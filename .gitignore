@@ -160,8 +160,25 @@ bin/
 
 # Simulation GUI and other tools window save file
 *-window.json
+<<<<<<< Updated upstream
 .gradle/file-system.probe
 .gradle/7.5.1/executionHistory/executionHistory.lock
 .gradle/7.5.1/fileHashes/fileHashes.lock
 .gitignore
 .gradle/7.5.1/checksums/checksums.lock
+=======
+
+# Commit info files
+src/main/deploy/version.txt
+src/main/deploy/commit.txt
+
+# LabVIEW
+*.lvlps
+*.aliases
+dashboard/Builds
+
+.tools/
+.sysid/
+*.wpilog
+.DataLogTool/
+>>>>>>> Stashed changes

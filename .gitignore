@@ -158,6 +158,14 @@ gradle-app.setting
 .settings/
 bin/
 
+hs_err_pid*
+
+# Build Files
+build/*
+bin/*
+.gradle/buildOutputCleanup/*
+.gradle/file-system.probe
+
 # Simulation GUI and other tools window save file
 *-window.json
 

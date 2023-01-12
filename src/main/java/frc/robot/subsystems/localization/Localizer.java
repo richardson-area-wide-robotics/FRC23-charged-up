@@ -12,12 +12,12 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
-public class AprilTagDetection {
+public class Localizer {
     private Thread visionThread;
     private AprilTagDetector detector;
 
 
-    public AprilTagDetection() {
+    public Localizer() {
         detector = new AprilTagDetector();
 
         visionThread = new Thread(() -> {
@@ -76,7 +76,7 @@ public class AprilTagDetection {
 
         for (int ind = 0; ind < 8; ind+=2) {
             Point cur = new Point(corners[ind], corners[ind+1]);
-            line(mat, prev, cur, Scalar(255, 0, 0), 3);
+            Imgproc.line(mat, prev, cur, new Scalar(255, 0, 0), 3);
             prev = cur;
         }
     }

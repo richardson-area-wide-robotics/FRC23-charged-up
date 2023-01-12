@@ -4,6 +4,9 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
+
+import edu.wpi.first.apriltag.*;
+
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
@@ -11,10 +14,12 @@ import org.opencv.imgproc.Imgproc;
 
 public class AprilTagDetection {
     private Thread visionThread;
-
+    private AprilTagDetector detector;
 
 
     public AprilTagDetection() {
+        detector = new AprilTagDetector();
+
         visionThread = new Thread(() -> {
             // Get the UsbCamera from CameraServer
             UsbCamera camera = CameraServer.startAutomaticCapture();
@@ -46,9 +51,13 @@ public class AprilTagDetection {
                 continue;
             }
 
+            AprilTagDetection[] tags = detector.detect(mat);
+            for (AprilTagDetection tag : tags) 
+                draw(mat, tag);
+
             // Put a rectangle on the image
-            Imgproc.rectangle(
-                mat, new Point(100, 100), new Point(400, 400), new Scalar(255, 255, 255), 5);
+            // Imgproc.rectangle(
+            //     mat, new Point(100, 100), new Point(400, 400), new Scalar(255, 255, 255), 5);
 
             // Give the output stream a new image to display
             outputStream.putFrame(mat);
@@ -59,6 +68,17 @@ public class AprilTagDetection {
     public void start() {
         visionThread.setDaemon(true);
         visionThread.start();
+    }
+
+    private void draw(Mat mat, AprilTagDetection tag) {
+        double[] corners = tag.getCorners();
+        Point prev = new Point(corners[7], corners[8]);
+
+        for (int ind = 0; ind < 8; ind+=2) {
+            Point cur = new Point(corners[ind], corners[ind+1]);
+            line(mat, prev, cur, Scalar(255, 0, 0), 3);
+            prev = cur;
+        }
     }
     
 }

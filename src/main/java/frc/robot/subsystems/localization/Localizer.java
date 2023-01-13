@@ -7,6 +7,8 @@ import edu.wpi.first.cscore.UsbCamera;
 
 import edu.wpi.first.apriltag.*;
 
+import java.util.ArrayList;
+
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
@@ -19,6 +21,9 @@ public class Localizer {
 
     public Localizer() {
         detector = new AprilTagDetector();
+        detector.addFamily("tag16h5", 0);
+        AprilTagDetector.Config config = new AprilTagDetector.Config();
+        detector.setConfig(config);
 
         visionThread = new Thread(() -> {
             // Get the UsbCamera from CameraServer
@@ -36,6 +41,8 @@ public class Localizer {
 
             // Mats are very memory expensive. Lets reuse this Mat.
             Mat mat = new Mat();
+            Mat grayMat = new Mat();
+            ArrayList<Integer> tags = new ArrayList<>();
 
             // This cannot be 'true'. The program will never exit if it is. This
             // lets the robot stop this thread when restarting robot code or
@@ -51,9 +58,13 @@ public class Localizer {
                 continue;
             }
 
-            AprilTagDetection[] tags = detector.detect(mat);
-            for (AprilTagDetection tag : tags) 
-                draw(mat, tag);
+            Imgproc.cvtColor(mat, grayMat, Imgproc.COLOR_RGB2GRAY);
+            AprilTagDetection[] detections = detector.detect(grayMat);
+            for (AprilTagDetection detection : detections) 
+            {
+                System.out.println("I see a tag " + detection.getId());
+                draw(mat, detection);
+            }    
 
             // Put a rectangle on the image
             // Imgproc.rectangle(
@@ -72,7 +83,7 @@ public class Localizer {
 
     private void draw(Mat mat, AprilTagDetection tag) {
         double[] corners = tag.getCorners();
-        Point prev = new Point(corners[7], corners[8]);
+        Point prev = new Point(corners[6], corners[7]);
 
         for (int ind = 0; ind < 8; ind+=2) {
             Point cur = new Point(corners[ind], corners[ind+1]);

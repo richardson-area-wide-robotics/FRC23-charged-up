@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
 
     localizer = new Localizer();
+    localizer.start();
   }
 
   /**
@@ -83,7 +84,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    localizer.start();
+    
   }
 
   /** This function is called periodically during operator control. */

@@ -1,13 +1,9 @@
 package frc.lib.swerve;
 
-import java.lang.reflect.Field;
-
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
-
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Twist2d;
@@ -24,47 +20,47 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class MAXSwerve extends SubsystemBase{ 
-    public enum ModuleLocation {
-        frontLeft(0),
-        frontRight(1),
-        backLeft(2),
-        backRight(3);
-    
-        public final int value;
-        private static final ModuleLocation[] m_mapping =
-            new ModuleLocation[] {frontLeft, frontRight, backLeft, backRight};
-    
-        private ModuleLocation(int v) {
-          this.value = v;
-        }
-    
-        public static ModuleLocation fromInt(int v) {
-          return m_mapping[v];
-        }
-      }
-    // Robot MAXswerve modules
-    private final MAXModule m_frontLeft;
-    private final MAXModule m_frontRight;
-    private final MAXModule m_backLeft;
-    private final MAXModule m_backRight;
+public class MAXSwerve extends SubsystemBase {
+  public enum ModuleLocation {
+    frontLeft(0),
+    frontRight(1),
+    backLeft(2),
+    backRight(3);
 
-    // The gyro sensor
-    private final AHRS m_gyro;
+    public final int value;
+    private static final ModuleLocation[] m_mapping =
+        new ModuleLocation[] {frontLeft, frontRight, backLeft, backRight};
 
-    // The module positions
-    private final SwerveModulePosition[] m_ModulePositions;
+    private ModuleLocation(int v) {
+      this.value = v;
+    }
 
-    // Kinematics 
-    private final SwerveDriveKinematics m_kinematics;
+    public static ModuleLocation fromInt(int v) {
+      return m_mapping[v];
+    }
+  }
+  // Robot MAXswerve modules
+  private final MAXModule m_frontLeft;
+  private final MAXModule m_frontRight;
+  private final MAXModule m_backLeft;
+  private final MAXModule m_backRight;
 
-    // Odometry
-    SwerveDriveOdometry m_odometry;
-    private final Field2d m_field = new Field2d();
+  // The gyro sensor
+  private final AHRS m_gyro;
 
-    private final double m_maxSpeed;
+  // The module positions
+  private final SwerveModulePosition[] m_ModulePositions;
 
-    /**
+  // Kinematics
+  private final SwerveDriveKinematics m_kinematics;
+
+  // Odometry
+  SwerveDriveOdometry m_odometry;
+  private final Field2d m_field = new Field2d();
+
+  private final double m_maxSpeed;
+
+  /**
    * Create a Swerve Drive module
    *
    * @param frontLeft Swerve Module
@@ -76,14 +72,14 @@ public class MAXSwerve extends SubsystemBase{
    * @param maxSpeed of the wheels used to normalize wheel speeds
    */
   public MAXSwerve(
-    MAXModule frontLeft,
-    MAXModule frontRight,
-    MAXModule backLeft,
-    MAXModule backRight,
-    SwerveDriveKinematics kinematics,
-    SwerveModulePosition[] modulePositions,
-    AHRS gyro,
-    double maxSpeed){
+      MAXModule frontLeft,
+      MAXModule frontRight,
+      MAXModule backLeft,
+      MAXModule backRight,
+      SwerveDriveKinematics kinematics,
+      SwerveModulePosition[] modulePositions,
+      AHRS gyro,
+      double maxSpeed) {
     m_frontLeft = frontLeft;
     m_frontRight = frontRight;
     m_backLeft = backLeft;
@@ -93,45 +89,46 @@ public class MAXSwerve extends SubsystemBase{
     m_ModulePositions = modulePositions;
     m_maxSpeed = maxSpeed;
     m_odometry = new SwerveDriveOdometry(kinematics, m_gyro.getRotation2d(), modulePositions);
-    }
+  }
 
-    private ChassisSpeeds m_chassisSpeed = new ChassisSpeeds();
+  private ChassisSpeeds m_chassisSpeed = new ChassisSpeeds();
 
-    @Override
-    public void initSendable(SendableBuilder builder) {
+  @Override
+  public void initSendable(SendableBuilder builder) {
     super.initSendable(builder);
     // builder.addDoubleProperty("Velocity vx", () -> m_chassisSpeed.vxMetersPerSecond, null);
     // builder.addDoubleProperty("Velocity vy", () -> m_chassisSpeed.vyMetersPerSecond, null);
-    // builder.addDoubleProperty("Velocity omega", () -> m_chassisSpeed.omegaRadiansPerSecond, null);
+    // builder.addDoubleProperty("Velocity omega", () -> m_chassisSpeed.omegaRadiansPerSecond,
+    // null);
     // addChild("Gyro", m_gyro);
     // addChild("frontLeft", m_frontLeft);
     // addChild("frontRight", m_frontRight);
     // addChild("rearLeft", m_rearLeft);
     // addChild("rearRight", m_rearRight);
-    // addChild("Field 2d", m_field); 
-    }
+    // addChild("Field 2d", m_field);
+  }
 
-    @Override
-    public void periodic(){
-        m_frontLeft.periodic();
-        m_frontRight.periodic();
-        m_backLeft.periodic();
-        m_backRight.periodic();
+  @Override
+  public void periodic() {
+    m_frontLeft.periodic();
+    m_frontRight.periodic();
+    m_backLeft.periodic();
+    m_backRight.periodic();
 
-        m_chassisSpeed = m_kinematics.toChassisSpeeds(getModuleStates());
+    m_chassisSpeed = m_kinematics.toChassisSpeeds(getModuleStates());
 
-        m_odometry.update(
-            Rotation2d.fromDegrees(m_gyro.getAngle()),
-            new SwerveModulePosition[] {
-              m_frontLeft.getPosition(),
-              m_frontRight.getPosition(),
-              m_backLeft.getPosition(),
-              m_backRight.getPosition()
-            });
-        m_field.setRobotPose(m_odometry.getPoseMeters());
-    }
+    m_odometry.update(
+        Rotation2d.fromDegrees(m_gyro.getAngle()),
+        new SwerveModulePosition[] {
+          m_frontLeft.getPosition(),
+          m_frontRight.getPosition(),
+          m_backLeft.getPosition(),
+          m_backRight.getPosition()
+        });
+    m_field.setRobotPose(m_odometry.getPoseMeters());
+  }
 
-    /**
+  /**
    * Return the current velocity of the chassis as a ChassisSpeeds object.
    *
    * @return velocity of the robot.
@@ -154,16 +151,16 @@ public class MAXSwerve extends SubsystemBase{
         chassisSpeed.omegaRadiansPerSecond * lookahead);
   }
 
-    /**
-     * Return the modules positions 
-     * 
-     * @return SwerveModulePositions
-     */
-    public SwerveModulePosition[] getModulePositions(){
-        return m_ModulePositions;
-    }
+  /**
+   * Return the modules positions
+   *
+   * @return SwerveModulePositions
+   */
+  public SwerveModulePosition[] getModulePositions() {
+    return m_ModulePositions;
+  }
 
-    /**
+  /**
    * Returns the currently-estimated pose of the robot.
    *
    * @return The pose.
@@ -181,7 +178,7 @@ public class MAXSwerve extends SubsystemBase{
     m_odometry.resetPosition(m_gyro.getRotation2d(), getModulePositions(), pose);
   }
 
-    /**
+  /**
    * Method to drive the robot using joystick info.
    *
    * @param xSpeed Speed of the robot in the x direction (forward).
@@ -190,7 +187,8 @@ public class MAXSwerve extends SubsystemBase{
    * @param fieldRelative Whether the provided x and y speeds are relative to the field.
    */
   public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
-     // If nothing is commanded, hold the same position - don't know if the rev modules need this yet?
+    // If nothing is commanded, hold the same position - don't know if the rev modules need this
+    // yet?
     //  if (xSpeed == 0.0 && ySpeed == 0.0 && rot == 0.0) {
     //     holdAllModulesRotation();
     //     return;
@@ -206,8 +204,7 @@ public class MAXSwerve extends SubsystemBase{
                 ? ChassisSpeeds.fromFieldRelativeSpeeds(
                     xSpeed, ySpeed, rot, Rotation2d.fromDegrees(m_gyro.getAngle()))
                 : new ChassisSpeeds(xSpeed, ySpeed, rot));
-    SwerveDriveKinematics.desaturateWheelSpeeds(
-        swerveModuleStates, m_maxSpeed);
+    SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, m_maxSpeed);
     m_frontLeft.setDesiredState(swerveModuleStates[0]);
     m_frontRight.setDesiredState(swerveModuleStates[1]);
     m_backLeft.setDesiredState(swerveModuleStates[2]);
@@ -235,7 +232,7 @@ public class MAXSwerve extends SubsystemBase{
     m_backRight.setDesiredState(new SwerveModuleState(0.0, Rotation2d.fromDegrees(45)));
   }
 
-    /**
+  /**
    * Sets the swerve ModuleStates.
    *
    * @param desiredStates The desired SwerveModule states.
@@ -287,10 +284,10 @@ public class MAXSwerve extends SubsystemBase{
     m_gyro.calibrate();
   }
 
-//   public void setHeading(double degreesCCWPositive) {
-//     Logger.tag("Swerve Drive").trace("Setting heading to {} degrees", degreesCCWPositive);
-//     m_gyro.setAngle(degreesCCWPositive);
-//   }
+  //   public void setHeading(double degreesCCWPositive) {
+  //     Logger.tag("Swerve Drive").trace("Setting heading to {} degrees", degreesCCWPositive);
+  //     m_gyro.setAngle(degreesCCWPositive);
+  //   }
 
   /**
    * Returns the heading of the robot.
@@ -309,7 +306,7 @@ public class MAXSwerve extends SubsystemBase{
     return new RunCommand(this::stop, this).withName("Swerve Stop");
   }
 
-   /**
+  /**
    * Returns the turn rate of the robot.
    *
    * @return The turn rate of the robot, in degrees per second
@@ -332,7 +329,7 @@ public class MAXSwerve extends SubsystemBase{
       PathPlannerTrajectory trajectory,
       PIDController xController,
       PIDController yController,
-        PIDController thetaController) {
+      PIDController thetaController) {
     Command swCommand =
         new PPSwerveControllerCommand(
             trajectory,

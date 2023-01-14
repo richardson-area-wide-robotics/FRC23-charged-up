@@ -5,14 +5,14 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.sendable.Sendable;
 
 public interface MAXModule extends Sendable {
-    /**
+  /**
    * Returns the current state of the module.
    *
    * @return The current state of the module.
    */
   public SwerveModuleState getState();
 
-/**
+  /**
    * Returns the last set desired state of the module. Can me useful for keeping the wheels set to a
    * specific orientation when no demand is given, instead of using some default.
    *
@@ -36,8 +36,8 @@ public interface MAXModule extends Sendable {
    */
   public default void periodic() {}
 
-// Set up simulation???
-//   public default void simulationPeriodic() {}
+  // Set up simulation???
+  //   public default void simulationPeriodic() {}
 
   public default void testPeriodic() {}
 

@@ -1,7 +1,7 @@
 plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2023.1.1"
-    id 'com.diffplug.spotless' version '6.1.0'
+    id 'com.diffplug.spotless', version: '6.1.0'
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
@@ -99,7 +99,8 @@ tasks.withType(JavaCompile) {
     options.compilerArgs.add '-XDstringConcat=inline'
 }
 
-// Copy spotless config from WPILib
+
+// // Copy spotless config from WPILib
 spotless {
     // optional: limit format enforcement to just the files changed by this feature branch
     // ratchetFrom 'origin/main'
@@ -144,13 +145,14 @@ spotless {
         endWithNewline()
     }
 }
-allprojects {
-    afterEvaluate {
-        def spotless = tasks.findByName('spotlessApply')
-        if (spotless) {
-            tasks.withType(JavaCompile) {
-                finalizedBy(spotless)
-            }
-        }
-    }
-}
+
+// allprojects {
+//     afterEvaluate {
+//         def spotless = tasks.findByName('spotlessApply')
+//         if (spotless) {
+//             tasks.withType(JavaCompile) {
+//                 finalizedBy(spotless)
+//             }
+//         }
+//     }
+// }

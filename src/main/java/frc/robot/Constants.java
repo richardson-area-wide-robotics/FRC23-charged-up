@@ -12,4 +12,12 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {}
+
+public final class Constants {
+    public static final double TARGET_SIZE_METERS = 0.1524;
+    public static final double FX_PIXELS = 699.3778103158814;
+    public static final double CX_PIXELS = 345.6059345433618;
+    public static final double FY_PIXELS = 677.7161226393544;
+    public static final double CY_PIXELS = 207.12741326228522;
+}
+

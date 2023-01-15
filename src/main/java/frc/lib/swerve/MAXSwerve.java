@@ -189,10 +189,10 @@ public class MAXSwerve extends SubsystemBase {
   public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
     // If nothing is commanded, hold the same position - don't know if the rev modules need this
     // yet?
-     if (xSpeed == 0.0 && ySpeed == 0.0 && rot == 0.0) {
-        holdAllModulesRotation();
-        return;
-      }
+    if (xSpeed == 0.0 && ySpeed == 0.0 && rot == 0.0) {
+      holdAllModulesRotation();
+      return;
+    }
     // Adjust input based on max speed
     xSpeed *= m_maxSpeed;
     ySpeed *= m_maxSpeed;

@@ -47,9 +47,9 @@ public final class Constants {
      */
     public static final class FrontLeftModule {
       // The CAN ID for the drive motor
-      public static final int kDriveMotorCANID = 1;
+      public static final int kDriveMotorCANID = 2;
       // The CAN ID for the steer motor
-      public static final int kSteerMotorCANID = 2;
+      public static final int kSteerMotorCANID = 1;
       // The Angular offset in radians for the steer encoder in radians
       public static final double kFrontLeftChassisAngularOffset = -Math.PI / 2;
       // creating the swerve module constants for the front left module
@@ -60,9 +60,9 @@ public final class Constants {
 
     public static final class FrontRightModule {
       // The CAN ID for the drive motor
-      public static final int kDriveMotorCANID = 7;
+      public static final int kDriveMotorCANID = 8;
       // The CAN ID for the steer motor
-      public static final int kSteerMotorCANID = 8;
+      public static final int kSteerMotorCANID = 7;
       // The Angular offsets in radians for the steer encoder
       public static final double kFrontRightChassisAngularOffset = 0;
       // creating the swerve module constants for the front right module
@@ -74,9 +74,9 @@ public final class Constants {
     /* Back Left Module - Module 2 */
     public static final class BackLeftModule {
       // The CAN ID for the drive motor
-      public static final int kDriveMotorCANID = 3;
+      public static final int kDriveMotorCANID = 4;
       // The CAN ID for the steer motor
-      public static final int kSteerMotorCANID = 4;
+      public static final int kSteerMotorCANID = 3;
       // The Angular offsets in radians for the steer encoder
       public static final double kBackLeftChassisAngularOffset = Math.PI;
       // creating the swerve module constants for the back left module
@@ -88,9 +88,9 @@ public final class Constants {
     /* Back Right Module - Module 3 */
     public static final class BackRightModule {
       // The CAN ID for the drive motor
-      public static final int kDriveMotorCANID = 5;
+      public static final int kDriveMotorCANID = 6;
       // The CAN ID for the steer motor
-      public static final int kSteerMotorCANID = 6;
+      public static final int kSteerMotorCANID = 5;
       // The Angular offsets in radians for the steer encoder
       public static final double kBackRightChassisAngularOffset = Math.PI / 2;
       // creating the swerve module constants for the back right module

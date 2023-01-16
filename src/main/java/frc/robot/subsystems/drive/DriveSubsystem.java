@@ -48,12 +48,7 @@ public class DriveSubsystem extends MAXSwerve {
         Constants.SwerveDriveConstants.kMaxSpeedMetersPerSecond);
   }
 
-  // @Override
-  // public void periodic() {
-  //   // TODO Auto-generated method stub
-  //   super.periodic();
-  // }
-
+  // TODO: Add sendable data for controllers during autonomous mode
   // @Override
   // public void initSendable(SendableBuilder builder) {
   //   super.initSendable(builder);

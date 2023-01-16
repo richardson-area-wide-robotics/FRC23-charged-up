@@ -34,6 +34,7 @@ public final class Constants {
     public static final double kTrackWidth = Units.inchesToMeters(26.5);
     // Distance between front and back wheels on robot
     public static final double kWheelBase = Units.inchesToMeters(26.5);
+    // TODO change these based on current robot track and wheel base
 
     public static final SwerveDriveKinematics kDriveKinematics =
         new SwerveDriveKinematics(
@@ -113,13 +114,13 @@ public final class Constants {
     public static final boolean kTurningEncoderInverted = true;
 
     // Calculations required for driving motor conversion factors and feed forward
-    public static final double kDrivingMotorFreeSpeedRps = NeoMotorConstants.kFreeSpeedRpm / 60;
+    public static final double kDrivingMotorFreeSpeedRps = NeoMotorConstants.kFreeSpeedRpm / 60.0;
     public static final double kWheelDiameterMeters = 0.0762;
     public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI;
     // 45 teeth on the wheel's bevel gear, 22 teeth on the first-stage spur gear, 15 teeth on the
     // bevel pinion
     public static final double kDrivingMotorReduction =
-        (45.0 * 22) / (kDrivingMotorPinionTeeth * 15);
+        (45.0 * 22) / (kDrivingMotorPinionTeeth * 15.0);
     public static final double kDriveWheelFreeSpeedRps =
         (kDrivingMotorFreeSpeedRps * kWheelCircumferenceMeters) / kDrivingMotorReduction;
 
@@ -132,21 +133,21 @@ public final class Constants {
     public static final double kTurningEncoderVelocityFactor =
         (2 * Math.PI) / 60.0; // radians per second
 
-    public static final double kTurningEncoderPositionPIDMinInput = 0; // radians
+    public static final double kTurningEncoderPositionPIDMinInput = 0.0; // radians
     public static final double kTurningEncoderPositionPIDMaxInput =
         kTurningEncoderPositionFactor; // radians
 
     public static final PIDGains kDrivingPIDGains =
         new PIDGains(0.04, 0, 0); // TODO: tune values for the driving motor
-    public static final double kDrivingFF = 1 / kDriveWheelFreeSpeedRps;
-    public static final double kDrivingMinOutput = -1;
-    public static final double kDrivingMaxOutput = 1;
+    public static final double kDrivingFF = 1.0 / kDriveWheelFreeSpeedRps;
+    public static final double kDrivingMinOutput = -1.0;
+    public static final double kDrivingMaxOutput = 1.0;
 
     public static final PIDGains kTurningPIDGains =
         new PIDGains(1, 0, 0); // TODO: tune values for the turning motor
-    public static final double kTurningFF = 0;
-    public static final double kTurningMinOutput = -1;
-    public static final double kTurningMaxOutput = 1;
+    public static final double kTurningFF = 0.0;
+    public static final double kTurningMinOutput = -1.0;
+    public static final double kTurningMaxOutput = 1.0;
 
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
@@ -161,14 +162,14 @@ public final class Constants {
   }
 
   public static final class AutoConstants {
-    public static final double kMaxSpeedMetersPerSecond = 3;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+    public static final double kMaxSpeedMetersPerSecond = 3.0;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 3.0;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
     public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
 
-    public static final double kPXController = 1;
-    public static final double kPYController = 1;
-    public static final double kPThetaController = 1;
+    public static final double kPXController = 1.0;
+    public static final double kPYController = 1.0;
+    public static final double kPThetaController = 1.0;
 
     // Constraint for the motion profiled robot angle controller
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
@@ -177,6 +178,6 @@ public final class Constants {
   }
 
   public static final class NeoMotorConstants {
-    public static final double kFreeSpeedRpm = 5676;
+    public static final double kFreeSpeedRpm = 5676.0;
   }
 }

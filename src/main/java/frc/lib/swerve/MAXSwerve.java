@@ -96,16 +96,15 @@ public class MAXSwerve extends SubsystemBase {
   @Override
   public void initSendable(SendableBuilder builder) {
     super.initSendable(builder);
-    // builder.addDoubleProperty("Velocity vx", () -> m_chassisSpeed.vxMetersPerSecond, null);
-    // builder.addDoubleProperty("Velocity vy", () -> m_chassisSpeed.vyMetersPerSecond, null);
-    // builder.addDoubleProperty("Velocity omega", () -> m_chassisSpeed.omegaRadiansPerSecond,
-    // null);
-    // addChild("Gyro", m_gyro);
-    // addChild("frontLeft", m_frontLeft);
-    // addChild("frontRight", m_frontRight);
-    // addChild("rearLeft", m_rearLeft);
-    // addChild("rearRight", m_rearRight);
-    // addChild("Field 2d", m_field);
+    builder.addDoubleProperty("Velocity vx", () -> m_chassisSpeed.vxMetersPerSecond, null);
+    builder.addDoubleProperty("Velocity vy", () -> m_chassisSpeed.vyMetersPerSecond, null);
+    builder.addDoubleProperty("Velocity omega", () -> m_chassisSpeed.omegaRadiansPerSecond, null);
+    addChild("Gyro", m_gyro);
+    addChild("frontLeft", m_frontLeft);
+    addChild("frontRight", m_frontRight);
+    addChild("rearLeft", m_backLeft);
+    addChild("rearRight", m_backRight);
+    addChild("Field 2d", m_field);
   }
 
   @Override
@@ -213,7 +212,7 @@ public class MAXSwerve extends SubsystemBase {
 
   private void holdModuleRotation(MAXModule m) {
     var state = m.getDesiredState();
-    state.speedMetersPerSecond = 0;
+    state.speedMetersPerSecond = 0.0;
     m.setDesiredState(state);
   }
 

@@ -92,13 +92,11 @@ public class Localizer {
   }
 
   private void draw(Mat mat, AprilTagDetection tag) {
-    double[] corners = tag.getCorners();
-    Point prev = new Point(corners[6], corners[7]);
-
-    for (int ind = 0; ind < 8; ind += 2) {
-      Point cur = new Point(corners[ind], corners[ind + 1]);
-      Imgproc.line(mat, prev, cur, new Scalar(255, 0, 0), 3);
-      prev = cur;
+    for (int ind = 0; ind < 4; ind++) {
+      int end = ind % 4;
+      Point pointA = new Point(getCornerX(ind), getCornerY(ind + 1));
+      Point pointB = new Point(getCornerX(end), getCornerY(end + 1));
+      Imgproc.line(mat, pointA, pointB, new Scalar(255, 0, 0), 3);
     }
   }
 }

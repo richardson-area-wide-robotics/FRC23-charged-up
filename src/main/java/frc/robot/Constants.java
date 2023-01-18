@@ -180,4 +180,18 @@ public final class Constants {
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676.0;
   }
+
+    // variables to set limits, speeds
+   public static final class ArmConstants {
+    public final static float REVERSE_LIMIT = 0.0f;
+    public final static float FORWARD_LIMIT = 0.0f;
+    public final static double REVERSE_SPEED = 0.0;
+    public final static double FORWARD_SPEED = 0.0;
+
+    // doubles for arm positions
+    public final static double INTAKE_ARM_GROUND = 0.0;
+    public final static double INTAKE_ARM_SHELF = 0.0;
+    public final static double SCORING_ARM_LOW = 0.0;
+    public final static double SCORING_ARM_MID = 0.0;
+  }
 }

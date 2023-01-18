@@ -20,6 +20,8 @@ public class Arm {
     INTAKE_ARM_POSITION_SHELF
   }
 
+  private final int test = 0;
+
   // variables to set limits, speeds
   private final float REVERSE_LIMIT = 0.0f;
   private final float FORWARD_LIMIT = 0.0f;

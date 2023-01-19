@@ -193,5 +193,13 @@ public final class Constants {
     public final static double INTAKE_ARM_SHELF = 0.0;
     public final static double SCORING_ARM_LOW = 0.0;
     public final static double SCORING_ARM_MID = 0.0;
+
+    // Spark max constants
+    public static final boolean RIGHT_MOTOR_INVERTED = false;
+    public static final boolean LEFT_MOTOR_INVERTED = true;
+
+    // PID constants using custom PID gains class
+    public static final PIDGains PID_GAINS = new PIDGains(0.0, 0.0, 0.0);
+
   }
 }

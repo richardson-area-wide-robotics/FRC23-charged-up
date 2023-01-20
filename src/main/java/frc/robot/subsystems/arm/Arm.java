@@ -3,7 +3,15 @@ package frc.robot.subsystems.arm;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.PS4Controller.Button;
+import edu.wpi.first.wpilibj.event.BooleanEvent;
+import edu.wpi.first.wpilibj.event.EventLoop;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 import java.util.EnumMap;
 
@@ -34,8 +42,8 @@ public class Arm {
   // setting up CAN IDs for the motors
   public Arm(int rightMotorCANID, int leftMotorCANID) {
 
-    //rightmotor.resetfactorydefualts
-    //leftmotor.resetfactorydefualts
+    rightMotor.restoreFactoryDefaults();
+    leftMotor.restoreFactoryDefaults();
 
     // motor type for right motor
     this.rightMotor = new CANSparkMax(rightMotorCANID, MotorType.kBrushless);
@@ -60,9 +68,9 @@ public class Arm {
     // this.leftMotor.setInverted(invertLeftMotor);
 
     this.leftMotor.follow(this.rightMotor, true);
-
-    //leftmotor.burnflash
-    //rightmotor.burnflash
+   
+    leftMotor.burnFlash();
+    rightMotor.burnFlash();
 
     armPositions.put(armPosition.INTAKE_ARM_POSITION_GROUND,  Constants.ArmConstants.INTAKE_ARM_GROUND);
     armPositions.put(armPosition.INTAKE_ARM_POSITION_SHELF,  Constants.ArmConstants.INTAKE_ARM_SHELF);
@@ -118,4 +126,19 @@ public class Arm {
         .getPIDController()
         .setReference(armPositions.get(currentArmPosition), CANSparkMax.ControlType.kPosition);
   }
+
+  //controller
+  public final CommandXboxController m_driverController = new CommandXboxController(0);
+  
+  //buttons
+  Trigger aTrigger = m_driverController.a();
+  Trigger bTrigger = m_driverController.b();
+  Trigger xTrigger = m_driverController.x();
+  Trigger yTrigger = m_driverController.y();
+
+  public EventLoop getDefaultButtonLoop(){
+    //I need to use methods like 'a()' with type 'Trigger' inside this DefualtButtonLoop in order to use the commands like runToScore
+    //But i'm not sure how
+    return null;
+ }
 }

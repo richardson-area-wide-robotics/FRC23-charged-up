@@ -4,25 +4,17 @@
 
 package frc.robot.subsystems.Camera;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.photonvision.PhotonCamera;
+import org.photonvision.targeting.PhotonPipelineResult;
+import org.photonvision.targeting.PhotonTrackedTarget;
 
 public class Camera extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public Camera() {}
+  PhotonCamera camera;
 
-  /**
-   * Example command factory method.
-   *
-   * @return a command
-   */
-  public CommandBase exampleMethodCommand() {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-    return runOnce(
-        () -> {
-          /* one-time action goes here */
-        });
+  public Camera() {
+    this.camera = new PhotonCamera("slotheye");
   }
 
   /**
@@ -36,12 +28,17 @@ public class Camera extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  public void periodic() {}
 
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+
+  public Transform3d getDistanceAndAngle() {
+    PhotonPipelineResult result = camera.getLatestResult();
+    PhotonTrackedTarget target = result.getBestTarget();
+    Transform3d pose = target.getBestCameraToTarget();
+    return pose;
   }
 }

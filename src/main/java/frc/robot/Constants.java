@@ -156,6 +156,17 @@ public final class Constants {
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
+  public static final class Intake {
+    public static final float kRLimit  = 0.0f;
+    public static final float kFLimit = 0.0f;
+    public static final double kForwardSpeed = 0.7;
+    public static final double kReverseSpeed = -1.0;
+    public static final boolean kIntakeInverted = false;
+    public static final int kIntakeID = 0; // TODO: set CAN ID, should be next available number after arm
+    public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
+    public static final int kIntakeCurrentLimit = 40; // amps
+  }
+
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 0;

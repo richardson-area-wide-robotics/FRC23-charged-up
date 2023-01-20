@@ -144,7 +144,7 @@ public final class Constants {
     public static final double kDrivingMaxOutput = 1.0;
 
     public static final PIDGains kTurningPIDGains =
-        new PIDGains(1, 0, 0); // TODO: tune values for the turning motor
+        new PIDGains(4, 0, 0.075); // TODO: tune values for the turning motor
     public static final double kTurningFF = 0.0;
     public static final double kTurningMinOutput = -1.0;
     public static final double kTurningMaxOutput = 1.0;

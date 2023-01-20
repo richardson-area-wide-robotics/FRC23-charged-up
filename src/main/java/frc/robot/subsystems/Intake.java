@@ -2,46 +2,55 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
-public class Intake {
-//the guys who said fortnite balls is crazy fr fr ong honestly wtf am i doing
+public class Intake extends SubsystemBase {
 
-//might use this enum later dunno depends on if chase thinks i should or not
-public enum intakePostition {
-    INTAKE_POSITION,
-    INTAKE_CLAW_OPEN,
-    INTAKE_CLAW_CLOSE
-}
 private CANSparkMax intakeMotor;
 
-  private final float REVERSE_LIMIT = 0.0f;
-  private final float FORWARD_LIMIT = 0.0f;
-  private final double FORWARD_SPEED = 0.7;
-  private final double REVERSE_SPEED = -1;
-  private final double RAMPRATE = 0;
+public Intake() {
 
-public Intake(int intakeMotorCANID, Boolean invertIntakeMotor) {
+  intakeMotor = new CANSparkMax(Constants.Intake.kIntakeID, MotorType.kBrushless);
 
-   this.intakeMotor = new CANSparkMax(intakeMotorCANID, MotorType.kBrushless);
-   this.intakeMotor.setSmartCurrentLimit(30); // i will change if need be, dont know yet :p
-   this.intakeMotor.setInverted(invertIntakeMotor);
-   this.intakeMotor.setOpenLoopRampRate(RAMPRATE);
+  // set intake motor to factory defaults for if we ever want to switch them out 
+  intakeMotor.restoreFactoryDefaults();
 
+  // set intake basic values 
+  intakeMotor.setSmartCurrentLimit(Constants.Intake.kIntakeCurrentLimit);
+  intakeMotor.setInverted(Constants.Intake.kIntakeInverted);
+  intakeMotor.setIdleMode(Constants.Intake.kIntakeIdleMode);
+
+  // enable and set intake motor forward and reverse limit
+  intakeMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+  intakeMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+  intakeMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.Intake.kFLimit);
+  intakeMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.Intake.kRLimit);
+
+  intakeMotor.burnFlash();
+
+  setDefaultCommand(new RunCommand(this::idle, this));
 }
 
-public void idle() 
-{
-  this.intakeMotor.set(0);
+public double getSpeed() {
+  return intakeMotor.getAppliedOutput();
 }
 
-public void pickup()
-    {
-  this.intakeMotor.set(FORWARD_SPEED);
+public double getPosition() {
+  return intakeMotor.getEncoder().getPosition();
+}
+
+public void idle() {
+  intakeMotor.set(0);
+}
+
+public void pickup(){
+  intakeMotor.set(Constants.Intake.kForwardSpeed);
 }
 
 public void drop() {
-  this.intakeMotor.set(REVERSE_SPEED);
+  intakeMotor.set(Constants.Intake.kReverseSpeed);
 }
 
 }

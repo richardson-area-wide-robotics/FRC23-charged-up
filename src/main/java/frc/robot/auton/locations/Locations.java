@@ -14,4 +14,12 @@ public abstract class Locations {
     return TopStart.instance;
   }
 
+public static BottomStart BottomStart(){
+    return BottomStart.instance;
+    }
+
+public static MiddleStart MiddleStart(){
+    return MiddleStart.instance;
+    }
+
 }

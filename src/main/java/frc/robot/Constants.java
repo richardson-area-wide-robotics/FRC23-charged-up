@@ -21,6 +21,11 @@ import frc.lib.util.SwerveModuleConstants;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  public static final class OIConstants {
+    public static final int kDriverControllerPort = 0;
+    public static final int kOperatorControllerPort = 1;
+    public static final double kControllerDeadband = 0.1;
+  }
   public static final class SwerveDriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
@@ -31,9 +36,9 @@ public final class Constants {
      * Chassis configuration
      */
     // Distance between centers of right and left wheels on robot
-    public static final double kTrackWidth = Units.inchesToMeters(26.5);
+    public static final double kTrackWidth = Units.inchesToMeters(23.5);
     // Distance between front and back wheels on robot
-    public static final double kWheelBase = Units.inchesToMeters(26.5);
+    public static final double kWheelBase = Units.inchesToMeters(23.5);
     // TODO change these based on current robot track and wheel base
 
     public static final SwerveDriveKinematics kDriveKinematics =
@@ -114,7 +119,8 @@ public final class Constants {
     public static final boolean kTurningEncoderInverted = true;
 
     // Calculations required for driving motor conversion factors and feed forward
-    public static final double kDrivingMotorFreeSpeedRps = NeoMotorConstants.kFreeSpeedRpm / 60.0;
+    public static final double kFreeSpeedRpm = 5676.0;
+    public static final double kDrivingMotorFreeSpeedRps = kFreeSpeedRpm / 60.0;
     public static final double kWheelDiameterMeters = 0.0762;
     public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI;
     // 45 teeth on the wheel's bevel gear, 22 teeth on the first-stage spur gear, 15 teeth on the
@@ -153,13 +159,9 @@ public final class Constants {
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
     public static final int kDrivingMotorCurrentLimit = 50; // amps
-    public static final int kTurningMotorCurrentLimit = 20; // amps
+    public static final int kTurningMotorCurrentLimit = 10; // amps
   }
 
-  public static final class OIConstants {
-    public static final int kDriverControllerPort = 0;
-    public static final int kOperatorControllerPort = 0;
-  }
 
   public static final class AutoConstants {
     public static final double kMaxSpeedMetersPerSecond = 3.0;
@@ -177,7 +179,4 @@ public final class Constants {
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
   }
 
-  public static final class NeoMotorConstants {
-    public static final double kFreeSpeedRpm = 5676.0;
-  }
 }

@@ -13,24 +13,25 @@ public class Lock extends CommandBase{
     DoubleSupplier forward;
     boolean lockedOn = false;
     
+    //PID controller for yawRate
     PIDController yawRateController = new PIDController(1, 0, 0);
-
+    //This gets the controller inputs and drive information
     public Lock(DriveSubsystem drive, DoubleSupplier forward, DoubleSupplier sideWays){
         this.drive = drive;
         this.forward = forward;
         this.sideWays = sideWays;
     }
+    //Need to create a toggle button that swiches between locked and unlocked motion
+    //So that it is not constantly active
 
-
-
-    //Changing yaw might be the best way to rotate the robot.
+    
     @Override
     public void initialize(){}  
 
     @Override
     public boolean isFinished(){
         return lockedOn;}
-    
+    //This sets the yawRate to circle the desired object while maintaning driver controll of motion
     @Override
     public void execute(){
         double angularOffset = 0;

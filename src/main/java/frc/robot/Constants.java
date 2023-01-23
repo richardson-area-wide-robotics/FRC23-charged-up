@@ -178,8 +178,6 @@ public final class Constants {
     public static final PIDController kPXController = new PIDController(0, 0, 0);
     public static final PIDController kPYController = new PIDController(0, 0, 0);
     public static final PIDController kPThetaController = new PIDController(0, 0, 0);
-
-
   }
 
   public static final class NeoMotorConstants {

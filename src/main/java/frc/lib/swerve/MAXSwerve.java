@@ -4,6 +4,7 @@ import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Twist2d;
@@ -325,21 +326,22 @@ public class MAXSwerve extends SubsystemBase {
    * @return Command to be scheduled
    */
   public Command trajectoryFollowerCommand(
-      PathPlannerTrajectory trajectory,
-      PIDController xController,
-      PIDController yController,
-      PIDController thetaController) {
-    Command swCommand =
-        new PPSwerveControllerCommand(
-            trajectory,
-            this::getPose,
-            m_kinematics,
-            xController,
-            yController,
-            thetaController,
-            (states) -> setModuleStates(states),
-            this);
-    return new InstantCommand(() -> m_field.getObject("Trajectory").setTrajectory(trajectory))
-        .alongWith(swCommand);
-  }
+    PathPlannerTrajectory trajectory,
+    PIDController xController,
+    PIDController yController,
+    PIDController thetaController) {
+  Command swCommand =
+      new PPSwerveControllerCommand(
+          trajectory,
+          this::getPose,
+          m_kinematics,
+          xController,
+          yController,
+          thetaController,
+          (states) -> setModuleStates(states),
+          true,
+          this);
+  return new InstantCommand(() -> m_field.getObject("Trajectory").setTrajectory(trajectory))
+      .alongWith(swCommand);
+}
 }

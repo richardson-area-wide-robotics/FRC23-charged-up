@@ -39,8 +39,7 @@ public final class Constants {
     public static final double kTrackWidth = Units.inchesToMeters(23.5);
     // Distance between front and back wheels on robot
     public static final double kWheelBase = Units.inchesToMeters(23.5);
-    // TODO change these based on current robot track and wheel base
-
+    // The kinematics for the robot drivetrain
     public static final SwerveDriveKinematics kDriveKinematics =
         new SwerveDriveKinematics(
             new Translation2d(kWheelBase / 2, kTrackWidth / 2),
@@ -112,7 +111,7 @@ public final class Constants {
     // The MAXSwerve module can be configured with one of three pinion gears: 12T, 13T, or 14T.
     // This changes the drive speed of the module (a pinion gear with more teeth will result in a
     // robot that drives faster).
-    public static final int kDrivingMotorPinionTeeth = 14;
+    public static final int kDrivingMotorPinionTeeth = 13;
 
     // Invert the turning encoder, since the output shaft rotates in the opposite direction of
     // the steering motor in the MAXSwerve Module.
@@ -151,7 +150,7 @@ public final class Constants {
 
     public static final PIDGains kTurningPIDGains =
         new PIDGains(4, 0, 0.075); // TODO: tune values for the turning motor
-    public static final double kTurningFF = 0.0;
+    public static final double kTurningFF = 0.0; // TODO: tune values for Feed Forward
     public static final double kTurningMinOutput = -1.0;
     public static final double kTurningMaxOutput = 1.0;
 

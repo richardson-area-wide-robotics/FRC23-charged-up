@@ -38,25 +38,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-    // Configure default commands
-    m_robotDrive.setDefaultCommand(
-        // The left stick controls translation of the robot.
-        // Turning is controlled by the X axis of the right stick.
-        new RunCommand(
-            () ->
-                m_robotDrive.drive(
-                    MathUtil.applyDeadband(
-                        -m_driverController.getLeftY(), 0.06), // 0.1 might be better?
-                    MathUtil.applyDeadband(
-                        -m_driverController.getLeftX(), 0.06), // 0.1 might be better?
-                    MathUtil.applyDeadband(
-                        -m_driverController.getRightX(), 0.06), // 0.1 might be better?
-                    true),
-            m_robotDrive));
-
-          if(m_driverController.getRightStickButtonPressed()){
-            m_robotDrive.zeroHeading();
-          }
+    
 
         
   }
@@ -70,7 +52,28 @@ public class RobotContainer {
    * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
    */
-  private void configureBindings() {}
+  private void configureBindings() {
+    
+    // Configure default commands
+    m_robotDrive.setDefaultCommand(
+        // The left stick controls translation of the robot.
+        // Turning is controlled by the X axis of the right stick.
+        new RunCommand(
+            () ->
+                m_robotDrive.drive(
+                    MathUtil.applyDeadband(
+                        -m_driverController.getLeftY(), 0.1), // 0.1 might be better?
+                    MathUtil.applyDeadband(
+                        -m_driverController.getLeftX(), 0.1), // 0.1 might be better?
+                    MathUtil.applyDeadband(
+                        -m_driverController.getRightX(), 0.1), // 0.1 might be better?
+                    true),
+            m_robotDrive));
+
+          if(m_driverController.getRightStickButtonPressed()){
+            m_robotDrive.zeroHeading();
+          }
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

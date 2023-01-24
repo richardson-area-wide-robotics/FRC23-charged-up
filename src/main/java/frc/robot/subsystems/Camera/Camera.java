@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.Camera;
 
+import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.photonvision.PhotonCamera;
@@ -28,17 +29,24 @@ public class Camera extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+    
+  }
 
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
 
-  public Transform3d getDistanceAndAngle() {
+  public double getAngle() {
     PhotonPipelineResult result = camera.getLatestResult();
     PhotonTrackedTarget target = result.getBestTarget();
     Transform3d pose = target.getBestCameraToTarget();
-    return pose;
+    Rotation3d rotation = pose.getRotation();
+    double angle = rotation.getAngle();
+    double xRot = rotation.getX();
+    System.out.println("Angle: " + angle*180/3.14);
+    System.out.println("XRot: " + xRot*180/3.14);
+    return angle;
   }
 }

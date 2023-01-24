@@ -6,24 +6,28 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.drive.DriveSubsystem;
 
 
+
 public class Lock extends CommandBase{
     
     DriveSubsystem drive;
-    DoubleSupplier sideWays;
+    DoubleSupplier sideways;
     DoubleSupplier forward;
     boolean lockedOn = false;
     
+
     //PID controller for yawRate
     PIDController yawRateController = new PIDController(1, 0, 0);
-    //This gets the controller inputs and drive information
-    public Lock(DriveSubsystem drive, DoubleSupplier forward, DoubleSupplier sideWays){
+
+    //This gets the controller inputs and drive information    
+    public Lock(DriveSubsystem drive, DoubleSupplier forward, DoubleSupplier sideways){
         this.drive = drive;
         this.forward = forward;
-        this.sideWays = sideWays;
+        this.sideways = sideways;
     }
+
     //Need to create a toggle button that swiches between locked and unlocked motion
     //So that it is not constantly active
-
+    
     
     @Override
     public void initialize(){}  
@@ -33,10 +37,10 @@ public class Lock extends CommandBase{
         return lockedOn;}
     //This sets the yawRate to circle the desired object while maintaning driver controll of motion
     @Override
-    public void execute(){
+    public  void execute(){
         double angularOffset = 0;
         double yawRate = yawRateController.calculate(angularOffset, 0);
-        drive.drive(forward.getAsDouble(), sideWays.getAsDouble(), yawRate, true);
+        drive.drive(forward.getAsDouble(), sideways.getAsDouble(), yawRate, true);
     }
     
     

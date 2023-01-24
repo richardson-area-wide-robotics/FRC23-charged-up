@@ -4,15 +4,20 @@
 
 package frc.robot;
 
+import java.util.function.DoubleSupplier;
+
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.LockMode.Lock;
 import frc.robot.subsystems.drive.DriveSubsystem;
 
 /**
@@ -26,7 +31,8 @@ public class RobotContainer {
   // The robot's subsystems
   private final AHRS m_gyro = new AHRS(SPI.Port.kMXP);
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
-
+  private final Lock LockMode;
+  
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
 
@@ -34,6 +40,14 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+  
+    //Some adjustments made for lock on mode
+     DoubleSupplier moveForward =  () -> MathUtil.applyDeadband(
+      -m_driverController.getLeftY(), 0.06); // 0.1 might be better?
+     DoubleSupplier moveSideways = () -> MathUtil.applyDeadband(
+      -m_driverController.getLeftX(), 0.06); // 0.1 might be better?
+      
+    LockMode = new Lock(m_robotDrive, moveForward, moveSideways);
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -42,16 +56,14 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    MathUtil.applyDeadband(
-                        -m_driverController.getLeftY(), 0.06), // 0.1 might be better?
-                    MathUtil.applyDeadband(
-                        -m_driverController.getLeftX(), 0.06), // 0.1 might be better?
+                    moveForward.getAsDouble(), // 0.1 might be better?
+                    moveSideways.getAsDouble(), // 0.1 might be better?
                     MathUtil.applyDeadband(
                         -m_driverController.getRightX(), 0.06), // 0.1 might be better?
                     true),
             m_robotDrive));
   }
-
+  
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -61,7 +73,10 @@ public class RobotContainer {
    * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
    */
-  private void configureBindings() {}
+  private void configureBindings() {
+    
+    new JoystickButton(m_driverController, XboxController.Button.kY.value).toggleOnTrue(LockMode);
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

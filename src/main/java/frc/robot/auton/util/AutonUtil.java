@@ -1,11 +1,8 @@
 package frc.robot.auton.util;
 
 import java.util.HashMap;
-import java.util.logging.Logger;
-
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
-
 import edu.wpi.first.math.geometry.Pose2d;
 
 public class AutonUtil {

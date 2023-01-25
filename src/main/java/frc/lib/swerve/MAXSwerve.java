@@ -212,6 +212,7 @@ public class MAXSwerve extends SubsystemBase {
     m_backRight.setDesiredState(swerveModuleStates[3]);
   }
 
+  /* These methods will prevent module movement is no command is being executed on the wheels */
   private void holdModuleRotation(MAXModule m) {
     var state = m.getDesiredState();
     state.speedMetersPerSecond = 0.0;

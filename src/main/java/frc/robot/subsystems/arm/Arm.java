@@ -1,7 +1,10 @@
 package frc.robot.subsystems.arm;
 
+import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
@@ -15,7 +18,9 @@ public class Arm {
   // making variable under the CANSparkMax class
   private CANSparkMax leftMotor;
   private CANSparkMax rightMotor;
-  private Encoder armEncoder;
+
+  private AbsoluteEncoder armEncoder;
+  private SparkMaxPIDController armPIDController;
 
   // enum sets unchangeable variables, here it sets the arm height for intaking and scoring game
   // objects
@@ -26,8 +31,6 @@ public class Arm {
     INTAKE_ARM_POSITION_SHELF
   }
 
-
-
   // Map of arm positions named armPositions
   EnumMap<armPosition, Double> armPositions = new EnumMap<>(armPosition.class);
 
@@ -35,39 +38,50 @@ public class Arm {
   private armPosition currentArmPosition = armPosition.INTAKE_ARM_POSITION_GROUND;
 
   // setting up CAN IDs for the motors
-  public Arm(int rightMotorCANID, int leftMotorCANID) {
-
-    //rightmotor.resetfactorydefualts
-    //leftmotor.resetfactorydefualts
-
+  public Arm() {
     // motor type for right motor
-    this.rightMotor = new CANSparkMax(rightMotorCANID, MotorType.kBrushless);
-    this.leftMotor = new CANSparkMax(leftMotorCANID, MotorType.kBrushless);
-
-    this.armEncoder = new Encoder(EncoderPort1, EncoderPort2);
+    leftMotor = new CANSparkMax(Constants.ArmConstants.LEFT_MOTOR_CAN_ID, MotorType.kBrushless);
+    rightMotor = new CANSparkMax(Constants.ArmConstants.RIGHT_MOTOR_CAN_ID, MotorType.kBrushless);
     
     // restoring defaults for spark max for if we need to switch them out
-    this.rightMotor.restoreFactoryDefaults();
-    this.leftMotor.restoreFactoryDefaults();
+    leftMotor.restoreFactoryDefaults();
+    rightMotor.restoreFactoryDefaults();
+    
+    // setting the Absolute Encoder for the SparkMax
+    armEncoder = leftMotor.getAbsoluteEncoder(Type.kDutyCycle);
+
+    // Apply position and velocity conversion factors for the driving encoder. The
+    // native units for position and velocity are rotations and RPM, respectively,
+    // but we want meters and meters per second
+    armEncoder.setPositionConversionFactor(Constants.ArmConstants.kArmEncoderPositionFactor);
+    armEncoder.setVelocityConversionFactor(Constants.ArmConstants.kArmEncoderVelocityFactor);
+  
+    // Set the PID gains for the driving motor.
+    armPIDController = leftMotor.getPIDController();
+    armPIDController.setFeedbackDevice(armEncoder);
+    armPIDController.setP(Constants.ArmConstants.ARM_PID_GAINS.P);
+    armPIDController.setI(Constants.ArmConstants.ARM_PID_GAINS.I);
+    armPIDController.setD(Constants.ArmConstants.ARM_PID_GAINS.D);
+    armPIDController.setFF(Constants.ArmConstants.ARM_FF);
+    armPIDController.setOutputRange(
+        Constants.ArmConstants.ARM_MIN_OUTPUT, Constants.ArmConstants.ARM_MAX_OUTPUT);
+
+    leftMotor.setIdleMode(Constants.ArmConstants.kArmMotorIdleMode);
+    leftMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
+    leftMotor.setInverted(Constants.ArmConstants.RIGHT_MOTOR_INVERTED);
 
     // setting soft limits (soft limits keep the motor running when it hits the limit instead of
     // braking)
-    this.rightMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-    this.rightMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.ArmConstants.FORWARD_LIMIT);
-    this.rightMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-    this.rightMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse,  Constants.ArmConstants.REVERSE_LIMIT);
+    leftMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+    leftMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.ArmConstants.FORWARD_LIMIT);
+    leftMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+    leftMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse,  Constants.ArmConstants.REVERSE_LIMIT);
 
     // setting the idle mode setting for the SparkMax, here it is set to brake when idle
-    this.rightMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    rightMotor.follow(this.leftMotor, Constants.ArmConstants.LEFT_MOTOR_INVERTED);
 
-    this.rightMotor.setInverted(Constants.ArmConstants.RIGHT_MOTOR_INVERTED);
-
-    this.leftMotor.follow(this.rightMotor, Constants.ArmConstants.LEFT_MOTOR_INVERTED);
-
-    this.leftMotor.follow(this.rightMotor, true);
-
-    //leftmotor.burnflash
-    //rightmotor.burnflash
+    leftMotor.burnFlash();
+    rightMotor.burnFlash();
 
     armPositions.put(armPosition.INTAKE_ARM_POSITION_GROUND,  Constants.ArmConstants.INTAKE_ARM_GROUND);
     armPositions.put(armPosition.INTAKE_ARM_POSITION_SHELF,  Constants.ArmConstants.INTAKE_ARM_SHELF);
@@ -123,19 +137,4 @@ public class Arm {
         .getPIDController()
         .setReference(armPositions.get(currentArmPosition), CANSparkMax.ControlType.kPosition);
   }
-
-  //controller
-  public final CommandXboxController m_driverController = new CommandXboxController(0);
-  
-  //buttons
-  Trigger aTrigger = m_driverController.a();
-  Trigger bTrigger = m_driverController.b();
-  Trigger xTrigger = m_driverController.x();
-  Trigger yTrigger = m_driverController.y();
-
-  public EventLoop getDefaultButtonLoop(){
-    //I need to use methods like 'a()' with type 'Trigger' inside this DefualtButtonLoop in order to use the commands like runToScore
-    //But i'm not sure how
-    return null;
- }
 }

@@ -64,7 +64,9 @@ public class Arm extends SubsystemBase {
         Constants.ArmConstants.ARM_MIN_OUTPUT, Constants.ArmConstants.ARM_MAX_OUTPUT);
 
     leftMotor.setIdleMode(Constants.ArmConstants.kArmMotorIdleMode);
+    rightMotor.setIdleMode(Constants.ArmConstants.kArmMotorIdleMode);
     leftMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
+    rightMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
     leftMotor.setInverted(Constants.ArmConstants.RIGHT_MOTOR_INVERTED);
 
     // setting soft limits (soft limits keep the motor running when it hits the limit instead of

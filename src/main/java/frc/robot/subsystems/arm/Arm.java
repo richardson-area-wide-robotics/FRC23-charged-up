@@ -7,13 +7,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import java.util.EnumMap;
 
-// extend SubsystemBase class into the Arm class?
-public class Arm {
+public class Arm extends SubsystemBase {
 
   // making variable under the CANSparkMax class
   private CANSparkMax leftMotor;

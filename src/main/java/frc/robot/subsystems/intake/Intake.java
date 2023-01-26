@@ -101,7 +101,7 @@ public void toggleIntake() {
   } else {
     currentIntakePosition = intakePosition.INTAKE_CLOSED;
   }
-  intakeMotor.getPIDController().setReference(intakePositions.get(currentIntakePosition), CANSparkMax.ControlType.kPosition);
+  intakePIDController.setReference(intakePositions.get(currentIntakePosition), CANSparkMax.ControlType.kPosition);
 }
 
 }

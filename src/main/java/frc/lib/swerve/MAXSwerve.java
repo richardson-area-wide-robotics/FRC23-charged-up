@@ -1,5 +1,6 @@
 package frc.lib.swerve;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
@@ -46,7 +47,7 @@ public class MAXSwerve extends SubsystemBase {
   private final MAXModule m_backRight;
 
   // The gyro sensor
-  private final ADIS16470_IMU m_gyro;
+  private final AHRS m_gyro;
 
   // The module positions
   private final SwerveModulePosition[] m_ModulePositions;
@@ -78,7 +79,7 @@ public class MAXSwerve extends SubsystemBase {
       MAXModule backRight,
       SwerveDriveKinematics kinematics,
       SwerveModulePosition[] modulePositions,
-      ADIS16470_IMU gyro,
+      AHRS gyro,
       double maxSpeed) {
     m_frontLeft = frontLeft;
     m_frontRight = frontRight;
@@ -118,7 +119,7 @@ public class MAXSwerve extends SubsystemBase {
     m_chassisSpeed = m_kinematics.toChassisSpeeds(getModuleStates());
 
     m_odometry.update(
-        Rotation2d.fromDegrees(m_gyro.getAngle()),
+        Rotation2d.fromDegrees(-m_gyro.getAngle()),
         new SwerveModulePosition[] {
           m_frontLeft.getPosition(),
           m_frontRight.getPosition(),
@@ -175,7 +176,7 @@ public class MAXSwerve extends SubsystemBase {
    * @param pose The pose to which to set the odometry.
    */
   public void resetOdometry(Pose2d pose) {
-    m_odometry.resetPosition(Rotation2d.fromDegrees(m_gyro.getAngle()), getModulePositions(), pose);
+    m_odometry.resetPosition(Rotation2d.fromDegrees(-m_gyro.getAngle()), getModulePositions(), pose);
     //m_odometry.resetPosition(m_gyro.getRotation2d(), getModulePositions(), pose);
   }
 
@@ -203,7 +204,7 @@ public class MAXSwerve extends SubsystemBase {
         m_kinematics.toSwerveModuleStates(
             fieldRelative
                 ? ChassisSpeeds.fromFieldRelativeSpeeds(
-                    xSpeed, ySpeed, rot, Rotation2d.fromDegrees(m_gyro.getAngle()))
+                    xSpeed, ySpeed, rot, Rotation2d.fromDegrees(-m_gyro.getAngle()))
                 : new ChassisSpeeds(xSpeed, ySpeed, rot));
     SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, m_maxSpeed);
     m_frontLeft.setDesiredState(swerveModuleStates[0]);
@@ -286,18 +287,13 @@ public class MAXSwerve extends SubsystemBase {
     m_gyro.calibrate();
   }
 
-  //   public void setHeading(double degreesCCWPositive) {
-  //     Logger.tag("Swerve Drive").trace("Setting heading to {} degrees", degreesCCWPositive);
-  //     m_gyro.setAngle(degreesCCWPositive);
-  //   }
-
   /**
    * Returns the heading of the robot.
    *
    * @return the robot's heading in degrees, from -180 to 180
    */
   public double getHeading() {
-    return Rotation2d.fromDegrees(m_gyro.getAngle()).getDegrees();
+    return Rotation2d.fromDegrees(-m_gyro.getAngle()).getDegrees();
     // return m_gyro.getRotation2d().getDegrees();
   }
 
@@ -319,7 +315,7 @@ public class MAXSwerve extends SubsystemBase {
   }
 
   public double getAngle(){
-    return m_gyro.getAngle();
+    return -m_gyro.getAngle();
   }
 
   /**

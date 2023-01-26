@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
@@ -23,7 +25,7 @@ import frc.robot.subsystems.drive.DriveSubsystem;
 public class RobotContainer {
 
   // The robot's subsystems
-  private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
+  private AHRS m_gyro = new AHRS();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
 
   // The driver's controller

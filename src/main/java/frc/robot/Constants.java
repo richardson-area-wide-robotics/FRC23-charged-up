@@ -156,17 +156,6 @@ public final class Constants {
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
-  public static final class Intake {
-    public static final float kRLimit  = 0.0f;
-    public static final float kFLimit = 0.0f;
-    public static final double kForwardSpeed = 0.7;
-    public static final double kReverseSpeed = -1.0;
-    public static final boolean kIntakeInverted = false;
-    public static final int kIntakeID = 0; // TODO: set CAN ID, should be next available number after arm
-    public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
-    public static final int kIntakeCurrentLimit = 40; // amps
-  }
-
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 0;
@@ -190,5 +179,23 @@ public final class Constants {
 
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676.0;
+  } 
+  
+  public static final class Intake {
+    public static final float kRLimit  = 0.0f;
+    public static final float kFLimit = 0.0f;
+    public static final double kForwardSpeed = 0.7;
+    public static final double kReverseSpeed = -1.0;
+    public static final boolean kIntakeInverted = false;
+    public static final int kIntakeID = 11; // TODO: set CAN ID, should be next available number after arm
+    public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
+    public static final int kIntakeCurrentLimit = 40; // amps
+    public static final double kIntakeOffset = 0.0; // TODO: set offset
+    public static final Double kIntakeOpen = 0.0;
+    public static final Double kIntakeClosed = 0.0;
+    public static final PIDGains kIntakePIDGains = new PIDGains(0.0, 0.0, 0.0);
+    public static final double kMinOutput = 0.0;
+    public static final double kMaxOutput = 0.0;
+
   }
 }

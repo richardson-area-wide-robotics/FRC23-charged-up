@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
-import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.drive.DriveSubsystem;
+import frc.robot.subsystems.intake.Intake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -67,9 +67,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
-    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new InstantCommand(() -> intake.pickup(), intake));
-
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new InstantCommand(() -> intake.drop(), intake));
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new InstantCommand(() -> intake.toggleIntake(), intake));
   }
 
   /**

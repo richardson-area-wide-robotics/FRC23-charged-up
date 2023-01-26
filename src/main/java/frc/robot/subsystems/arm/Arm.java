@@ -35,14 +35,33 @@ public class Arm extends SubsystemBase {
   private armPosition currentArmPosition = armPosition.INTAKE_ARM_POSITION_GROUND;
 
   // setting up CAN IDs for the motors
+  public void armConfig(CANSparkMax motor){
+    // restore factory defaults
+    motor.restoreFactoryDefaults();
+    // set motor basic values l
+    motor.setIdleMode(Constants.ArmConstants.kArmMotorIdleMode);
+    motor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
+     // setting soft limits (soft limits keep the motor running when it hits the limit instead of
+    // braking)
+    motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+    motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.ArmConstants.FORWARD_LIMIT);
+    motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+    motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse,  Constants.ArmConstants.REVERSE_LIMIT);
+
+    // set the arm PID controllers
+    armPIDController = motor.getPIDController();
+    armPIDController.setP(Constants.ArmConstants.ARM_PID_GAINS.P);
+    armPIDController.setI(Constants.ArmConstants.ARM_PID_GAINS.I);
+    armPIDController.setD(Constants.ArmConstants.ARM_PID_GAINS.D);
+    armPIDController.setFF(Constants.ArmConstants.ARM_FF);
+    armPIDController.setOutputRange(
+        Constants.ArmConstants.ARM_MIN_OUTPUT, Constants.ArmConstants.ARM_MAX_OUTPUT);
+
+  }
   public Arm() {
     // motor type for right motor
     leftMotor = new CANSparkMax(Constants.ArmConstants.LEFT_MOTOR_CAN_ID, MotorType.kBrushless);
     rightMotor = new CANSparkMax(Constants.ArmConstants.RIGHT_MOTOR_CAN_ID, MotorType.kBrushless);
-    
-    // restoring defaults for spark max for if we need to switch them out
-    leftMotor.restoreFactoryDefaults();
-    rightMotor.restoreFactoryDefaults();
     
     // setting the Absolute Encoder for the SparkMax
     armEncoder = leftMotor.getAbsoluteEncoder(Type.kDutyCycle);
@@ -53,28 +72,13 @@ public class Arm extends SubsystemBase {
     armEncoder.setPositionConversionFactor(Constants.ArmConstants.kArmEncoderPositionFactor);
     armEncoder.setVelocityConversionFactor(Constants.ArmConstants.kArmEncoderVelocityFactor);
   
-    // Set the PID gains for the driving motor.
-    armPIDController = leftMotor.getPIDController();
-    armPIDController.setFeedbackDevice(armEncoder);
-    armPIDController.setP(Constants.ArmConstants.ARM_PID_GAINS.P);
-    armPIDController.setI(Constants.ArmConstants.ARM_PID_GAINS.I);
-    armPIDController.setD(Constants.ArmConstants.ARM_PID_GAINS.D);
-    armPIDController.setFF(Constants.ArmConstants.ARM_FF);
-    armPIDController.setOutputRange(
-        Constants.ArmConstants.ARM_MIN_OUTPUT, Constants.ArmConstants.ARM_MAX_OUTPUT);
+    leftMotor.getPIDController().setFeedbackDevice(armEncoder);
 
-    leftMotor.setIdleMode(Constants.ArmConstants.kArmMotorIdleMode);
-    rightMotor.setIdleMode(Constants.ArmConstants.kArmMotorIdleMode);
-    leftMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
-    rightMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
+    // setting the motor configuration
+    armConfig(leftMotor);
+    armConfig(rightMotor);
+
     leftMotor.setInverted(Constants.ArmConstants.RIGHT_MOTOR_INVERTED);
-
-    // setting soft limits (soft limits keep the motor running when it hits the limit instead of
-    // braking)
-    leftMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-    leftMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.ArmConstants.FORWARD_LIMIT);
-    leftMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-    leftMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse,  Constants.ArmConstants.REVERSE_LIMIT);
 
     // setting the idle mode setting for the SparkMax, here it is set to brake when idle
     rightMotor.follow(this.leftMotor, Constants.ArmConstants.LEFT_MOTOR_INVERTED);
@@ -90,22 +94,22 @@ public class Arm extends SubsystemBase {
 
   // setting functions of runToScore and runToIntake
   public void runToScoreLow() {
-    this.rightMotor.set( Constants.ArmConstants.FORWARD_SPEED);
+    this.rightMotor.set(Constants.ArmConstants.FORWARD_SPEED);
     this.currentArmPosition = armPosition.SCORING_ARM_POSITION_LOW;
   }
 
   public void runToScoreMid() {
-    this.rightMotor.set( Constants.ArmConstants.FORWARD_SPEED);
+    this.rightMotor.set(Constants.ArmConstants.FORWARD_SPEED);
     this.currentArmPosition = armPosition.SCORING_ARM_POSITION_MID;
   }
 
   public void runToIntakeGround() {
-    this.rightMotor.set( Constants.ArmConstants.REVERSE_SPEED);
+    this.rightMotor.set(Constants.ArmConstants.REVERSE_SPEED);
     this.currentArmPosition = armPosition.INTAKE_ARM_POSITION_GROUND;
   }
 
   public void runToIntakeShelf() {
-    this.rightMotor.set( Constants.ArmConstants.REVERSE_SPEED);
+    this.rightMotor.set(Constants.ArmConstants.REVERSE_SPEED);
     this.currentArmPosition = armPosition.INTAKE_ARM_POSITION_SHELF;
   }
 

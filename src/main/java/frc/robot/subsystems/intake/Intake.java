@@ -4,6 +4,7 @@ import java.util.EnumMap;
 
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
@@ -17,6 +18,7 @@ public class Intake extends SubsystemBase {
 
 private CANSparkMax intakeMotor;
 private AbsoluteEncoder intakeEncoder;
+private RelativeEncoder intakeRelativeEncoder;
 private SparkMaxPIDController intakePIDController;
 
  // enum sets unchangeable variables, here it sets the arm height for intaking and scoring game
@@ -39,7 +41,8 @@ public Intake() {
   // set intake motor to factory defaults for if we ever want to switch them out 
   intakeMotor.restoreFactoryDefaults();
 
-  intakeEncoder = intakeMotor.getAbsoluteEncoder(Type.kDutyCycle);
+  //intakeEncoder = intakeMotor.getAbsoluteEncoder(Type.kDutyCycle);
+  intakeRelativeEncoder = intakeMotor.getEncoder();
 
   // set intake basic values 
   intakeMotor.setSmartCurrentLimit(Constants.Intake.kIntakeCurrentLimit);
@@ -48,7 +51,8 @@ public Intake() {
 
   // set the intake PID controllers
   intakePIDController = intakeMotor.getPIDController();
-  intakePIDController.setFeedbackDevice(intakeEncoder);
+  // intakePIDController.setFeedbackDevice(intakeEncoder);
+  intakePIDController.setFeedbackDevice(intakeRelativeEncoder);
   intakePIDController.setP(Constants.Intake.kIntakePIDGains.P);
   intakePIDController.setOutputRange(
       Constants.Intake.kMinOutput, Constants.Intake.kMaxOutput);
@@ -76,10 +80,10 @@ public double getPosition() {
   return intakeEncoder.getPosition();
 }
 
-// returns the absolute rotation of the intake Absolute Encoder without the offset
-public Rotation2d getAbsoluteRotation() {
-  return new Rotation2d(getPosition() - Constants.Intake.kIntakeOffset);
-}
+// // returns the absolute rotation of the intake Absolute Encoder without the offset
+// public Rotation2d getAbsoluteRotation() {
+//   return new Rotation2d(getPosition() - Constants.Intake.kIntakeOffset);
+// }
 
 // sets the intake motor to 0 to stop all movement 
 public void idle() {

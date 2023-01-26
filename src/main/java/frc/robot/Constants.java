@@ -183,7 +183,6 @@ public final class Constants {
 
     // variables to set limits, speeds
    public static final class ArmConstants {
-
     // Arm limits
     public final static float REVERSE_LIMIT = 0.0f;
     public final static float FORWARD_LIMIT = 0.0f;
@@ -195,6 +194,7 @@ public final class Constants {
     public final static double INTAKE_ARM_SHELF = 0.0;
     public final static double SCORING_ARM_LOW = 0.0;
     public final static double SCORING_ARM_MID = 0.0;
+    public static final Double INTAKE_ARM_STOWED = 0.0;
 
     /* Spark max constants */ 
     // CAN ID
@@ -205,13 +205,17 @@ public final class Constants {
     public static final double kArmEncoderPositionFactor = 0.0;
     public static final double kArmEncoderVelocityFactor = 0.0;
     public static final IdleMode kArmMotorIdleMode = IdleMode.kBrake;
-    public static final int kArmMotorCurrentLimit = 50; // TODO: Ask For Current Limit
+    public static final int kArmMotorCurrentLimit = 40;
+    public static final int kMovingArmMotorCurrentLimit = 60;  
 
     // PID constants using custom PID gains class //TODO: tune PID values
     public static final PIDGains ARM_PID_GAINS = new PIDGains(0.0, 0.0, 0.0);
     public static final double ARM_FF = 0.0;
-    public static final double ARM_MIN_OUTPUT = 0.0;
-    public static final double ARM_MAX_OUTPUT = 0.0;
+    public static final double ARM_MIN_OUTPUT = -1.0;
+    public static final double ARM_MAX_OUTPUT = 1.0;
+    
+    public static final double ARM_ENCODER_OFFSET = 0;
+  
 
   }
 }

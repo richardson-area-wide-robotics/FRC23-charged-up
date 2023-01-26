@@ -129,10 +129,12 @@ public class Arm extends SubsystemBase {
   // recording if the arm actively moving and set the current limit to 70 amps, and back to 40 amps if the arm is not moving or hold a constant position
   public void setArmCurrentLimit() {
     if (this.getSpeed() > 0.1 || this.getSpeed() < -0.1) {
-      this.leftMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
+      this.leftMotor.setSmartCurrentLimit(Constants.ArmConstants.kMovingArmMotorCurrentLimit);
+      this.rightMotor.setSmartCurrentLimit(Constants.ArmConstants.kMovingArmMotorCurrentLimit);
       SmartDashboard.putNumber("Arm Current", this.leftMotor.getOutputCurrent());
     } else {
       this.leftMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
+      this.rightMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
       SmartDashboard.putNumber("Arm Current", this.leftMotor.getOutputCurrent());
     }
   }

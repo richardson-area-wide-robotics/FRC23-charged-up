@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import frc.robot.Constants;
+import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import java.util.EnumMap;
@@ -95,7 +96,7 @@ public class Arm extends SubsystemBase {
     armPositions.put(armPosition.INTAKE_ARM_POSITION_STOWED,  Constants.ArmConstants.INTAKE_ARM_STOWED);
   }
 
-  // getting and positions, speed, and limits and returning them to us
+  // getting relative encoder position of the arm
   public double getPosition() {
     return this.leftMotor.getEncoder().getPosition();
   }
@@ -112,7 +113,7 @@ public class Arm extends SubsystemBase {
   
   // get the arm speed - returns in RPM (revolutions per minute)
   public double getSpeed() {
-    return this.leftMotor.getEncoder().getVelocity();
+    return this.armEncoder.getVelocity(); 
   }
 
   // check if the arm is at the forward limit
@@ -125,7 +126,7 @@ public class Arm extends SubsystemBase {
     return this.leftMotor.getFault(CANSparkMax.FaultID.kSoftLimitRev);
   }
 
-  // recording if the arm actively moving and set the current limit to 70 amps, and back to 40 amps if the arm is not moving or hold a constant position // TODO: maake sure this is passed "periodically"
+  // recording if the arm actively moving and set the current limit to 70 amps, and back to 40 amps if the arm is not moving or hold a constant position
   public void setArmCurrentLimit() {
     if (this.getSpeed() > 0.1 || this.getSpeed() < -0.1) {
       this.leftMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
@@ -136,11 +137,29 @@ public class Arm extends SubsystemBase {
     }
   }
 
+  // set the arm position back to home position
+  public void resetArmPosition() {
+    this.leftMotor.getEncoder().setPosition(0);
+  }
+
   // arm movement controls using PID loop
   public void moveArmToPosition(armPosition position) {
-    currentArmPosition = position;
     leftMotor
         .getPIDController()
-        .setReference(armPositions.get(currentArmPosition), CANSparkMax.ControlType.kPosition);
+        .setReference(armPositions.get(position), CANSparkMax.ControlType.kPosition, 0,0);
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+    setArmCurrentLimit();
+  }
+
+  // sends the arm values to NT to be later used in Shuffleboard
+  @Override
+  public void initSendable(SendableBuilder builder) {
+    super.initSendable(builder);
+    builder.addDoubleProperty("Set Point", this::getAbsoluteEncoder, null);
+    builder.addDoubleProperty("Arm Speed", this::getSpeed, null);
   }
 }

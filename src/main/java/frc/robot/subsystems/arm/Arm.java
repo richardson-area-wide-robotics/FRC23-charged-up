@@ -34,9 +34,6 @@ public class Arm extends SubsystemBase {
   // Map of arm positions named armPositions
   EnumMap<armPosition, Double> armPositions = new EnumMap<>(armPosition.class);
 
-  // variable to set the arm position when scoring and intaking
-  private armPosition currentArmPosition = armPosition.INTAKE_ARM_POSITION_GROUND;
-
   // setting up CAN IDs for the motors
   public void armConfig(CANSparkMax motor){
     // restore factory defaults

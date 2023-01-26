@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import java.util.EnumMap;
 
@@ -96,23 +97,43 @@ public class Arm extends SubsystemBase {
 
   // getting and positions, speed, and limits and returning them to us
   public double getPosition() {
-    return this.leftMotor.getEncoder().getPosition(); // this needs to change as we will be using external encoder for arm
+    return this.leftMotor.getEncoder().getPosition();
   }
 
-  public double getMeasurement() {
-    return this.getPosition();
+  // getting the absolute encoder position
+  public double getAbsoluteEncoder() {
+    return this.armEncoder.getPosition() - Constants.ArmConstants.ARM_ENCODER_OFFSET;
+  }
+
+  // set the arm speed
+  public void setSpeed(double speed) {
+    this.leftMotor.set(speed);
   }
   
+  // get the arm speed - returns in RPM (revolutions per minute)
   public double getSpeed() {
-    return this.leftMotor.get();
+    return this.leftMotor.getEncoder().getVelocity();
   }
 
+  // check if the arm is at the forward limit
   public Boolean atForwardLimit() {
     return this.leftMotor.getFault(CANSparkMax.FaultID.kSoftLimitFwd);
   }
 
+  // check if the arm is at the reverse limit
   public Boolean atReverseLimit() {
     return this.leftMotor.getFault(CANSparkMax.FaultID.kSoftLimitRev);
+  }
+
+  // recording if the arm actively moving and set the current limit to 70 amps, and back to 40 amps if the arm is not moving or hold a constant position // TODO: maake sure this is passed "periodically"
+  public void setArmCurrentLimit() {
+    if (this.getSpeed() > 0.1 || this.getSpeed() < -0.1) {
+      this.leftMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
+      SmartDashboard.putNumber("Arm Current", this.leftMotor.getOutputCurrent());
+    } else {
+      this.leftMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
+      SmartDashboard.putNumber("Arm Current", this.leftMotor.getOutputCurrent());
+    }
   }
 
   // arm movement controls using PID loop

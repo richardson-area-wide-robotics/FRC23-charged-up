@@ -187,7 +187,7 @@ public final class Constants {
     public static final double kForwardSpeed = 0.7;
     public static final double kReverseSpeed = -1.0;
     public static final boolean kIntakeInverted = false;
-    public static final int kIntakeID = 11; // TODO: set CAN ID, should be next available number after arm
+    public static final int kIntakeID = 11;
     public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
     public static final int kIntakeCurrentLimit = 40; // amps
     public static final double kIntakeOffset = 0.0; // TODO: set offset
@@ -196,6 +196,5 @@ public final class Constants {
     public static final PIDGains kIntakePIDGains = new PIDGains(0.0, 0.0, 0.0);
     public static final double kMinOutput = 0.0;
     public static final double kMaxOutput = 0.0;
-
   }
 }

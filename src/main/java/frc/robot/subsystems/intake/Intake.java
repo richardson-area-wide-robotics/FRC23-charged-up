@@ -76,7 +76,7 @@ public double getPosition() {
   return intakeEncoder.getPosition();
 }
 
-// returns the absolute rotation of the intake Absolute Encoder
+// returns the absolute rotation of the intake Absolute Encoder without the offset
 public Rotation2d getAbsoluteRotation() {
   return new Rotation2d(getPosition() - Constants.Intake.kIntakeOffset);
 }
@@ -92,6 +92,11 @@ public void MunaulPickup(){
 
 public void ManualDrop() {
   intakeMotor.set(Constants.Intake.kReverseSpeed);
+}
+
+// returns the setpoint of the intake PID controller; can be used to check intake pid contoller
+public double getSetPoint(){
+  return intakePositions.get(currentIntakePosition);
 }
 
 /* Toggles the state of the intake between clamped and open, using enum positions - defualt will be closed, with set reference method running the robot in closed loop  */

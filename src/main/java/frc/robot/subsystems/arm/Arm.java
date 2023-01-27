@@ -123,7 +123,7 @@ public class Arm extends SubsystemBase {
     return this.leftMotor.getFault(CANSparkMax.FaultID.kSoftLimitRev);
   }
 
-  // recording if the arm actively moving and set the current limit to 70 amps, and back to 40 amps if the arm is not moving or hold a constant position
+  // recording if the arm actively moving and set the current limit to 60 amps, and back to 40 amps if the arm is not moving or holding a constant position
   public void setArmCurrentLimit() {
     if (this.getSpeed() > 0.1 || this.getSpeed() < -0.1) {
       this.leftMotor.setSmartCurrentLimit(Constants.ArmConstants.kMovingArmMotorCurrentLimit);

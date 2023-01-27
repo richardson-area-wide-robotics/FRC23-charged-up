@@ -67,6 +67,10 @@ public class RobotContainer {
           if(m_driverController.getLeftStickButtonPressed()){
             m_robotDrive.zeroHeading();
           }
+
+          if(m_driverController.getRightStickButtonPressed()){
+            m_robotDrive.setX();
+          }
   }
 
   /**

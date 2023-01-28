@@ -5,10 +5,16 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
+
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
@@ -17,12 +23,15 @@ import org.opencv.imgproc.Imgproc;
 public class Localizer {
   private Thread visionThread;
   private AprilTagDetector detector;
+  private AprilTagFieldLayout fieldLayout;
 
-  public Localizer() {
+  public Localizer() throws IOException {
     detector = new AprilTagDetector();
     detector.addFamily("tag16h5", 0);
     AprilTagDetector.Config config = new AprilTagDetector.Config();
     detector.setConfig(config);
+    String path = Filesystem.getDeployDirectory().getPath();
+    fieldLayout = new AprilTagFieldLayout(path);
 
     visionThread =
         new Thread(
@@ -70,10 +79,16 @@ public class Localizer {
                 AprilTagDetection[] detections = detector.detect(grayMat);
                 tags.clear();
                 for (AprilTagDetection detection : detections) {
-                  draw(mat, detection);
+                  //draw(mat, detection);
                   Transform3d pose = estimator.estimate(detection);
-                  SmartDashboard.putString("tag", "" + detection.getId());
+                  int tagID = detection.getId();
+                  Pose3d transformPose = findPoseTransform(pose, tagID);
+                  Pose3d plusPose = findPosePlus(pose, tagID);
+                  SmartDashboard.putString("tag", "" + tagID);
                   SmartDashboard.putString("pose", pose.toString());
+                  SmartDashboard.putString("transform", transformPose.toString());
+                  SmartDashboard.putString("plus", plusPose.toString());
+
                 }
 
                 // Put a rectangle on the image
@@ -84,6 +99,7 @@ public class Localizer {
                 outputStream.putFrame(mat);
               }
             });
+
   }
 
   public void start() {
@@ -91,12 +107,33 @@ public class Localizer {
     visionThread.start();
   }
 
-  private void draw(Mat mat, AprilTagDetection tag) {
-    for (int ind = 0; ind < 4; ind++) {
-      int end = ind % 4;
-      Point pointA = new Point(getCornerX(ind), getCornerY(ind + 1));
-      Point pointB = new Point(getCornerX(end), getCornerY(end + 1));
-      Imgproc.line(mat, pointA, pointB, new Scalar(255, 0, 0), 3);
-    }
+  private Pose3d findPoseTransform(Transform3d pose, int tagID){ 
+    Optional<Pose3d> tagPose = fieldLayout.getTagPose(tagID);
+
+    Pose3d robotPosition = new Pose3d();
+    if(tagPose.isPresent()){
+      tagPose.get().transformBy(pose);
   }
+    return robotPosition;
+  }
+
+  private Pose3d findPosePlus(Transform3d pose, int tagID){ 
+    Optional<Pose3d> tagPose = fieldLayout.getTagPose(tagID);
+
+    Pose3d robotPosition = new Pose3d();
+    if(tagPose.isPresent()){
+      tagPose.get().plus(pose);
+  }
+    return robotPosition;
+  }
+
+
+  //private void draw(Mat mat, AprilTagDetection tag) {
+    //for (int ind = 0; ind < 4; ind++) {
+      //int end = ind % 4;
+      //Point pointA = new Point(getCornerX(ind), getCornerY(ind + 1));
+      //Point pointB = new Point(getCornerX(end), getCornerY(end + 1));
+      //Imgproc.line(mat, pointA, pointB, new Scalar(255, 0, 0), 3);
+    //}
+  //}
 }

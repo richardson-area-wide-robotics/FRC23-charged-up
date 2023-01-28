@@ -9,10 +9,14 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
+import frc.robot.subsystems.arm.Arm;
+import frc.robot.subsystems.arm.Arm.armPosition;
 import frc.robot.subsystems.drive.DriveSubsystem;
 
 /**
@@ -26,6 +30,7 @@ public class RobotContainer {
   // The robot's subsystems
   private final AHRS m_gyro = new AHRS(SPI.Port.kMXP);
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
+  private final Arm m_arm = new Arm();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -61,7 +66,14 @@ public class RobotContainer {
    * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
    */
-  private void configureBindings() {}
+  private void configureBindings() {
+
+    new JoystickButton(m_driverController, XboxController.Button.kY.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_GROUND), m_arm));
+
+    new JoystickButton(m_driverController, XboxController.Button.kA.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_STOWED), m_arm));
+
+    new JoystickButton(m_driverController, XboxController.Button.kA.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_MID), m_arm));
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

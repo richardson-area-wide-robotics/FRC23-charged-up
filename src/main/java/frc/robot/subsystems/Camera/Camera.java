@@ -11,10 +11,10 @@ import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
 public class Camera extends SubsystemBase {
-  PhotonCamera camera;
+  static PhotonCamera camera;
 
   public Camera() {
-    this.camera = new PhotonCamera("slotheye");
+    Camera.camera = new PhotonCamera("slotheye");
   }
 
   /**
@@ -39,6 +39,16 @@ public class Camera extends SubsystemBase {
     PhotonPipelineResult result = camera.getLatestResult();
     PhotonTrackedTarget target = result.getBestTarget();
     Transform3d pose = target.getBestCameraToTarget();
+    
     return pose;
+    
+  }
+
+  public static double getAngle() {
+    PhotonPipelineResult result = camera.getLatestResult();
+    PhotonTrackedTarget target = result.getBestTarget();
+    double  angle = target.getYaw();
+
+    return angle;
   }
 }

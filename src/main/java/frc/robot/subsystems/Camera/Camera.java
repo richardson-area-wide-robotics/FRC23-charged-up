@@ -41,14 +41,5 @@ public class Camera extends SubsystemBase {
     Transform3d pose = target.getBestCameraToTarget();
     
     return pose;
-    
-  }
-
-  public static double getAngle() {
-    PhotonPipelineResult result = camera.getLatestResult();
-    PhotonTrackedTarget target = result.getBestTarget();
-    double  angle = target.getYaw();
-
-    return angle;
   }
 }

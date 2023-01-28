@@ -20,9 +20,7 @@ public class Camera extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
-    
-  }
+  public void periodic() {}
 
   @Override
   public void simulationPeriodic() {
@@ -35,33 +33,27 @@ public class Camera extends SubsystemBase {
   }
 
   public PhotonTrackedTarget getCameraTarget() {
-    PhotonPipelineResult result = camera.getLatestResult();
+    PhotonPipelineResult result = this.getCameraResult();
     PhotonTrackedTarget target = result.getBestTarget();
     return target;
   }
 
   public Transform3d getPose() {
-    PhotonPipelineResult result = camera.getLatestResult();
-    PhotonTrackedTarget target = result.getBestTarget();
+    PhotonTrackedTarget target = this.getCameraTarget();
     Transform3d pose = target.getBestCameraToTarget();
     return pose;
   }
 
   public Rotation3d getCameraRotation() {
-    PhotonPipelineResult result = camera.getLatestResult();
-    PhotonTrackedTarget target = result.getBestTarget();
-    Transform3d pose = target.getBestCameraToTarget();
+    Transform3d pose = this.getPose();
     Rotation3d rotation = pose.getRotation();
     return rotation;
   }
-  
+
   public double getAngle() {
-    PhotonPipelineResult result = camera.getLatestResult();
-    PhotonTrackedTarget target = result.getBestTarget();
-    Transform3d pose = target.getBestCameraToTarget();
-    Rotation3d rotation = pose.getRotation();
+    Rotation3d rotation = this.getCameraRotation();
     double angle = rotation.getAngle();
-    SmartDashboard.putNumber("Angle: ", angle*180/Math.PI);
+    SmartDashboard.putNumber("Angle: ", angle * 180 / Math.PI);
     return angle;
   }
 }

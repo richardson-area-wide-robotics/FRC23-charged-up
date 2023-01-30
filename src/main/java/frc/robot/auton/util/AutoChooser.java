@@ -1,11 +1,15 @@
 package frc.robot.auton.util;
 
+import edu.wpi.first.util.datalog.DataLog;
+import edu.wpi.first.util.datalog.DataLogEntry;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.LogManager;
 
 public class AutoChooser {
     private static final HashMap<String, Command> m_autons = new HashMap<>();
@@ -13,7 +17,6 @@ public class AutoChooser {
     private static boolean m_isInit = false;
   
     private static Command m_defaultAuton = new WaitCommand(0.0).withName("Do Nothing Default");
-  
     static {
       addAuton(new WaitCommand(0.0).withName("Do Nothing Auton"), "Do Nothing");
     }
@@ -26,7 +29,7 @@ public class AutoChooser {
      */
     public static void addAuton(Command auton, String name) {
       if (m_autons.containsKey(name)) {
-        //Logger.tag("Auton Chooser").error("Auton already exists with name {}!", name);
+        System.out.print("Auton Already exists with the name {}!" + name);
         return;
       }
   
@@ -53,11 +56,8 @@ public class AutoChooser {
       String selectedAuton =
           SmartDashboard.getString("Auto Selector", "INVALID VALUE FROM NETWORK TABLES");
       if (!m_autons.containsKey(selectedAuton)) {
-        // Logger.tag("Auton Chooser")
-        //     .error(
-        //         "Auton selection {} not found, falling back to {}",
-        //         selectedAuton,
-        //         m_defaultAuton.getName());
+        // if chosen auton path can not be loaded, alert and revert to default 
+        DriverStation.reportWarning("No auto path selected... Loading default auto.", false);;
       }
   
       return m_autons.getOrDefault(selectedAuton, m_defaultAuton);

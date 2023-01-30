@@ -3,13 +3,16 @@ package frc.robot.subsystems.arm;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import frc.robot.Constants;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import java.util.EnumMap;
 
 public class Arm extends SubsystemBase {
@@ -17,6 +20,7 @@ public class Arm extends SubsystemBase {
   // making variable under the CANSparkMax class
   private CANSparkMax leftMotor;
   private CANSparkMax rightMotor;
+  private PIDController armPID;
 
   private AbsoluteEncoder armEncoder;
   private SparkMaxPIDController armPIDController;
@@ -34,6 +38,9 @@ public class Arm extends SubsystemBase {
   // Map of arm positions named armPositions
   EnumMap<armPosition, Double> armPositions = new EnumMap<>(armPosition.class);
 
+  // current arm position
+  private armPosition currentArmPosition = armPosition.INTAKE_ARM_POSITION_STOWED;
+
   // setting up CAN IDs for the motors
   public void armConfig(CANSparkMax motor){
     // restore factory defaults
@@ -50,9 +57,10 @@ public class Arm extends SubsystemBase {
 
     // set the arm PID controllers
     armPIDController = motor.getPIDController();
-    armPIDController.setP(Constants.ArmConstants.ARM_PID_GAINS.P);
-    armPIDController.setI(Constants.ArmConstants.ARM_PID_GAINS.I);
-    armPIDController.setD(Constants.ArmConstants.ARM_PID_GAINS.D);
+    armPID = new PIDController(Constants.ArmConstants.ARM_PID_GAINS.P, Constants.ArmConstants.ARM_PID_GAINS.I, Constants.ArmConstants.ARM_PID_GAINS.D);
+    armPIDController.setP(armPID.getP());
+    armPIDController.setI(armPID.getI());
+    armPIDController.setD(armPID.getD());
     armPIDController.setFF(Constants.ArmConstants.ARM_FF);
     armPIDController.setOutputRange(
         Constants.ArmConstants.ARM_MIN_OUTPUT, Constants.ArmConstants.ARM_MAX_OUTPUT);
@@ -73,6 +81,8 @@ public class Arm extends SubsystemBase {
     armEncoder.setVelocityConversionFactor(Constants.ArmConstants.kArmEncoderVelocityFactor);
   
     leftMotor.getPIDController().setFeedbackDevice(armEncoder);
+
+    this.resetArmPosition();
 
     // setting the motor configuration
     armConfig(leftMotor);
@@ -138,20 +148,19 @@ public class Arm extends SubsystemBase {
 
   // set the arm position back to home position
   public void resetArmPosition() {
-    this.leftMotor.getEncoder().setPosition(0);
+    this.leftMotor.getEncoder().setPosition(armPositions.get(armPosition.INTAKE_ARM_POSITION_STOWED));
   }
 
   // arm movement controls using PID loop
   public void moveArmToPosition(armPosition position) {
-    leftMotor
-        .getPIDController()
-        .setReference(armPositions.get(position), CANSparkMax.ControlType.kPosition, 0,0);
+    this.currentArmPosition = position;
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     setArmCurrentLimit();
+    this.armPIDController.setReference(armPositions.get(this.currentArmPosition), ControlType.kPosition);
   }
 
   // sends the arm values to NT to be later used in Shuffleboard
@@ -160,5 +169,7 @@ public class Arm extends SubsystemBase {
     super.initSendable(builder);
     builder.addDoubleProperty("Set Point", this::getAbsoluteEncoder, null);
     builder.addDoubleProperty("Arm Speed", this::getSpeed, null);
+    builder.addBooleanProperty("Arm Reverse limit", this::atReverseLimit, null);
+    builder.addBooleanProperty("Arm Forward limit", this::atForwardLimit, null);
   }
 }

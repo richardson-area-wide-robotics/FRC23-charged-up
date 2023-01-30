@@ -45,11 +45,11 @@ public class Localizer {
               ArrayList<Integer> tags = new ArrayList<>();
               AprilTagPoseEstimator.Config poseEstConfig =
                   new AprilTagPoseEstimator.Config(
-                      Constants.TARGET_SIZE_METERS,
-                      Constants.FX_PIXELS,
-                      Constants.FY_PIXELS,
-                      Constants.CX_PIXELS,
-                      Constants.CY_PIXELS);
+                      Constants.Localizer.TARGET_SIZE_METERS,
+                      Constants.Localizer.FX_PIXELS,
+                      Constants.Localizer.FY_PIXELS,
+                      Constants.Localizer.CX_PIXELS,
+                      Constants.Localizer.CY_PIXELS);
               AprilTagPoseEstimator estimator = new AprilTagPoseEstimator(poseEstConfig);
 
               // This cannot be 'true'. The program will never exit if it is. This

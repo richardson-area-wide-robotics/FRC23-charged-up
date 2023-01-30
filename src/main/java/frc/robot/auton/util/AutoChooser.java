@@ -29,7 +29,7 @@ public class AutoChooser {
      */
     public static void addAuton(Command auton, String name) {
       if (m_autons.containsKey(name)) {
-        System.out.print("Auton Already exists with the name {}!" + name);
+        System.out.println("Auton Already exists with the name {}!" + name);
         return;
       }
   

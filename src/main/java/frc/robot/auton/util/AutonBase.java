@@ -20,46 +20,34 @@ public abstract class AutonBase extends SequentialCommandGroup {
   }
 
 
-// TODO: The below needs logging functions
+// TODO: Possibly look into a low priority issue for changing printing to logging 
   public void addCommandsWithLog(String tag, Command... commands) {
-    // Add logging to each command
+    // Add Printing to each command
 
-    // Log start of group
+    // Print start of group
     super.addCommands(
         new InstantCommand(
             () -> {
               m_autonStartTime = Timer.getFPGATimestamp();
-              Logger.tag(tag).trace("Auton goup Starting at {}", m_autonStartTime);
+              System.out.println("Auton group Starting at {}" + m_autonStartTime);
             }));
 
-    // Log start and end of each command
+    // Print start and end of each command
     for (var cmd : commands) {
       super.addCommands(
           new InstantCommand(
-              () ->
-                  Logger.tag(tag)
-                      .trace(
-                          "Starting command step {}, at {}",
-                          cmd.getName(),
-                          Timer.getFPGATimestamp())),
+              () -> System.out.println("Starting command step{}, at {}" + cmd.getName() + Timer.getFPGATimestamp())),
           cmd,
           new InstantCommand(
               () ->
-                  Logger.tag(tag)
-                      .trace(
-                          "Ending command step {}, at {}",
-                          cmd.getName(),
-                          Timer.getFPGATimestamp())));
+              System.out.println("Ending command step{}, at {}" + cmd.getName() + Timer.getFPGATimestamp())));
     }
 
-    // Log end of auton
+    // Print end of auton
     super.addCommands(
         new InstantCommand(
             () -> {
-              Logger.tag(tag)
-                  .trace(
-                      "Auton group complete after {} seconds",
-                      Timer.getFPGATimestamp() - m_autonStartTime);
+              System.out.println("Auton group complete after {} seconds" + (Timer.getFPGATimestamp() - m_autonStartTime));
             }));
   }
 }

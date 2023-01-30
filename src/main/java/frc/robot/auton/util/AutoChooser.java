@@ -1,7 +1,5 @@
 package frc.robot.auton.util;
 
-import edu.wpi.first.util.datalog.DataLog;
-import edu.wpi.first.util.datalog.DataLogEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -9,7 +7,6 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.LogManager;
 
 public class AutoChooser {
     private static final HashMap<String, Command> m_autons = new HashMap<>();

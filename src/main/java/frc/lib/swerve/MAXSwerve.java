@@ -1,6 +1,5 @@
 package frc.lib.swerve;
 
-import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
@@ -303,6 +302,10 @@ public class MAXSwerve extends SubsystemBase {
 
   public Command stopCommand() {
     return new RunCommand(this::stop, this).withName("Swerve Stop");
+  }
+
+  public void setHeading(ADIS16470_IMU.IMUAxis heading) {
+    m_gyro.setYawAxis(heading);
   }
 
   /**

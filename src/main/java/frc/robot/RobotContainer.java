@@ -18,6 +18,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.Arm.armPosition;
 import frc.robot.subsystems.drive.DriveSubsystem;
+import frc.robot.subsystems.intake.Intake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,6 +31,7 @@ public class RobotContainer {
   // The robot's subsystems
   private final AHRS m_gyro = new AHRS(SPI.Port.kMXP);
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
+  private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
 
   // The driver's controller
@@ -68,11 +70,13 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).onTrue(new InstantCommand(() -> intake.toggleIntake(), intake));
+
     new JoystickButton(m_driverController, XboxController.Button.kY.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_GROUND), m_arm));
 
     new JoystickButton(m_driverController, XboxController.Button.kA.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_STOWED), m_arm));
 
-    new JoystickButton(m_driverController, XboxController.Button.kA.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_MID), m_arm));
+    new JoystickButton(m_driverController, XboxController.Button.kB.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_MID), m_arm));
   }
 
   /**

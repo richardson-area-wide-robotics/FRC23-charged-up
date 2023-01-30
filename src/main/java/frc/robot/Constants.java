@@ -178,4 +178,62 @@ public final class Constants {
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
   }
 
+  public static final class NeoMotorConstants {
+    public static final double kFreeSpeedRpm = 5676.0;
+  } 
+  
+  public static final class Intake {
+    public static final float kRLimit  = -4.0f;
+    public static final float kFLimit = 0.0f;
+    public static final double kForwardSpeed = 0.7;
+    public static final double kReverseSpeed = -1.0;
+    public static final boolean kIntakeInverted = true;
+    public static final int kIntakeID = 11;
+    public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
+    public static final int kIntakeCurrentLimit = 40; // amps
+    public static final double kIntakeOffset = 0.0; // TODO: set offset
+    public static final Double kIntakeOpen = -3.5;
+    public static final Double kIntakeClosed = -1.4;
+    public static final PIDGains kIntakePIDGains = new PIDGains(0.1, 0.0, 0.0);
+    public static final double kMinOutput = -1.0;
+    public static final double kMaxOutput = 1.0;
+  }
+
+    // variables to set limits, speeds
+   public static final class ArmConstants {
+    // Arm limits
+    public final static float REVERSE_LIMIT = 0.0f;
+    public final static float FORWARD_LIMIT = 43.5f;
+    public final static double REVERSE_SPEED = 0.5;
+    public final static double FORWARD_SPEED = 0.5;
+
+    // doubles for arm positions
+    public final static double INTAKE_ARM_GROUND = 0.0;
+    public final static double INTAKE_ARM_SHELF = 0.0;
+    public final static double SCORING_ARM_LOW = 0.0;
+    public final static double SCORING_ARM_MID = 0.0;
+    public static final Double INTAKE_ARM_STOWED = 0.0;
+
+    /* Spark max constants */ 
+    // CAN ID
+    public final static int LEFT_MOTOR_CAN_ID = 9;
+    public final static int RIGHT_MOTOR_CAN_ID = 10;
+    public static final boolean RIGHT_MOTOR_INVERTED = false;
+    public static final boolean LEFT_MOTOR_INVERTED = true; 
+    public static final double kArmEncoderPositionFactor = 0.0;
+    public static final double kArmEncoderVelocityFactor = 0.0;
+    public static final IdleMode kArmMotorIdleMode = IdleMode.kBrake;
+    public static final int kArmMotorCurrentLimit = 40;
+    public static final int kMovingArmMotorCurrentLimit = 60;  
+
+    // PID constants using custom PID gains class //TODO: tune PID values
+    public static final PIDGains ARM_PID_GAINS = new PIDGains(1.0, 0.0, 0.0);
+    public static final double ARM_FF = 0.0;
+    public static final double ARM_MIN_OUTPUT = -1.0;
+    public static final double ARM_MAX_OUTPUT = 1.0;
+    
+    public static final double ARM_ENCODER_OFFSET = 0;
+  
+
+  }
 }

@@ -23,6 +23,11 @@ import frc.lib.util.SwerveModuleConstants;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  public static final class OIConstants {
+    public static final int kDriverControllerPort = 0;
+    public static final int kOperatorControllerPort = 1;
+    public static final double kControllerDeadband = 0.1;
+  }
   public static final class SwerveDriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
@@ -33,11 +38,10 @@ public final class Constants {
      * Chassis configuration
      */
     // Distance between centers of right and left wheels on robot
-    public static final double kTrackWidth = Units.inchesToMeters(26.5);
+    public static final double kTrackWidth = Units.inchesToMeters(23.5);
     // Distance between front and back wheels on robot
-    public static final double kWheelBase = Units.inchesToMeters(26.5);
-    // TODO change these based on current robot track and wheel base
-
+    public static final double kWheelBase = Units.inchesToMeters(23.5);
+    // The kinematics for the robot drivetrain
     public static final SwerveDriveKinematics kDriveKinematics =
         new SwerveDriveKinematics(
             new Translation2d(kWheelBase / 2, kTrackWidth / 2),
@@ -109,14 +113,15 @@ public final class Constants {
     // The MAXSwerve module can be configured with one of three pinion gears: 12T, 13T, or 14T.
     // This changes the drive speed of the module (a pinion gear with more teeth will result in a
     // robot that drives faster).
-    public static final int kDrivingMotorPinionTeeth = 14;
+    public static final int kDrivingMotorPinionTeeth = 13;
 
     // Invert the turning encoder, since the output shaft rotates in the opposite direction of
     // the steering motor in the MAXSwerve Module.
     public static final boolean kTurningEncoderInverted = true;
 
     // Calculations required for driving motor conversion factors and feed forward
-    public static final double kDrivingMotorFreeSpeedRps = NeoMotorConstants.kFreeSpeedRpm / 60.0;
+    public static final double kFreeSpeedRpm = 5676.0;
+    public static final double kDrivingMotorFreeSpeedRps = kFreeSpeedRpm / 60.0;
     public static final double kWheelDiameterMeters = 0.0762;
     public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI;
     // 45 teeth on the wheel's bevel gear, 22 teeth on the first-stage spur gear, 15 teeth on the
@@ -146,8 +151,8 @@ public final class Constants {
     public static final double kDrivingMaxOutput = 1.0;
 
     public static final PIDGains kTurningPIDGains =
-        new PIDGains(1, 0, 0); // TODO: tune values for the turning motor
-    public static final double kTurningFF = 0.0;
+        new PIDGains(4, 0, 0.075); // TODO: tune values for the turning motor
+    public static final double kTurningFF = 0.0; // TODO: tune values for Feed Forward
     public static final double kTurningMinOutput = -1.0;
     public static final double kTurningMaxOutput = 1.0;
 
@@ -155,16 +160,10 @@ public final class Constants {
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
     public static final int kDrivingMotorCurrentLimit = 50; // amps
-    public static final int kTurningMotorCurrentLimit = 20; // amps
+    public static final int kTurningMotorCurrentLimit = 10; // amps
   }
-
-  public static final class OIConstants {
-    public static final int kDriverControllerPort = 0;
-    public static final int kOperatorControllerPort = 0;
-  }
-
   public static final class AutoConstants {
-    public static final double kMaxSpeedMetersPerSecond = 3.0;
+     public static final double kMaxSpeedMetersPerSecond = 3.0;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3.0;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
     public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;    
@@ -178,8 +177,57 @@ public final class Constants {
     public static final PIDController kPYController = new PIDController(0, 0, 0);
     public static final PIDController kPThetaController = new PIDController(0, 0, 0);
   }
+  
+  public static final class Intake {
+    public static final float kRLimit  = -4.0f;
+    public static final float kFLimit = 0.0f;
+    public static final double kForwardSpeed = 0.7;
+    public static final double kReverseSpeed = -1.0;
+    public static final boolean kIntakeInverted = true;
+    public static final int kIntakeID = 11;
+    public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
+    public static final int kIntakeCurrentLimit = 40; // amps
+    public static final double kIntakeOffset = 0.0; // TODO: set offset
+    public static final Double kIntakeOpen = -3.5;
+    public static final Double kIntakeClosed = -1.4;
+    public static final PIDGains kIntakePIDGains = new PIDGains(0.1, 0.0, 0.0);
+    public static final double kMinOutput = -1.0;
+    public static final double kMaxOutput = 1.0;
+  }
+   public static final class ArmConstants {
+    // Arm limits
+    public final static float REVERSE_LIMIT = 0.0f;
+    public final static float FORWARD_LIMIT = 43.5f;
+    public final static double REVERSE_SPEED = 0.5;
+    public final static double FORWARD_SPEED = 0.5;
 
-  public static final class NeoMotorConstants {
-    public static final double kFreeSpeedRpm = 5676.0;
+    // doubles for arm positions
+    public final static double INTAKE_ARM_GROUND = 0.0;
+    public final static double INTAKE_ARM_SHELF = 0.0;
+    public final static double SCORING_ARM_LOW = 0.0;
+    public final static double SCORING_ARM_MID = 0.0;
+    public static final Double INTAKE_ARM_STOWED = 0.0;
+
+    /* Spark max constants */ 
+    // CAN ID
+    public final static int LEFT_MOTOR_CAN_ID = 9;
+    public final static int RIGHT_MOTOR_CAN_ID = 10;
+    public static final boolean RIGHT_MOTOR_INVERTED = false;
+    public static final boolean LEFT_MOTOR_INVERTED = true; 
+    public static final double kArmEncoderPositionFactor = 0.0;
+    public static final double kArmEncoderVelocityFactor = 0.0;
+    public static final IdleMode kArmMotorIdleMode = IdleMode.kBrake;
+    public static final int kArmMotorCurrentLimit = 40;
+    public static final int kMovingArmMotorCurrentLimit = 60;  
+
+    // PID constants using custom PID gains class //TODO: tune PID values
+    public static final PIDGains ARM_PID_GAINS = new PIDGains(1.0, 0.0, 0.0);
+    public static final double ARM_FF = 0.0;
+    public static final double ARM_MIN_OUTPUT = -1.0;
+    public static final double ARM_MAX_OUTPUT = 1.0;
+    
+    public static final double ARM_ENCODER_OFFSET = 0;
+  
+
   }
 }

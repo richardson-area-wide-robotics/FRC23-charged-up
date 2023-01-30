@@ -25,7 +25,7 @@ import frc.robot.subsystems.drive.DriveSubsystem;
 public class RobotContainer {
 
   // The robot's subsystems
-  private AHRS m_gyro = new AHRS();
+  private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
 
   // The driver's controller

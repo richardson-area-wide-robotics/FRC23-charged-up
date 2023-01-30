@@ -67,7 +67,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
-    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new InstantCommand(() -> intake.toggleIntake(), intake));
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).onTrue(new InstantCommand(() -> intake.toggleIntake(), intake));
   }
 
   /**

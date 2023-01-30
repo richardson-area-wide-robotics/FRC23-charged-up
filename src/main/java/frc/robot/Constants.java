@@ -160,8 +160,6 @@ public final class Constants {
     public static final int kDrivingMotorCurrentLimit = 50; // amps
     public static final int kTurningMotorCurrentLimit = 10; // amps
   }
-
-
   public static final class AutoConstants {
      public static final double kMaxSpeedMetersPerSecond = 3.0;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3.0;
@@ -177,10 +175,6 @@ public final class Constants {
         new TrapezoidProfile.Constraints(
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
   }
-
-  public static final class NeoMotorConstants {
-    public static final double kFreeSpeedRpm = 5676.0;
-  } 
   
   public static final class Intake {
     public static final float kRLimit  = -4.0f;
@@ -198,8 +192,6 @@ public final class Constants {
     public static final double kMinOutput = -1.0;
     public static final double kMaxOutput = 1.0;
   }
-
-    // variables to set limits, speeds
    public static final class ArmConstants {
     // Arm limits
     public final static float REVERSE_LIMIT = 0.0f;

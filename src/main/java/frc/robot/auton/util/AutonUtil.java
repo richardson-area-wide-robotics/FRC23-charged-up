@@ -4,6 +4,7 @@ import java.util.HashMap;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class AutonUtil {
     private static HashMap<String, PathPlannerTrajectory> m_cache = new HashMap<>();
@@ -37,17 +38,10 @@ public class AutonUtil {
         PathPlannerTrajectory trajectory = PathPlanner.loadPath(name, maxVel, maxAccel, reversed);
     
         if (trajectory == null) {
-          //Logger.tag("Auton Path").error("Failed to load trajectory: {}", name); //TODO: Add logging for autonomous to dashboard
+            DriverStation.reportError("Auton Path... Failed to load trajectory paths: {}" + name, false);
         }
-    
-        // Logger.tag("Auton Path")
-        //     .trace(
-        //         "Loaded auton {}, max velocity: {}, max accel: {}, reversed: {}, starting state {}",
-        //         name,
-        //         maxVel,
-        //         maxAccel,
-        //         reversed,
-        //         trajectory.getInitialState());
+
+        System.out.println("Loaded auton {}" + name + " max velocity: {}" + maxVel + "max accel: {}" + maxAccel + "reversed: {}" + reversed + "starting state {}" + trajectory.getInitialState());
     
         /*
          * Store trajectories. This is done since multiple autons may load the same trajectories,

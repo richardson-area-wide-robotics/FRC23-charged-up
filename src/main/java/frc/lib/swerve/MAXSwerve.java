@@ -89,7 +89,7 @@ public class MAXSwerve extends SubsystemBase {
     m_kinematics = kinematics;
     m_ModulePositions = modulePositions;
     m_maxSpeed = maxSpeed;
-    m_odometry = new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(m_gyro.getAngle()), modulePositions);
+    m_odometry = new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(getAngle()), modulePositions);
     //m_odometry = new SwerveDriveOdometry(kinematics, m_gyro.getRotation2d(), modulePositions);
   }
 
@@ -119,7 +119,7 @@ public class MAXSwerve extends SubsystemBase {
     m_chassisSpeed = m_kinematics.toChassisSpeeds(getModuleStates());
 
     m_odometry.update(
-        Rotation2d.fromDegrees(m_gyro.getAngle()),
+        Rotation2d.fromDegrees(getAngle()),
         new SwerveModulePosition[] {
           m_frontLeft.getPosition(),
           m_frontRight.getPosition(),
@@ -176,7 +176,7 @@ public class MAXSwerve extends SubsystemBase {
    * @param pose The pose to which to set the odometry.
    */
   public void resetOdometry(Pose2d pose) {
-    m_odometry.resetPosition(Rotation2d.fromDegrees(m_gyro.getAngle()), getModulePositions(), pose);
+    m_odometry.resetPosition(Rotation2d.fromDegrees(getAngle()), getModulePositions(), pose);
     //m_odometry.resetPosition(m_gyro.getRotation2d(), getModulePositions(), pose);
   }
 
@@ -204,7 +204,7 @@ public class MAXSwerve extends SubsystemBase {
         m_kinematics.toSwerveModuleStates(
             fieldRelative
                 ? ChassisSpeeds.fromFieldRelativeSpeeds(
-                    xSpeed, ySpeed, rot, Rotation2d.fromDegrees(m_gyro.getAngle()))
+                    xSpeed, ySpeed, rot, Rotation2d.fromDegrees(getAngle()))
                 : new ChassisSpeeds(xSpeed, ySpeed, rot));
     SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, m_maxSpeed);
     m_frontLeft.setDesiredState(swerveModuleStates[0]);
@@ -293,7 +293,7 @@ public class MAXSwerve extends SubsystemBase {
    * @return the robot's heading in degrees, from -180 to 180
    */
   public double getHeading() {
-    return Rotation2d.fromDegrees(m_gyro.getAngle()).getDegrees();
+    return Rotation2d.fromDegrees(getAngle()).getDegrees();
     // return m_gyro.getRotation2d().getDegrees();
   }
 

@@ -13,6 +13,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.sendable.SendableBuilder;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -46,7 +47,7 @@ public class MAXSwerve extends SubsystemBase {
   private final MAXModule m_backRight;
 
   // The gyro sensor
-  private final AHRS m_gyro;
+  private final ADIS16470_IMU m_gyro;
 
   // The module positions
   private final SwerveModulePosition[] m_ModulePositions;
@@ -78,7 +79,7 @@ public class MAXSwerve extends SubsystemBase {
       MAXModule backRight,
       SwerveDriveKinematics kinematics,
       SwerveModulePosition[] modulePositions,
-      AHRS gyro,
+      ADIS16470_IMU gyro,
       double maxSpeed) {
     m_frontLeft = frontLeft;
     m_frontRight = frontRight;
@@ -88,7 +89,8 @@ public class MAXSwerve extends SubsystemBase {
     m_kinematics = kinematics;
     m_ModulePositions = modulePositions;
     m_maxSpeed = maxSpeed;
-    m_odometry = new SwerveDriveOdometry(kinematics, m_gyro.getRotation2d(), modulePositions);
+    m_odometry = new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(getAngle()), modulePositions);
+    //m_odometry = new SwerveDriveOdometry(kinematics, m_gyro.getRotation2d(), modulePositions);
   }
 
   private ChassisSpeeds m_chassisSpeed = new ChassisSpeeds();
@@ -117,7 +119,7 @@ public class MAXSwerve extends SubsystemBase {
     m_chassisSpeed = m_kinematics.toChassisSpeeds(getModuleStates());
 
     m_odometry.update(
-        Rotation2d.fromDegrees(m_gyro.getAngle()),
+        Rotation2d.fromDegrees(getAngle()),
         new SwerveModulePosition[] {
           m_frontLeft.getPosition(),
           m_frontRight.getPosition(),
@@ -174,7 +176,8 @@ public class MAXSwerve extends SubsystemBase {
    * @param pose The pose to which to set the odometry.
    */
   public void resetOdometry(Pose2d pose) {
-    m_odometry.resetPosition(m_gyro.getRotation2d(), getModulePositions(), pose);
+    m_odometry.resetPosition(Rotation2d.fromDegrees(getAngle()), getModulePositions(), pose);
+    //m_odometry.resetPosition(m_gyro.getRotation2d(), getModulePositions(), pose);
   }
 
   /**
@@ -201,7 +204,7 @@ public class MAXSwerve extends SubsystemBase {
         m_kinematics.toSwerveModuleStates(
             fieldRelative
                 ? ChassisSpeeds.fromFieldRelativeSpeeds(
-                    xSpeed, ySpeed, rot, Rotation2d.fromDegrees(m_gyro.getAngle()))
+                    xSpeed, ySpeed, rot, Rotation2d.fromDegrees(getAngle()))
                 : new ChassisSpeeds(xSpeed, ySpeed, rot));
     SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, m_maxSpeed);
     m_frontLeft.setDesiredState(swerveModuleStates[0]);
@@ -210,6 +213,7 @@ public class MAXSwerve extends SubsystemBase {
     m_backRight.setDesiredState(swerveModuleStates[3]);
   }
 
+  /* These methods will prevent module movement if no command is being executed on the wheels */
   private void holdModuleRotation(MAXModule m) {
     var state = m.getDesiredState();
     state.speedMetersPerSecond = 0.0;
@@ -283,18 +287,14 @@ public class MAXSwerve extends SubsystemBase {
     m_gyro.calibrate();
   }
 
-  //   public void setHeading(double degreesCCWPositive) {
-  //     Logger.tag("Swerve Drive").trace("Setting heading to {} degrees", degreesCCWPositive);
-  //     m_gyro.setAngle(degreesCCWPositive);
-  //   }
-
   /**
    * Returns the heading of the robot.
    *
    * @return the robot's heading in degrees, from -180 to 180
    */
   public double getHeading() {
-    return m_gyro.getRotation2d().getDegrees();
+    return Rotation2d.fromDegrees(getAngle()).getDegrees();
+    // return m_gyro.getRotation2d().getDegrees();
   }
 
   public void stop() {
@@ -312,6 +312,10 @@ public class MAXSwerve extends SubsystemBase {
    */
   public double getTurnRate() {
     return m_gyro.getRate() * (Constants.SwerveDriveConstants.kGyroReversed ? -1.0 : 1.0);
+  }
+
+  public double getAngle(){
+    return m_gyro.getAngle();
   }
 
   /**

@@ -6,9 +6,8 @@ package frc.robot;
 
 import java.util.function.DoubleSupplier;
 
-import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -18,7 +17,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.LockMode.Lock;
+import frc.robot.subsystems.arm.Arm;
+import frc.robot.subsystems.arm.Arm.armPosition;
 import frc.robot.subsystems.drive.DriveSubsystem;
+import frc.robot.subsystems.intake.Intake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -29,10 +31,13 @@ import frc.robot.subsystems.drive.DriveSubsystem;
 public class RobotContainer {
 
   // The robot's subsystems
-  private final AHRS m_gyro = new AHRS(SPI.Port.kMXP);
+  private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Lock LockMode;
   
+  private final Intake intake = new Intake();
+  private final Arm m_arm = new Arm();
+
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
 
@@ -62,6 +67,7 @@ public class RobotContainer {
                         -m_driverController.getRightX(), 0.06), // 0.1 might be better?
                     true),
             m_robotDrive));
+    configureBindings();    
   }
   
   /**
@@ -76,6 +82,37 @@ public class RobotContainer {
   private void configureBindings() {
     
     new JoystickButton(m_driverController, XboxController.Button.kY.value).toggleOnTrue(LockMode);
+    // Configure default commands
+    m_robotDrive.setDefaultCommand(
+        // The left stick controls translation of the robot.
+        // Turning is controlled by the X axis of the right stick.
+        new RunCommand(
+            () ->
+                m_robotDrive.drive(
+                    MathUtil.applyDeadband(
+                        -m_driverController.getLeftY(), 0.1),
+                    MathUtil.applyDeadband(
+                        -m_driverController.getLeftX(), 0.1),
+                    MathUtil.applyDeadband(
+                        -m_driverController.getRightX(), 0.1),
+                    true),
+            m_robotDrive));
+
+          if(m_driverController.getLeftStickButtonPressed()){
+            m_robotDrive.zeroHeading();
+          }
+
+          if(m_driverController.getRightStickButtonPressed()){
+            m_robotDrive.setX();
+          }
+
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).onTrue(new InstantCommand(() -> intake.toggleIntake(), intake));
+
+    new JoystickButton(m_driverController, XboxController.Button.kY.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_GROUND), m_arm));
+
+    new JoystickButton(m_driverController, XboxController.Button.kA.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_STOWED), m_arm));
+
+    new JoystickButton(m_driverController, XboxController.Button.kB.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_MID), m_arm));
   }
 
   /**

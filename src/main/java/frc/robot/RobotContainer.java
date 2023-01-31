@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
@@ -41,7 +39,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    configureBindings();    
+    configureBindings();
   }
 
   /**
@@ -54,7 +52,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    
+
     // Configure default commands
     m_robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
@@ -62,30 +60,37 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    MathUtil.applyDeadband(
-                        -m_driverController.getLeftY(), 0.1),
-                    MathUtil.applyDeadband(
-                        -m_driverController.getLeftX(), 0.1),
-                    MathUtil.applyDeadband(
-                        -m_driverController.getRightX(), 0.1),
+                    MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.1),
+                    MathUtil.applyDeadband(-m_driverController.getLeftX(), 0.1),
+                    MathUtil.applyDeadband(-m_driverController.getRightX(), 0.1),
                     true),
             m_robotDrive));
 
-          if(m_driverController.getLeftStickButtonPressed()){
-            m_robotDrive.zeroHeading();
-          }
+    if (m_driverController.getLeftStickButtonPressed()) {
+      m_robotDrive.zeroHeading();
+    }
 
-          if(m_driverController.getRightStickButtonPressed()){
-            m_robotDrive.setX();
-          }
+    if (m_driverController.getRightStickButtonPressed()) {
+      m_robotDrive.setX();
+    }
 
-    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).onTrue(new InstantCommand(() -> intake.toggleIntake(), intake));
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)
+        .onTrue(new InstantCommand(() -> intake.toggleIntake(), intake));
 
-    new JoystickButton(m_driverController, XboxController.Button.kY.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_GROUND), m_arm));
+    new JoystickButton(m_driverController, XboxController.Button.kY.value)
+        .whileTrue(
+            new InstantCommand(
+                () -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_GROUND), m_arm));
 
-    new JoystickButton(m_driverController, XboxController.Button.kA.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_STOWED), m_arm));
+    new JoystickButton(m_driverController, XboxController.Button.kA.value)
+        .whileTrue(
+            new InstantCommand(
+                () -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_STOWED), m_arm));
 
-    new JoystickButton(m_driverController, XboxController.Button.kB.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_MID), m_arm));
+    new JoystickButton(m_driverController, XboxController.Button.kB.value)
+        .whileTrue(
+            new InstantCommand(
+                () -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_MID), m_arm));
   }
 
   /**

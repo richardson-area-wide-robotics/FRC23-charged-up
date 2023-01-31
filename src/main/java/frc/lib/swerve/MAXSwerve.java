@@ -1,6 +1,5 @@
 package frc.lib.swerve;
 
-import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
@@ -89,8 +88,9 @@ public class MAXSwerve extends SubsystemBase {
     m_kinematics = kinematics;
     m_ModulePositions = modulePositions;
     m_maxSpeed = maxSpeed;
-    m_odometry = new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(getAngle()), modulePositions);
-    //m_odometry = new SwerveDriveOdometry(kinematics, m_gyro.getRotation2d(), modulePositions);
+    m_odometry =
+        new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(getAngle()), modulePositions);
+    // m_odometry = new SwerveDriveOdometry(kinematics, m_gyro.getRotation2d(), modulePositions);
   }
 
   private ChassisSpeeds m_chassisSpeed = new ChassisSpeeds();
@@ -177,7 +177,7 @@ public class MAXSwerve extends SubsystemBase {
    */
   public void resetOdometry(Pose2d pose) {
     m_odometry.resetPosition(Rotation2d.fromDegrees(getAngle()), getModulePositions(), pose);
-    //m_odometry.resetPosition(m_gyro.getRotation2d(), getModulePositions(), pose);
+    // m_odometry.resetPosition(m_gyro.getRotation2d(), getModulePositions(), pose);
   }
 
   /**
@@ -314,7 +314,7 @@ public class MAXSwerve extends SubsystemBase {
     return m_gyro.getRate() * (Constants.SwerveDriveConstants.kGyroReversed ? -1.0 : 1.0);
   }
 
-  public double getAngle(){
+  public double getAngle() {
     return m_gyro.getAngle();
   }
 

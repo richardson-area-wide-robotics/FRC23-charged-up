@@ -3,6 +3,7 @@ package frc.robot.subsystems.drive;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import com.revrobotics.SparkMaxPIDController;
@@ -52,6 +53,11 @@ public class MAXSwerveModule implements MAXModule {
     drivingPidController.setOutputRange(
         Constants.ModuleConstants.kDrivingMinOutput, Constants.ModuleConstants.kDrivingMaxOutput);
 
+      driveMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 100);
+      driveMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 15);
+      driveMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 15);
+      driveMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 200);
+
     driveMotor.setIdleMode(Constants.ModuleConstants.kDrivingMotorIdleMode);
     driveMotor.setSmartCurrentLimit(Constants.ModuleConstants.kDrivingMotorCurrentLimit);
 
@@ -88,6 +94,11 @@ public class MAXSwerveModule implements MAXModule {
     turningPidController.setFF(Constants.ModuleConstants.kTurningFF);
     turningPidController.setOutputRange(
         Constants.ModuleConstants.kTurningMinOutput, Constants.ModuleConstants.kTurningMaxOutput);
+    
+        turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 100);
+        turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 15);
+        turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 15);
+        turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 200);
 
     // Enable PID wrap around for the turning motor. This will allow the PID
     // controller to go through 0 to get to the setpoint i.e. going from 350 degrees

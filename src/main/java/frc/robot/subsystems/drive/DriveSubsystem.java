@@ -4,8 +4,8 @@
 
 package frc.robot.subsystems.drive;
 
-import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import frc.lib.swerve.MAXSwerve;
 import frc.robot.Constants;
 
@@ -31,7 +31,7 @@ public class DriveSubsystem extends MAXSwerve {
   static final MAXSwerveModule backRight =
       new MAXSwerveModule(Constants.SwerveDriveConstants.BackRightModule.S_MODULE_CONSTANTS);
 
-  public DriveSubsystem(AHRS gyro) {
+  public DriveSubsystem(ADIS16470_IMU m_gyro) {
     super(
         frontLeft,
         frontRight,
@@ -44,9 +44,11 @@ public class DriveSubsystem extends MAXSwerve {
           backLeft.getPosition(),
           backRight.getPosition()
         },
-        gyro,
+        m_gyro,
         Constants.SwerveDriveConstants.kMaxSpeedMetersPerSecond);
   }
+
+
 
   // TODO: Add sendable data for controllers during autonomous mode
   // @Override

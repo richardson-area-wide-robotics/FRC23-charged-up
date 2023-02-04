@@ -1,5 +1,5 @@
 {
-  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.configuration.updateBuildConfiguration": "automatic",
   "java.server.launchMode": "Standard",
   "http.systemCertificates": false,
   "files.exclude": {
@@ -29,6 +29,6 @@
   "java.test.defaultConfig": "WPIlibUnitTests",
   "spotlessGradle.format.enable": true,
   "editor.codeActionsOnSave": {
-     "source.fixAll.spotlessGradle": true,
+     "source.fixAll.spotlessGradle": false,
    },
 }

@@ -6,9 +6,10 @@ package frc.robot;
 
 import java.util.function.DoubleSupplier;
 
-import com.kauailabs.navx.frc.AHRS;
+import org.photonvision.PhotonCamera;
+
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -19,7 +20,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.LockMode.Lock;
 import frc.robot.subsystems.Camera.Camera;
+import frc.robot.subsystems.arm.Arm;
+import frc.robot.subsystems.arm.Arm.armPosition;
 import frc.robot.subsystems.drive.DriveSubsystem;
+import frc.robot.subsystems.intake.Intake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,25 +34,25 @@ import frc.robot.subsystems.drive.DriveSubsystem;
 public class RobotContainer {
 
   // The robot's subsystems
-  private final AHRS m_gyro = new AHRS(SPI.Port.kMXP);
+  private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Lock LockMode;
   private final Camera camera = new Camera();
-  
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-  
+ 
     //Some adjustments made for lock on mode
      DoubleSupplier moveForward =  () -> MathUtil.applyDeadband(
       -m_driverController.getLeftY(), 0.06); // 0.1 might be better?
      DoubleSupplier moveSideways = () -> MathUtil.applyDeadband(
       -m_driverController.getLeftX(), 0.06); // 0.1 might be better?
-      
+  
     LockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
 
     // Configure default commands
@@ -64,6 +68,7 @@ public class RobotContainer {
                         -m_driverController.getRightX(), 0.06), // 0.1 might be better?
                     true),
             m_robotDrive));
+    configureBindings();    
   }
   
   /**

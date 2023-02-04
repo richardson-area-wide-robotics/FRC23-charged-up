@@ -24,13 +24,14 @@ public class Localizer {
   private Thread visionThread;
   private AprilTagDetector detector;
   private AprilTagFieldLayout fieldLayout;
+  private String filename = "/ChargedUp.json";
 
   public Localizer() throws IOException {
     detector = new AprilTagDetector();
     detector.addFamily("tag16h5", 0);
     AprilTagDetector.Config config = new AprilTagDetector.Config();
     detector.setConfig(config);
-    String path = Filesystem.getDeployDirectory().getPath();
+    String path = Filesystem.getDeployDirectory().getPath() + filename;
     fieldLayout = new AprilTagFieldLayout(path);
 
     visionThread =

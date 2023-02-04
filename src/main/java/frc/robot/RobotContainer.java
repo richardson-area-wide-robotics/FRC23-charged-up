@@ -62,13 +62,13 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    MathUtil.applyDeadband(
-                        -m_driverController.getLeftY(), 0.1),
-                    MathUtil.applyDeadband(
-                        -m_driverController.getLeftX(), 0.1),
-                    MathUtil.applyDeadband(
-                        -m_driverController.getRightX(), 0.1),
-                    true),
+                    -MathUtil.applyDeadband(
+                        -m_driverController.getLeftY(), Constants.OIConstants.kControllerDeadband),
+                    -MathUtil.applyDeadband(
+                        -m_driverController.getLeftX(), Constants.OIConstants.kControllerDeadband),
+                    -MathUtil.applyDeadband(
+                        -m_driverController.getRightX(), Constants.OIConstants.kControllerDeadband),
+                    true, true),
             m_robotDrive));
 
           if(m_driverController.getLeftStickButtonPressed()){

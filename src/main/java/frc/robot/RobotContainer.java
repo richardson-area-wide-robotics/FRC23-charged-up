@@ -18,10 +18,10 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.LockMode.Lock;
-import frc.robot.subsystems.Camera.Camera;
+import frc.robot.commands.lockmode.Lock;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.Arm.armPosition;
+import frc.robot.subsystems.camera.Camera;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 

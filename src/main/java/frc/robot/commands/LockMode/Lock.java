@@ -1,9 +1,9 @@
-package frc.robot.commands.LockMode;
+package frc.robot.commands.lockmode;
 
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Camera.Camera;
+import frc.robot.subsystems.camera.Camera;
 import frc.robot.subsystems.drive.DriveSubsystem;
 
 

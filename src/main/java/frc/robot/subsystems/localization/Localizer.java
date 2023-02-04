@@ -24,7 +24,11 @@ public class Localizer {
   private Thread visionThread;
   private AprilTagDetector detector;
   private AprilTagFieldLayout fieldLayout;
+  private NodePositionLayout nodeLayout;
   private String filename = "/ChargedUp.json";
+  private String nodePositionFilename = "/ScoringLocations.json";
+  private AprilTagDetection[] detections;
+  private AprilTagPoseEstimator estimator;
 
   public Localizer() throws IOException {
     detector = new AprilTagDetector();
@@ -33,6 +37,18 @@ public class Localizer {
     detector.setConfig(config);
     String path = Filesystem.getDeployDirectory().getPath() + filename;
     fieldLayout = new AprilTagFieldLayout(path);
+
+    String nodePositionPath = Filesystem.getDeployDirectory().getPath() + nodePositionFilename;
+    nodeLayout = new NodePositionLayout(nodePositionPath);
+
+    AprilTagPoseEstimator.Config poseEstConfig =
+    new AprilTagPoseEstimator.Config(
+        Constants.TARGET_SIZE_METERS,
+        Constants.FX_PIXELS,
+        Constants.FY_PIXELS,
+        Constants.CX_PIXELS,
+        Constants.CY_PIXELS);
+estimator = new AprilTagPoseEstimator(poseEstConfig);
 
     visionThread =
         new Thread(
@@ -53,14 +69,7 @@ public class Localizer {
               Mat mat = new Mat();
               Mat grayMat = new Mat();
               ArrayList<Integer> tags = new ArrayList<>();
-              AprilTagPoseEstimator.Config poseEstConfig =
-                  new AprilTagPoseEstimator.Config(
-                      Constants.TARGET_SIZE_METERS,
-                      Constants.FX_PIXELS,
-                      Constants.FY_PIXELS,
-                      Constants.CX_PIXELS,
-                      Constants.CY_PIXELS);
-              AprilTagPoseEstimator estimator = new AprilTagPoseEstimator(poseEstConfig);
+
 
               // This cannot be 'true'. The program will never exit if it is. This
               // lets the robot stop this thread when restarting robot code or
@@ -77,7 +86,7 @@ public class Localizer {
                 }
 
                 Imgproc.cvtColor(mat, grayMat, Imgproc.COLOR_RGB2GRAY);
-                AprilTagDetection[] detections = detector.detect(grayMat);
+                detections = detector.detect(grayMat);
                 tags.clear();
                 for (AprilTagDetection detection : detections) {
                   //draw(mat, detection);
@@ -126,6 +135,33 @@ public class Localizer {
       tagPose.get().plus(pose);
   }
     return robotPosition;
+  }
+
+  //TODO: Figure out if minus works, See if robot goes to correct team community, double check the .47 measurement, test if findPosePlus or findPoseTransform are correct. 
+
+  public Transform3d getAprilTagBasedTransform(int aprilTagId,  int gridId)
+  {
+    Transform3d transform = new Transform3d();
+
+    for (AprilTagDetection detection : detections) {
+      if(detection.getId() == aprilTagId)
+      {
+        //draw(mat, detection);
+        Transform3d pose = estimator.estimate(detection);
+        Pose3d transformPose = findPoseTransform(pose, aprilTagId);
+        // Pose3d plusPose = findPosePlus(pose, tagID);
+
+        Optional<Pose3d> nodePose = nodeLayout.getTagPose(gridId);
+
+        if(nodePose.isPresent())
+        {
+          transform = transformPose.minus(nodePose.get());
+        }
+      }
+    }
+
+
+    return transform;
   }
 
 

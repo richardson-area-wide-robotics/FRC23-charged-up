@@ -212,6 +212,29 @@ public class MAXSwerve extends SubsystemBase {
     m_backRight.setDesiredState(swerveModuleStates[3]);
   }
 
+  public void driveDistance(double xDistance, double yDistance, double rot)
+  {
+        // If nothing is commanded, hold the same position - don't know if the rev modules need this
+    // yet?
+    if (xDistance <= 0.05 && yDistance <= 0.05 && rot == 0.0) {
+      holdAllModulesRotation();
+      return;
+    }
+    // Adjust input based on max speed
+    double xSpeed = xDistance * 0.1;
+    double ySpeed = yDistance * 0.1;
+    rot *= Constants.SwerveDriveConstants.kMaxAngularSpeed;
+
+    var swerveModuleStates =
+        m_kinematics.toSwerveModuleStates(new ChassisSpeeds(xSpeed, ySpeed, rot));
+    SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, m_maxSpeed);
+    m_frontLeft.setDesiredState(swerveModuleStates[0]);
+    m_frontRight.setDesiredState(swerveModuleStates[1]);
+    m_backLeft.setDesiredState(swerveModuleStates[2]);
+    m_backRight.setDesiredState(swerveModuleStates[3]);
+
+  }
+
   /* These methods will prevent module movement if no command is being executed on the wheels */
   private void holdModuleRotation(MAXModule m) {
     var state = m.getDesiredState();

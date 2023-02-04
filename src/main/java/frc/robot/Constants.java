@@ -22,16 +22,6 @@ import frc.lib.util.SwerveModuleConstants;
  */
 
 public final class Constants {
-  public static final class OIConstants {
-    public static final int kDriverControllerPort = 0;
-    public static final int kOperatorControllerPort = 1;
-    public static final double kControllerDeadband = 0.1;
-  }
-  public static final class SwerveDriveConstants {
-    // Driving Parameters - Note that these are not the maximum capable speeds of
-    // the robot, rather the allowed maximum speeds
-    public static final double kMaxSpeedMetersPerSecond = 4.8;
-    public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
     /**Camera */
     public static final double TARGET_SIZE_METERS = 0.1524;
@@ -39,6 +29,20 @@ public final class Constants {
     public static final double CX_PIXELS = 345.6059345433618;
     public static final double FY_PIXELS = 677.7161226393544;
     public static final double CY_PIXELS = 207.12741326228522;
+
+
+  public static final class OIConstants {
+    public static final int kDriverControllerPort = 0;
+    public static final int kOperatorControllerPort = 1;
+    public static final double kControllerDeadband = 0.1;
+    
+  }
+  public static final class SwerveDriveConstants {
+    // Driving Parameters - Note that these are not the maximum capable speeds of
+    // the robot, rather the allowed maximum speeds
+    public static final double kMaxSpeedMetersPerSecond = 4.8;
+    public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
+
 
     /*
      * Chassis configuration

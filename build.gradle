@@ -1,7 +1,8 @@
 plugins {
     id "java"
-    id "edu.wpi.first.GradleRIO" version "2023.1.1"
-    id 'com.diffplug.spotless' version '6.1.0'
+    id "edu.wpi.first.GradleRIO" version "2023.2.1"
+    id "com.diffplug.spotless" version "6.1.0"
+    id "de.undercouch.download" version "5.0.1"
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
@@ -87,6 +88,17 @@ jar {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+task _downloadPathPlanner(type: Download) {
+    src 'https://github.com/mjansen4857/pathplanner/releases/download/v2023.1.1/PathPlanner-windows.zip'
+    dest new File(buildDir, 'pathplanner-2023.1.1.zip')
+    overwrite false
+}
+
+task downloadPathPlanner(dependsOn: _downloadPathPlanner, type: Copy) {
+    from zipTree(_downloadPathPlanner.dest)
+    into ".tools/PathPlanner"
 }
 
 // Configure jar and deploy tasks

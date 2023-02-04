@@ -82,7 +82,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).toggleOnTrue(LockMode);
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).toggleOnTrue(new InstantCommand(()-> LockMode.execute()));
   }
 
   /**

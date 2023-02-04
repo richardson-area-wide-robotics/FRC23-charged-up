@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.LockMode.Lock;
+import frc.robot.subsystems.Camera.Camera;
 import frc.robot.subsystems.drive.DriveSubsystem;
 
 /**
@@ -32,6 +33,7 @@ public class RobotContainer {
   private final AHRS m_gyro = new AHRS(SPI.Port.kMXP);
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Lock LockMode;
+  private final Camera camera = new Camera();
   
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -47,7 +49,7 @@ public class RobotContainer {
      DoubleSupplier moveSideways = () -> MathUtil.applyDeadband(
       -m_driverController.getLeftX(), 0.06); // 0.1 might be better?
       
-    LockMode = new Lock(m_robotDrive, moveForward, moveSideways);
+    LockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -75,7 +77,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     
-    new JoystickButton(m_driverController, XboxController.Button.kY.value).toggleOnTrue(LockMode);
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).toggleOnTrue(LockMode);
   }
 
   /**

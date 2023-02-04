@@ -4,7 +4,9 @@
 
 package frc.robot.subsystems.Camera;
 
+import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
@@ -17,38 +19,49 @@ public class Camera extends SubsystemBase {
     Camera.camera = new PhotonCamera("slotheye");
   }
 
-  /**
-   * An example method querying a boolean state of the subsystem (for example, a digital sensor).
-   *
-   * @return value of some boolean subsystem state, such as a digital sensor.
-   */
-  public boolean exampleCondition() {
-    // Query some boolean state, such as a digital sensor.
-    return false;
-  }
-
   @Override
-  public void periodic() {}
+  public void periodic() {
+    
+  }
 
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
 
-  public Transform3d getDistanceAndAngle() {
+  public PhotonPipelineResult getCameraResult() {
+    PhotonPipelineResult result = camera.getLatestResult();
+    return result;
+  }
+
+  public PhotonTrackedTarget getCameraTarget() {
+    PhotonPipelineResult result = camera.getLatestResult();
+    PhotonTrackedTarget target = result.getBestTarget();
+    return target;
+  }
+
+  public Transform3d getPose() {
     PhotonPipelineResult result = camera.getLatestResult();
     PhotonTrackedTarget target = result.getBestTarget();
     Transform3d pose = target.getBestCameraToTarget();
-    
     return pose;
-    
   }
 
+  public Rotation3d getCameraRotation() {
+    PhotonPipelineResult result = camera.getLatestResult();
+    PhotonTrackedTarget target = result.getBestTarget();
+    Transform3d pose = target.getBestCameraToTarget();
+    Rotation3d rotation = pose.getRotation();
+    return rotation;
+  }
+  
   public static double getAngle() {
     PhotonPipelineResult result = camera.getLatestResult();
     PhotonTrackedTarget target = result.getBestTarget();
-    double  angle = target.getYaw();
-
+    Transform3d pose = target.getBestCameraToTarget();
+    Rotation3d rotation = pose.getRotation();
+    double angle = rotation.getAngle();
+    SmartDashboard.putNumber("Angle: ", angle*180/Math.PI);
     return angle;
   }
 }

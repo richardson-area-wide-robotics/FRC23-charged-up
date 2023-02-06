@@ -177,20 +177,12 @@ public final class Constants {
   }
   
   public static final class Intake {
-    public static final float kRLimit  = -4.0f;
-    public static final float kFLimit = 0.0f;
-    public static final double kForwardSpeed = 0.7;
-    public static final double kReverseSpeed = -1.0;
     public static final boolean kIntakeInverted = true;
     public static final int kIntakeID = 11;
     public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
-    public static final int kIntakeCurrentLimit = 40; // amps
-    public static final double kIntakeOffset = 0.0; // TODO: set offset
-    public static final Double kIntakeOpen = -3.5;
-    public static final Double kIntakeClosed = -1.4;
-    public static final PIDGains kIntakePIDGains = new PIDGains(0.1, 0.0, 0.0);
-    public static final double kMinOutput = -1.0;
-    public static final double kMaxOutput = 1.0;
+    public static final int kIntakeCurrentLimit = 15; // amps
+	  public static final double kIntakeSpeed = 0.7;
+    public static final double kOutakeSpeed = -1.0;
   }
    public static final class ArmConstants {
     // Arm limits

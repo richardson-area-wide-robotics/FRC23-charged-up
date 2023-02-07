@@ -10,6 +10,7 @@ import org.photonvision.PhotonCamera;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -24,7 +25,7 @@ import frc.robot.subsystems.arm.Arm.armPosition;
 import frc.robot.subsystems.camera.Camera;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
-
+import frc.robot.subsystems.RoboState;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -36,12 +37,13 @@ public class RobotContainer {
   // The robot's subsystems
   private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
-  private final Lock LockMode;
+  //private final Lock LockMode;
   private final Camera camera = new Camera();
+  private final  RoboState roboCon = new RoboState();
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
 
-
+  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -53,8 +55,10 @@ public class RobotContainer {
      DoubleSupplier moveSideways = () -> MathUtil.applyDeadband(
       -m_driverController.getLeftX(), 0.06); // 0.1 might be better?
   
-    LockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
+    //LockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
 
+    //sends the movement information to RoboCon method in RoboState
+    roboCon.drive(moveForward, moveSideways);
     // Configure default commands
     m_robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
@@ -82,8 +86,9 @@ public class RobotContainer {
    */
   private void configureBindings() {
     
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).toggleOnTrue(new InstantCommand(()-> LockMode.execute()));
-  }
+  //   new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).toggleOnTrue(new InstantCommand(()-> LockMode.execute()));
+  // 
+}
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

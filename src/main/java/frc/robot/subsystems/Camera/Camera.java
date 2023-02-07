@@ -8,17 +8,23 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.subsystems.RoboState;
+
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
+
+
 public class Camera extends SubsystemBase {
   static PhotonCamera camera;
-
+  private final static RoboState camState = new RoboState();
+  
   public Camera() {
     Camera.camera = new PhotonCamera("slotheye");
   }
 
+  
   @Override
   public void periodic() {
     
@@ -62,6 +68,7 @@ public class Camera extends SubsystemBase {
     Rotation3d rotation = pose.getRotation();
     double angle = rotation.getAngle();
     SmartDashboard.putNumber("Angle: ", angle*180/Math.PI);
+    camState.camAngle(angle*180/Math.PI);
     return angle;
   }
 }

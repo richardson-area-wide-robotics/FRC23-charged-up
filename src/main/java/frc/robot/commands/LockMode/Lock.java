@@ -3,6 +3,7 @@ package frc.robot.commands.lockmode;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.camera.Camera;
 import frc.robot.subsystems.drive.DriveSubsystem;
 
@@ -17,7 +18,10 @@ public class Lock extends CommandBase{
 
     //PID controller for yawRate
     //move this to the constants class
-    final PIDController yawRateController = new PIDController(1, 0, 0);
+    final PIDController yawRateController = new PIDController(
+        Constants.ModuleConstants.kTurningPIDGains.P,
+        Constants.ModuleConstants.kTurningPIDGains.I,
+        Constants.ModuleConstants.kTurningPIDGains.D);
 
     //This gets the controller inputs and drive information    
     public Lock(DriveSubsystem drive, Camera camera, DoubleSupplier forward, DoubleSupplier sideways ){
@@ -26,9 +30,7 @@ public class Lock extends CommandBase{
         this.sideways = sideways;
         this.camera = camera;
         this.addRequirements(camera, drive);
-        
     }
-    
     
     @Override
     public void initialize(){}  

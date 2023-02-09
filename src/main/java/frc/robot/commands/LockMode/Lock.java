@@ -16,7 +16,7 @@ public class Lock extends CommandBase{
     Camera camera;
 
     //PID controller for yawRate
-    PIDController yawRateController = new PIDController(1, 0, 0);
+    final PIDController yawRateController = new PIDController(1, 0, 0);
 
     //This gets the controller inputs and drive information    
     public Lock(DriveSubsystem drive, Camera camera, DoubleSupplier forward, DoubleSupplier sideways ){

@@ -2,7 +2,8 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.Camera;
+
+package frc.robot.subsystems.camera;
 
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
@@ -13,10 +14,11 @@ import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
 public class Camera extends SubsystemBase {
-  static PhotonCamera camera;
+
+  PhotonCamera camera;
 
   public Camera() {
-    Camera.camera = new PhotonCamera("slotheye");
+    this.camera = new PhotonCamera("slotheye");
   }
 
   @Override

@@ -92,8 +92,8 @@ public class Localizer {
   }
 
   private void draw(Mat mat, AprilTagDetection tag) {
-    //double[] corners = tag.getCorners();
-    //Point prev = new Point(corners[6], corners[7]);
+    // double[] corners = tag.getCorners();
+    // Point prev = new Point(corners[6], corners[7]);
     for (int ind = 0; ind <= 3; ind++) {
       int end = (ind + 1) % 4;
       Point point1 = new Point(tag.getCornerX(ind), tag.getCornerY(ind));

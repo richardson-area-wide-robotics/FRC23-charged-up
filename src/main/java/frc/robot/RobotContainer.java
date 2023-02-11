@@ -36,9 +36,6 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the trigger bindings
-    configureBindings();
-
     // Some adjustments made for lock on mode
     DoubleSupplier moveForward =
         () -> MathUtil.applyDeadband(-m_driverController.getLeftY(), 0.06); // 0.1 might be better?

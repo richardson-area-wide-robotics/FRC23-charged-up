@@ -21,12 +21,13 @@ public class Camera extends SubsystemBase {
   private final static RoboState camState = new RoboState();
   
   public Camera() {
-    Camera.camera = new PhotonCamera("slotheye");
+    camera = new PhotonCamera("Slotheye");
   }
 
   
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("object angle", getAngle());
     
   }
 
@@ -63,12 +64,25 @@ public class Camera extends SubsystemBase {
   
   public static double getAngle() {
     PhotonPipelineResult result = camera.getLatestResult();
-    PhotonTrackedTarget target = result.getBestTarget();
-    Transform3d pose = target.getBestCameraToTarget();
-    Rotation3d rotation = pose.getRotation();
-    double angle = rotation.getAngle();
-    SmartDashboard.putNumber("Angle: ", angle*180/Math.PI);
-    camState.camAngle(angle*180/Math.PI);
-    return angle;
+
+    SmartDashboard.putBoolean("hasTargets", result.hasTargets());
+
+    if(result.hasTargets())
+    {
+      PhotonTrackedTarget target = result.getBestTarget();
+
+      target.getYaw();
+      
+      Transform3d pose = target.getBestCameraToTarget();
+      Rotation3d rotation = pose.getRotation();
+      double angle = rotation.getAngle();
+      SmartDashboard.putNumber("Angle: ", angle*180/Math.PI);
+      camState.camAngle(angle*180/Math.PI);
+      return angle+(.5 * Math.PI);
+    }
+    else
+    {
+      return 0.0;
+    }
   }
 }

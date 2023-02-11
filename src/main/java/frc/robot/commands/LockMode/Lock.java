@@ -2,6 +2,7 @@ package frc.robot.commands.lockmode;
 
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.camera.Camera;
@@ -45,7 +46,11 @@ public class Lock extends CommandBase{
     public  void execute(){
         double angularOffset = Camera.getAngle();
         double yawRate = yawRateController.calculate(angularOffset, 0);
-        drive.drive(forward.getAsDouble(), sideways.getAsDouble(), yawRate, true);
+            
+        SmartDashboard.putNumber("angular offset", angularOffset);
+        SmartDashboard.putNumber("yawRate", yawRate);
+        
+        drive.drive(forward.getAsDouble(), sideways.getAsDouble(), yawRate, false);
         yawRateController.reset();
     }
  

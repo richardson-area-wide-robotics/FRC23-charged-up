@@ -9,7 +9,7 @@ public class PIDGains {
 
   public PIDGains() {}
 
-  public double P = 0.0;
+  public double P = 1.0;
   public double I = 0.0;
-  public double D = 0.0;
+  public double D = 0.1;
 }

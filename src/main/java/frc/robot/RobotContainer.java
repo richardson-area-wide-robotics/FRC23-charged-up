@@ -37,7 +37,7 @@ public class RobotContainer {
   // The robot's subsystems
   private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
-  //private final Lock LockMode;
+  private final Lock lockMode;
   private final Camera camera = new Camera();
   private final  RoboState roboCon = new RoboState();
   // The driver's controller
@@ -46,8 +46,6 @@ public class RobotContainer {
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the trigger bindings
-    configureBindings();
  
     //Some adjustments made for lock on mode
      DoubleSupplier moveForward =  () -> MathUtil.applyDeadband(
@@ -55,7 +53,7 @@ public class RobotContainer {
      DoubleSupplier moveSideways = () -> MathUtil.applyDeadband(
       -m_driverController.getLeftX(), 0.06); // 0.1 might be better?
   
-    //LockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
+    lockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
 
     //sends the movement information to RoboCon method in RoboState
     roboCon.drive(moveForward, moveSideways);
@@ -86,8 +84,8 @@ public class RobotContainer {
    */
   private void configureBindings() {
     
-  //   new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).toggleOnTrue(new InstantCommand(()-> LockMode.execute()));
-  // 
+     new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(lockMode);
+   
 }
 
   /**

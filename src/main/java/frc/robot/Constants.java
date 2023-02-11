@@ -177,17 +177,17 @@ public final class Constants {
   }
   
   public static final class Intake {
-    public static final float kRLimit  = -4.0f;
-    public static final float kFLimit = 0.0f;
+    public static final float kRLimit  = 0.0f;
+    public static final float kFLimit = 4.0f;
     public static final double kForwardSpeed = 0.7;
     public static final double kReverseSpeed = -1.0;
     public static final boolean kIntakeInverted = true;
     public static final int kIntakeID = 11;
     public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
-    public static final int kIntakeCurrentLimit = 40; // amps
+    public static final int kIntakeCurrentLimit = 50; // amps
     public static final double kIntakeOffset = 0.0; // TODO: set offset
-    public static final Double kIntakeOpen = -3.5;
-    public static final Double kIntakeClosed = -1.4;
+    public static final Double kIntakeOpen = 3.5;
+    public static final Double kIntakeClosed = 0.0;
     public static final PIDGains kIntakePIDGains = new PIDGains(0.1, 0.0, 0.0);
     public static final double kMinOutput = -1.0;
     public static final double kMaxOutput = 1.0;
@@ -195,15 +195,15 @@ public final class Constants {
    public static final class ArmConstants {
     // Arm limits
     public final static float REVERSE_LIMIT = 0.0f;
-    public final static float FORWARD_LIMIT = 43.5f;
+    public final static float FORWARD_LIMIT = 50.5f;
     public final static double REVERSE_SPEED = 0.5;
     public final static double FORWARD_SPEED = 0.5;
 
     // doubles for arm positions
-    public final static double INTAKE_ARM_GROUND = 0.0;
+    public final static double INTAKE_ARM_GROUND = 47.5;
     public final static double INTAKE_ARM_SHELF = 0.0;
-    public final static double SCORING_ARM_LOW = 0.0;
-    public final static double SCORING_ARM_MID = 0.0;
+    public final static double SCORING_ARM_LOW = 46.0;
+    public final static double SCORING_ARM_MID = 33.0;
     public static final Double INTAKE_ARM_STOWED = 0.0;
 
     /* Spark max constants */ 
@@ -215,17 +215,22 @@ public final class Constants {
     public static final double kArmEncoderPositionFactor = 0.0;
     public static final double kArmEncoderVelocityFactor = 0.0;
     public static final IdleMode kArmMotorIdleMode = IdleMode.kBrake;
-    public static final int kArmMotorCurrentLimit = 40;
+    public static final int kArmMotorCurrentLimit = 60;
     public static final int kMovingArmMotorCurrentLimit = 60;  
 
-    // PID constants using custom PID gains class //TODO: tune PID values
-    public static final PIDGains ARM_PID_GAINS = new PIDGains(1.0, 0.0, 0.0);
+    // PID constants using custom PID gains class
+    public static final PIDGains ARM_PID_GAINS = new PIDGains(0.5, 0.0, 0.08);
     public static final double ARM_FF = 0.0;
     public static final double ARM_MIN_OUTPUT = -1.0;
     public static final double ARM_MAX_OUTPUT = 1.0;
+
+    // TODO: caluclate the feedforward 
+    public static final double armks = 0.0;
+    public static final double armkg = 0.0;
+    public static final double armkv = 0.0;
+    public static final double armka = 0.0;
+
     
     public static final double ARM_ENCODER_OFFSET = 0;
-  
-
   }
 }

@@ -86,6 +86,10 @@ public class RobotContainer {
     new JoystickButton(m_driverController, XboxController.Button.kA.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_STOWED), m_arm));
 
     new JoystickButton(m_driverController, XboxController.Button.kB.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_MID), m_arm));
+
+    //new JoystickButton(m_driverController, XboxController.Button.kX.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_LOW), m_arm));
+
+    //new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(new InstantCommand(() -> m_arm.toggleArm(), m_arm));
   }
 
   /**

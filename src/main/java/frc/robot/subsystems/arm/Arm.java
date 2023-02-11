@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import frc.robot.Constants;
+import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -41,8 +42,11 @@ public class Arm extends SubsystemBase {
   // current arm position
   private armPosition currentArmPosition = armPosition.INTAKE_ARM_POSITION_STOWED;
 
+  // current arm feedforward 
+  private ArmFeedforward armFeedforward = new ArmFeedforward(Constants.ArmConstants.armks, Constants.ArmConstants.armkg, Constants.ArmConstants.armkv, Constants.ArmConstants.armka);
+
   // setting up CAN IDs for the motors
-  public void armConfig(CANSparkMax motor){
+  public void armConfig(CANSparkMax motor,boolean isMain){
     // restore factory defaults
     motor.restoreFactoryDefaults();
     // set motor basic values l
@@ -50,10 +54,12 @@ public class Arm extends SubsystemBase {
     motor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
      // setting soft limits (soft limits keep the motor running when it hits the limit instead of
     // braking)
+    if (isMain = false){
     motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
     motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.ArmConstants.FORWARD_LIMIT);
     motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
     motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse,  Constants.ArmConstants.REVERSE_LIMIT);
+    }
 
     // set the arm PID controllers
     armPIDController = motor.getPIDController();
@@ -80,18 +86,19 @@ public class Arm extends SubsystemBase {
     armEncoder.setPositionConversionFactor(Constants.ArmConstants.kArmEncoderPositionFactor);
     armEncoder.setVelocityConversionFactor(Constants.ArmConstants.kArmEncoderVelocityFactor);
   
-    leftMotor.getPIDController().setFeedbackDevice(armEncoder);
-
-    this.resetArmPosition();
+    // leftMotor.getPIDController().setFeedbackDevice(armEncoder);
 
     // setting the motor configuration
-    armConfig(leftMotor);
-    armConfig(rightMotor);
+    armConfig(leftMotor, true);
+    //armConfig(rightMotor, false);
 
     leftMotor.setInverted(Constants.ArmConstants.RIGHT_MOTOR_INVERTED);
 
     // setting the idle mode setting for the SparkMax, here it is set to brake when idle
     rightMotor.follow(this.leftMotor, Constants.ArmConstants.LEFT_MOTOR_INVERTED);
+
+    rightMotor.setIdleMode(Constants.ArmConstants.kArmMotorIdleMode);
+    rightMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
 
     leftMotor.burnFlash();
     rightMotor.burnFlash();
@@ -106,6 +113,10 @@ public class Arm extends SubsystemBase {
   // getting relative encoder position of the arm
   public double getPosition() {
     return this.leftMotor.getEncoder().getPosition();
+  }
+
+  public double getRightPosition(){
+    return this.rightMotor.getEncoder().getPosition();
   }
 
   // getting the absolute encoder position
@@ -148,7 +159,8 @@ public class Arm extends SubsystemBase {
 
   // set the arm position back to home position
   public void resetArmPosition() {
-    this.leftMotor.getEncoder().setPosition(armPositions.get(armPosition.INTAKE_ARM_POSITION_STOWED));
+    //this.leftMotor.getEncoder().setPosition(armPositions.get(armPosition.INTAKE_ARM_POSITION_STOWED));
+    this.leftMotor.getEncoder().setPosition(0.0);
   }
 
   // arm movement controls using PID loop
@@ -156,11 +168,25 @@ public class Arm extends SubsystemBase {
     this.currentArmPosition = position;
   }
 
+  public double getSetPoint(){
+    return armPositions.get(this.currentArmPosition);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    setArmCurrentLimit();
-    this.armPIDController.setReference(armPositions.get(this.currentArmPosition), ControlType.kPosition);
+    //setArmCurrentLimit();
+    this.armFeedforward.calculate(getPosition(), getAbsoluteEncoder(),0);
+    this.armPIDController.setReference(this.getSetPoint(), ControlType.kPosition);
+
+    /* 
+     * puts the arm position on the board for tuning
+     * Need to make sure to turn motors to coast to be able to test these values for the arm 
+     */
+    SmartDashboard.putNumber("Arm Left Position", this.getPosition());
+    SmartDashboard.putNumber("Arm Right Position", this.getRightPosition());
+    SmartDashboard.putNumber("Arm variable position", armPositions.get(this.currentArmPosition));
+    SmartDashboard.putNumber("leftAmps ", this.leftMotor.getOutputCurrent());
   }
 
   // sends the arm values to NT to be later used in Shuffleboard

@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -58,8 +59,8 @@ public Intake() {
       Constants.Intake.kMinOutput, Constants.Intake.kMaxOutput);
 
   // enable and set intake motor forward and reverse limit
-  intakeMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-  intakeMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+  intakeMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
+  intakeMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
   intakeMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.Intake.kFLimit);
   intakeMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.Intake.kRLimit);
 
@@ -67,8 +68,6 @@ public Intake() {
 
   intakePositions.put(intakePosition.INTAKE_OPEN,  Constants.Intake.kIntakeOpen);
   intakePositions.put(intakePosition.INTAKE_CLOSED,  Constants.Intake.kIntakeClosed);
-
-  setDefaultCommand(new RunCommand(this::idle, this));
 }
 
 public double getSpeed() {
@@ -110,7 +109,13 @@ public void toggleIntake() {
   } else {
     currentIntakePosition = intakePosition.INTAKE_CLOSED;
   }
+}
+
+@Override
+public void periodic(){
   intakePIDController.setReference(intakePositions.get(currentIntakePosition), CANSparkMax.ControlType.kPosition);
+
+  SmartDashboard.putNumber("Intake amps", intakeMotor.getAppliedOutput());
 }
 
 }

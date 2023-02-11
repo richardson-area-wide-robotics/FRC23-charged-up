@@ -20,7 +20,6 @@ public class LED_Strip extends SubsystemBase {
 
   public void setSolidColor(int r, int g, int b) {
     for (var i = 0; i < ledBuffer.getLength(); i++) {
-      // Sets the specified LED to the RGB values for red
       ledBuffer.setRGB(i, r, g, b);
     }
   }

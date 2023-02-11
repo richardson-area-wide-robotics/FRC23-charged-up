@@ -15,8 +15,8 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 public class Camera extends SubsystemBase {
   PhotonCamera camera;
 
-  public Camera() {
-    this.camera = new PhotonCamera("slotheye");
+  public Camera(String name) {
+    this.camera = new PhotonCamera(name);
   }
 
   @Override

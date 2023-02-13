@@ -173,9 +173,9 @@ public final class Constants {
         new TrapezoidProfile.Constraints(
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
 
-    public static final PIDController kPXController = new PIDController(0, 0, 0);
-    public static final PIDController kPYController = new PIDController(0, 0, 0);
-    public static final PIDController kPThetaController = new PIDController(0, 0, 0);
+    public static final PIDController kPXController = new PIDController(1.0, 0, 0.35);
+    public static final PIDController kPYController = new PIDController(1.075, 0, 0.45);
+    public static final PIDController kPThetaController = new PIDController(6.0, 0, 0.5);
   }
   
   public static final class Intake {
@@ -230,4 +230,5 @@ public final class Constants {
   
 
   }
+public static final boolean kCompetitionMode = false;
 }

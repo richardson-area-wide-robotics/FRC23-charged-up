@@ -8,16 +8,13 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
-import frc.robot.subsystems.arm.Arm;
-import frc.robot.subsystems.arm.Arm.armPosition;
+import frc.robot.auton.paths.top.TopPark;
+import frc.robot.auton.util.AutoChooser;
 import frc.robot.subsystems.drive.DriveSubsystem;
-import frc.robot.subsystems.intake.Intake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,8 +27,13 @@ public class RobotContainer {
   // The robot's subsystems
   private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
-  private final Intake intake = new Intake();
-  private final Arm m_arm = new Arm();
+  //private final Intake intake = new Intake();
+  //private final Arm m_arm = new Arm();
+
+  {
+    AutoChooser.setDefaultAuton( new TopPark(m_robotDrive));
+  }
+  
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -76,14 +78,6 @@ public class RobotContainer {
           if(m_driverController.getRightStickButtonPressed()){
             m_robotDrive.setX();
           }
-
-    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).onTrue(new InstantCommand(() -> intake.toggleIntake(), intake));
-
-    new JoystickButton(m_driverController, XboxController.Button.kY.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_GROUND), m_arm));
-
-    new JoystickButton(m_driverController, XboxController.Button.kA.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_STOWED), m_arm));
-
-    new JoystickButton(m_driverController, XboxController.Button.kB.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_MID), m_arm));
   }
 
   /**
@@ -91,7 +85,13 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    return null;
+  public Command getAutonomousCommand(){
+    // AutoChooser.addAuton(, "Top-Park");
+    return AutoChooser.getAuton();
+  }
+
+  public void autonInit(){
+    m_robotDrive.calibrateGyro();
+    m_robotDrive.stop();
   }
 }

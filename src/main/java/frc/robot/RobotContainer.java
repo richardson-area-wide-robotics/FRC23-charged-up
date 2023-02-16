@@ -38,7 +38,7 @@ public class RobotContainer {
   private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Lock lockMode;
-  private final Camera camera = new Camera();
+  private final Camera camera = new Camera("slothEye");
   private final  RoboState roboCon = new RoboState();
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);

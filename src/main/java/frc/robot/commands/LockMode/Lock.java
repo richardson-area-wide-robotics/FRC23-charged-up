@@ -18,14 +18,19 @@ public class Lock extends CommandBase{
     Camera camera;
 
     //PID controller for yawRate
-    //move this to the constants class
     final PIDController yawRateController = new PIDController(
-        Constants.ModuleConstants.kTurningPIDGains.P,
-        Constants.ModuleConstants.kTurningPIDGains.I,
-        Constants.ModuleConstants.kTurningPIDGains.D);
+        Constants.ModuleConstants.kDrivingPIDGains.P,
+        Constants.ModuleConstants.kDrivingPIDGains.I,
+        Constants.ModuleConstants.kDrivingPIDGains.D);
 
-    //This gets the controller inputs and drive information    
-    public Lock(DriveSubsystem drive, Camera camera, DoubleSupplier forward, DoubleSupplier sideways ){
+    /**
+     *
+     @param drive passes control
+     @param camera passes camera
+     @param forward passes y translation
+     @param sideways passes x translation
+    */
+    public Lock(DriveSubsystem drive, Camera camera, DoubleSupplier forward, DoubleSupplier sideways ) {
         this.drive = drive;
         this.forward = forward;
         this.sideways = sideways;
@@ -34,23 +39,24 @@ public class Lock extends CommandBase{
     }
     
     @Override
-    public void initialize(){}  
+    public void initialize() {}  
 
     @Override
-    public boolean isFinished(){
+    public boolean isFinished() {
         return false;
     }
         
     //This sets the yawRate to circle the desired object while maintaning driver controll of motion
     @Override
-    public  void execute(){
-        double angularOffset = Camera.getAngle();
+    public  void execute() {
+        double angularOffset = camera.getAngle();
         double yawRate = yawRateController.calculate(angularOffset, 0);
             
         SmartDashboard.putNumber("angular offset", angularOffset);
         SmartDashboard.putNumber("yawRate", yawRate);
-        
+
         drive.drive(forward.getAsDouble(), sideways.getAsDouble(), yawRate, false);
+        
         yawRateController.reset();
     }
  

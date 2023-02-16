@@ -19,9 +19,9 @@ public class Lock extends CommandBase{
 
     //PID controller for yawRate
     final PIDController yawRateController = new PIDController(
-        Constants.ModuleConstants.kDrivingPIDGains.P,
-        Constants.ModuleConstants.kDrivingPIDGains.I,
-        Constants.ModuleConstants.kDrivingPIDGains.D);
+        Constants.ModuleConstants.kTurningPIDGains.P,
+        Constants.ModuleConstants.kTurningPIDGains.I,
+        Constants.ModuleConstants.kTurningPIDGains.D);
 
     /**
      *
@@ -56,7 +56,7 @@ public class Lock extends CommandBase{
         SmartDashboard.putNumber("yawRate", yawRate);
 
         drive.drive(forward.getAsDouble(), sideways.getAsDouble(), yawRate, false);
-        
+
         yawRateController.reset();
     }
  

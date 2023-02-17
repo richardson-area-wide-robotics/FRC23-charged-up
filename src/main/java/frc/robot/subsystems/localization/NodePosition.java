@@ -8,7 +8,7 @@ import java.util.Objects;
 @SuppressWarnings("MemberName")
 public class NodePosition {
   @JsonProperty(value = "position")
-  public int Position;
+  public int position;
 
   @JsonProperty(value = "pose")
   public Pose3d pose;
@@ -16,9 +16,9 @@ public class NodePosition {
   @SuppressWarnings("ParameterName")
   @JsonCreator
   public NodePosition(
-      @JsonProperty(required = true, value = "Position") int Position,
+      @JsonProperty(required = true, value = "position") int position,
       @JsonProperty(required = true, value = "pose") Pose3d pose) {
-    this.Position = Position;
+    this.position = position;
     this.pose = pose;
   }
 
@@ -26,18 +26,18 @@ public class NodePosition {
   public boolean equals(Object obj) {
     if (obj instanceof NodePosition) {
       var other = (NodePosition) obj;
-      return Position == other.Position && pose.equals(other.pose);
+      return position == other.position && pose.equals(other.pose);
     }
     return false;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Position, pose);
+    return Objects.hash(position, pose);
   }
 
   @Override
   public String toString() {
-    return "NodePosition(Position: " + Position + ", pose: " + pose + ")";
+    return "NodePosition(position: " + position + ", pose: " + pose + ")";
   }
 }

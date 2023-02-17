@@ -16,7 +16,7 @@ public class Camera extends SubsystemBase {
   PhotonCamera camera;
 
   public Camera() {
-    this.camera = new PhotonCamera("slotheye");
+    this.camera = new PhotonCamera("Slotheye");
   }
 
   @Override

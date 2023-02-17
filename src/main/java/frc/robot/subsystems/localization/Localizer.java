@@ -10,6 +10,9 @@ import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
+import org.photonvision.PhotonCamera;
+import org.photonvision.targeting.PhotonPipelineResult;
+import org.photonvision.targeting.PhotonTrackedTarget;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ public class Localizer {
   private String nodePositionFilename = "/ScoringLocations.json";
   private AprilTagDetection[] detections;
   private AprilTagPoseEstimator estimator;
+  int count;
 
   public Localizer() throws IOException {
     detector = new AprilTagDetector();
@@ -50,25 +54,30 @@ public class Localizer {
         Constants.CY_PIXELS);
 estimator = new AprilTagPoseEstimator(poseEstConfig);
 
+
+PhotonCamera camera = new PhotonCamera("Slotheye");
+
+
+
     visionThread =
         new Thread(
             () -> {
               // Get the UsbCamera from CameraServer
-              UsbCamera camera = CameraServer.startAutomaticCapture();
 
+              SmartDashboard.putBoolean("Camera ON", true);
+              SmartDashboard.putNumber("camera Count", count++);
               // Set the resolution
-              camera.setResolution(640, 480);
 
-              // Get a CvSink. This will capture Mats from the camera
-              CvSink cvSink = CameraServer.getVideo();
+              // // Get a CvSink. This will capture Mats from the camera
+              // CvSink cvSink = CameraServer.getVideo();
 
-              // Setup a CvSource. This will send images back to the Dashboard
-              CvSource outputStream = CameraServer.putVideo("Rectangle", 640, 480);
+              // // Setup a CvSource. This will send images back to the Dashboard
+              // CvSource outputStream = CameraServer.putVideo("Rectangle", 640, 480);
 
-              // Mats are very memory expensive. Lets reuse this Mat.
-              Mat mat = new Mat();
-              Mat grayMat = new Mat();
-              ArrayList<Integer> tags = new ArrayList<>();
+              // // Mats are very memory expensive. Lets reuse this Mat.
+              // Mat mat = new Mat();
+              // Mat grayMat = new Mat();
+              // ArrayList<Integer> tags = new ArrayList<>();
 
 
               // This cannot be 'true'. The program will never exit if it is. This
@@ -76,37 +85,40 @@ estimator = new AprilTagPoseEstimator(poseEstConfig);
               // deploying.
               while (!Thread.interrupted()) {
 
-                // Tell the CvSink to grab a frame from the camera and put it
-                // in the source mat.  If there is an error notify the output.
-                if (cvSink.grabFrame(mat) == 0) {
-                  // Send the output the error.
-                  outputStream.notifyError(cvSink.getError());
-                  // skip the rest of the current iteration
-                  continue;
-                }
+                // // Tell the CvSink to grab a frame from the camera and put it
+                // // in the source mat.  If there is an error notify the output.
+                // if (cvSink.grabFrame(mat) == 0) {
+                //   // Send the output the error.
+                //   outputStream.notifyError(cvSink.getError());
+                //   // skip the rest of the current iteration
+                //   continue;
+                // }
 
-                Imgproc.cvtColor(mat, grayMat, Imgproc.COLOR_RGB2GRAY);
-                detections = detector.detect(grayMat);
-                tags.clear();
-                for (AprilTagDetection detection : detections) {
-                  //draw(mat, detection);
-                  Transform3d pose = estimator.estimate(detection);
-                  int tagID = detection.getId();
-                  Pose3d transformPose = findPoseTransform(pose, tagID);
-                  Pose3d plusPose = findPosePlus(pose, tagID);
+                // Imgproc.cvtColor(mat, grayMat, Imgproc.COLOR_RGB2GRAY);
+                // detections = detector.detect(grayMat);
+
+                PhotonPipelineResult result = camera.getLatestResult();
+                PhotonTrackedTarget target = result.getBestTarget();
+
+                if(target!=null)
+                {
+
+                  SmartDashboard.putNumber("tag seen", target.getFiducialId());
+
+                  int tagID = target.getFiducialId();
+                  Transform3d transformPose = target.getBestCameraToTarget();
+                  Pose3d plusPose = findPoseTransform(transformPose, tagID);
                   SmartDashboard.putString("tag", "" + tagID);
-                  SmartDashboard.putString("pose", pose.toString());
                   SmartDashboard.putString("transform", transformPose.toString());
-                  SmartDashboard.putString("plus", plusPose.toString());
-
-                }
+                  SmartDashboard.putString("plus", plusPose.toString());                
+              }
 
                 // Put a rectangle on the image
                 // Imgproc.rectangle(
                 //     mat, new Point(100, 100), new Point(400, 400), new Scalar(255, 255, 255), 5);
 
                 // Give the output stream a new image to display
-                outputStream.putFrame(mat);
+                // outputStream.putFrame(mat);
               }
             });
 
@@ -122,7 +134,10 @@ estimator = new AprilTagPoseEstimator(poseEstConfig);
 
     Pose3d robotPosition = new Pose3d();
     if(tagPose.isPresent()){
-      tagPose.get().transformBy(pose);
+      
+    SmartDashboard.putString("tag pose", tagPose.toString());
+    
+      robotPosition = tagPose.get().transformBy(pose);
   }
     return robotPosition;
   }
@@ -130,9 +145,11 @@ estimator = new AprilTagPoseEstimator(poseEstConfig);
   private Pose3d findPosePlus(Transform3d pose, int tagID){ 
     Optional<Pose3d> tagPose = fieldLayout.getTagPose(tagID);
 
+    SmartDashboard.putString("tag pose", tagPose.toString());
+
     Pose3d robotPosition = new Pose3d();
     if(tagPose.isPresent()){
-      tagPose.get().plus(pose);
+      robotPosition = tagPose.get().plus(pose);
   }
     return robotPosition;
   }
@@ -151,7 +168,7 @@ estimator = new AprilTagPoseEstimator(poseEstConfig);
         Pose3d transformPose = findPoseTransform(pose, aprilTagId);
         // Pose3d plusPose = findPosePlus(pose, tagID);
 
-        Optional<Pose3d> nodePose = nodeLayout.getTagPose(gridId);
+        Optional<Pose3d> nodePose = nodeLayout.getPositionPose(gridId);
 
         if(nodePose.isPresent())
         {

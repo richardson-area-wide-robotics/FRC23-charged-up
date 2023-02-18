@@ -1,0 +1,1871 @@
+[2022-12-31 13:17:16] [General - Main] [INFO] Native libraries loaded.
+[2022-12-31 13:17:17] [Camera - LibCameraJNI] [INFO] Successfully loaded libpicam shared object
+[2022-12-31 13:17:17] [General - Main] [INFO] Logging initialized in debug mode.
+[2022-12-31 13:17:17] [General - ShellExec] [DEBUG] Executing "id -u"
+[2022-12-31 13:17:17] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:17:17] [General - ShellExec] [DEBUG] Executing "cat /proc/device-tree/model"
+[2022-12-31 13:17:17] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:17:17] [General - Main] [INFO] Starting PhotonVision version v2023.1.2 on Linux Raspbian 64-bit (Pi UNKNOWN)
+[2022-12-31 13:17:17] [General - ConfigManager] [INFO] Loading settings...
+[2022-12-31 13:17:17] [General - ConfigManager] [INFO] Hardware config does not exist! Loading defaults
+[2022-12-31 13:17:18] [Camera - CameraConfiguration] [DEBUG] Creating camera configuration for ZeroCopyPicam unicam (AKA Slotheye) at /dev/video0
+[2022-12-31 13:17:18] [General - NetworkTablesManager] [INFO] Starting NT Client
+[2022-12-31 13:17:18] [General - NetworkTablesManager] [ERROR] [NetworkTablesManager] Could not connect to the robot! Will retry in the background...
+[2022-12-31 13:17:18] [General - NetworkManager] [INFO] Setting DHCP with team team 1745
+[2022-12-31 13:17:18] [General - ShellExec] [DEBUG] Executing "cat /etc/hostname | tr -d " \t\n\r""
+[2022-12-31 13:17:18] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:17:18] [General - ShellExec] [DEBUG] Executing "echo photonvision > /etc/hostname"
+[2022-12-31 13:17:18] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:17:18] [General - ShellExec] [DEBUG] Executing "hostnamectl set-hostname photonvision"
+[2022-12-31 13:17:18] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:17:18] [General - ShellExec] [DEBUG] Executing "sed -i "s/127.0.1.1.*photonvision/127.0.1.1\tphotonvision/g" /etc/hosts"
+[2022-12-31 13:17:18] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:17:18] [General - ShellExec] [DEBUG] Executing "sudo service avahi-daemon restart"
+[2022-12-31 13:17:19] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:17:19] [General - NetworkManager] [INFO] Set hostname to photonvision
+[2022-12-31 13:17:19] [General - ShellExec] [DEBUG] Executing "dhclient eth0"
+[2022-12-31 13:17:19] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:17:19] [Camera - VisionSourceManager] [DEBUG] Matching 1 new cameras!
+[2022-12-31 13:17:19] [Camera - VisionSourceManager] [INFO] Adding local video device - "unicam" at "/dev/video0"
+[2022-12-31 13:17:19] [Camera - VisionSourceManager] [DEBUG] Trying to find a match for loaded camera unicam with path /dev/video0
+[2022-12-31 13:17:19] [Camera - VisionSourceManager] [DEBUG] Matched the config for unicam to a physical camera!
+[2022-12-31 13:17:19] [Camera - VisionSourceManager] [DEBUG] After matching loaded configs 0 cameras were unmatched.
+[2022-12-31 13:17:19] [Camera - VisionSourceManager] [DEBUG] Matched or created 1 camera configs!
+[2022-12-31 13:17:19] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:17:20] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:17:20] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:17:24] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:17:25] [WebServer - DataChangeService] [DEBUG] Added subscriber - Sources: DCS_WEBSOCKET, DCS_HTTP, DCS_NETWORKTABLES, DCS_VISIONMODULE, DCS_OTHER, Destinations: DCD_UI
+[2022-12-31 13:17:25] [WebServer - DataChangeService] [DEBUG] Added subscriber - Sources: DCS_WEBSOCKET, Destinations: DCD_GENSETTINGS
+[2022-12-31 13:17:25] [Camera - VisionSourceManager] [DEBUG] Matched config for camera "AcceleratedPicamFrameProvider" and loaded 1 pipelines
+[2022-12-31 13:17:25] [Camera - VisionSourceManager] [INFO] Adding 1 configs to VMM.
+[2022-12-31 13:17:25] [WebServer - DataChangeService] [DEBUG] Added subscriber - Sources: DCS_WEBSOCKET, DCS_HTTP, DCS_NETWORKTABLES, DCS_VISIONMODULE, DCS_OTHER, Destinations: DCD_ACTIVEMODULE, DCD_ACTIVEPIPELINESETTINGS, DCD_GENSETTINGS, DCD_UI, DCD_OTHER
+[2022-12-31 13:17:26] [Camera - SocketVideoStreamManager] [DEBUG] Added new stream for port 1181
+[2022-12-31 13:17:26] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:17:26] [Camera - SocketVideoStreamManager] [DEBUG] Added new stream for port 1182
+[2022-12-31 13:17:26] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:17:26] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:17:26] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:17:26] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to -1
+[2022-12-31 13:17:26] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Driver Mode
+[2022-12-31 13:17:26] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:17:27] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:17:27] [General - NTDataPublisher] [DEBUG] Driver mode is already true
+[2022-12-31 13:17:28] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:17:28] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:17:56] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:17:56] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:17:56] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:18:33] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:18:33] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:18:34] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:18:36] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:18:36] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:18:37] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:18:41] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:18:41] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:18:41] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:19:26] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:19:26] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:19:26] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:20:11] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:20:11] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:20:11] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:20:21] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:20:21] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:20:21] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:20:24] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:20:24] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:20:24] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:20:25] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:20:25] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:20:25] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:20:27] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:20:27] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:20:29] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:20:29] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:20:29] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:20:29] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:20:29] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:20:29] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:20:29] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:20:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 44.375675ms
+[2022-12-31 13:20:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 109.21166ms
+[2022-12-31 13:20:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 21.696198ms
+[2022-12-31 13:20:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 20.781143ms
+[2022-12-31 13:20:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 7.971302ms
+[2022-12-31 13:21:00] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 26.435053ms
+[2022-12-31 13:21:00] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 37.922916ms
+[2022-12-31 13:21:00] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 33.436825ms
+[2022-12-31 13:21:00] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 16.723072ms
+[2022-12-31 13:21:00] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 11.444896ms
+[2022-12-31 13:21:00] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 18.37422ms
+[2022-12-31 13:21:00] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 9.510624ms
+[2022-12-31 13:21:00] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 7.720572ms
+[2022-12-31 13:21:00] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 17.464844ms
+[2022-12-31 13:21:00] [WebServer - DataSocketHandler] [INFO] New websocket connection from /10.17.45.185:49738
+[2022-12-31 13:21:00] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 211.54875ms
+[2022-12-31 13:21:01] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 4.871719ms
+[2022-12-31 13:22:39] [VisionModule - VisionModuleChangeSubscriber - Slotheye] [DEBUG] Skipping pipeline change, index -1 already active
+[2022-12-31 13:22:50] [General - MetricsManager] [DEBUG] Publishing Metrics...
+[2022-12-31 13:22:50] [General - ShellExec] [DEBUG] Executing "sed 's/.\{3\}$/.&/' /sys/class/thermal/thermal_zone0/temp"
+[2022-12-31 13:22:50] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:22:50] [General - ShellExec] [DEBUG] Executing "top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}'"
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Executing "vcgencmd get_mem arm | grep -Eo '[0-9]+'"
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Executing "if   ((  $(( $(vcgencmd get_throttled | grep -Eo 0x[0-9a-fA-F]*) & 0x01 )) != 0x00 )); then echo "LOW VOLTAGE";  elif ((  $(( $(vcgencmd get_throttled | grep -Eo 0x[0-9a-fA-F]*) & 0x08 )) != 0x00 )); then echo "HIGH TEMP";  elif ((  $(( $(vcgencmd get_throttled | grep -Eo 0x[0-9a-fA-F]*) & 0x10000 )) != 0x00 )); then echo "Prev. Low Voltage";  elif ((  $(( $(vcgencmd get_throttled | grep -Eo 0x[0-9a-fA-F]*) & 0x80000 )) != 0x00 )); then echo "Prev. High Temp";  else echo "None"; fi"
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Executing "uptime -p | cut -c 4-"
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Executing "vcgencmd get_mem gpu | grep -Eo '[0-9]+'"
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Executing "awk '/MemFree:/ {print int($2 / 1000);}' /proc/meminfo"
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Executing "vcgencmd get_mem malloc | grep -Eo '[0-9]+'"
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Executing "df ./ --output=pcent | tail -n +2"
+[2022-12-31 13:22:51] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 13:22:51] [WebServer - Server] [DEBUG] Handled HTTP POST request from 10.17.45.185 in 551.3787ms
+[2022-12-31 13:23:19] [VisionModule - VisionModuleChangeSubscriber - Slotheye] [DEBUG] Skipping pipeline change, index -1 already active
+[2022-12-31 13:24:18] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 0
+[2022-12-31 13:24:18] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: New Pipeline
+[2022-12-31 13:24:18] [VisionModule - PipelineManager] [DEBUG] Creating Reflective pipeline
+[2022-12-31 13:24:18] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:24:20] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:24:20] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:24:29] [VisionModule - VisionModuleChangeSubscriber - Slotheye] [DEBUG] Skipping pipeline change, index 0 already active
+[2022-12-31 13:24:36] [VisionModule - VisionModuleChangeSubscriber - Slotheye] [INFO] Changing nick to Cone
+[2022-12-31 13:24:37] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:24:38] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:24:45] [VisionModule - PipelineManager] [INFO] Adding new pipe of type ColoredShape at idx 0
+[2022-12-31 13:24:45] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 13:24:45] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 0
+[2022-12-31 13:24:45] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cone
+[2022-12-31 13:24:45] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 13:24:45] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:24:48] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:24:48] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:25:04] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:25:04] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:25:52] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:25:52] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:26:10] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:26:10] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:26:12] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:26:12] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:26:15] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:26:16] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:27:02] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:27:02] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:27:14] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:27:14] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:27:18] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:27:18] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:27:22] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:27:23] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:27:28] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:27:28] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:27:31] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:27:32] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:27:34] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:27:34] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:27:36] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:27:36] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:27:38] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:27:38] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:27:40] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:27:40] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:27:48] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:27:48] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:27:50] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:27:50] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:28:03] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:28:03] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:28:11] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:28:11] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:28:57] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:28:57] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:29:15] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:29:15] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:29:22] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:29:23] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:29:28] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:29:28] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:29:33] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:29:33] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:29:38] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:29:39] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:29:44] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:29:44] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:29:48] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:29:48] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:31:25] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 85 Width: 640 Height: 480 Pixel Format: kUnknown
+[2022-12-31 13:31:26] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:31:26] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:31:30] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:31:32] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:31:33] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:31:50] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:31:50] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:31:52] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:31:52] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:32:45] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:32:45] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:32:55] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:32:55] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:35:09] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:35:09] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:35:16] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:35:17] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:35:36] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:35:36] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:35:57] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:35:57] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:36:30] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:36:30] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:36:39] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:36:39] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:36:43] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:36:44] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:36:48] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:36:48] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:37:34] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to -1
+[2022-12-31 13:37:34] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Driver Mode
+[2022-12-31 13:37:34] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:37:36] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:37:36] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:37:45] [VisionModule - VisionModuleChangeSubscriber - Slotheye] [DEBUG] Skipping pipeline change, index -1 already active
+[2022-12-31 13:37:46] [VisionModule - VisionModuleChangeSubscriber - Slotheye] [DEBUG] Skipping pipeline change, index -1 already active
+[2022-12-31 13:37:52] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 0
+[2022-12-31 13:37:52] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cone
+[2022-12-31 13:37:52] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 13:37:52] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:37:54] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:37:54] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:38:00] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to -1
+[2022-12-31 13:38:00] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Driver Mode
+[2022-12-31 13:38:00] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:38:02] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:38:02] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:38:11] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 15 Width: 1920 Height: 1080 Pixel Format: kUnknown
+[2022-12-31 13:38:12] [VisionModule - VisionModule - Slotheye] [INFO] Starting calibration at resolution index 5 and settings UICalibrationData{videoModeIndex=5, count=0, minCount=12, hasEnough=false, squareSizeIn=1.0, patternWidth=8, patternHeight=8, boardType=CHESSBOARD}
+[2022-12-31 13:38:12] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to -2
+[2022-12-31 13:38:12] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: New Pipeline
+[2022-12-31 13:38:12] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 15 Width: 1920 Height: 1080 Pixel Format: kUnknown
+[2022-12-31 13:38:14] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:38:15] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:39:27] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 0
+[2022-12-31 13:39:27] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cone
+[2022-12-31 13:39:27] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 13:39:27] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:39:29] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:39:29] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:39:43] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to -1
+[2022-12-31 13:39:43] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Driver Mode
+[2022-12-31 13:39:43] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:39:45] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 0
+[2022-12-31 13:39:45] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cone
+[2022-12-31 13:39:45] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 13:39:45] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:39:45] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:39:45] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:39:47] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:39:47] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:39:57] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:39:57] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:40:03] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to -1
+[2022-12-31 13:40:03] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Driver Mode
+[2022-12-31 13:40:03] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:40:04] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:40:04] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:40:09] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:40:09] [VisionModule - VisionModule - Slotheye] [INFO] Starting calibration at resolution index 0 and settings UICalibrationData{videoModeIndex=0, count=0, minCount=12, hasEnough=false, squareSizeIn=1.0, patternWidth=8, patternHeight=8, boardType=CHESSBOARD}
+[2022-12-31 13:40:09] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to -2
+[2022-12-31 13:40:09] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: New Pipeline
+[2022-12-31 13:40:09] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:40:11] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:40:12] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:40:16] [WebServer - RequestHandler] [INFO] Calibrating camera! This will take a long time...
+[2022-12-31 13:40:17] [General - Calibrate3dPipeline] [INFO] Not enough snapshots! Only got 0 of 12 -- returning null..
+[2022-12-31 13:40:17] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 13:40:17] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 0
+[2022-12-31 13:40:17] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cone
+[2022-12-31 13:40:17] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 13:40:17] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:40:17] [VisionModule - VisionModule - Slotheye] [ERROR] Calibration failed...
+[2022-12-31 13:40:17] [WebServer - Server] [DEBUG] Handled HTTP POST request from 10.17.45.185 in 341.48468ms
+[2022-12-31 13:40:19] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:40:19] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:40:23] [VisionModule - VisionModuleChangeSubscriber - Slotheye] [DEBUG] Skipping pipeline change, index 0 already active
+[2022-12-31 13:40:36] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:40:36] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:40:37] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 5.566927ms
+[2022-12-31 13:40:39] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 13:40:43] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 13:40:43] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 7.180938ms
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 16.059584ms
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 5.628907ms
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 10.738958ms
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 6.682083ms
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 33.80255ms
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 13.166875ms
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 4.6ms
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 33.547344ms
+[2022-12-31 13:40:49] [WebServer - DataSocketHandler] [INFO] Closing websocket connection from /10.17.45.185:49738 for reason: Connection closed by client
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 9.232916ms
+[2022-12-31 13:40:49] [WebServer - DataSocketHandler] [INFO] New websocket connection from /10.17.45.185:57278
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 5.458489ms
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 7.734791ms
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 7.788178ms
+[2022-12-31 13:40:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 18.629063ms
+[2022-12-31 13:40:50] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 6.620052ms
+[2022-12-31 13:45:12] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:45:12] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:45:25] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:45:25] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:45:28] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:45:28] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:45:37] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:45:37] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:45:49] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:45:49] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:45:52] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:45:52] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:45:57] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:45:58] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:46:02] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:46:02] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:46:10] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:46:10] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:46:17] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:46:17] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:46:19] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:46:19] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:46:28] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:46:28] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:46:46] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:46:46] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:47:09] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:47:09] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:47:11] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:47:11] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:48:53] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:48:54] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:48:57] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:48:57] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:49:03] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:49:03] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:49:10] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:49:10] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:49:15] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:49:15] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:49:31] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:49:31] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:49:37] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:49:37] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:49:45] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:49:45] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:49:47] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:49:47] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:49:51] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:49:51] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:50:01] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:50:01] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:50:10] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:50:10] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:50:10] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:50:10] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:50:11] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:50:11] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:50:14] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:50:14] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:50:14] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:50:14] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:50:16] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:50:16] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:50:19] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:50:19] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:50:21] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:50:21] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:50:26] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:50:26] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:50:26] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:50:26] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:50:29] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:50:30] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:50:35] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:50:35] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:50:36] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:50:36] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:50:38] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:50:38] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:50:40] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:50:40] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:50:44] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:50:44] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:50:46] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:50:46] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:50:47] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:50:47] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:51:16] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:51:16] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:51:21] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:51:21] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:51:23] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:51:23] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:51:37] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:51:37] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:51:45] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:51:45] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:51:52] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:51:52] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:51:54] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:51:54] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:52:14] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:52:14] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:52:14] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:52:14] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:52:25] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:52:25] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:52:25] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:52:26] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:52:34] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:52:34] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:52:40] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:52:40] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:52:41] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:52:41] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:52:44] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:52:44] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:52:46] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:52:46] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:52:48] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:52:48] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:53:04] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:53:04] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:53:14] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:53:14] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:53:25] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:53:25] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:53:30] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:53:30] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:53:41] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:53:41] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:53:57] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:53:57] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:54:13] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:54:13] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:54:26] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:54:26] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:54:33] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:54:33] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:55:10] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:55:10] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:55:38] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:55:38] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:55:44] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:55:44] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:55:55] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:55:55] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:56:03] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:56:03] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:56:11] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:56:11] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:56:11] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:56:11] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:56:21] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:56:21] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:56:21] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:56:21] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:57:07] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:57:07] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:57:29] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:57:29] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:57:43] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:57:43] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:58:28] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:58:28] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:58:54] [VisionModule - VisionModuleChangeSubscriber - Slotheye] [INFO] Adding a ColoredShape pipeline with name Cube
+[2022-12-31 13:58:55] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:58:55] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:58:57] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 13:58:57] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 13:58:59] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 1
+[2022-12-31 13:58:59] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cube
+[2022-12-31 13:58:59] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 13:58:59] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 13:59:00] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:59:00] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:59:07] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:59:08] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:59:26] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:59:26] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:59:30] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:59:30] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:59:34] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:59:34] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:59:36] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:59:37] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:59:41] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:59:41] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:59:52] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:59:52] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 13:59:55] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 13:59:55] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:00:00] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:00:00] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:00:03] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:00:03] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:00:15] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:00:15] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:00:26] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:00:26] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:00:40] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:00:41] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:00:51] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:00:51] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:01:01] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:01:01] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:01:09] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:01:09] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:01:13] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:01:13] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:01:21] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:01:22] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:01:32] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:01:32] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:01:50] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:01:50] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:01:55] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:01:55] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:03:40] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:03:40] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:03:43] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:03:43] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:03:52] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:03:52] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:03:59] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:03:59] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:04:10] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:04:10] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:04:12] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:04:12] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:04:17] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:04:17] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:04:20] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:04:20] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:04:31] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:04:32] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:04:33] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:04:33] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:04:48] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:04:48] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:05:11] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:05:11] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:05:13] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:05:13] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:05:16] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:05:16] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:05:24] [General - MetricsManager] [DEBUG] Publishing Metrics...
+[2022-12-31 14:05:24] [General - ShellExec] [DEBUG] Executing "sed 's/.\{3\}$/.&/' /sys/class/thermal/thermal_zone0/temp"
+[2022-12-31 14:05:24] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:05:24] [General - ShellExec] [DEBUG] Executing "top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}'"
+[2022-12-31 14:05:24] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:05:24] [General - ShellExec] [DEBUG] Executing "if   ((  $(( $(vcgencmd get_throttled | grep -Eo 0x[0-9a-fA-F]*) & 0x01 )) != 0x00 )); then echo "LOW VOLTAGE";  elif ((  $(( $(vcgencmd get_throttled | grep -Eo 0x[0-9a-fA-F]*) & 0x08 )) != 0x00 )); then echo "HIGH TEMP";  elif ((  $(( $(vcgencmd get_throttled | grep -Eo 0x[0-9a-fA-F]*) & 0x10000 )) != 0x00 )); then echo "Prev. Low Voltage";  elif ((  $(( $(vcgencmd get_throttled | grep -Eo 0x[0-9a-fA-F]*) & 0x80000 )) != 0x00 )); then echo "Prev. High Temp";  else echo "None"; fi"
+[2022-12-31 14:05:25] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:05:25] [General - ShellExec] [DEBUG] Executing "uptime -p | cut -c 4-"
+[2022-12-31 14:05:25] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:05:25] [General - ShellExec] [DEBUG] Executing "awk '/MemFree:/ {print int($2 / 1000);}' /proc/meminfo"
+[2022-12-31 14:05:25] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:05:25] [General - ShellExec] [DEBUG] Executing "vcgencmd get_mem malloc | grep -Eo '[0-9]+'"
+[2022-12-31 14:05:25] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:05:25] [General - ShellExec] [DEBUG] Executing "df ./ --output=pcent | tail -n +2"
+[2022-12-31 14:05:25] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:05:25] [WebServer - Server] [DEBUG] Handled HTTP POST request from 10.17.45.185 in 494.84647ms
+[2022-12-31 14:05:25] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to -1
+[2022-12-31 14:05:25] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Driver Mode
+[2022-12-31 14:05:25] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 14:05:26] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 1
+[2022-12-31 14:05:26] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cube
+[2022-12-31 14:05:26] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 14:05:26] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 14:05:28] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:05:28] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:05:38] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:05:38] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:05:42] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:05:43] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:05:49] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:05:49] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:05:54] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:05:54] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:05:56] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:05:56] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:06:02] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:06:02] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:06:21] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:06:21] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:06:31] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:06:31] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:06:31] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:06:31] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:07:11] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:07:11] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:07:11] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:07:11] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:07:18] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:07:18] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:07:26] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:07:26] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:07:31] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:07:32] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:07:36] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:07:36] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:07:38] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:07:38] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:07:40] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:07:40] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:07:42] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:07:42] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:07:48] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:07:48] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:08:04] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:08:04] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:08:06] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:08:06] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:08:11] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:08:11] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:08:13] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:08:13] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:08:16] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:08:16] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:08:19] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 14:08:19] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 14:08:20] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 5.075ms
+[2022-12-31 14:08:21] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 14:08:24] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 14:08:24] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 14:08:24] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:08:25] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:08:27] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:08:27] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:08:33] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:08:33] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:09:51] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:09:51] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:10:01] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:10:01] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:10:11] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:10:11] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:10:17] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:10:17] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:10:28] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:10:28] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:10:30] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:10:31] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:10:31] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:10:31] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:10:38] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:10:38] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:10:39] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:10:39] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:10:53] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:10:53] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:10:55] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:10:55] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:10:57] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:10:57] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:11:02] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:11:02] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:11:12] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:11:12] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:11:57] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:11:57] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:12:37] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:12:37] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:12:44] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:12:44] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:12:50] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:12:50] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:12:50] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:12:50] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:12:57] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:12:57] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:13:05] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:13:05] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:13:09] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:13:09] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:13:16] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:13:16] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:13:21] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:13:21] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:13:42] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:13:42] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:13:52] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 14:13:52] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 14:13:53] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 5.14948ms
+[2022-12-31 14:13:54] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 14:13:54] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:13:54] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:13:55] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:13:55] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:13:56] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 14:13:56] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 14:14:02] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:14:02] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:14:05] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:14:05] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:14:26] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:14:26] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:14:26] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:14:26] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:14:33] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:14:33] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:14:48] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:14:48] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:15:02] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:15:02] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:15:23] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:15:23] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:15:30] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:15:30] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:15:36] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:15:36] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:15:48] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:15:48] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:15:59] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:15:59] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:16:37] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:16:37] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:16:41] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:16:41] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:17:02] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:17:02] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:17:02] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:17:02] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:17:22] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:17:22] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:18:52] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:18:52] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:19:07] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:19:07] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:19:15] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:19:15] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:19:18] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:19:18] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:19:44] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:19:44] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:19:47] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:19:47] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:19:56] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:19:56] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:19:59] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:20:00] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:20:04] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:20:04] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:20:12] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:20:12] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:20:19] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:20:19] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:20:23] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:20:23] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:20:26] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:20:26] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:20:30] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:20:30] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:21:00] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:21:00] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:21:17] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:21:17] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:21:22] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:21:22] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:21:37] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:21:37] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:21:55] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:21:55] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:21:59] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:21:59] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:22:04] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:22:04] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:22:50] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:22:50] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:23:03] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:23:03] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:23:08] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:23:09] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:23:11] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:23:11] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:23:14] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:23:14] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:23:16] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:23:16] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:23:27] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:23:27] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:23:50] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 0
+[2022-12-31 14:23:50] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cone
+[2022-12-31 14:23:50] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 14:23:50] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 14:23:52] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:23:52] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:24:09] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 1
+[2022-12-31 14:24:09] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cube
+[2022-12-31 14:24:09] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 14:24:09] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 14:24:11] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:24:11] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:24:43] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:24:43] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:24:54] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:24:54] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:25:36] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:25:36] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:26:12] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:26:12] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:26:18] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:26:18] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:26:30] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:26:30] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:27:06] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 0
+[2022-12-31 14:27:06] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cone
+[2022-12-31 14:27:06] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 14:27:06] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 14:27:08] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:27:08] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:27:21] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 1
+[2022-12-31 14:27:21] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cube
+[2022-12-31 14:27:21] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 14:27:21] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 14:27:23] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:27:23] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:28:00] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:28:00] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:28:04] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:28:04] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:28:20] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:28:20] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:28:32] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:28:32] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:28:55] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:28:55] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:28:57] [WebServer - DataSocketHandler] [INFO] Closing websocket connection from /10.17.45.185:57278 for reason: Connection closed by client
+[2022-12-31 14:29:03] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:29:03] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:29:03] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:29:03] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:29:05] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 7.63ms
+[2022-12-31 14:29:05] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 15.048177ms
+[2022-12-31 14:29:06] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 6.507864ms
+[2022-12-31 14:29:06] [VisionModule - VisionModule - Slotheye] [ERROR] Exception while running stream runnable!
+[2022-12-31 14:29:06] [VisionModule - VisionModule - Slotheye] [ERROR] CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.6.0) /__w/thirdparty-opencv/thirdparty-opencv/opencv/modules/imgproc/src/drawing.cpp:2599: error: (-215:Assertion failed) reader.ptr != NULL in function 'cvDrawContours'
+]
+	at org.opencv.imgproc.Imgproc.drawContours_4(Native Method)
+	at org.opencv.imgproc.Imgproc.drawContours(Imgproc.java:9271)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:103)
+	at org.photonvision.vision.pipe.impl.Draw2dTargetsPipe.process(Draw2dTargetsPipe.java:35)
+	at org.photonvision.vision.pipe.CVPipe.run(CVPipe.java:50)
+	at org.photonvision.vision.pipeline.OutputStreamPipeline.process(OutputStreamPipeline.java:169)
+	at org.photonvision.vision.processes.VisionModule$StreamRunnable.run(VisionModule.java:264)
+
+[2022-12-31 14:29:06] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 20.096458ms
+[2022-12-31 14:29:06] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 9.890208ms
+[2022-12-31 14:29:06] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 20.205ms
+[2022-12-31 14:29:06] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 29.918646ms
+[2022-12-31 14:29:06] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 20.205051ms
+[2022-12-31 14:29:06] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 50.264896ms
+[2022-12-31 14:29:06] [WebServer - DataSocketHandler] [INFO] New websocket connection from /10.17.45.185:50808
+[2022-12-31 14:29:06] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 3.25901ms
+[2022-12-31 14:29:06] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 4.601928ms
+[2022-12-31 14:29:06] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 21.784897ms
+[2022-12-31 14:29:06] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 4.706562ms
+[2022-12-31 14:29:06] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 5.71625ms
+[2022-12-31 14:29:07] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.185 in 5.873073ms
+[2022-12-31 14:29:12] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 0
+[2022-12-31 14:29:12] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cone
+[2022-12-31 14:29:12] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 14:29:12] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 14:29:13] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 14:29:14] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 14:29:18] [General - MetricsManager] [DEBUG] Publishing Metrics...
+[2022-12-31 14:29:18] [General - ShellExec] [DEBUG] Executing "sed 's/.\{3\}$/.&/' /sys/class/thermal/thermal_zone0/temp"
+[2022-12-31 14:29:18] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:29:18] [General - ShellExec] [DEBUG] Executing "top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}'"
+[2022-12-31 14:29:18] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:29:18] [General - ShellExec] [DEBUG] Executing "if   ((  $(( $(vcgencmd get_throttled | grep -Eo 0x[0-9a-fA-F]*) & 0x01 )) != 0x00 )); then echo "LOW VOLTAGE";  elif ((  $(( $(vcgencmd get_throttled | grep -Eo 0x[0-9a-fA-F]*) & 0x08 )) != 0x00 )); then echo "HIGH TEMP";  elif ((  $(( $(vcgencmd get_throttled | grep -Eo 0x[0-9a-fA-F]*) & 0x10000 )) != 0x00 )); then echo "Prev. Low Voltage";  elif ((  $(( $(vcgencmd get_throttled | grep -Eo 0x[0-9a-fA-F]*) & 0x80000 )) != 0x00 )); then echo "Prev. High Temp";  else echo "None"; fi"
+[2022-12-31 14:29:19] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:29:19] [General - ShellExec] [DEBUG] Executing "uptime -p | cut -c 4-"
+[2022-12-31 14:29:19] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:29:19] [General - ShellExec] [DEBUG] Executing "awk '/MemFree:/ {print int($2 / 1000);}' /proc/meminfo"
+[2022-12-31 14:29:19] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:29:19] [General - ShellExec] [DEBUG] Executing "vcgencmd get_mem malloc | grep -Eo '[0-9]+'"
+[2022-12-31 14:29:19] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:29:19] [General - ShellExec] [DEBUG] Executing "df ./ --output=pcent | tail -n +2"
+[2022-12-31 14:29:19] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 14:29:19] [WebServer - Server] [DEBUG] Handled HTTP POST request from 10.17.45.185 in 455.64383ms
+[2022-12-31 14:29:35] [VisionModule - VisionModuleChangeSubscriber - Slotheye] [DEBUG] Skipping pipeline change, index 0 already active
+[2022-12-31 14:29:39] [WebServer - DataSocketHandler] [INFO] Closing websocket connection from /10.17.45.185:50808 for reason: Connection closed by client
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      

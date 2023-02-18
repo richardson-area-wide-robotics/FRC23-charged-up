@@ -233,13 +233,4 @@ public final class Constants {
     public static final double ARM_ENCODER_OFFSET = 0;
   }
 
-  public static final class Localizer {
-    public static final double TARGET_SIZE_METERS = 0.0;
-    public static final double FX_PIXELS = 0.0;
-    public static final double FY_PIXELS = 0.0;
-    public static final double CX_PIXELS = 0.0;
-    public static final double CY_PIXELS = 0.0;
-  }
-
-
 }

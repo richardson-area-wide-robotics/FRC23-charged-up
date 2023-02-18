@@ -36,12 +36,10 @@ public class RoboState {
         this.localizer = localizer;
     }
     
-    //
     public void drive(DoubleSupplier Xtranslation, DoubleSupplier Ytranslation){
         this.Xtranslation = Xtranslation;
         this.Ytranslation = Ytranslation;
     }
-
     
     public DoubleSupplier getXtranslation() {
         return Xtranslation;

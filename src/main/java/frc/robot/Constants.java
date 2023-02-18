@@ -23,14 +23,6 @@ import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
 
-    /**Camera */
-    public static final double TARGET_SIZE_METERS = 0.1524;
-    public static final double FX_PIXELS = 699.3778103158814;
-    public static final double CX_PIXELS = 345.6059345433618;
-    public static final double FY_PIXELS = 677.7161226393544;
-    public static final double CY_PIXELS = 207.12741326228522;
-
-
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;

@@ -13,6 +13,7 @@ import frc.robot.Constants;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
-public class Localizer {
+public class Localizer extends SubsystemBase{
   private Thread visionThread;
   private AprilTagDetector detector;
   private AprilTagFieldLayout fieldLayout;
@@ -86,6 +87,7 @@ PhotonCamera camera = new PhotonCamera("Slotheye");
     if(tagPose.isPresent()){
       robotPosition = tagPose.get().transformBy(pose);
   }
+    // Returns an empty pose3d if not tag is seen
     return robotPosition;
   }
 

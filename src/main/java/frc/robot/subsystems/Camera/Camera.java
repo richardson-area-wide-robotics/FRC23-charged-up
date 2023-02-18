@@ -18,7 +18,6 @@ public class Camera extends SubsystemBase {
 
   public Camera(String name) {
     this.camera = new PhotonCamera(name);
-    SmartDashboard.putNumber("pipelineIndex", camera.getPipelineIndex());
   }
 
   @Override
@@ -65,13 +64,8 @@ public class Camera extends SubsystemBase {
     if(target == null) {
         return 0.0;
     }
-    else {
-    // Rotation3d rotation = this.getCameraRotation();
-    // double angle = rotation.getAngle();
-    
+    else {  
     double angle = Math.toRadians(target.getYaw());
-    SmartDashboard.putNumber("AngleRad: ", angle);
-    SmartDashboard.putNumber("Angle: ", angle * (180 / Math.PI));
     return angle;
     }
   }

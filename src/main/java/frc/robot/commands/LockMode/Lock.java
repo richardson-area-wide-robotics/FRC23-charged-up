@@ -62,7 +62,6 @@ public class Lock extends CommandBase{
 
         drive.drive(limitedForward, limitedSideways, yawRate, true);
 
-
     }
  
 }

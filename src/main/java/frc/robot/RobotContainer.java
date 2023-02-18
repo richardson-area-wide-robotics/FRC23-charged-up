@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import javax.management.InstanceAlreadyExistsException;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
@@ -96,7 +94,7 @@ public class RobotContainer {
 
     new JoystickButton(m_driverController, XboxController.Button.kB.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_MID), m_arm));
     
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper).whileTrue(new InstantCommand(()-> m_driverController.driveDistance(m_localizer.get)))
+    //new JoystickButton(m_driverController, XboxController.Button.kRightBumper).whileTrue(new InstantCommand(()-> m_driverController.driveDistance(m_localizer.get)));
   
   }
 

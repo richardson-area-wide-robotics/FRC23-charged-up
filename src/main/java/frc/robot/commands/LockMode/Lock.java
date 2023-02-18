@@ -24,7 +24,7 @@ public class Lock extends CommandBase{
 
     /**
      *
-     @param drive passes control
+     @param drive passes controller
      @param camera passes camera
      @param forward passes y translation
      @param sideways passes x translation

@@ -6,7 +6,6 @@ package frc.robot.subsystems.camera;
 
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
@@ -60,7 +59,6 @@ public class Camera extends SubsystemBase {
     PhotonPipelineResult result = this.getCameraResult();
     PhotonTrackedTarget target = result.getBestTarget();  
 
-    SmartDashboard.putBoolean("I see target", target != null);
     if(target == null) {
         return 0.0;
     }

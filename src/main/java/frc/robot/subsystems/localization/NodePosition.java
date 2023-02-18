@@ -8,6 +8,7 @@ import java.util.Objects;
 @SuppressWarnings("MemberName")
 public class NodePosition {
   @JsonProperty(value = "position")
+  // The positions in the json file is this int position
   public int position;
 
   @JsonProperty(value = "pose")

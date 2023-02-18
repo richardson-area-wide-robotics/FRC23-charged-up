@@ -154,6 +154,12 @@ public final class Constants {
     public static final double kTurningMinOutput = -1.0;
     public static final double kTurningMaxOutput = 1.0;
 
+    
+    public static final PIDGains kVisionTurningPIDGains =
+        new PIDGains(1.0, 0, 0.01); // TODO: tune values for Vision auto-turning
+
+    public static final double MAX_LOCKED_ON_SPEED = 0.33;
+    
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 

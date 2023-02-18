@@ -2,8 +2,9 @@ package frc.robot.subsystems;
 
 import java.util.function.DoubleSupplier;
 import frc.robot.Constants.Intake;
-import frc.robot.Constants.Localizer;
+import frc.robot.subsystems.localization.Localizer;
 import frc.robot.subsystems.drive.DriveSubsystem;
+
 
 
 public class RoboState {
@@ -15,28 +16,33 @@ public class RoboState {
     DoubleSupplier Ytranslation;
     DoubleSupplier Xtranslation;
 
-    //would a return type of Double work here to solely return the angle?
+
    
-    public Double camAngle(Double Angle) {
+    public Double getCamAngle(Double Angle) {
         this.Angle = Angle;
         return Angle;
     }
 
-    //what values would we need from intake?
+    //Change variable type to return any information needed
+    //Class types are currently place holders
+
+    //what values are needed from intake?
     public void intake(Intake intake) {
         this.intake = intake;
     }
 
+    //what values are needed from localizer?
     public void localizer(Localizer localizer) {
         this.localizer = localizer;
     }
     
-    //would a void return type give us what we want?
+    //
     public void drive(DoubleSupplier Xtranslation, DoubleSupplier Ytranslation){
         this.Xtranslation = Xtranslation;
         this.Ytranslation = Ytranslation;
     }
 
+    
     public DoubleSupplier getXtranslation() {
         return Xtranslation;
     }

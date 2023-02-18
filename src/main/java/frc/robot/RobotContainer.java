@@ -10,7 +10,6 @@ import org.photonvision.PhotonCamera;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
-import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -38,7 +37,7 @@ public class RobotContainer {
   private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Lock lockMode;
-  private final Camera camera = new Camera("slothEye");
+  private final Camera camera = new Camera("Slotheye");
   private final  RoboState roboCon = new RoboState();
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);

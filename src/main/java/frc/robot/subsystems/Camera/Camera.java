@@ -8,8 +8,6 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import javax.naming.spi.DirStateFactory.Result;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
@@ -20,6 +18,7 @@ public class Camera extends SubsystemBase {
 
   public Camera(String name) {
     this.camera = new PhotonCamera(name);
+    SmartDashboard.putNumber("pipelineIndex", camera.getPipelineIndex());
   }
 
   @Override
@@ -55,19 +54,24 @@ public class Camera extends SubsystemBase {
     return rotation;
   }
 /**
- * Returns the angle of the robot relative to a target.
+ * Returns the angle of the robot relative to a target in radians.
+ * Convert to degrees as necessary.
  */
   public double getAngle() {
     PhotonPipelineResult result = this.getCameraResult();
     PhotonTrackedTarget target = result.getBestTarget();  
 
+    SmartDashboard.putBoolean("I see target", target != null);
     if(target == null) {
         return 0.0;
     }
     else {
-    Rotation3d rotation = this.getCameraRotation();
-    double angle = rotation.getAngle();
-    SmartDashboard.putNumber("Angle: ", angle * 180 / Math.PI);
+    // Rotation3d rotation = this.getCameraRotation();
+    // double angle = rotation.getAngle();
+    
+    double angle = Math.toRadians(target.getYaw());
+    SmartDashboard.putNumber("AngleRad: ", angle);
+    SmartDashboard.putNumber("Angle: ", angle * (180 / Math.PI));
     return angle;
     }
   }

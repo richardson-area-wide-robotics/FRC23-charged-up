@@ -2,7 +2,6 @@ package frc.robot.commands.lockmode;
 
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.camera.Camera;
@@ -19,9 +18,9 @@ public class Lock extends CommandBase{
 
     //PID controller for yawRate
     final PIDController yawRateController = new PIDController(
-        Constants.ModuleConstants.kTurningPIDGains.P,
-        Constants.ModuleConstants.kTurningPIDGains.I,
-        Constants.ModuleConstants.kTurningPIDGains.D);
+        Constants.ModuleConstants.kVisionTurningPIDGains.P,
+        Constants.ModuleConstants.kVisionTurningPIDGains.I,
+        Constants.ModuleConstants.kVisionTurningPIDGains.D);
 
     /**
      *
@@ -39,7 +38,10 @@ public class Lock extends CommandBase{
     }
     
     @Override
-    public void initialize() {}  
+    public void initialize() {
+        
+        yawRateController.reset();
+    }  
 
     @Override
     public boolean isFinished() {
@@ -51,13 +53,16 @@ public class Lock extends CommandBase{
     public  void execute() {
         double angularOffset = camera.getAngle();
         double yawRate = yawRateController.calculate(angularOffset, 0);
-            
-        SmartDashboard.putNumber("angular offset", angularOffset);
-        SmartDashboard.putNumber("yawRate", yawRate);
 
-        drive.drive(forward.getAsDouble(), sideways.getAsDouble(), yawRate, false);
+        //limits robot max speed while in locked-on mode
+        double limitedForward = Math.max(forward.getAsDouble(), -1.0 * Constants.ModuleConstants.MAX_LOCKED_ON_SPEED);
+        limitedForward = Math.min(limitedForward, Constants.ModuleConstants.MAX_LOCKED_ON_SPEED);
+        double limitedSideways = Math.max(sideways.getAsDouble(), -1.0 * Constants.ModuleConstants.MAX_LOCKED_ON_SPEED);
+        limitedSideways = Math.min(limitedSideways, Constants.ModuleConstants.MAX_LOCKED_ON_SPEED);
 
-        yawRateController.reset();
+        drive.drive(limitedForward, limitedSideways, yawRate, true);
+
+
     }
  
 }

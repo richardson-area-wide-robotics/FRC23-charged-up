@@ -93,8 +93,6 @@ public class RobotContainer {
     new JoystickButton(m_driverController, XboxController.Button.kA.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_STOWED), m_arm));
 
     new JoystickButton(m_driverController, XboxController.Button.kB.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_MID), m_arm));
-    
-    //new JoystickButton(m_driverController, XboxController.Button.kRightBumper).whileTrue(new InstantCommand(()-> m_driverController.driveDistance(m_localizer.get)));
   
   }
 

@@ -56,8 +56,7 @@ public class Camera extends SubsystemBase {
  * Convert to degrees as necessary.
  */
   public double getAngle() {
-    PhotonPipelineResult result = this.getCameraResult();
-    PhotonTrackedTarget target = result.getBestTarget();  
+    PhotonTrackedTarget target = getCameraTarget(); 
 
     if(target == null) {
         return 0.0;

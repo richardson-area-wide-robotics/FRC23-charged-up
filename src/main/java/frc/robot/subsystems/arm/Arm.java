@@ -82,7 +82,6 @@ public class Arm extends SubsystemBase {
   
     leftMotor.getPIDController().setFeedbackDevice(armEncoder);
 
-    this.resetArmPosition();
 
     // setting the motor configuration
     armConfig(leftMotor);
@@ -101,6 +100,9 @@ public class Arm extends SubsystemBase {
     armPositions.put(armPosition.SCORING_ARM_POSITION_LOW,  Constants.ArmConstants.SCORING_ARM_LOW);
     armPositions.put(armPosition.SCORING_ARM_POSITION_MID, Constants.ArmConstants. SCORING_ARM_MID);
     armPositions.put(armPosition.INTAKE_ARM_POSITION_STOWED,  Constants.ArmConstants.INTAKE_ARM_STOWED);
+  
+  
+    this.resetArmPosition();
   }
 
   // getting relative encoder position of the arm

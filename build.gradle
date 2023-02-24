@@ -111,7 +111,8 @@ tasks.withType(JavaCompile) {
     options.compilerArgs.add '-XDstringConcat=inline'
 }
 
-// Copy spotless config from WPILib
+
+// // Copy spotless config from WPILib
 // spotless {
 //     // optional: limit format enforcement to just the files changed by this feature branch
 //     // ratchetFrom 'origin/main'

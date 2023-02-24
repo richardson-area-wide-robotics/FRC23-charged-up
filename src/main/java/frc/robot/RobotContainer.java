@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import java.util.function.DoubleSupplier;
+import org.photonvision.PhotonCamera;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
@@ -14,10 +16,13 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.lockMode.Lock;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.Arm.armPosition;
+import frc.robot.subsystems.camera.Camera;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.RoboState;
 import frc.robot.subsystems.localization.Localizer;
 
 /**
@@ -31,24 +36,27 @@ public class RobotContainer {
   // The robot's subsystems
   private ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
+  private Lock lockMode;
   private final Intake intake = new Intake();
+  private final Camera camera = new Camera("Slotheye");
+  private final  RoboState roboCon = new RoboState();
   private final Arm m_arm = new Arm();
   private final Localizer m_localizer;
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
 
+  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer(Localizer localizer) {
      
-
     m_localizer = localizer;
    
    
     // Configure the trigger bindings
     configureBindings();  
   }
-
+  
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -59,38 +67,52 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+
+
+    //Some adjustments made for lock on mode
+    DoubleSupplier moveForward =  () -> MathUtil.applyDeadband(
+      -m_driverController.getLeftY(), 0.06); // 0.1 might be better?
+     DoubleSupplier moveSideways = () -> MathUtil.applyDeadband(
+      -m_driverController.getLeftX(), 0.06); // 0.1 might be better?
+  
+    lockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
+
+    //sends the movement information to RoboCon method in RoboState
+    roboCon.drive(moveForward, moveSideways); 
     
-    // Configure default commands
-    m_robotDrive.setDefaultCommand(
-        // The left stick controls translation of the robot.
-        // Turning is controlled by the X axis of the right stick.
-        new RunCommand(
-            () ->
-                m_robotDrive.drive(
-                    MathUtil.applyDeadband(
-                        -m_driverController.getLeftY(), 0.1),
-                    MathUtil.applyDeadband(
-                        -m_driverController.getLeftX(), 0.1),
-                    MathUtil.applyDeadband(
-                        -m_driverController.getRightX(), 0.1),
-                    true),
-            m_robotDrive));
+    //Enters Lock-on mode
+     new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(lockMode);
+   
+     m_robotDrive.setDefaultCommand(
+      // The left stick controls translation of the robot.
+      // Turning is controlled by the X axis of the right stick.
+     new RunCommand(
+      () ->
+          m_robotDrive.drive(
+              MathUtil.applyDeadband(
+                  -m_driverController.getLeftY(), 0.1),
+              MathUtil.applyDeadband(
+                  -m_driverController.getLeftX(), 0.1),
+              MathUtil.applyDeadband(
+                  -m_driverController.getRightX(), 0.1),
+              true),
+      m_robotDrive));
 
-          if(m_driverController.getLeftStickButtonPressed()){
-            m_robotDrive.zeroHeading();
-          }
+    if(m_driverController.getLeftStickButtonPressed()){
+      m_robotDrive.zeroHeading();
+    }
 
-          if(m_driverController.getRightStickButtonPressed()){
-            m_robotDrive.setX();
-          }
+    if(m_driverController.getRightStickButtonPressed()){
+      m_robotDrive.setX();
+    }
 
           //Make sure that all buttons are unique
 
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).onTrue(new InstantCommand(() -> intake.toggleIntake(), intake));
 
-    new JoystickButton(m_driverController, XboxController.Button.kY.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_GROUND), m_arm));
+new JoystickButton(m_driverController, XboxController.Button.kY.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_GROUND), m_arm));
 
-    new JoystickButton(m_driverController, XboxController.Button.kA.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_STOWED), m_arm));
+new JoystickButton(m_driverController, XboxController.Button.kA.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.INTAKE_ARM_POSITION_STOWED), m_arm));
 
     new JoystickButton(m_driverController, XboxController.Button.kB.value).whileTrue(new InstantCommand(() -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_MID), m_arm));
   

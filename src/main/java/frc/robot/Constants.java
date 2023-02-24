@@ -158,6 +158,12 @@ public final class Constants {
     public static final double kTurningMinOutput = -1.0;
     public static final double kTurningMaxOutput = 1.0;
 
+    
+    public static final PIDGains kVisionTurningPIDGains =
+        new PIDGains(1.0, 0, 0.01); // TODO: tune values for Vision auto-turning
+
+    public static final double MAX_LOCKED_ON_SPEED = 0.33;
+    
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
@@ -229,7 +235,15 @@ public final class Constants {
     public static final double ARM_MAX_OUTPUT = 1.0;
     
     public static final double ARM_ENCODER_OFFSET = 0;
-  
-
   }
+
+  public static final class Localizer {
+    public static final double TARGET_SIZE_METERS = 0.0;
+    public static final double FX_PIXELS = 0.0;
+    public static final double FY_PIXELS = 0.0;
+    public static final double CX_PIXELS = 0.0;
+    public static final double CY_PIXELS = 0.0;
+  }
+
+
 }

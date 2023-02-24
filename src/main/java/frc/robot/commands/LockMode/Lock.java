@@ -1,4 +1,4 @@
-package frc.robot.commands.lockmode;
+package frc.robot.commands.lockMode;
 
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.controller.PIDController;

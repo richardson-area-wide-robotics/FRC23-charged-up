@@ -23,9 +23,4 @@ public class ShoulderPosition extends CommandBase {
     public boolean isFinished() {
         return arm.getArmAbsoluteEncoder() >= position - .1 && arm.getArmAbsoluteEncoder() <= position + .1;
     }
-
-    @Override
-    public void end(boolean interrupted) {
-        arm.setShoulderPower(0);
-    }
 }

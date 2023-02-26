@@ -48,6 +48,4 @@ public class IntakeCommand extends CommandBase {
         }
     }
 
-
-
 }

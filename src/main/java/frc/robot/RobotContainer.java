@@ -162,10 +162,6 @@ public class RobotContainer {
      * left bumper - shelf cube picup
      * Right bumper - cube picup
      */
-    
-
-
-
 
 
     // pick up tipped cone

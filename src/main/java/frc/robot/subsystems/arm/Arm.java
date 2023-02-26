@@ -4,22 +4,13 @@ import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
-import com.revrobotics.CANSparkMax.FaultID;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import frc.robot.Constants;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.util.sendable.SendableBuilder;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -27,48 +18,32 @@ import java.util.EnumMap;
 
 public class Arm extends SubsystemBase {
 
-  // making variable under the CANSparkMax class
+  // Shoulder Motors
   private CANSparkMax leftMotor;
   private CANSparkMax rightMotor;
+
+  // Elbow Motors
   private CANSparkMax elbowMotor;
-  private CANSparkMax elbowMotor2;
+
+  // PID Controllers
   private PIDController armPID;
-  private PIDController elbowPID;
-
-  // for motor config
-  private int currentLimit;
-  private float forwardSoftLimit;
-  private float reverseSoftLimit;
-
-
-  private AbsoluteEncoder armEncoder;
-  private AbsoluteEncoder elbowEncoder;
+  private PIDController elbowPID;  
   private SparkMaxPIDController armPIDController;
-  private SparkMaxPIDController elbowPIDController;
+  private SparkMaxPIDController elbowPIDController;  
+
+  // Feedforward
   private ArmFeedforward elbowFF;
   private ArmFeedforward armFF;
 
-  // enum sets unchangeable variables, here it sets the arm height for intaking and scoring game
-  // objects
-  public enum armPosition {
-    SCORING_ARM_POSITION_LOW,
-    SCORING_ARM_POSITION_MID,
-    INTAKE_ARM_POSITION_GROUND,
-    INTAKE_ARM_POSITION_SHELF,
-    INTAKE_ARM_POSITION_STOWED
-  }
+  // Encoders
+  private AbsoluteEncoder armEncoder;
+  private AbsoluteEncoder elbowEncoder;
 
-  // Map of arm positions named armPositions
-  EnumMap<armPosition, Double> armPositions = new EnumMap<>(armPosition.class);
-
-  // current arm position
-  // private armPosition currentArmPosition = armPosition.INTAKE_ARM_POSITION_STOWED;
-  // private armPosition currentElbowPosition = armPosition.INTAKE_ARM_POSITION_STOWED;
-
+  // Arm Positions
   private double currentArmPosition;
   private double currentElbowPosition;
 
-  // setting up CAN IDs for the motors
+  // set up the arm congfiguration
   public void armConfig(CANSparkMax motor, AbsoluteEncoder enc){
     // restore factory defaults
     motor.restoreFactoryDefaults();
@@ -98,6 +73,7 @@ public class Arm extends SubsystemBase {
   
   }
 
+  // set up the elbow congfiguration
   public void elbowConfig(CANSparkMax motor, AbsoluteEncoder enc){
  // restore factory defaults
  motor.restoreFactoryDefaults();
@@ -134,8 +110,6 @@ public class Arm extends SubsystemBase {
     // setting the Absolute Encoder for the SparkMax
     armEncoder = rightMotor.getAbsoluteEncoder(Type.kDutyCycle);
     elbowEncoder = elbowMotor.getAbsoluteEncoder(Type.kDutyCycle);
-
-    
 
     // Apply position and velocity conversion factors for the driving encoder. The
     // native units for position and velocity are rotations and RPM, respectively,
@@ -215,11 +189,6 @@ public class Arm extends SubsystemBase {
     return this.armEncoder.getVelocity(); 
   }
 
-  // set the arm position back to home position
-  public void resetArmPosition() {
-    this.leftMotor.getEncoder().setPosition(armPositions.get(armPosition.INTAKE_ARM_POSITION_STOWED));
-  }
-
   public void moveElbowPosition(int armPosition){
     if(armPosition == 0){
       this.currentElbowPosition = Constants.ArmConstants.ELBOW_PICK_UP_SHELF;
@@ -297,17 +266,33 @@ public class Arm extends SubsystemBase {
     }
   }
 
+  public void setArmPosition(double position) {
+    currentArmPosition = position;
+  }
+
+  public void setElbowPosition(double position) {
+    currentElbowPosition = position;
+  }
+
   public void getSparkStatus(IdleMode mode){
     leftMotor.setIdleMode(mode);
     rightMotor.setIdleMode(mode);
     elbowMotor.setIdleMode(mode);
   }
 
+  public void setShoulderPower(double power){
+    rightMotor.set(power);
+  }
+
+  public void setElbowPower(double power){
+    elbowMotor.set(power);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  
-    armPIDController.setReference(currentArmPosition, ControlType.kPosition/* , 1, armFF.calculate(currentElbowPosition, armPID.getSetpoint().velocity)*/);
+    armPIDController.setReference(currentArmPosition, ControlType.kPosition);
+    /* , 1, armFF.calculate(currentElbowPosition, armPID.getSetpoint().velocity)*/
     SmartDashboard.putNumber("outputcurrent for elbow", outputcurrent());
     SmartDashboard.putNumber("outputcurrent for left", outputleftcurrent());
     SmartDashboard.putNumber("outputcurrent for right", outputrightcurrent());

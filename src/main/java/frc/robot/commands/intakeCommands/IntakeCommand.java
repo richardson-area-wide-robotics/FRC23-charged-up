@@ -1,6 +1,7 @@
 package frc.robot.commands.intakeCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.intake.Intake;
 
 public class IntakeCommand extends CommandBase {
@@ -40,10 +41,10 @@ public class IntakeCommand extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         if (!mode) {
-            intakeMech.intake(0.1);
+            intakeMech.intake(Constants.Intake.kConeIdleSpeed);
         }
         else {
-            intakeMech.intake(-0.1);
+            intakeMech.intake(Constants.Intake.kCubeIdleSpeed);
         }
     }
 

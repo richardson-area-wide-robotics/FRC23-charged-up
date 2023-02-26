@@ -149,9 +149,9 @@ public class RobotContainer {
      */
     // TODO: change this to be a ramp up with the deadband of the trigger :)
 
-    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(() -> intake.intake(), intake));
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(() -> intake.intake(1.0), intake));
 
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(() -> intake.outake(), intake));
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(() -> intake.outake(-1.0), intake));
 
     /*
      * ---Arm Controls 

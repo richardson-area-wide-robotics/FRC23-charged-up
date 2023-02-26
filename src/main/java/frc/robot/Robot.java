@@ -5,13 +5,15 @@
 package frc.robot;
 
 import com.revrobotics.CANSparkMax.IdleMode;
-
 import edu.wpi.first.math.util.Units;
+import java.io.IOException;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.arm.ArmKinematics;
+
+import frc.robot.subsystems.localization.Localizer;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -22,6 +24,8 @@ import frc.robot.subsystems.arm.ArmKinematics;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
+  private Localizer localizer;
+
   private RobotContainer m_robotContainer;
   private ArmKinematics mArmKinematics;
 
@@ -31,10 +35,19 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+    try {
+      localizer = new Localizer();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    localizer.start();
+    
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
     mArmKinematics = new ArmKinematics(0.559, 0.652);
+    m_robotContainer = new RobotContainer(localizer);
   }
 
   /**
@@ -102,7 +115,7 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
-    }
+    }  
   }
 
   /** This function is called periodically during operator control. */

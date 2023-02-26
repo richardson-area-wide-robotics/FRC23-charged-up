@@ -25,17 +25,21 @@ import frc.lib.util.SwerveModuleConstants;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants extends SubsystemBase{
+
+public final class Constants {
+
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;
     public static final double kControllerDeadband = 0.1;
+    
   }
   public static final class SwerveDriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
     public static final double kMaxSpeedMetersPerSecond = 4.8;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
+
 
     /*
      * Chassis configuration
@@ -159,6 +163,12 @@ public final class Constants extends SubsystemBase{
     public static final double kTurningMinOutput = -1.0;
     public static final double kTurningMaxOutput = 1.0;
 
+    
+    public static final PIDGains kVisionTurningPIDGains =
+        new PIDGains(1.0, 0, 0.01); // TODO: tune values for Vision auto-turning
+
+    public static final double MAX_LOCKED_ON_SPEED = 0.33;
+    
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
@@ -291,28 +301,38 @@ public final class Constants extends SubsystemBase{
     // public static final double ARM_IDLE = 0.3;
   }
 
-  public void putNumber(){
-    SmartDashboard.putNumber("stowed elbow", ArmConstants.ELBOW_STOWED);
-    SmartDashboard.putNumber("pick up Tcone", ArmConstants.ELBOW_PICK_UP_TCONE);
-    SmartDashboard.putNumber("pick up cone", ArmConstants.ELBOW_PICK_UP_CONE);
-    SmartDashboard.putNumber("score cone low", ArmConstants.ELBOW_SCORE_CONE_LOW);
-    SmartDashboard.putNumber("score cone mid", ArmConstants.ELBOW_SCORE_CONE_MID);
-    SmartDashboard.putNumber("score cone high", ArmConstants.ELBOW_SCORE_CONE_HIGH);
-    SmartDashboard.putNumber("score cube low", ArmConstants.ELBOW_SCORE_CUBE_LOW);
-    SmartDashboard.putNumber("score cube mid", ArmConstants.ELBOW_SCORE_CUBE_MID);
-    SmartDashboard.putNumber("score cube high", ArmConstants.ELBOW_SCORE_CUBE_HIGH);
+  // public void putNumber(){
+  //   SmartDashboard.putNumber("stowed elbow", ArmConstants.ELBOW_STOWED);
+  //   SmartDashboard.putNumber("pick up Tcone", ArmConstants.ELBOW_PICK_UP_TCONE);
+  //   SmartDashboard.putNumber("pick up cone", ArmConstants.ELBOW_PICK_UP_CONE);
+  //   SmartDashboard.putNumber("score cone low", ArmConstants.ELBOW_SCORE_CONE_LOW);
+  //   SmartDashboard.putNumber("score cone mid", ArmConstants.ELBOW_SCORE_CONE_MID);
+  //   SmartDashboard.putNumber("score cone high", ArmConstants.ELBOW_SCORE_CONE_HIGH);
+  //   SmartDashboard.putNumber("score cube low", ArmConstants.ELBOW_SCORE_CUBE_LOW);
+  //   SmartDashboard.putNumber("score cube mid", ArmConstants.ELBOW_SCORE_CUBE_MID);
+  //   SmartDashboard.putNumber("score cube high", ArmConstants.ELBOW_SCORE_CUBE_HIGH);
+  // }
+
+  // @Override public void periodic() {
+  //   SmartDashboard.getNumber("stowed elbow", ArmConstants.ELBOW_STOWED);
+  //   SmartDashboard.getNumber("pick up Tcone", ArmConstants.ELBOW_PICK_UP_TCONE);
+  //   SmartDashboard.getNumber("pick up cone", ArmConstants.ELBOW_PICK_UP_CONE);
+  //   SmartDashboard.getNumber("score cone low", ArmConstants.ELBOW_SCORE_CONE_LOW);
+  //   SmartDashboard.getNumber("score cone mid", ArmConstants.ELBOW_SCORE_CONE_MID);
+  //   SmartDashboard.getNumber("score cone high", ArmConstants.ELBOW_SCORE_CONE_HIGH);
+  //   SmartDashboard.getNumber("score cube low", ArmConstants.ELBOW_SCORE_CUBE_LOW);
+  //   SmartDashboard.getNumber("score cube mid", ArmConstants.ELBOW_SCORE_CUBE_MID);
+  //   SmartDashboard.getNumber("score cube high", ArmConstants.ELBOW_SCORE_CUBE_HIGH);
+
+  // }
+
+  public static final class Localizer {
+    public static final double TARGET_SIZE_METERS = 0.0;
+    public static final double FX_PIXELS = 0.0;
+    public static final double FY_PIXELS = 0.0;
+    public static final double CX_PIXELS = 0.0;
+    public static final double CY_PIXELS = 0.0;
   }
 
-  @Override public void periodic() {
-    SmartDashboard.getNumber("stowed elbow", ArmConstants.ELBOW_STOWED);
-    SmartDashboard.getNumber("pick up Tcone", ArmConstants.ELBOW_PICK_UP_TCONE);
-    SmartDashboard.getNumber("pick up cone", ArmConstants.ELBOW_PICK_UP_CONE);
-    SmartDashboard.getNumber("score cone low", ArmConstants.ELBOW_SCORE_CONE_LOW);
-    SmartDashboard.getNumber("score cone mid", ArmConstants.ELBOW_SCORE_CONE_MID);
-    SmartDashboard.getNumber("score cone high", ArmConstants.ELBOW_SCORE_CONE_HIGH);
-    SmartDashboard.getNumber("score cube low", ArmConstants.ELBOW_SCORE_CUBE_LOW);
-    SmartDashboard.getNumber("score cube mid", ArmConstants.ELBOW_SCORE_CUBE_MID);
-    SmartDashboard.getNumber("score cube high", ArmConstants.ELBOW_SCORE_CUBE_HIGH);
 
-  }
 }

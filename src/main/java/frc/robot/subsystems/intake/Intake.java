@@ -2,7 +2,6 @@ package frc.robot.subsystems.intake;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -11,7 +10,6 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
 
 private CANSparkMax intakeMotor;
-private boolean m_intakeState;
 
 public Intake() {
 
@@ -39,19 +37,16 @@ public double getSpeed() {
 // sets the intake motor to 0 to stop all movement 
 public void idle() {
   intakeMotor.set(0.0);
-  m_intakeState = false;
 }
 
 // sets the motor to intake
 public void intake(){
   intakeMotor.set(Constants.Intake.kIntakeSpeed);
-  m_intakeState = true;
 }
 
 // sets the motor to outaking - also used for tiped over cone intaking 
 public void outake(){
   intakeMotor.set(Constants.Intake.kOutakeSpeed);
-  m_intakeState = false;
 }
 
 // returns the current of the motor 

@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
@@ -12,7 +11,8 @@ import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
-
+import java.util.function.DoubleSupplier;
+import org.photonvision.PhotonCamera;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
@@ -29,10 +29,14 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.lockMode.Lock;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.Arm.armPosition;
+import frc.robot.subsystems.camera.Camera;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.RoboState;
+import frc.robot.subsystems.localization.Localizer;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -46,23 +50,29 @@ public class RobotContainer {
   // The robot's subsystems
   private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
+  private Lock lockMode;
   private final Intake intake = new Intake();
+  private final Camera camera = new Camera("Slotheye");
+  private final  RoboState roboCon = new RoboState();
   private final Arm m_arm = new Arm();
-  // CANSparkMax leftArmMotor = new CANSparkMax(10, MotorType.kBrushless);
-
-  //   CANSparkMax ElbowMotor = new CANSparkMax(11, MotorType.kBrushless);
+  private final Localizer m_localizer;
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   XboxController m_operatorController = new XboxController(OIConstants.kOperatorControllerPort);
 
+  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
+  public RobotContainer(Localizer localizer) {
+     
+    m_localizer = localizer;
+   
+   
     // Configure the trigger bindings
     configureDriverBindings(); 
     configureOpperatorBindings();   
   }
-
+  
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -73,6 +83,22 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureDriverBindings() {
+
+    
+
+    //Some adjustments made for lock on mode
+    DoubleSupplier moveForward =  () -> MathUtil.applyDeadband(
+      -m_driverController.getLeftY(), 0.06); // 0.1 might be better?
+     DoubleSupplier moveSideways = () -> MathUtil.applyDeadband(
+      -m_driverController.getLeftX(), 0.06); // 0.1 might be better?
+  
+    lockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
+
+    //sends the movement information to RoboCon method in RoboState
+    roboCon.drive(moveForward, moveSideways); 
+    
+    //Enters Lock-on mode
+     new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(lockMode);
     
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -104,9 +130,11 @@ public class RobotContainer {
             m_robotDrive.zeroHeading();
           }
 
-          if(m_driverController.getRightStickButtonPressed()){
-            m_robotDrive.setX();
-          }
+    if(m_driverController.getRightStickButtonPressed()){
+      m_robotDrive.setX();
+    }
+
+          //Make sure that all buttons are unique
 
     /*
      * ---Toggle button that switches the state of the robot - between cone or cube state

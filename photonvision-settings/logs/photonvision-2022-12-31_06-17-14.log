@@ -1,0 +1,124 @@
+[2022-12-31 18:17:18] [General - Main] [INFO] Native libraries loaded.
+[2022-12-31 18:17:19] [Camera - LibCameraJNI] [INFO] Successfully loaded libpicam shared object
+[2022-12-31 18:17:19] [General - Main] [INFO] Logging initialized in debug mode.
+[2022-12-31 18:17:19] [General - ShellExec] [DEBUG] Executing "id -u"
+[2022-12-31 18:17:19] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:19] [General - ShellExec] [DEBUG] Executing "cat /proc/device-tree/model"
+[2022-12-31 18:17:19] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:19] [General - Main] [INFO] Starting PhotonVision version v2023.1.2 on Linux Raspbian 64-bit (Pi PI_3)
+[2022-12-31 18:17:19] [General - ConfigManager] [INFO] Loading settings...
+[2022-12-31 18:17:19] [General - ConfigManager] [INFO] Hardware config does not exist! Loading defaults
+[2022-12-31 18:17:21] [Camera - CameraConfiguration] [DEBUG] Creating camera configuration for ZeroCopyPicam unicam (AKA Slotheye) at /dev/video0
+[2022-12-31 18:17:21] [General - NetworkTablesManager] [INFO] Starting NT Client
+[2022-12-31 18:17:22] [General - NetworkTablesManager] [ERROR] [NetworkTablesManager] Could not connect to the robot! Will retry in the background...
+[2022-12-31 18:17:22] [General - NetworkManager] [INFO] Setting DHCP with team team 8874
+[2022-12-31 18:17:22] [General - ShellExec] [DEBUG] Executing "cat /etc/hostname | tr -d " \t\n\r""
+[2022-12-31 18:17:22] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:22] [General - ShellExec] [DEBUG] Executing "echo photonvision > /etc/hostname"
+[2022-12-31 18:17:22] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:22] [General - ShellExec] [DEBUG] Executing "hostnamectl set-hostname photonvision"
+[2022-12-31 18:17:22] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:22] [General - ShellExec] [DEBUG] Executing "sed -i "s/127.0.1.1.*photonvision/127.0.1.1\tphotonvision/g" /etc/hosts"
+[2022-12-31 18:17:22] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:22] [General - ShellExec] [DEBUG] Executing "sudo service avahi-daemon restart"
+[2022-12-31 18:17:22] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 18:17:23] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:17:23] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:23] [General - NetworkManager] [INFO] Set hostname to photonvision
+[2022-12-31 18:17:23] [General - ShellExec] [DEBUG] Executing "dhclient eth0"
+[2022-12-31 18:17:23] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:23] [Camera - VisionSourceManager] [DEBUG] Matching 1 new cameras!
+[2022-12-31 18:17:23] [Camera - VisionSourceManager] [INFO] Adding local video device - "unicam" at "/dev/video0"
+[2022-12-31 18:17:23] [Camera - VisionSourceManager] [DEBUG] Trying to find a match for loaded camera unicam with path /dev/video0
+[2022-12-31 18:17:23] [Camera - VisionSourceManager] [DEBUG] Matched the config for unicam to a physical camera!
+[2022-12-31 18:17:23] [Camera - VisionSourceManager] [DEBUG] After matching loaded configs 0 cameras were unmatched.
+[2022-12-31 18:17:23] [Camera - VisionSourceManager] [DEBUG] Matched or created 1 camera configs!
+[2022-12-31 18:17:24] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 18:17:26] [WebServer - DataChangeService] [DEBUG] Added subscriber - Sources: DCS_WEBSOCKET, DCS_HTTP, DCS_NETWORKTABLES, DCS_VISIONMODULE, DCS_OTHER, Destinations: DCD_UI
+[2022-12-31 18:17:26] [WebServer - DataChangeService] [DEBUG] Added subscriber - Sources: DCS_WEBSOCKET, Destinations: DCD_GENSETTINGS
+[2022-12-31 18:17:30] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 18:17:31] [Camera - VisionSourceManager] [DEBUG] Matched config for camera "AcceleratedPicamFrameProvider" and loaded 1 pipelines
+[2022-12-31 18:17:31] [Camera - VisionSourceManager] [INFO] Adding 1 configs to VMM.
+[2022-12-31 18:17:31] [WebServer - DataChangeService] [DEBUG] Added subscriber - Sources: DCS_WEBSOCKET, DCS_HTTP, DCS_NETWORKTABLES, DCS_VISIONMODULE, DCS_OTHER, Destinations: DCD_ACTIVEMODULE, DCD_ACTIVEPIPELINESETTINGS, DCD_GENSETTINGS, DCD_UI, DCD_OTHER
+[2022-12-31 18:17:32] [Camera - SocketVideoStreamManager] [DEBUG] Added new stream for port 1181
+[2022-12-31 18:17:32] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:17:32] [Camera - SocketVideoStreamManager] [DEBUG] Added new stream for port 1182
+[2022-12-31 18:17:32] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:17:32] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:17:32] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:17:32] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 0
+[2022-12-31 18:17:32] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: New Pipeline
+[2022-12-31 18:17:32] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 18:17:32] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:17:32] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 18:17:33] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 18:17:33] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 18:17:34] [General - NTDataPublisher] [DEBUG] Pipeline index is already 0
+[2022-12-31 18:17:34] [General - NTDataPublisher] [DEBUG] Driver mode is already false
+[2022-12-31 18:17:34] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 18:17:35] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 18:17:40] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:17:40] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:17:40] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:17:42] [WebServer - DataSocketHandler] [INFO] New websocket connection from /10.88.74.152:64410
+[2022-12-31 18:17:44] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 139.85905ms
+[2022-12-31 18:17:47] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:17:47] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:17:47] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:17:47] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:17:48] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:17:48] [WebServer - DataSocketHandler] [INFO] New websocket connection from /10.88.74.185:64616
+[2022-12-31 18:17:48] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.185 in 10.034427ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 55.145416ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 64.34386ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 33.84432ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 41.063488ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 113.840935ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 89.16776ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 41.525ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 129.21385ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 113.30406ms
+[2022-12-31 18:17:58] [WebServer - DataSocketHandler] [INFO] New websocket connection from /10.88.74.152:64489
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 22.989271ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 26.158228ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 20.290783ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 29.232449ms
+[2022-12-31 18:17:58] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 32.6675ms
+[2022-12-31 18:18:02] [VisionModule - VisionModuleChangeSubscriber - Slotheye] [DEBUG] Skipping pipeline change, index 0 already active
+[2022-12-31 18:18:41] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 13.253333ms
+[2022-12-31 18:18:41] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 57.799637ms
+[2022-12-31 18:18:41] [WebServer - DataSocketHandler] [INFO] Closing websocket connection from /10.88.74.152:64489 for reason: Connection closed by client
+[2022-12-31 18:18:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 107.44016ms
+[2022-12-31 18:18:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 104.93739ms
+[2022-12-31 18:18:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 111.816826ms
+[2022-12-31 18:18:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 120.24562ms
+[2022-12-31 18:18:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 95.31422ms
+[2022-12-31 18:18:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 94.54302ms
+[2022-12-31 18:18:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 74.83432ms
+[2022-12-31 18:18:42] [WebServer - DataSocketHandler] [INFO] New websocket connection from /10.88.74.152:57842
+[2022-12-31 18:18:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 33.959167ms
+[2022-12-31 18:18:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 42.120884ms
+[2022-12-31 18:18:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 44.36495ms
+[2022-12-31 18:18:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 20.112083ms
+[2022-12-31 18:18:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 10.927031ms
+[2022-12-31 18:18:55] [VisionModule - VisionModuleChangeSubscriber - Slotheye] [DEBUG] Skipping pipeline change, index 0 already active
+[2022-12-31 18:18:59] [WebServer - DataSocketHandler] [INFO] Closing websocket connection from /10.88.74.152:57842 for reason: Connection closed by client
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 10.865833ms
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 55.78943ms
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 34.781353ms
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 40.219845ms
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 58.6112ms
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 31.362083ms
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 31.311617ms
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 73.592445ms
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 40.447914ms
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 32.726147ms
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 27.148228ms
+[2022-12-31 18:18:59] [WebServer - DataSocketHandler] [INFO] New websocket connection from /10.88.74.152:58032
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 27.548227ms
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 22.241198ms
+[2022-12-31 18:18:59] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.88.74.152 in 38.27281ms
+[2022-12-31 18:19:43] [General - ShellExec] [DEBUG] Executing "systemctl restart photonvision.service"
+[2022-12-31 18:19:43] [WebServer - Server] [DEBUG] Handled HTTP POST request from 10.88.74.185 in 9.219844ms
+[2022-12-31 18:19:43] [General - ShellExec] [DEBUG] Got exit code 143
+[2022-12-31 18:19:43] [General - HardwareManager] [INFO] Shutting down LEDs...

@@ -1,7 +1,7 @@
 {
   "HALProvider": {
     "Other Devices": {
-      "ADIS16470[0]": {
+      "SPARK MAX [6]": {
         "header": {
           "open": true
         }
@@ -10,17 +10,16 @@
   },
   "NTProvider": {
     "types": {
-      "/FMSInfo": "FMSInfo"
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/DriveSubsystem/Field 2d": "Field2d",
+      "/LiveWindow/DriveSubsystem/Gyro": "Gyro",
+      "/LiveWindow/Ungrouped/PIDController[1]": "PIDController",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
     }
   },
   "NetworkTables": {
-    "transitory": {
-      "SmartDashboard": {
-        "open": true
-      }
+    "Persistent Values": {
+      "open": false
     }
-  },
-  "NetworkTables View": {
-    "visible": false
   }
 }

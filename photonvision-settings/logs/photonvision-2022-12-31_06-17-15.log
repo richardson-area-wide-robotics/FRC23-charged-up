@@ -1,0 +1,802 @@
+[2022-12-31 18:17:19] [General - Main] [INFO] Native libraries loaded.
+[2022-12-31 18:17:19] [Camera - LibCameraJNI] [INFO] Successfully loaded libpicam shared object
+[2022-12-31 18:17:19] [General - Main] [INFO] Logging initialized in debug mode.
+[2022-12-31 18:17:19] [General - ShellExec] [DEBUG] Executing "id -u"
+[2022-12-31 18:17:20] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:20] [General - ShellExec] [DEBUG] Executing "cat /proc/device-tree/model"
+[2022-12-31 18:17:20] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:20] [General - Main] [INFO] Starting PhotonVision version v2023.1.2 on Linux Raspbian 64-bit (Pi UNKNOWN)
+[2022-12-31 18:17:20] [General - ConfigManager] [INFO] Loading settings...
+[2022-12-31 18:17:20] [General - ConfigManager] [INFO] Hardware config does not exist! Loading defaults
+[2022-12-31 18:17:22] [Camera - CameraConfiguration] [DEBUG] Creating camera configuration for ZeroCopyPicam unicam (AKA Slotheye) at /dev/video0
+[2022-12-31 18:17:23] [General - NetworkTablesManager] [INFO] Starting NT Client
+[2022-12-31 18:17:23] [General - NetworkTablesManager] [ERROR] [NetworkTablesManager] Could not connect to the robot! Will retry in the background...
+[2022-12-31 18:17:23] [General - NetworkManager] [INFO] Setting DHCP with team team 1745
+[2022-12-31 18:17:23] [General - ShellExec] [DEBUG] Executing "cat /etc/hostname | tr -d " \t\n\r""
+[2022-12-31 18:17:23] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:23] [General - ShellExec] [DEBUG] Executing "echo photonvision > /etc/hostname"
+[2022-12-31 18:17:23] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:23] [General - ShellExec] [DEBUG] Executing "hostnamectl set-hostname photonvision"
+[2022-12-31 18:17:23] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:23] [General - ShellExec] [DEBUG] Executing "sed -i "s/127.0.1.1.*photonvision/127.0.1.1\tphotonvision/g" /etc/hosts"
+[2022-12-31 18:17:23] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:23] [General - ShellExec] [DEBUG] Executing "sudo service avahi-daemon restart"
+[2022-12-31 18:17:24] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:24] [General - NetworkManager] [INFO] Set hostname to photonvision
+[2022-12-31 18:17:24] [General - ShellExec] [DEBUG] Executing "dhclient eth0"
+[2022-12-31 18:17:24] [General - ShellExec] [DEBUG] Got exit code 0
+[2022-12-31 18:17:24] [Camera - VisionSourceManager] [DEBUG] Matching 1 new cameras!
+[2022-12-31 18:17:24] [Camera - VisionSourceManager] [INFO] Adding local video device - "unicam" at "/dev/video0"
+[2022-12-31 18:17:24] [Camera - VisionSourceManager] [DEBUG] Trying to find a match for loaded camera unicam with path /dev/video0
+[2022-12-31 18:17:24] [Camera - VisionSourceManager] [DEBUG] Matched the config for unicam to a physical camera!
+[2022-12-31 18:17:24] [Camera - VisionSourceManager] [DEBUG] After matching loaded configs 0 cameras were unmatched.
+[2022-12-31 18:17:24] [Camera - VisionSourceManager] [DEBUG] Matched or created 1 camera configs!
+[2022-12-31 18:17:24] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 18:17:25] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:17:26] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 18:17:27] [WebServer - DataChangeService] [DEBUG] Added subscriber - Sources: DCS_WEBSOCKET, DCS_HTTP, DCS_NETWORKTABLES, DCS_VISIONMODULE, DCS_OTHER, Destinations: DCD_UI
+[2022-12-31 18:17:27] [WebServer - DataChangeService] [DEBUG] Added subscriber - Sources: DCS_WEBSOCKET, Destinations: DCD_GENSETTINGS
+[2022-12-31 18:17:31] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 90 Width: 320 Height: 240 Pixel Format: kUnknown
+[2022-12-31 18:17:32] [Camera - VisionSourceManager] [DEBUG] Matched config for camera "AcceleratedPicamFrameProvider" and loaded 3 pipelines
+[2022-12-31 18:17:32] [Camera - VisionSourceManager] [INFO] Adding 1 configs to VMM.
+[2022-12-31 18:17:32] [WebServer - DataChangeService] [DEBUG] Added subscriber - Sources: DCS_WEBSOCKET, DCS_HTTP, DCS_NETWORKTABLES, DCS_VISIONMODULE, DCS_OTHER, Destinations: DCD_ACTIVEMODULE, DCD_ACTIVEPIPELINESETTINGS, DCD_GENSETTINGS, DCD_UI, DCD_OTHER
+[2022-12-31 18:17:33] [Camera - SocketVideoStreamManager] [DEBUG] Added new stream for port 1181
+[2022-12-31 18:17:33] [Camera - SocketVideoStreamManager] [DEBUG] Added new stream for port 1182
+[2022-12-31 18:17:33] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:17:34] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:17:34] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:17:34] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:17:34] [VisionModule - VisionModule - Slotheye] [INFO] Setting pipeline to 0
+[2022-12-31 18:17:34] [VisionModule - VisionModule - Slotheye] [INFO] Pipeline name: Cone
+[2022-12-31 18:17:34] [VisionModule - PipelineManager] [DEBUG] Creating ColoredShape pipeline
+[2022-12-31 18:17:34] [VisionModule - VisionSourceSettables] [INFO] Setting video mode to FPS: 45 Width: 960 Height: 720 Pixel Format: kUnknown
+[2022-12-31 18:17:34] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 18:17:35] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 18:17:36] [General - ConfigManager] [DEBUG] Saving to disk...
+[2022-12-31 18:17:36] [General - NTDataPublisher] [DEBUG] Pipeline index is already 0
+[2022-12-31 18:17:36] [General - NTDataPublisher] [DEBUG] Driver mode is already false
+[2022-12-31 18:17:37] [General - ConfigManager] [INFO] Settings saved!
+[2022-12-31 18:18:11] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:18:11] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:18:14] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:18:21] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:18:21] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:18:27] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:18:27] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:18:29] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:18:31] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:18:31] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:18:36] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:18:36] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:18:39] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:18:40] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:18:40] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:18:45] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:18:45] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:18:47] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:18:49] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:18:49] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:18:55] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:18:55] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:18:57] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:18:58] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:18:58] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:04] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:04] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:06] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:19:07] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:07] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:12] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:12] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:14] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:19:15] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:15] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:21] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:21] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:24] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:19:25] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:25] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:30] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:30] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:32] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:19:33] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:33] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:39] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:39] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:41] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:19:42] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:42] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:48] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:48] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:50] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:19:51] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:51] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:57] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:19:57] [General - ScriptManager] [INFO] Queued event: kNTConnected
+[2022-12-31 18:19:59] [General - NetworkTablesManager] [ERROR] NT Connection has failed! Will retry in background.
+[2022-12-31 18:20:00] [General - NetworkTablesManager] [INFO] NT Connected!
+[2022-12-31 18:23:41] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 99.226456ms
+[2022-12-31 18:23:41] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 272.85168ms
+[2022-12-31 18:23:41] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 81.96578ms
+[2022-12-31 18:23:41] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 107.31411ms
+[2022-12-31 18:23:41] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 295.49246ms
+[2022-12-31 18:23:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 479.77927ms
+[2022-12-31 18:23:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 983.1118ms
+[2022-12-31 18:23:42] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 1157.7739ms
+[2022-12-31 18:23:45] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 3453.732ms
+[2022-12-31 18:23:45] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 76.10792ms
+[2022-12-31 18:23:45] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 199.63713ms
+[2022-12-31 18:23:45] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 125.00037ms
+[2022-12-31 18:23:45] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 241.29494ms
+[2022-12-31 18:23:46] [WebServer - DataSocketHandler] [INFO] New websocket connection from /10.17.45.206:62067
+[2022-12-31 18:23:46] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 926.5157ms
+[2022-12-31 18:23:48] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 23.037865ms
+[2022-12-31 18:23:49] [WebServer - Server] [DEBUG] Handled HTTP GET request from 10.17.45.206 in 77.683334ms
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:08] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:09] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:09] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:09] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:09] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:09] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:09] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:09] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:09] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:10] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:11] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:12] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:13] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:14] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:16] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:16] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:16] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:16] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:16] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:16] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:16] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:16] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:16] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:16] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:20] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:21] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:22] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:23] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:24] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:25] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:25] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:25] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:25] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:25] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:25] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:25] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:25] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:25] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:25] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:27] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:28] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:29] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:30] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:30] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:30] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:30] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:31] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:32] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:32] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:32] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:32] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:32] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:32] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:32] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:32] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:32] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:32] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:32] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:32] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:33] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:34] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:35] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:36] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:37] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:38] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:39] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:40] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:41] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:42] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:43] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:44] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:44] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:44] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:44] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:44] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:44] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0
+[2022-12-31 18:26:44] [VisionModule - Draw3dTargetsPipe] [ERROR] Convex hull is empty?
+[2022-12-31 18:26:44] [VisionModule - Draw3dTargetsPipe] [DEBUG] Orig. Convex Hull: 0x0

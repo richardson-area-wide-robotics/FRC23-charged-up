@@ -136,7 +136,7 @@ public class RobotContainer {
           //Make sure that all buttons are unique
 
     /*
-     * ---Toggle button that switches the state of the robot - between cone or cube state
+     * ---Toggle buttons
      * Top Right botton on the back of Xbox controller controls the toggle between cone and intake state - P1
      */
 

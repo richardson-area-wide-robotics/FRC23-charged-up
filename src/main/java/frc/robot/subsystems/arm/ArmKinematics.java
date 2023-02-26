@@ -8,6 +8,8 @@ import edu.wpi.first.math.geometry.Translation2d;
 public class ArmKinematics {
     private final double shoulderLength;
     private final double elbowLength;
+    private double shoulderAngle;
+    private double elbowAngle;
 
     public ArmKinematics(double shoulderLength, double elbowLength) {
         this.shoulderLength = shoulderLength;
@@ -21,11 +23,17 @@ public class ArmKinematics {
      * @param elbowAngle the angle of the elbow joint. [rad]
      * @return the position of the end effector. ([m, [m])
      */
-    public Translation2d forwardKinematics(double shoulderAngle, double elbowAngle) {
-        double theta = elbowAngle + shoulderAngle - Math.PI / 2;
-        double x = shoulderLength * Math.cos(shoulderAngle) + elbowLength * Math.sin(theta);
-        double y = shoulderLength * Math.sin(shoulderAngle) + elbowLength * Math.cos(theta);
-        return new Translation2d(x, y);
+    public double forwardXKinematics(double shoulderAngle, double elbowAngle) {
+        double theta = elbowAngle + shoulderAngle;
+        double x = shoulderLength * Math.cos(shoulderAngle) + elbowLength * Math.cos(theta);
+        double y = shoulderLength * Math.sin(shoulderAngle) + elbowLength * Math.sin(theta);
+        return x;
+    }
+    public double forwardYKinematics(double shoulderAngle, double elbowAngle) {
+        double theta = elbowAngle + shoulderAngle;
+        double x = shoulderLength * Math.cos(shoulderAngle) + elbowLength * Math.cos(theta);
+        double y = shoulderLength * Math.sin(shoulderAngle) + elbowLength * Math.sin(theta);
+        return y;
     }
 
     /**
@@ -49,9 +57,22 @@ public class ArmKinematics {
         if (x > 0) {
             psi = -psi;
             theta = -theta;
-        }
+        } 
+        shoulderAngle = psi;
+        elbowAngle = theta;
+
         return new InverseKinematicsSolution(psi, theta);
     }
+
+    public double getShoulderAngle(){
+        return shoulderAngle;
+    }
+
+    public double getElbowAngle(){
+        return elbowAngle;
+    }
+
+
 
     /**
      * A class representing the solution of the inverse kinematics.

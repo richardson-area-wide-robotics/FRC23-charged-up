@@ -4,9 +4,14 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax.IdleMode;
+
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.arm.ArmKinematics;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -18,6 +23,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+  private ArmKinematics mArmKinematics;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -28,6 +34,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    mArmKinematics = new ArmKinematics(0.559, 0.652);
   }
 
   /**
@@ -48,10 +55,29 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    m_robotContainer.getIdleMode(IdleMode.kCoast);
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    SmartDashboard.putNumber("Arm encoder", m_robotContainer.getSparkMax());
+    SmartDashboard.putNumber("encoder elbow", m_robotContainer.getElbowSparkMax());
+
+    // SmartDashboard.putNumber("Arm relative encoder", m_robotContainer.getnormalSparkMax());
+    // SmartDashboard.putNumber("encoder relative elbow", m_robotContainer.getnormalElbowSparkMax());
+
+    double x = mArmKinematics.forwardXKinematics(m_robotContainer.getSparkMax(), m_robotContainer.getElbowSparkMax());
+    double y = mArmKinematics.forwardYKinematics(m_robotContainer.getSparkMax(), m_robotContainer.getElbowSparkMax());
+
+    mArmKinematics.inverseKinematics(x, y);
+
+    SmartDashboard.putNumber("Kinematics X", Units.metersToInches(x));
+    SmartDashboard.putNumber("Kinematics y", Units.metersToInches(y));
+
+    SmartDashboard.putNumber("Inverse Kinematics Shoulder angle", Units.radiansToDegrees(mArmKinematics.getShoulderAngle()));
+    SmartDashboard.putNumber("Inverse Kinematics Elbow angle", Units.radiansToDegrees(mArmKinematics.getElbowAngle()));
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
@@ -69,6 +95,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    m_robotContainer.getIdleMode(IdleMode.kBrake);
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -80,7 +107,10 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    SmartDashboard.putNumber("Arm encoder", m_robotContainer.getSparkMax());
+    SmartDashboard.putNumber("encoder elbow", m_robotContainer.getElbowSparkMax());
+  }
 
   @Override
   public void testInit() {

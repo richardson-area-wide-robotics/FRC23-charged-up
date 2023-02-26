@@ -23,9 +23,4 @@ public class ElbowPosition extends CommandBase {
     public boolean isFinished() {
         return arm.getElbowAbsoluteEncoder() >= position - .1 && arm.getElbowAbsoluteEncoder() <= position + .1;
     }
-    
-    @Override
-    public void end(boolean interrupted) {
-        arm.setElbowPower(0);
-    }
 }

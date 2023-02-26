@@ -40,13 +40,13 @@ public void idle() {
 }
 
 // sets the motor to intake
-public void intake(){
-  intakeMotor.set(Constants.Intake.kIntakeSpeed);
+public void intake(double speed){
+  intakeMotor.set(speed);
 }
 
 // sets the motor to outaking - also used for tiped over cone intaking 
-public void outake(){
-  intakeMotor.set(Constants.Intake.kOutakeSpeed);
+public void outake(double speed){
+  intakeMotor.set(speed);
 }
 
 // returns the current of the motor 

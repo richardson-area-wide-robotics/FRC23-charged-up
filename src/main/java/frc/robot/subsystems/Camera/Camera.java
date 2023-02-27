@@ -6,7 +6,12 @@ package frc.robot.subsystems.camera;
 
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import java.lang.StackWalker.Option;
+import java.util.Optional;
+
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
@@ -16,8 +21,13 @@ public class Camera extends SubsystemBase {
   PhotonCamera camera;
 
   public Camera(String name) {
-    this.camera = new PhotonCamera(name);
+    try {
+      this.camera = new PhotonCamera(name);
+    } catch (Exception notDetectedException) {
+      SmartDashboard.putString("Error", "Camera Not Found");
+    }
   }
+
 
   @Override
   public void periodic() {}

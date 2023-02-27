@@ -7,10 +7,14 @@ package frc.robot;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ArmFeedforward;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.controller.PIDGains;
 import frc.lib.util.SwerveModuleConstants;
 
@@ -22,17 +26,21 @@ import frc.lib.util.SwerveModuleConstants;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
+
 public final class Constants {
+
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;
     public static final double kControllerDeadband = 0.1;
+    
   }
   public static final class SwerveDriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
     public static final double kMaxSpeedMetersPerSecond = 4.8;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
+
 
     /*
      * Chassis configuration
@@ -156,6 +164,12 @@ public final class Constants {
     public static final double kTurningMinOutput = -1.0;
     public static final double kTurningMaxOutput = 1.0;
 
+    
+    public static final PIDGains kVisionTurningPIDGains =
+        new PIDGains(1.0, 0, 0.01); // TODO: tune values for Vision auto-turning
+
+    public static final double MAX_LOCKED_ON_SPEED = 0.33;
+    
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
@@ -179,56 +193,150 @@ public final class Constants {
   }
   
   public static final class Intake {
-    public static final float kRLimit  = -4.0f;
-    public static final float kFLimit = 0.0f;
-    public static final double kForwardSpeed = 0.7;
-    public static final double kReverseSpeed = -1.0;
     public static final boolean kIntakeInverted = true;
-    public static final int kIntakeID = 11;
+    public static final int kIntakeID = 12;
     public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
-    public static final int kIntakeCurrentLimit = 40; // amps
-    public static final double kIntakeOffset = 0.0; // TODO: set offset
-    public static final Double kIntakeOpen = -3.5;
-    public static final Double kIntakeClosed = -1.4;
-    public static final PIDGains kIntakePIDGains = new PIDGains(0.1, 0.0, 0.0);
-    public static final double kMinOutput = -1.0;
-    public static final double kMaxOutput = 1.0;
+    public static final int kIntakeCurrentLimit = 60; // amps
+	  public static final double kIntakeSpeed = 1.0;
+    public static final double kOutakeSpeed = -1.0;
+    public static final double kConeIdleSpeed = 0.1;
+    public static final double kCubeIdleSpeed = -0.1;
   }
    public static final class ArmConstants {
     // Arm limits
-    public final static float REVERSE_LIMIT = 0.0f;
-    public final static float FORWARD_LIMIT = 43.5f;
-    public final static double REVERSE_SPEED = 0.5;
-    public final static double FORWARD_SPEED = 0.5;
+    public final static float ARM_REVERSE_LIMIT = 34.0f;
+    public final static float ARM_FORWARD_LIMIT = 0.0f;
+    public final static double ARM_REVERSE_SPEED = 0.5;
+    public final static double ARM_FORWARD_SPEED = 0.5;
 
-    // doubles for arm positions
-    public final static double INTAKE_ARM_GROUND = 0.0;
-    public final static double INTAKE_ARM_SHELF = 0.0;
-    public final static double SCORING_ARM_LOW = 0.0;
-    public final static double SCORING_ARM_MID = 0.0;
-    public static final Double INTAKE_ARM_STOWED = 0.0;
+    // Elbow limits // TODO: tune these values 
+    public final static float ELBOW_REVERSE_LIMIT = 0.0f;
+    public final static float ELBOW_FORWARD_LIMIT = 0.0f;
+    public final static double ELBOW_REVERSE_SPEED = 0.5;
+    public final static double ELBOW_FORWARD_SPEED = 0.5;
 
     /* Spark max constants */ 
     // CAN ID
     public final static int LEFT_MOTOR_CAN_ID = 9;
     public final static int RIGHT_MOTOR_CAN_ID = 10;
-    public static final boolean RIGHT_MOTOR_INVERTED = false;
-    public static final boolean LEFT_MOTOR_INVERTED = true; 
-    public static final double kArmEncoderPositionFactor = 0.0;
-    public static final double kArmEncoderVelocityFactor = 0.0;
-    public static final IdleMode kArmMotorIdleMode = IdleMode.kBrake;
+    public final static int ELBOW_MOTOR_CAN_ID = 11;
+
+    // Motor directions 
+    public static final boolean RIGHT_ARMMOTOR_INVERTED = false;
+    public static final boolean LEFT_ARMMOTOR_INVERTED = true; 
+    public static final boolean ELBOW_MOTOR_INVERTED = true;
+
+    // Absolute encoder conversions 
+    public static final double kArmEncoderPositionFactor = 2 * Math.PI;
+    public static final double kArmEncoderVelocityFactor = (2 * Math.PI) / 60.0;
+
+    public static final double kElbowEncoderPositionFactor = 2 * Math.PI;
+    public static final double kElbowEncoderVelocityFactor = (2 * Math.PI) / 60.0;
+
+    // Idle mode
+    public static final IdleMode kMotorIdleMode = IdleMode.kBrake; 
+
+    // Current limits 
     public static final int kArmMotorCurrentLimit = 40;
-    public static final int kMovingArmMotorCurrentLimit = 60;  
+    public static final int kMovingArmMotorCurrentLimit = 60;
+    public static final int kElbowMotorCurrentLimit = 60;
 
     // PID constants using custom PID gains class //TODO: tune PID values
-    public static final PIDGains ARM_PID_GAINS = new PIDGains(1.0, 0.0, 0.0);
+    public static final PIDGains ARM_PID_GAINS = new PIDGains(3.0, 0.0, 0.0);
+    public static final ArmFeedforward ARM_MOTOR_FEEDFORWARD = new ArmFeedforward(0.0,0.72,1.56, 0.08);
     public static final double ARM_FF = 0.0;
-    public static final double ARM_MIN_OUTPUT = -1.0;
-    public static final double ARM_MAX_OUTPUT = 1.0;
+    public static final PIDGains ELBOW_PID_GAINS = new PIDGains(1.6, 0.0, 0.45);
+    public static final ArmFeedforward ELBOW_MOTOR_FEEDFORWARD = new ArmFeedforward(0.0,0.77,0.7,0.04);
+    public static final double ELBOW_FF = 0.0;
+    public static final double MIN_OUTPUT = -1.0;
+    public static final double MAX_OUTPUT = 1.0;
     
+    // Encoder offsets - radians 
     public static final double ARM_ENCODER_OFFSET = 0;
-  
+    public static final double ELBOW_ENCODER_OFFSET = 0;
 
+    public static final double ARM_STOWED = .55;
+    public static final double ELBOW_STOWED = .79;
+    public static final double ARM_PICK_UP_TCONE = .3455;//.35
+    public static final double ELBOW_PICK_UP_TCONE = .529;//.13
+    public static final double ARM_PICK_UP_CONE = 0.1658;
+    public static final double ELBOW_PICK_UP_CONE = 0.29;//0.416
+    public static final double ARM_PICK_UP_CUBE = 0.325;
+    public static final double ELBOW_PICK_UP_CUBE = 0.56;
+    public static final double ARM_SCORE_CUBE_LOW = 0.166;
+    public static final double ELBOW_SCORE_CUBE_LOW = 0.4;
+    public static final double ARM_SCORE_CONE_LOW = 0.172;
+    public static final double ARM_SCORE_CONE_MID = 0.7345;
+    public static final double ELBOW_SCORE_CONE_LOW = 0.356;
+    public static final double ELBOW_SCORE_CONE_MID = 0.54;
+    public static final double ARM_SCORE_CUBE_MID = 0.71;
+    public static final double ELBOW_SCORE_CUBE_MID = 0.53;
+    public static final double ARM_SCORE_CONE_HIGH = 0.0185;
+    public static final double ELBOW_SCORE_CONE_HIGH = 0.29;
+    public static final double ARM_SCORE_CUBE_HIGH = 0.2;
+    public static final double ELBOW_SCORE_CUBE_HIGH = 0.62;
+    public static final double ELBOW_IDLE = .83;
+    public static final double ARM_PICK_UP_SHELF = 0.445;
+    public static final double ELBOW_PICK_UP_SHELF = 0.83;
+    // public static final double ARM_STOWED = .55;
+    // public static final double ELBOW_STOWED = .92;
+    // public static final double ARM_PICK_UP_TCONE = .3455;//.35
+    // public static final double ELBOW_PICK_UP_TCONE = .67;//.13
+    // public static final double ARM_PICK_UP_CONE = 0.163;
+    // public static final double ELBOW_PICK_UP_CONE = 0.42;//0.416
+    // public static final double ARM_PICK_UP_CUBE = 0.395;
+    // public static final double ELBOW_PICK_UP_CUBE = 0.79;
+    // public static final double ARM_SCORE_CUBE_LOW = 0.166;
+    // public static final double ELBOW_SCORE_CUBE_LOW = 0.4;
+    // public static final double ARM_SCORE_CONE_LOW = 0.172;
+    // public static final double ARM_SCORE_CONE_MID = 0.0175;
+    // public static final double ELBOW_SCORE_CONE_LOW = 0.356;
+    // public static final double ELBOW_SCORE_CONE_MID = 0.35;
+    // public static final double ARM_SCORE_CUBE_MID = 0.029;
+    // public static final double ELBOW_SCORE_CUBE_MID = 0.33;
+    // public static final double ARM_SCORE_CONE_HIGH = 0.024;
+    // public static final double ELBOW_SCORE_CONE_HIGH = 0.445;
+    // public static final double ARM_SCORE_CUBE_HIGH = 0.043;
+    // public static final double ELBOW_SCORE_CUBE_HIGH = 0.49;
+    // public static final double ELBOW_IDLE = .95;
+    // public static final double ARM_PICK_UP_SHELF = 0.49;
+    // public static final double ELBOW_PICK_UP_SHELF = 0.995;
+    // public static final double ARM_IDLE = 0.3;
   }
 public static final boolean kCompetitionMode = false;
+
+  // public void putNumber(){
+  //   SmartDashboard.putNumber("stowed elbow", ArmConstants.ELBOW_STOWED);
+  //   SmartDashboard.putNumber("pick up Tcone", ArmConstants.ELBOW_PICK_UP_TCONE);
+  //   SmartDashboard.putNumber("pick up cone", ArmConstants.ELBOW_PICK_UP_CONE);
+  //   SmartDashboard.putNumber("score cone low", ArmConstants.ELBOW_SCORE_CONE_LOW);
+  //   SmartDashboard.putNumber("score cone mid", ArmConstants.ELBOW_SCORE_CONE_MID);
+  //   SmartDashboard.putNumber("score cone high", ArmConstants.ELBOW_SCORE_CONE_HIGH);
+  //   SmartDashboard.putNumber("score cube low", ArmConstants.ELBOW_SCORE_CUBE_LOW);
+  //   SmartDashboard.putNumber("score cube mid", ArmConstants.ELBOW_SCORE_CUBE_MID);
+  //   SmartDashboard.putNumber("score cube high", ArmConstants.ELBOW_SCORE_CUBE_HIGH);
+  // }
+
+  // @Override public void periodic() {
+  //   SmartDashboard.getNumber("stowed elbow", ArmConstants.ELBOW_STOWED);
+  //   SmartDashboard.getNumber("pick up Tcone", ArmConstants.ELBOW_PICK_UP_TCONE);
+  //   SmartDashboard.getNumber("pick up cone", ArmConstants.ELBOW_PICK_UP_CONE);
+  //   SmartDashboard.getNumber("score cone low", ArmConstants.ELBOW_SCORE_CONE_LOW);
+  //   SmartDashboard.getNumber("score cone mid", ArmConstants.ELBOW_SCORE_CONE_MID);
+  //   SmartDashboard.getNumber("score cone high", ArmConstants.ELBOW_SCORE_CONE_HIGH);
+  //   SmartDashboard.getNumber("score cube low", ArmConstants.ELBOW_SCORE_CUBE_LOW);
+  //   SmartDashboard.getNumber("score cube mid", ArmConstants.ELBOW_SCORE_CUBE_MID);
+  //   SmartDashboard.getNumber("score cube high", ArmConstants.ELBOW_SCORE_CUBE_HIGH);
+
+  // }
+
+  public static final class Localizer {
+    public static final double TARGET_SIZE_METERS = 0.0;
+    public static final double FX_PIXELS = 0.0;
+    public static final double FY_PIXELS = 0.0;
+    public static final double CX_PIXELS = 0.0;
+    public static final double CY_PIXELS = 0.0;
+  }
+
+
 }

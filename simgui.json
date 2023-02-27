@@ -1,0 +1,25 @@
+{
+  "HALProvider": {
+    "Other Devices": {
+      "SPARK MAX [6]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/DriveSubsystem/Field 2d": "Field2d",
+      "/LiveWindow/DriveSubsystem/Gyro": "Gyro",
+      "/LiveWindow/Ungrouped/PIDController[1]": "PIDController",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+    }
+  },
+  "NetworkTables": {
+    "Persistent Values": {
+      "open": false
+    }
+  }
+}

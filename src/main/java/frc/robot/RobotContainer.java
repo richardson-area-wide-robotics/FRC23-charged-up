@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.intakeCommands.IntakeCommand;
 import frc.robot.commands.lockMode.Lock;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.camera.Camera;
@@ -40,20 +41,22 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private Lock lockMode;
   private final Intake intake = new Intake();
-  private final Camera camera = new Camera("Slotheye");
-  private final  RoboState roboCon = new RoboState();
+  // private final Camera camera = new Camera("Slotheye");
+  // private final  RoboState roboCon = new RoboState();
   private final Arm m_arm = new Arm();
-  private final Localizer m_localizer;
+  // private final Localizer m_localizer;
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   XboxController m_operatorController = new XboxController(OIConstants.kOperatorControllerPort);
 
+  private IntakeCommand intakeCommand;
+
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer(Localizer localizer) {
+  public RobotContainer() {
      
-    m_localizer = localizer;
+    // m_localizer = localizer;
    
    
     // Configure the trigger bindings
@@ -80,13 +83,13 @@ public class RobotContainer {
      DoubleSupplier moveSideways = () -> MathUtil.applyDeadband(
       -m_driverController.getLeftX(), 0.06); // 0.1 might be better?
   
-    lockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
+    // lockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
 
     //sends the movement information to RoboCon method in RoboState
-    roboCon.drive(moveForward, moveSideways); 
+    // roboCon.drive(moveForward, moveSideways); 
     
     //Enters Lock-on mode
-     new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(lockMode);
+    //  new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(lockMode);
     
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -114,10 +117,6 @@ public class RobotContainer {
        * right stick button on controller controls the X mode of the robot
        */
 
-          if(m_driverController.getLeftStickButtonPressed()){
-            m_robotDrive.zeroHeading();
-          }
-
     if(m_driverController.getRightStickButtonPressed()){
       m_robotDrive.setX();
     }
@@ -138,9 +137,18 @@ public class RobotContainer {
      */
     // TODO: change this to be a ramp up with the deadband of the trigger :)
 
+    boolean mode = m_driverController.getLeftStickButton();
+
+
+    if (!mode){
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(() -> intake.intake(1.0), intake));
 
     new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(() -> intake.outake(-1.0), intake));
+    } else {
+      new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(() -> intake.intake(-1.0), intake));
+
+      new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(() -> intake.outake(1.0), intake));
+    }
 
     /*
      * ---Arm Controls 

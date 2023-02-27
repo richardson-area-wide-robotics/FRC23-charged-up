@@ -24,8 +24,6 @@ import frc.robot.subsystems.localization.Localizer;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  private Localizer localizer;
-
   private RobotContainer m_robotContainer;
   private ArmKinematics mArmKinematics;
 
@@ -35,19 +33,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-
-    try {
-      localizer = new Localizer();
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    localizer.start();
     
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     mArmKinematics = new ArmKinematics(0.559, 0.652);
-    m_robotContainer = new RobotContainer(localizer);
+    m_robotContainer = new RobotContainer();
   }
 
   /**

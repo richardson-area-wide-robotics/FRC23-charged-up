@@ -43,6 +43,11 @@ public class Arm extends SubsystemBase {
   private double currentArmPosition;
   private double currentElbowPosition;
 
+  // last arm positions
+  private double lastArmPosition;
+  private double lastElbowPosition;
+
+
   // set up the arm congfiguration
   public void armConfig(CANSparkMax motor, AbsoluteEncoder enc){
     // restore factory defaults
@@ -145,6 +150,8 @@ public class Arm extends SubsystemBase {
 
     this.currentArmPosition = Constants.ArmConstants.ARM_STOWED;
     this.currentElbowPosition = Constants.ArmConstants.ELBOW_STOWED;
+    this.lastArmPosition = currentArmPosition;
+    this.lastElbowPosition = currentElbowPosition;
 
     elbowFF = Constants.ArmConstants.ELBOW_MOTOR_FEEDFORWARD;
     armFF = Constants.ArmConstants.ARM_MOTOR_FEEDFORWARD;
@@ -153,6 +160,14 @@ public class Arm extends SubsystemBase {
   // getting relative encoder position of the arm
   public double getPosition() {
     return this.leftMotor.getEncoder().getPosition();
+  }
+
+  public double getLastArmPosition(){
+    return lastArmPosition;
+  }
+
+  public double getArmPosition(){
+    return currentArmPosition;
   }
 
   public double getArmAbsoluteEncoder(){
@@ -290,6 +305,7 @@ public class Arm extends SubsystemBase {
 
   @Override
   public void periodic() {
+
     // This method will be called once per scheduler run
     armPIDController.setReference(currentArmPosition, ControlType.kPosition);
     /* , 1, armFF.calculate(currentElbowPosition, armPID.getSetpoint().velocity)*/
@@ -298,5 +314,8 @@ public class Arm extends SubsystemBase {
     SmartDashboard.putNumber("outputcurrent for right", outputrightcurrent());
 
     elbowPIDController.setReference(currentElbowPosition, ControlType.kPosition/* , 1, elbowFF.calculate(elbowPID.getSetpoint().position, elbowPID.getSetpoint().velocity)*/);
+
+    lastArmPosition = currentArmPosition;
+    lastElbowPosition = currentElbowPosition;
   }
 }

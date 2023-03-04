@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.math.util.Units;
 import java.io.IOException;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -24,7 +26,6 @@ import frc.robot.subsystems.localization.Localizer;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
   private RobotContainer m_robotContainer;
   private ArmKinematics mArmKinematics;
 
@@ -68,20 +69,6 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
     SmartDashboard.putNumber("Arm encoder", m_robotContainer.getSparkMax());
     SmartDashboard.putNumber("encoder elbow", m_robotContainer.getElbowSparkMax());
-
-    // SmartDashboard.putNumber("Arm relative encoder", m_robotContainer.getnormalSparkMax());
-    // SmartDashboard.putNumber("encoder relative elbow", m_robotContainer.getnormalElbowSparkMax());
-
-    double x = mArmKinematics.forwardXKinematics(m_robotContainer.getSparkMax(), m_robotContainer.getElbowSparkMax());
-    double y = mArmKinematics.forwardYKinematics(m_robotContainer.getSparkMax(), m_robotContainer.getElbowSparkMax());
-
-    mArmKinematics.inverseKinematics(x, y);
-
-    SmartDashboard.putNumber("Kinematics X", Units.metersToInches(x));
-    SmartDashboard.putNumber("Kinematics y", Units.metersToInches(y));
-
-    SmartDashboard.putNumber("Inverse Kinematics Shoulder angle", Units.radiansToDegrees(mArmKinematics.getShoulderAngle()));
-    SmartDashboard.putNumber("Inverse Kinematics Elbow angle", Units.radiansToDegrees(mArmKinematics.getElbowAngle()));
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */

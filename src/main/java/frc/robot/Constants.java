@@ -41,7 +41,6 @@ public final class Constants {
     public static final double kMaxSpeedMetersPerSecond = 4.8;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
-
     /*
      * Chassis configuration
      */
@@ -159,7 +158,7 @@ public final class Constants {
     public static final double kDrivingMaxOutput = 1.0;
 
     public static final PIDGains kTurningPIDGains =
-        new PIDGains(4, 0, 0.075); // TODO: tune values for the turning motor
+        new PIDGains(3.75, 0, 0.35); // TODO: tune values for the turning motor
     public static final double kTurningFF = 0.0; // TODO: tune values for Feed Forward
     public static final double kTurningMinOutput = -1.0;
     public static final double kTurningMaxOutput = 1.0;
@@ -202,8 +201,8 @@ public final class Constants {
     public static final int kIntakeCurrentLimit = 60; // amps
 	  public static final double kIntakeSpeed = 1.0;
     public static final double kOutakeSpeed = -1.0;
-    public static final double kConeIdleSpeed = 0.1;
-    public static final double kCubeIdleSpeed = -0.1;
+    public static final double kConeIdleSpeed = 0.05;
+    public static final double kCubeIdleSpeed = -0.05;
   }
    public static final class ArmConstants {
     // Arm limits
@@ -248,7 +247,7 @@ public final class Constants {
     public static final PIDGains ARM_PID_GAINS = new PIDGains(3.0, 0.0, 0.0);
     public static final ArmFeedforward ARM_MOTOR_FEEDFORWARD = new ArmFeedforward(0.0,0.72,1.56, 0.08);
     public static final double ARM_FF = 0.0;
-    public static final PIDGains ELBOW_PID_GAINS = new PIDGains(1.6, 0.0, 0.45);
+    public static final PIDGains ELBOW_PID_GAINS = new PIDGains(4, 0.0, 0.65);
     public static final ArmFeedforward ELBOW_MOTOR_FEEDFORWARD = new ArmFeedforward(0.0,0.77,0.7,0.04);
     public static final double ELBOW_FF = 0.0;
     public static final double MIN_OUTPUT = -1.0;
@@ -260,22 +259,22 @@ public final class Constants {
 
     public static final double ARM_STOWED = .55;
     public static final double ELBOW_STOWED = .79;
-    public static final double ARM_PICK_UP_TCONE = .3455;//.35
-    public static final double ELBOW_PICK_UP_TCONE = .529;//.13
+    public static final double ARM_PICK_UP_TCONE = .35;
+    public static final double ELBOW_PICK_UP_TCONE = .529;
     public static final double ARM_PICK_UP_CONE = 0.1658;
-    public static final double ELBOW_PICK_UP_CONE = 0.29;//0.416
+    public static final double ELBOW_PICK_UP_CONE = 0.31;
     public static final double ARM_PICK_UP_CUBE = 0.325;
-    public static final double ELBOW_PICK_UP_CUBE = 0.56;
+    public static final double ELBOW_PICK_UP_CUBE = 0.60;
     public static final double ARM_SCORE_CUBE_LOW = 0.166;
     public static final double ELBOW_SCORE_CUBE_LOW = 0.4;
     public static final double ARM_SCORE_CONE_LOW = 0.172;
     public static final double ARM_SCORE_CONE_MID = 0.7345;
     public static final double ELBOW_SCORE_CONE_LOW = 0.356;
-    public static final double ELBOW_SCORE_CONE_MID = 0.54;
+    public static final double ELBOW_SCORE_CONE_MID = 0.58;
     public static final double ARM_SCORE_CUBE_MID = 0.71;
-    public static final double ELBOW_SCORE_CUBE_MID = 0.53;
+    public static final double ELBOW_SCORE_CUBE_MID = 0.62;
     public static final double ARM_SCORE_CONE_HIGH = 0.0185;
-    public static final double ELBOW_SCORE_CONE_HIGH = 0.29;
+    public static final double ELBOW_SCORE_CONE_HIGH = 0.32;
     public static final double ARM_SCORE_CUBE_HIGH = 0.2;
     public static final double ELBOW_SCORE_CUBE_HIGH = 0.62;
     public static final double ELBOW_IDLE = .83;

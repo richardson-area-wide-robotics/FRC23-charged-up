@@ -17,13 +17,15 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
 import frc.robot.auton.paths.top.TopPark;
 import frc.robot.auton.util.AutoChooser;
-import frc.robot.subsystems.drive.DriveSubsystem;
-import frc.robot.commands.intakeCommands.IntakeCommand;
+import frc.robot.commands.armCommands.ElbowPosition;
+import frc.robot.commands.armCommands.PositionCommand;
 import frc.robot.commands.lockMode.Lock;
 import frc.robot.subsystems.arm.Arm;
+import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.camera.Camera;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
@@ -38,7 +40,8 @@ import frc.robot.subsystems.localization.Localizer;
  */
 public class RobotContainer {
 
-  private boolean coneState = false; 
+  private boolean mode = false;
+  private double direction = 0.0;
   // The robot's subsystems
   private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
@@ -55,12 +58,11 @@ public class RobotContainer {
   // private final  RoboState roboCon = new RoboState();
   private final Arm m_arm = new Arm();
   // private final Localizer m_localizer;
-
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   XboxController m_operatorController = new XboxController(OIConstants.kOperatorControllerPort);
+  private final PositionCommand armPositions = new PositionCommand(m_arm, intake);
 
-  private IntakeCommand intakeCommand;
 
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -109,17 +111,14 @@ public class RobotContainer {
        * The right stick controls the rotation of the robot - 12
        */
   
-        new RunCommand(
-            () ->
-                m_robotDrive.drive(
-                    MathUtil.applyDeadband(
-                        -m_driverController.getLeftY(), 0.1),
-                    MathUtil.applyDeadband(
-                        -m_driverController.getLeftX(), 0.1),
-                    MathUtil.applyDeadband(
-                        -m_driverController.getRightX(), 0.1),
-                    true),
-            m_robotDrive));
+      new RunCommand(
+        () ->
+          m_robotDrive.drive(
+          MathUtil.applyDeadband(-m_driverController.getLeftY(), Constants.OIConstants.kControllerDeadband),
+          MathUtil.applyDeadband(-m_driverController.getLeftX(), Constants.OIConstants.kControllerDeadband),
+          JoystickUtil.squareAxis(
+          -m_driverController.getRightX()),
+          true), m_robotDrive));
 
       /*
        * ---Reset button and X mode button
@@ -131,7 +130,6 @@ public class RobotContainer {
             m_robotDrive.setX();
           }
 
-          //Make sure that all buttons are unique
 
     /*
      * ---Toggle buttons
@@ -147,40 +145,68 @@ public class RobotContainer {
      */
     // TODO: change this to be a ramp up with the deadband of the trigger :)
 
-    boolean mode = m_driverController.getLeftStickButton();
+// if (new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).getAsBoolean()) {
+//    if (mode) {
+//       // Current state is true so turn off
+//       mode = false;
+//    } else {
+//       // Current state is false so turn on
+//       mode = true;
+//    }
+//   }
 
+  
 
-    if (!mode){
-    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(() -> intake.intake(1.0), intake));
+    // if(!mode && m_intake.getAsDouble() == 0.0 && m_outake.getAsDouble() == 0.0){
+    //   intake.idle(0.05);
+    // } else if (mode && m_intake.getAsDouble() == 0.0 && m_outake.getAsDouble() == 0.0){
+    //   intake.idle(-0.05);
+    // }
 
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(() -> intake.outake(-1.0), intake));
-    } else {
-      new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(() -> intake.intake(-1.0), intake));
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(()->intake.manipulates(-1)));
 
-      new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(() -> intake.outake(1.0), intake));
-    }
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(0.5)));
+
+    // new JoystickButton(m_driverController, XboxController.Axis.kLeftTrigger.value).whileTrue(intake.manipulator(1.0, mode));
+
+    // new JoystickButton(m_driverController, XboxController.Axis.kRightTrigger.value).whileTrue(intake.manipulator(-0.5, mode));
 
     /*
      * ---Arm Controls 
-     * Top back left button on the back - arm stowing
-     * Y button - shelf cone pickup
-     * A button - tipped cone pickup
-     * B button - standing cone pickup
-     * left bumper - shelf cube picup
-     * Right bumper - cube picup
+     * B - arm stowing
+     * Y button - tipped cone pickup
+     * X button - standing cone pickup
+     * A button - cube picup
+     * left Bumper - shelf cone pickup
+     *  - shelf cube picup
      */
+    // // pick up tipped cone
+    // new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> System.out.println("Button Presseds")), new ElbowPosition(m_arm, Constants.ArmConstants.ELBOW_IDLE), new WaitCommand(0.2), new InstantCommand(() -> m_arm.moveArmToPosition(1)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(1))));
+    // // stowed
+    // new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.7), new InstantCommand(() -> m_arm.moveArmToPosition(10)), new WaitCommand(1.6), new InstantCommand(() -> m_arm.moveElbowPosition(10))));
+    // //  pick up cube
+    // new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(3)), new WaitCommand(0.3), new InstantCommand(() -> m_arm.moveElbowPosition(3))));
+    // // standing cone 
+    // new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.7), new InstantCommand(() -> m_arm.moveArmToPosition(2)), new WaitCommand(1.0), new InstantCommand(() -> m_arm.moveElbowPosition(2))));
+    // // shelf
 
 
-    // pick up tipped cone
-    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> System.out.println("Button Presseds")), new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.2), new InstantCommand(() -> m_arm.moveArmToPosition(1)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(1))));
-    // stowed
-    new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.7), new InstantCommand(() -> m_arm.moveArmToPosition(10)), new WaitCommand(1.6), new InstantCommand(() -> m_arm.moveElbowPosition(10))));
-    //  pick up cube
-    new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(3)), new WaitCommand(0.3), new InstantCommand(() -> m_arm.moveElbowPosition(3))));
-    // standing cone 
-    new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.7), new InstantCommand(() -> m_arm.moveArmToPosition(2)), new WaitCommand(1.0), new InstantCommand(() -> m_arm.moveElbowPosition(2))));
-    // shelf
+    if (m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_CONE || m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_TCONE || m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_SHELF){
+      direction = -0.1;
+    } else if (m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_CUBE){
+      direction = 0.1;
+      }
 
+    // Stow
+    new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(armPositions.armStowCommand());
+    // Tipped pick up
+    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand().raceWith(new RunCommand(()-> intake.manipulates(direction))));
+    // Standing Cone 
+    new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
+    // Pick up Cube 
+    new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(armPositions.armPickUpCubeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
+    // Shelf 
+    new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0)));
   }
 
   private void configureOpperatorBindings(){
@@ -198,17 +224,19 @@ public class RobotContainer {
      */
 
     // cone high
-    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(8)), new WaitCommand(0.3), new InstantCommand(() -> m_arm.moveElbowPosition(8))));
-  // cube high
-    new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(9)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(9))));
-// cube mid
-    new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(7)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(7))));
-// cone mid
-    new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(6)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(6))));
+    // new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(8)), new WaitCommand(0.3), new InstantCommand(() -> m_arm.moveElbowPosition(8))));
+    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand());
+  // cone mid
+    // new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(9)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(9))));
+    new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand());
+  // cube High
+    // new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(7)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(7))));
+    new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(armPositions.armScoreCubeHighCommand());
+  // cube mid
+    // new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(6)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(6))));
+    new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand());
     // shelf
-    new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(0)), new WaitCommand(0.7), new InstantCommand(() -> m_arm.moveArmToPosition(0))));
-    new JoystickButton(m_operatorController, XboxController.Button.kRightBumper.value).onTrue(new InstantCommand(() -> m_robotDrive.zeroHeading()));
-
+    // new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(0)), new WaitCommand(0.7), new InstantCommand(() -> m_arm.moveArmToPosition(0))));
 
      /*
       * ---Manual arm controls 
@@ -230,16 +258,6 @@ public class RobotContainer {
     // return abs.getPosition() * 2 * Math.PI;
     return m_arm.getElbowAbsoluteEncoder();
   }
-
-  // public double getnormalSparkMax(){
-  //   RelativeEncoder abs = leftArmMotor.getEncoder();
-  //   return abs.getPosition() /*- Units.degreesToRadians()*/;
-  // }
-
-  // public double getnormalElbowSparkMax(){
-  //   RelativeEncoder abs = ElbowMotor.getEncoder();
-  //   return abs.getPosition();
-  // }
 
   public void getIdleMode(IdleMode idleMode){
       m_arm.getSparkStatus(idleMode);

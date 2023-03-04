@@ -297,6 +297,10 @@ public class MAXSwerve extends SubsystemBase {
     // return m_gyro.getRotation2d().getDegrees();
   }
 
+  public double getAdjustedAngle(){
+    return 0.0;
+  }
+
   public void stop() {
     drive(0.0, 0.0, 0.0, false);
   }

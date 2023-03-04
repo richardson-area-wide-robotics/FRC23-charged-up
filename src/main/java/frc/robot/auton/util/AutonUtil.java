@@ -27,6 +27,8 @@ public class AutonUtil {
       public static PathPlannerTrajectory loadTrajectory(String name, double maxVel, double maxAccel) {
         return loadTrajectory(name, maxVel, maxAccel, false);
       }
+
+      // public static PathPlannerTrajectory load
     
       public static PathPlannerTrajectory loadTrajectory(
           String name, double maxVel, double maxAccel, boolean reversed) {
@@ -36,6 +38,7 @@ public class AutonUtil {
         }
     
         PathPlannerTrajectory trajectory = PathPlanner.loadPath(name, maxVel, maxAccel, reversed);
+        
     
         if (trajectory == null) {
             DriverStation.reportError("Auton Path... Failed to load trajectory paths: {}" + name, false);

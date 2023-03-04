@@ -130,9 +130,6 @@ public class RobotContainer {
           if(m_driverController.getRightStickButtonPressed()){
             m_robotDrive.setX();
           }
-    if(m_driverController.getRightStickButtonPressed()){
-      m_robotDrive.setX();
-    }
 
           //Make sure that all buttons are unique
 

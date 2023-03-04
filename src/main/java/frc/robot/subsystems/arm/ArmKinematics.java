@@ -23,17 +23,11 @@ public class ArmKinematics {
      * @param elbowAngle the angle of the elbow joint. [rad]
      * @return the position of the end effector. ([m, [m])
      */
-    public double forwardXKinematics(double shoulderAngle, double elbowAngle) {
+    public Translation2d forwardXKinematics(double shoulderAngle, double elbowAngle) {
         double theta = elbowAngle + shoulderAngle;
         double x = shoulderLength * Math.cos(shoulderAngle) + elbowLength * Math.cos(theta);
         double y = shoulderLength * Math.sin(shoulderAngle) + elbowLength * Math.sin(theta);
-        return x;
-    }
-    public double forwardYKinematics(double shoulderAngle, double elbowAngle) {
-        double theta = elbowAngle + shoulderAngle;
-        double x = shoulderLength * Math.cos(shoulderAngle) + elbowLength * Math.cos(theta);
-        double y = shoulderLength * Math.sin(shoulderAngle) + elbowLength * Math.sin(theta);
-        return y;
+        return new Translation2d(x,y);
     }
 
     /**

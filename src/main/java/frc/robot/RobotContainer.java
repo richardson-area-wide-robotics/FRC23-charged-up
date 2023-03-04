@@ -39,7 +39,7 @@ import frc.robot.subsystems.localization.Localizer;
 public class RobotContainer {
 
   private boolean mode = false;
-  private double direction;
+  private double direction = 0.0;
   // The robot's subsystems
   private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
@@ -181,17 +181,16 @@ public class RobotContainer {
     // // shelf
 
 
-    if (m_arm.getArmPosition() == ArmPositions.Positions.ARM_PICK_UP_CONE || m_arm.getArmPosition() == ArmPositions.Positions.ARM_PICK_UP_TCONE || m_arm.getArmPosition() == ArmPositions.Positions.ARM_PICK_UP_SHELF){
+    if (m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_CONE || m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_TCONE || m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_SHELF){
       direction = -0.1;
-    } else if (m_arm.getArmPosition() == ArmPositions.Positions.ARM_PICK_UP_CUBE){
+    } else if (m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_CUBE){
       direction = 0.1;
       }
 
     // Stow
     new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(armPositions.armStowCommand());
     // Tipped pick up
-    // new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(-0.2)));//.onFalse(new InstantCommand(()->intake.stop()));
-    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).whileFalse(new RunCommand(()->intake.manipulates(direction)));//.onFalse(new InstantCommand(()->intake.stop()));
+    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand().raceWith(new RunCommand(()-> intake.manipulates(direction))));
     // Standing Cone 
     new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
     // Pick up Cube 

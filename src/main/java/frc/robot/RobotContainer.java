@@ -45,6 +45,8 @@ public class RobotContainer {
   // The robot's subsystems
   private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
+  private final Intake intake = new Intake();
+  private final Arm m_arm = new Arm();
   //private final Intake intake = new Intake();
   //private final Arm m_arm = new Arm();
 
@@ -53,10 +55,8 @@ public class RobotContainer {
   }
   
   private Lock lockMode;
-  private final Intake intake = new Intake();
   // private final Camera camera = new Camera("Slotheye");
   // private final  RoboState roboCon = new RoboState();
-  private final Arm m_arm = new Arm();
   // private final Localizer m_localizer;
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -126,9 +126,8 @@ public class RobotContainer {
        * right stick button on controller controls the X mode of the robot
        */
 
-          if(m_driverController.getRightStickButtonPressed()){
-            m_robotDrive.setX();
-          }
+        new JoystickButton(m_driverController, XboxController.Button.kRightStick.value).onTrue(new InstantCommand(()-> m_robotDrive.zeroHeading()));
+        new JoystickButton(m_driverController, XboxController.Button.kLeftStick.value).onTrue(new InstantCommand(()-> m_robotDrive.setX()));
 
 
     /*
@@ -165,7 +164,7 @@ public class RobotContainer {
 
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(()->intake.manipulates(-1)));
 
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(0.5)));
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(0.25)));
 
     // new JoystickButton(m_driverController, XboxController.Axis.kLeftTrigger.value).whileTrue(intake.manipulator(1.0, mode));
 
@@ -200,7 +199,7 @@ public class RobotContainer {
     // Stow
     new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(armPositions.armStowCommand());
     // Tipped pick up
-    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand().raceWith(new RunCommand(()-> intake.manipulates(direction))));
+    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand().alongWith(new RunCommand(()-> intake.manipulates(direction))));
     // Standing Cone 
     new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
     // Pick up Cube 

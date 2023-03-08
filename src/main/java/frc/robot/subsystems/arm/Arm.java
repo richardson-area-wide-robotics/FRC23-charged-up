@@ -4,12 +4,13 @@ import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import frc.robot.Constants;
+import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -17,92 +18,143 @@ import java.util.EnumMap;
 
 public class Arm extends SubsystemBase {
 
-  // making variable under the CANSparkMax class
+  // Shoulder Motors
   private CANSparkMax leftMotor;
   private CANSparkMax rightMotor;
+
+  // Elbow Motors
+  private CANSparkMax elbowMotor;
+
+  // PID Controllers
   private PIDController armPID;
-
-  private AbsoluteEncoder armEncoder;
+  private PIDController elbowPID;  
   private SparkMaxPIDController armPIDController;
+  private SparkMaxPIDController elbowPIDController;  
 
-  // enum sets unchangeable variables, here it sets the arm height for intaking and scoring game
-  // objects
-  public enum armPosition {
-    SCORING_ARM_POSITION_LOW,
-    SCORING_ARM_POSITION_MID,
-    INTAKE_ARM_POSITION_GROUND,
-    INTAKE_ARM_POSITION_SHELF,
-    INTAKE_ARM_POSITION_STOWED
-  }
+  // Feedforward
+  private ArmFeedforward elbowFF;
+  private ArmFeedforward armFF;
 
-  // Map of arm positions named armPositions
-  EnumMap<armPosition, Double> armPositions = new EnumMap<>(armPosition.class);
+  // Encoders
+  private AbsoluteEncoder armEncoder;
+  private AbsoluteEncoder elbowEncoder;
 
-  // current arm position
-  private armPosition currentArmPosition = armPosition.INTAKE_ARM_POSITION_STOWED;
+  // Arm Positions
+  private double currentArmPosition;
+  private double currentElbowPosition;
 
-  // setting up CAN IDs for the motors
-  public void armConfig(CANSparkMax motor){
+  // last arm positions
+  private double lastArmPosition;
+  private double lastElbowPosition;
+
+
+  // set up the arm congfiguration
+  public void armConfig(CANSparkMax motor, AbsoluteEncoder enc){
     // restore factory defaults
     motor.restoreFactoryDefaults();
-    // set motor basic values l
-    motor.setIdleMode(Constants.ArmConstants.kArmMotorIdleMode);
-    motor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
-     // setting soft limits (soft limits keep the motor running when it hits the limit instead of
-    // braking)
-    motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-    motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.ArmConstants.FORWARD_LIMIT);
-    motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-    motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse,  Constants.ArmConstants.REVERSE_LIMIT);
-
+    // set motor basic values
+    motor.setIdleMode(Constants.ArmConstants.kMotorIdleMode);
+    // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
+    // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
     // set the arm PID controllers
+    motor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
     armPIDController = motor.getPIDController();
+    armPIDController.setFeedbackDevice(enc);
+    armPIDController.setPositionPIDWrappingEnabled(false);
     armPID = new PIDController(Constants.ArmConstants.ARM_PID_GAINS.P, Constants.ArmConstants.ARM_PID_GAINS.I, Constants.ArmConstants.ARM_PID_GAINS.D);
     armPIDController.setP(armPID.getP());
     armPIDController.setI(armPID.getI());
     armPIDController.setD(armPID.getD());
-    armPIDController.setFF(Constants.ArmConstants.ARM_FF);
     armPIDController.setOutputRange(
-        Constants.ArmConstants.ARM_MIN_OUTPUT, Constants.ArmConstants.ARM_MAX_OUTPUT);
-
+        Constants.ArmConstants.MIN_OUTPUT, Constants.ArmConstants.MAX_OUTPUT);
+  //       motor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 20);
+  //       motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
+  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 200);
+  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 20);
+  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 200);
+  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 200);
+// motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.ArmConstants.ARM_FORWARD_LIMIT);
+//     motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.ArmConstants.ARM_REVERSE_LIMIT);
+  
   }
+
+  // set up the elbow congfiguration
+  public void elbowConfig(CANSparkMax motor, AbsoluteEncoder enc){
+ // restore factory defaults
+ motor.restoreFactoryDefaults();
+ // set motor basic values
+ motor.setIdleMode(Constants.ArmConstants.kMotorIdleMode);
+ // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
+ // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
+  motor.setSmartCurrentLimit(Constants.ArmConstants.kElbowMotorCurrentLimit);
+  elbowPIDController = motor.getPIDController();
+  elbowPIDController.setFeedbackDevice(enc);
+  elbowPIDController.setPositionPIDWrappingEnabled(false);
+  elbowPID = new PIDController(Constants.ArmConstants.ELBOW_PID_GAINS.P, Constants.ArmConstants.ELBOW_PID_GAINS.I, Constants.ArmConstants.ELBOW_PID_GAINS.D);
+  elbowPIDController.setP(elbowPID.getP());
+  elbowPIDController.setI(elbowPID.getI());
+  elbowPIDController.setD(elbowPID.getD());
+  elbowPIDController.setOutputRange(
+      Constants.ArmConstants.MIN_OUTPUT, Constants.ArmConstants.MAX_OUTPUT);
+  //     motor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 20);
+  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
+  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 200);
+  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 20);
+  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 200);
+  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 200);
+      // motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.ArmConstants.ELBOW_FORWARD_LIMIT);
+      // motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.ArmConstants.ELBOW_REVERSE_LIMIT);
+  }
+
   public Arm() {
     // motor type for right motor
     leftMotor = new CANSparkMax(Constants.ArmConstants.LEFT_MOTOR_CAN_ID, MotorType.kBrushless);
     rightMotor = new CANSparkMax(Constants.ArmConstants.RIGHT_MOTOR_CAN_ID, MotorType.kBrushless);
-    
+    elbowMotor = new CANSparkMax(Constants.ArmConstants.ELBOW_MOTOR_CAN_ID, MotorType.kBrushless);
+
     // setting the Absolute Encoder for the SparkMax
-    armEncoder = leftMotor.getAbsoluteEncoder(Type.kDutyCycle);
+    armEncoder = rightMotor.getAbsoluteEncoder(Type.kDutyCycle);
+    elbowEncoder = elbowMotor.getAbsoluteEncoder(Type.kDutyCycle);
 
     // Apply position and velocity conversion factors for the driving encoder. The
     // native units for position and velocity are rotations and RPM, respectively,
     // but we want meters and meters per second
     armEncoder.setPositionConversionFactor(Constants.ArmConstants.kArmEncoderPositionFactor);
     armEncoder.setVelocityConversionFactor(Constants.ArmConstants.kArmEncoderVelocityFactor);
-  
-    leftMotor.getPIDController().setFeedbackDevice(armEncoder);
 
+    elbowEncoder.setPositionConversionFactor(Constants.ArmConstants.kElbowEncoderPositionFactor);
+    elbowEncoder.setVelocityConversionFactor(Constants.ArmConstants.kElbowEncoderVelocityFactor);
+
+    // this.resetArmPosition();
 
     // setting the motor configuration
-    armConfig(leftMotor);
-    armConfig(rightMotor);
+    // armConfig(leftMotor, armEncoder, false);
+    armConfig(rightMotor, armEncoder);
+    elbowConfig(elbowMotor, elbowEncoder);
 
-    leftMotor.setInverted(Constants.ArmConstants.RIGHT_MOTOR_INVERTED);
+    rightMotor.setInverted(Constants.ArmConstants.RIGHT_ARMMOTOR_INVERTED);
+    elbowMotor.setInverted(true);
 
     // setting the idle mode setting for the SparkMax, here it is set to brake when idle
-    rightMotor.follow(this.leftMotor, Constants.ArmConstants.LEFT_MOTOR_INVERTED);
+    leftMotor.follow(this.rightMotor, true);
 
     leftMotor.burnFlash();
     rightMotor.burnFlash();
+    elbowMotor.burnFlash();
 
-    armPositions.put(armPosition.INTAKE_ARM_POSITION_GROUND,  Constants.ArmConstants.INTAKE_ARM_GROUND);
-    armPositions.put(armPosition.INTAKE_ARM_POSITION_SHELF,  Constants.ArmConstants.INTAKE_ARM_SHELF);
-    armPositions.put(armPosition.SCORING_ARM_POSITION_LOW,  Constants.ArmConstants.SCORING_ARM_LOW);
-    armPositions.put(armPosition.SCORING_ARM_POSITION_MID, Constants.ArmConstants. SCORING_ARM_MID);
-    armPositions.put(armPosition.INTAKE_ARM_POSITION_STOWED,  Constants.ArmConstants.INTAKE_ARM_STOWED);
-  
-  
-    this.resetArmPosition();
+    // armPositions.put(armPosition.INTAKE_ARM_POSITION_GROUND,  Constants.ArmConstants.INTAKE_ARM_GROUND);
+    // armPositions.put(armPosition.INTAKE_ARM_POSITION_SHELF,  Constants.ArmConstants.INTAKE_ARM_SHELF);
+    // armPositions.put(armPosition.SCORING_ARM_POSITION_LOW,  Constants.ArmConstants.SCORING_ARM_LOW);
+    // armPositions.put(armPosition.SCORING_ARM_POSITION_MID, Constants.ArmConstants. SCORING_ARM_MID);
+    // armPositions.put(armPosition.INTAKE_ARM_POSITION_STOWED,  Constants.ArmConstants.INTAKE_ARM_STOWED);
+
+    this.currentArmPosition = Constants.ArmConstants.ARM_STOWED;
+    this.currentElbowPosition = Constants.ArmConstants.ELBOW_STOWED;
+    this.lastArmPosition = currentArmPosition;
+    this.lastElbowPosition = currentElbowPosition;
+
+    elbowFF = Constants.ArmConstants.ELBOW_MOTOR_FEEDFORWARD;
+    armFF = Constants.ArmConstants.ARM_MOTOR_FEEDFORWARD;
   }
 
   // getting relative encoder position of the arm
@@ -110,9 +162,36 @@ public class Arm extends SubsystemBase {
     return this.leftMotor.getEncoder().getPosition();
   }
 
-  // getting the absolute encoder position
-  public double getAbsoluteEncoder() {
-    return this.armEncoder.getPosition() - Constants.ArmConstants.ARM_ENCODER_OFFSET;
+  public double getLastArmPosition(){
+    return lastArmPosition;
+  }
+
+  public double getArmPosition(){
+    return currentArmPosition;
+  }
+
+  public double getArmAbsoluteEncoder(){
+    return armEncoder.getPosition(); //- Units.degreesToRadians(50);
+  }
+
+  public double getElbowAbsoluteEncoder(){
+    return elbowEncoder.getPosition();
+  }
+
+  public double outputcurrent(){
+    return elbowMotor.getOutputCurrent();
+  }
+
+  public double outputleftcurrent(){
+    return leftMotor.getOutputCurrent();
+  }
+
+  public double outputrightcurrent(){
+    return rightMotor.getOutputCurrent();
+  }
+
+  public double speed(){
+    return elbowEncoder.getVelocity();
   }
 
   // set the arm speed
@@ -125,53 +204,118 @@ public class Arm extends SubsystemBase {
     return this.armEncoder.getVelocity(); 
   }
 
-  // check if the arm is at the forward limit
-  public Boolean atForwardLimit() {
-    return this.leftMotor.getFault(CANSparkMax.FaultID.kSoftLimitFwd);
-  }
-
-  // check if the arm is at the reverse limit
-  public Boolean atReverseLimit() {
-    return this.leftMotor.getFault(CANSparkMax.FaultID.kSoftLimitRev);
-  }
-
-  // recording if the arm actively moving and set the current limit to 60 amps, and back to 40 amps if the arm is not moving or holding a constant position
-  public void setArmCurrentLimit() {
-    if (this.getSpeed() > 0.1 || this.getSpeed() < -0.1) {
-      this.leftMotor.setSmartCurrentLimit(Constants.ArmConstants.kMovingArmMotorCurrentLimit);
-      this.rightMotor.setSmartCurrentLimit(Constants.ArmConstants.kMovingArmMotorCurrentLimit);
-      SmartDashboard.putNumber("Arm Current", this.leftMotor.getOutputCurrent());
-    } else {
-      this.leftMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
-      this.rightMotor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
-      SmartDashboard.putNumber("Arm Current", this.leftMotor.getOutputCurrent());
+  public void moveElbowPosition(int armPosition){
+    if(armPosition == 0){
+      this.currentElbowPosition = Constants.ArmConstants.ELBOW_PICK_UP_SHELF;
+    }
+    if(armPosition == 1){
+      this.currentElbowPosition = Constants.ArmConstants.ELBOW_PICK_UP_TCONE;
+    }
+    else if(armPosition == 2){
+      this.currentElbowPosition = Constants.ArmConstants.ELBOW_PICK_UP_CONE;
+    }
+    else if(armPosition == 3){
+      this.currentElbowPosition = Constants.ArmConstants.ELBOW_PICK_UP_CUBE;
+    }
+    else if(armPosition == 4){
+      this.currentElbowPosition = Constants.ArmConstants.ELBOW_SCORE_CUBE_LOW;
+    }
+    else if(armPosition == 5){
+      this.currentElbowPosition = Constants.ArmConstants.ELBOW_SCORE_CONE_LOW;
+    }
+    else if(armPosition == 6){
+      this.currentElbowPosition = Constants.ArmConstants.ELBOW_SCORE_CONE_MID;
+    }
+    else if(armPosition == 7){
+      this.currentElbowPosition = Constants.ArmConstants.ELBOW_SCORE_CUBE_MID;
+    }
+    else if(armPosition == 8){
+      this.currentElbowPosition = Constants.ArmConstants.ELBOW_SCORE_CONE_HIGH;
+    }
+    else if(armPosition == 9){
+      this.currentElbowPosition = Constants.ArmConstants.ELBOW_SCORE_CUBE_HIGH;
+    }
+    else if(armPosition == 10){
+      this.currentElbowPosition = Constants.ArmConstants.ELBOW_STOWED;
+    }
+    else if(armPosition == 11){
+      this.currentElbowPosition = Constants.ArmConstants.ELBOW_IDLE;
     }
   }
 
-  // set the arm position back to home position
-  public void resetArmPosition() {
-    this.leftMotor.getEncoder().setPosition(armPositions.get(armPosition.INTAKE_ARM_POSITION_STOWED));
+  // arm movement controls using PID loop
+  public void moveArmToPosition(int armPosition) {
+
+    if(armPosition == 0){
+      this.currentArmPosition = Constants.ArmConstants.ARM_PICK_UP_SHELF;
+    }
+    if(armPosition == 1){
+      this.currentArmPosition = Constants.ArmConstants.ARM_PICK_UP_TCONE;
+    }
+    else if(armPosition == 2){
+      this.currentArmPosition = Constants.ArmConstants.ARM_PICK_UP_CONE;
+    }
+    else if(armPosition == 3){
+      this.currentArmPosition = Constants.ArmConstants.ARM_PICK_UP_CUBE;
+    }
+    else if(armPosition == 4){
+      this.currentArmPosition = Constants.ArmConstants.ARM_SCORE_CUBE_LOW;
+    }
+    else if(armPosition == 5){
+      this.currentArmPosition = Constants.ArmConstants.ARM_SCORE_CONE_LOW;
+    }
+    else if(armPosition == 6){
+      this.currentArmPosition = Constants.ArmConstants.ARM_SCORE_CONE_MID;
+    }
+    else if(armPosition == 7){
+      this.currentArmPosition = Constants.ArmConstants.ARM_SCORE_CUBE_MID;
+    }
+    else if(armPosition == 8){
+      this.currentArmPosition = Constants.ArmConstants.ARM_SCORE_CONE_HIGH;
+    }
+    else if(armPosition == 9){
+      this.currentArmPosition = Constants.ArmConstants.ARM_SCORE_CUBE_HIGH;
+    }
+    else if(armPosition == 10){
+      this.currentArmPosition = Constants.ArmConstants.ARM_STOWED;
+    }
   }
 
-  // arm movement controls using PID loop
-  public void moveArmToPosition(armPosition position) {
-    this.currentArmPosition = position;
+  public void setArmPosition(double position) {
+    currentArmPosition = position;
+  }
+
+  public void setElbowPosition(double position) {
+    currentElbowPosition = position;
+  }
+
+  public void getSparkStatus(IdleMode mode){
+    leftMotor.setIdleMode(mode);
+    rightMotor.setIdleMode(mode);
+    elbowMotor.setIdleMode(mode);
+  }
+
+  public void setShoulderPower(double power){
+    rightMotor.set(power);
+  }
+
+  public void setElbowPower(double power){
+    elbowMotor.set(power);
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    setArmCurrentLimit();
-    this.armPIDController.setReference(armPositions.get(this.currentArmPosition), ControlType.kPosition);
-  }
 
-  // sends the arm values to NT to be later used in Shuffleboard
-  @Override
-  public void initSendable(SendableBuilder builder) {
-    super.initSendable(builder);
-    builder.addDoubleProperty("Set Point", this::getAbsoluteEncoder, null);
-    builder.addDoubleProperty("Arm Speed", this::getSpeed, null);
-    builder.addBooleanProperty("Arm Reverse limit", this::atReverseLimit, null);
-    builder.addBooleanProperty("Arm Forward limit", this::atForwardLimit, null);
+    // This method will be called once per scheduler run
+    armPIDController.setReference(currentArmPosition, ControlType.kPosition);
+    /* , 1, armFF.calculate(currentElbowPosition, armPID.getSetpoint().velocity)*/
+    SmartDashboard.putNumber("outputcurrent for elbow", outputcurrent());
+    SmartDashboard.putNumber("outputcurrent for left", outputleftcurrent());
+    SmartDashboard.putNumber("outputcurrent for right", outputrightcurrent());
+
+    elbowPIDController.setReference(currentElbowPosition, ControlType.kPosition/* , 1, elbowFF.calculate(elbowPID.getSetpoint().position, elbowPID.getSetpoint().velocity)*/);
+
+    lastArmPosition = currentArmPosition;
+    lastElbowPosition = currentElbowPosition;
   }
 }

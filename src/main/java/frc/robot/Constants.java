@@ -156,8 +156,9 @@ public final class Constants {
     public static final double kDrivingMinOutput = -1.0;
     public static final double kDrivingMaxOutput = 1.0;
 
+    //was 3.75,0,.35
     public static final PIDGains kTurningPIDGains =
-        new PIDGains(3.75, 0, 0.35); // TODO: tune values for the turning motor
+        new PIDGains(6.75, 0.03, 0.35); // TODO: tune values for the turning motor
     public static final double kTurningFF = 0.0; // TODO: tune values for Feed Forward
     public static final double kTurningMinOutput = -1.0;
     public static final double kTurningMaxOutput = 1.0;
@@ -194,7 +195,7 @@ public final class Constants {
     public static final boolean kIntakeInverted = true;
     public static final int kIntakeID = 12;
     public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
-    public static final int kIntakeCurrentLimit = 60; // amps
+    public static final int kIntakeCurrentLimit = 70; // amps
 	  public static final double kIntakeSpeed = 1.0;
     public static final double kOutakeSpeed = -1.0;
     public static final double kConeIdleSpeed = 0.05;

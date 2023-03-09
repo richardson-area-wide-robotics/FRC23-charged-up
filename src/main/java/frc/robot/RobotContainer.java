@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -21,7 +22,7 @@ import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.armCommands.ElbowPosition;
 import frc.robot.commands.armCommands.PositionCommand;
-import frc.robot.commands.lockMode.Lock;
+import frc.robot.commands.LockMode.Lock;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.camera.Camera;
@@ -190,7 +191,9 @@ public class RobotContainer {
     // Stow
     new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(armPositions.armStowCommand());
     // Tipped pick up
-    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand().raceWith(new RunCommand(()-> intake.manipulates(direction))));
+    new JoystickButton(m_driverController, XboxController.Button.kY.value)
+        .onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(() -> intake.manipulates(-1.0)))
+        .onFalse(armPositions.armStowCommand().raceWith(new RunCommand(() -> intake.manipulates(direction))));
     // Standing Cone 
     new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
     // Pick up Cube 
@@ -259,6 +262,19 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return null;
+    // return null;
+    // return new RunCommand(
+    //   () ->
+    //     m_robotDrive.drive(
+    //     0.4,
+    //     0.0,
+    //     0.0,
+    //     true),
+         
+    //     m_robotDrive);
+    ParallelRaceGroup scoreCubeLow = armPositions.armScoreCubeMidCommand().withTimeout(2);
+    ParallelRaceGroup releaseCube = new RunCommand(()->intake.manipulates(-1)).withTimeout(1.5);
+    ParallelRaceGroup stowArm = armPositions.armStowCommand().withTimeout(2);
+    return scoreCubeLow.andThen(releaseCube).andThen(stowArm);
   }
 }

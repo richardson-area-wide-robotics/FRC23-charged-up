@@ -7,12 +7,15 @@ package frc.robot;
 import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.math.util.Units;
 import java.io.IOException;
+import edu.wpi.first.wpilibj.RobotController;
+
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.arm.ArmKinematics;
 
 import frc.robot.subsystems.localization.Localizer;
@@ -27,6 +30,10 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
   private ArmKinematics mArmKinematics;
+
+  private double autonStart = 0;
+  //In seconds
+  private double autonDuration = 1;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -72,7 +79,8 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-
+    // autonStart = RobotController.getFPGATime();
+    m_robotContainer.getAutonomousCommand();
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -81,7 +89,14 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    // if (m_autonomousCommand != null) {
+    //   if (RobotController.getFPGATime() > autonStart + autonDuration*100)
+    //   {
+    //     m_autonomousCommand.cancel();
+    //   }
+    // }
+  }
 
   @Override
   public void teleopInit() {

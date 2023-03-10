@@ -309,6 +309,10 @@ public class MAXSwerve extends SubsystemBase {
     return new RunCommand(this::stop, this).withName("Swerve Stop");
   }
 
+  public void setHeading(ADIS16470_IMU.IMUAxis heading) {
+    m_gyro.setYawAxis(heading);
+  }
+
   /**
    * Returns the turn rate of the robot.
    *
@@ -333,21 +337,22 @@ public class MAXSwerve extends SubsystemBase {
    * @return Command to be scheduled
    */
   public Command trajectoryFollowerCommand(
-      PathPlannerTrajectory trajectory,
-      PIDController xController,
-      PIDController yController,
-      PIDController thetaController) {
-    Command swCommand =
-        new PPSwerveControllerCommand(
-            trajectory,
-            this::getPose,
-            m_kinematics,
-            xController,
-            yController,
-            thetaController,
-            (states) -> setModuleStates(states),
-            this);
-    return new InstantCommand(() -> m_field.getObject("Trajectory").setTrajectory(trajectory))
-        .alongWith(swCommand);
-  }
+    PathPlannerTrajectory trajectory,
+    PIDController xController,
+    PIDController yController,
+    PIDController thetaController) {
+  Command swCommand =
+      new PPSwerveControllerCommand(
+          trajectory,
+          this::getPose,
+          m_kinematics,
+          xController,
+          yController,
+          thetaController,
+          (states) -> setModuleStates(states),
+          true,
+          this);
+  return new InstantCommand(() -> m_field.getObject("Trajectory").setTrajectory(trajectory))
+      .alongWith(swCommand);
+}
 }

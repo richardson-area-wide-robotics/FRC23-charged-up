@@ -6,6 +6,7 @@ package frc.robot;
 
 import com.revrobotics.CANSparkMax.IdleMode;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -179,16 +180,19 @@ public final class Constants {
      public static final double kMaxSpeedMetersPerSecond = 3.0;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3.0;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
-    public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
-
-    public static final double kPXController = 1.0;
-    public static final double kPYController = 1.0;
-    public static final double kPThetaController = 1.0;
-
+    public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;    
+    
     // Constraint for the motion profiled robot angle controller
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
         new TrapezoidProfile.Constraints(
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
+
+    // public static final PIDController kPXController = new PIDController(0.0, 0, 0.0);// 1.0 - 0.35
+    // public static final PIDController kPYController = new PIDController(0.0, 0, 0.0);// 1.075 - 0.45
+    // public static final PIDController kPThetaController = new PIDController(0.0, 0, 0.0);// 6.0 - 0.5
+    public static final PIDController kPXController = new PIDController(1.0, 0, 0.35);// 1.0 - 0.35
+    public static final PIDController kPYController = new PIDController(0.001, 0, 0.00075);// 1.075 - 0.45
+    public static final PIDController kPThetaController = new PIDController(8.0, 0, 0.75);// 6.0 - 0.5
   }
   
   public static final class Intake {
@@ -302,6 +306,7 @@ public final class Constants {
     // public static final double ELBOW_PICK_UP_SHELF = 0.995;
     // public static final double ARM_IDLE = 0.3;
   }
+public static final boolean kCompetitionMode = false;
 
   // public void putNumber(){
   //   SmartDashboard.putNumber("stowed elbow", ArmConstants.ELBOW_STOWED);

@@ -31,7 +31,6 @@ public class ArmPositions extends SubsystemBase {
         SmartDashboard.putNumber("Elbow Cone High", Positions.ELBOW_SCORE_CONE_HIGH);
         // Elbow Idle Position
         SmartDashboard.putNumber("Elbow Idle", Positions.ELBOW_IDLE);
-
     }
 
     public static class Positions {

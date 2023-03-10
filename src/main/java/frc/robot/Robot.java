@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.math.util.Units;
 import java.io.IOException;
@@ -44,6 +45,7 @@ public class Robot extends TimedRobot {
     
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    DriverStation.silenceJoystickConnectionWarning(!Constants.kCompetitionMode);
     mArmKinematics = new ArmKinematics(0.559, 0.652);
     m_robotContainer = new RobotContainer();
   }
@@ -79,8 +81,15 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+<<<<<<< HEAD
     // autonStart = RobotController.getFPGATime();
     m_robotContainer.getAutonomousCommand();
+=======
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
+    m_robotContainer.autonInit();
+    
+>>>>>>> dc15aae6aa304f0a7da837eb6490b554106bd20a
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

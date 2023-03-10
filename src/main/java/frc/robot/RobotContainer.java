@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
+import frc.robot.auton.paths.top.TopPark;
+import frc.robot.auton.util.AutoChooser;
 import frc.robot.commands.armCommands.ElbowPosition;
 import frc.robot.commands.armCommands.PositionCommand;
 import frc.robot.commands.LockMode.Lock;
@@ -44,11 +46,18 @@ public class RobotContainer {
   // The robot's subsystems
   private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
-  private Lock lockMode;
   private final Intake intake = new Intake();
+  private final Arm m_arm = new Arm();
+  //private final Intake intake = new Intake();
+  //private final Arm m_arm = new Arm();
+
+  {
+    AutoChooser.setDefaultAuton( new TopPark(m_robotDrive));
+  }
+  
+  private Lock lockMode;
   // private final Camera camera = new Camera("Slotheye");
   // private final  RoboState roboCon = new RoboState();
-  private final Arm m_arm = new Arm();
   // private final Localizer m_localizer;
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -118,8 +127,8 @@ public class RobotContainer {
        * right stick button on controller controls the X mode of the robot
        */
 
-      new JoystickButton(m_driverController, XboxController.Button.kRightStick.value).onTrue(new InstantCommand(()->m_robotDrive.zeroHeading())); 
-      new JoystickButton(m_driverController, XboxController.Button.kLeftStick.value).onTrue(new InstantCommand(()->m_robotDrive.setX()));
+        new JoystickButton(m_driverController, XboxController.Button.kRightStick.value).onTrue(new InstantCommand(()-> m_robotDrive.zeroHeading()));
+        new JoystickButton(m_driverController, XboxController.Button.kLeftStick.value).onTrue(new InstantCommand(()-> m_robotDrive.setX()));
 
 
     /*
@@ -156,7 +165,7 @@ public class RobotContainer {
 
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(()->intake.manipulates(-1)));
 
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(0.5)));
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(0.25)));
 
     // new JoystickButton(m_driverController, XboxController.Axis.kLeftTrigger.value).whileTrue(intake.manipulator(1.0, mode));
 
@@ -191,9 +200,13 @@ public class RobotContainer {
     // Stow
     new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(armPositions.armStowCommand());
     // Tipped pick up
+<<<<<<< HEAD
     new JoystickButton(m_driverController, XboxController.Button.kY.value)
         .onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(() -> intake.manipulates(-1.0)))
         .onFalse(armPositions.armStowCommand().raceWith(new RunCommand(() -> intake.manipulates(direction))));
+=======
+    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand().alongWith(new RunCommand(()-> intake.manipulates(direction))));
+>>>>>>> dc15aae6aa304f0a7da837eb6490b554106bd20a
     // Standing Cone 
     new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
     // Pick up Cube 
@@ -261,6 +274,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+<<<<<<< HEAD
   public Command getAutonomousCommand() {
     // return null;
     // return new RunCommand(
@@ -276,5 +290,15 @@ public class RobotContainer {
     ParallelRaceGroup releaseCube = new RunCommand(()->intake.manipulates(-1)).withTimeout(1.5);
     ParallelRaceGroup stowArm = armPositions.armStowCommand().withTimeout(2);
     return scoreCubeLow.andThen(releaseCube).andThen(stowArm);
+=======
+  public Command getAutonomousCommand(){
+    // AutoChooser.addAuton(, "Top-Park");
+    return AutoChooser.getAuton();
+  }
+
+  public void autonInit(){
+    m_robotDrive.calibrateGyro();
+    m_robotDrive.stop();
+>>>>>>> dc15aae6aa304f0a7da837eb6490b554106bd20a
   }
 }

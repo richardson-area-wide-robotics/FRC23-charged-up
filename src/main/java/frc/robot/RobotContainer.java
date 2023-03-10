@@ -200,13 +200,10 @@ public class RobotContainer {
     // Stow
     new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(armPositions.armStowCommand());
     // Tipped pick up
-<<<<<<< HEAD
-    new JoystickButton(m_driverController, XboxController.Button.kY.value)
-        .onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(() -> intake.manipulates(-1.0)))
-        .onFalse(armPositions.armStowCommand().raceWith(new RunCommand(() -> intake.manipulates(direction))));
-=======
+
+
     new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand().alongWith(new RunCommand(()-> intake.manipulates(direction))));
->>>>>>> dc15aae6aa304f0a7da837eb6490b554106bd20a
+
     // Standing Cone 
     new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
     // Pick up Cube 
@@ -274,23 +271,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-<<<<<<< HEAD
-  public Command getAutonomousCommand() {
-    // return null;
-    // return new RunCommand(
-    //   () ->
-    //     m_robotDrive.drive(
-    //     0.4,
-    //     0.0,
-    //     0.0,
-    //     true),
-         
-    //     m_robotDrive);
-    ParallelRaceGroup scoreCubeLow = armPositions.armScoreCubeMidCommand().withTimeout(2);
-    ParallelRaceGroup releaseCube = new RunCommand(()->intake.manipulates(-1)).withTimeout(1.5);
-    ParallelRaceGroup stowArm = armPositions.armStowCommand().withTimeout(2);
-    return scoreCubeLow.andThen(releaseCube).andThen(stowArm);
-=======
+
   public Command getAutonomousCommand(){
     // AutoChooser.addAuton(, "Top-Park");
     return AutoChooser.getAuton();
@@ -299,6 +280,5 @@ public class RobotContainer {
   public void autonInit(){
     m_robotDrive.calibrateGyro();
     m_robotDrive.stop();
->>>>>>> dc15aae6aa304f0a7da837eb6490b554106bd20a
   }
 }

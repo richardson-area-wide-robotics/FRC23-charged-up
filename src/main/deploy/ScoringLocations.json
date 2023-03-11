@@ -1,0 +1,166 @@
+{
+    "positions": [
+      {
+        "position": 1,
+        "pose": {
+          "translation": {
+            "x": -0.47,
+            "y": -0.5,
+            "z": 0.0
+          },
+          "rotation": {
+            "quaternion": {
+              "W": 0.0,
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 1.0
+            }
+          }
+        }
+      },
+      {
+        "position": 2,
+        "pose": {
+          "translation": {
+            "x": 0.0,
+            "y": -0.5,
+            "z": 0.0
+          },
+          "rotation": {
+            "quaternion": {
+              "W": 0.0,
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 1.0
+            }
+          }
+        }
+      },      
+      {
+        "position": 3,
+        "pose": {
+          "translation": {
+            "x": 0.47,
+            "y": -0.5,
+            "z": 0.0
+          },
+          "rotation": {
+            "quaternion": {
+              "W": 0.0,
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 1.0
+            }
+          }
+        }
+      },
+      {
+        "position": 4,
+        "pose": {
+          "translation": {
+            "x": -0.47,
+            "y": -0.5,
+            "z": 0.0
+          },
+          "rotation": {
+            "quaternion": {
+              "W": 0.0,
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 1.0
+            }
+          }
+        }
+      },
+      {
+        "position": 5,
+        "pose": {
+          "translation": {
+            "x": 0.0,
+            "y": -0.5,
+            "z": 0.0
+          },
+          "rotation": {
+            "quaternion": {
+              "W": 0.0,
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 1.0
+            }
+          }
+        }
+      },      
+      {
+        "position": 6,
+        "pose": {
+          "translation": {
+            "x": 0.47,
+            "y": -0.5,
+            "z": 0.0
+          },
+          "rotation": {
+            "quaternion": {
+              "W": 0.0,
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 1.0
+            }
+          }
+        }
+      },
+      {
+        "position": 7,
+        "pose": {
+          "translation": {
+            "x": -0.47,
+            "y": -0.5,
+            "z": 0.0
+          },
+          "rotation": {
+            "quaternion": {
+              "W": 0.0,
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 1.0
+            }
+          }
+        }
+      },
+      {
+        "position": 8,
+        "pose": {
+          "translation": {
+            "x": 0.0,
+            "y": -0.5,
+            "z": 0.0
+          },
+          "rotation": {
+            "quaternion": {
+              "W": 0.0,
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 1.0
+            }
+          }
+        }
+      },      
+      {
+        "position": 9,
+        "pose": {
+          "translation": {
+            "x": 0.47,
+            "y": -0.5,
+            "z": 0.0
+          },
+          "rotation": {
+            "quaternion": {
+              "W": 0.0,
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 1.0
+            }
+          }
+        }
+      }
+      ]
+}

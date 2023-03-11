@@ -6,13 +6,13 @@ package frc.robot.subsystems.camera;
 
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
 public class Camera extends SubsystemBase {
+
   PhotonCamera camera;
 
   public Camera(String name) {
@@ -27,14 +27,16 @@ public class Camera extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
+  //does this work?
   public PhotonPipelineResult getCameraResult() {
-    PhotonPipelineResult result = camera.getLatestResult();
+     PhotonPipelineResult result = camera.getLatestResult();
     return result;
   }
 
+ 
   public PhotonTrackedTarget getCameraTarget() {
     PhotonPipelineResult result = this.getCameraResult();
-    PhotonTrackedTarget target = result.getBestTarget();
+    PhotonTrackedTarget target = result.getBestTarget();    
     return target;
   }
 
@@ -49,11 +51,19 @@ public class Camera extends SubsystemBase {
     Rotation3d rotation = pose.getRotation();
     return rotation;
   }
-
+/**
+ * Returns the angle of the robot relative to a target in radians.
+ * Convert to degrees as necessary.
+ */
   public double getAngle() {
-    Rotation3d rotation = this.getCameraRotation();
-    double angle = rotation.getAngle();
-    SmartDashboard.putNumber("Angle: ", angle * 180 / Math.PI);
+    PhotonTrackedTarget target = getCameraTarget(); 
+
+    if(target == null) {
+        return 0.0;
+    }
+    else {  
+    double angle = Math.toRadians(target.getYaw());
     return angle;
+    }
   }
 }

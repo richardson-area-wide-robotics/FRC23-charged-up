@@ -20,11 +20,14 @@ import frc.lib.util.SwerveModuleConstants;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
+
 public final class Constants {
+
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;
     public static final double kControllerDeadband = 0.1;
+    
   }
 
   public static final class SwerveDriveConstants {
@@ -32,6 +35,7 @@ public final class Constants {
     // the robot, rather the allowed maximum speeds
     public static final double kMaxSpeedMetersPerSecond = 4.8;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
+
 
     /*
      * Chassis configuration
@@ -155,6 +159,12 @@ public final class Constants {
     public static final double kTurningMinOutput = -1.0;
     public static final double kTurningMaxOutput = 1.0;
 
+    
+    public static final PIDGains kVisionTurningPIDGains =
+        new PIDGains(1.0, 0, 0.01); // TODO: tune values for Vision auto-turning
+
+    public static final double MAX_LOCKED_ON_SPEED = 0.33;
+    
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
@@ -226,17 +236,26 @@ public final class Constants {
     public static final double ARM_FF = 0.0;
     public static final double ARM_MIN_OUTPUT = -1.0;
     public static final double ARM_MAX_OUTPUT = 1.0;
-
     public static final double ARM_ENCODER_OFFSET = 0;
   }
 
   public static final class LEDConstants {
-    public static final int LED_STRIP_LEFT_PORT = 0;
-    public static final int LED_STRIP_RIGHT_PORT = 1;
+    public static final int LED_STRIP_LEFT_PORT = 8;
+    public static final int LED_STRIP_RIGHT_PORT = 9;
     public static final int LED_STRIP_LEFT_LENGTH = 50;
     public static final int LED_STRIP_RIGHT_LENGTH = 50;
     public static final int[] PURPLE = {138, 43, 226};
     public static final int[] YELLOW = {255, 255, 0};
     public static final double FLASH_PERIOD = 0.5; // in seconds
   }
+
+  public static final class Localizer {
+    public static final double TARGET_SIZE_METERS = 0.0;
+    public static final double FX_PIXELS = 0.0;
+    public static final double FY_PIXELS = 0.0;
+    public static final double CX_PIXELS = 0.0;
+    public static final double CY_PIXELS = 0.0;
+  }
+
+
 }

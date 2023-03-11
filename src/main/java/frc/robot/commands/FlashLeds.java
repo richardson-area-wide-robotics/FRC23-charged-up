@@ -30,7 +30,7 @@ public class FlashLeds extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (timer.get()/LEDConstants.FLASH_PERIOD % 2 < 1) {
+    if (timer.get() / LEDConstants.FLASH_PERIOD % 2 < 1) {
       for (LEDStrip ledStrip : ledStrips) {
         ledStrip.setSolidColor(color);
       }

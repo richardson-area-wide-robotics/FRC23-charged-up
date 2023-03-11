@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.FlashLeds;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.Arm.armPosition;
 import frc.robot.subsystems.drive.DriveSubsystem;
@@ -110,7 +111,7 @@ public class RobotContainer {
         .whileTrue(new SetLEDColor(m_LEDStrips, LEDConstants.YELLOW));
 
     new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
-        .whileTrue(new SetLEDColor(m_LEDStrips, LEDConstants.PURPLE));
+        .whileTrue(new FlashLeds(m_LEDStrips, LEDConstants.PURPLE));
   }
 
   /**

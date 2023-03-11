@@ -18,6 +18,7 @@ public class LEDStrip extends SubsystemBase {
     for (var i = 0; i < OFF_BUFFER.getLength(); i++) {
       OFF_BUFFER.setRGB(i, 0, 0, 0);
     }
+    ledStrip.start();
   }
 
   public void setSolidColor(int... colorArray) {

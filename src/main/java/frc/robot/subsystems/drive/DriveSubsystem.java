@@ -4,20 +4,24 @@
 
 package frc.robot.subsystems.drive;
 
+import com.pathplanner.lib.PathPlannerTrajectory;
+
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.swerve.MAXSwerve;
 import frc.robot.Constants;
 
 public class DriveSubsystem extends MAXSwerve {
-  // public Command trajectoryFollowerCommand(PathPlannerTrajectory trajectory) {
-  //   Constants.AutoConstants.kPThetaController.enableContinuousInput(-Math.PI, Math.PI);
-  //   return trajectoryFollowerCommand(
-  //       trajectory,
-  //       Constants.Drivetrain.kXController,
-  //       Constants.Drivetrain.kYController,
-  //       Constants.Drivetrain.kThetaController);
-  // }
+  public Command trajectoryFollowerCommand(PathPlannerTrajectory trajectory) {
+    Constants.AutoConstants.kPThetaController.enableContinuousInput(-Math.PI, Math.PI);
+    return trajectoryFollowerCommand(
+        trajectory,
+        Constants.AutoConstants.kPXController,
+        Constants.AutoConstants.kPYController,
+        Constants.AutoConstants.kPThetaController);
+  }
 
   static final MAXSwerveModule frontLeft =
       new MAXSwerveModule(Constants.SwerveDriveConstants.FrontLeftModule.S_MODULE_CONSTANTS);
@@ -49,11 +53,11 @@ public class DriveSubsystem extends MAXSwerve {
   }
 
   // TODO: Add sendable data for controllers during autonomous mode
-  // @Override
-  // public void initSendable(SendableBuilder builder) {
-  //   super.initSendable(builder);
-  //   addChild("X Controller", Constants.SwerveConstants.kXController);
-  //   addChild("Y Controller", Constants.SwerveConstants.kYController);
-  //   addChild("Theta Controller", Constants.SwerveConstants.kThetaController);
-  // }
+  @Override
+  public void initSendable(SendableBuilder builder) {
+    super.initSendable(builder);
+    addChild("X Controller", Constants.AutoConstants.kPXController);
+    addChild("Y Controller", Constants.AutoConstants.kPYController);
+    addChild("Theta Controller", Constants.AutoConstants.kPThetaController);
+  }
 }

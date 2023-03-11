@@ -2,8 +2,9 @@ package frc.robot.subsystems.led_strip;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class LEDStrip {
+public class LEDStrip extends SubsystemBase {
   private AddressableLED ledStrip;
   private AddressableLEDBuffer ledBuffer;
   private final AddressableLEDBuffer OFF_BUFFER;

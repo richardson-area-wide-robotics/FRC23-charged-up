@@ -237,5 +237,6 @@ public final class Constants {
     public static final int LED_STRIP_RIGHT_LENGTH = 50;
     public static final int[] PURPLE = {138, 43, 226};
     public static final int[] YELLOW = {255, 255, 0};
+    public static final double FLASH_PERIOD = 0.5; // in seconds
   }
 }

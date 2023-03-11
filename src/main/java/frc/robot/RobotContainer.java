@@ -21,6 +21,7 @@ import frc.robot.subsystems.arm.Arm.armPosition;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.led_strip.LEDStrip;
+import java.util.function.BooleanSupplier;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -43,6 +44,11 @@ public class RobotContainer {
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+
+  BooleanSupplier do_flash_leds =
+      () -> {
+        return m_driverController.getRightBumper();
+      };
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {

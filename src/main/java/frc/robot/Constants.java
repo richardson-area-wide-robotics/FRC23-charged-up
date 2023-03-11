@@ -229,4 +229,13 @@ public final class Constants {
 
     public static final double ARM_ENCODER_OFFSET = 0;
   }
+
+  public static final class LEDConstants {
+    public static final int LED_STRIP_LEFT_PORT = 0;
+    public static final int LED_STRIP_RIGHT_PORT = 1;
+    public static final int LED_STRIP_LEFT_LENGTH = 50;
+    public static final int LED_STRIP_RIGHT_LENGTH = 50;
+    public static final int[] PURPLE = {138, 43, 226};
+    public static final int[] YELLOW = {255, 255, 0};
+  }
 }

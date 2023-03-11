@@ -12,16 +12,16 @@ public class LEDStrip {
     ledStrip = new AddressableLED(pwmPort);
     ledBuffer = new AddressableLEDBuffer(stripLength);
     ledStrip.setLength(ledBuffer.getLength());
-    //offBuffer is used to store off state of LEDs
+    // offBuffer is used to store off state of LEDs
     OFF_BUFFER = new AddressableLEDBuffer(stripLength);
     for (var i = 0; i < OFF_BUFFER.getLength(); i++) {
       OFF_BUFFER.setRGB(i, 0, 0, 0);
     }
   }
 
-  public void setSolidColor(int r, int g, int b) {
+  public void setSolidColor(int... colorArray) {
     for (var i = 0; i < ledBuffer.getLength(); i++) {
-      ledBuffer.setRGB(i, r, g, b);
+      ledBuffer.setRGB(i, colorArray[0], colorArray[1], colorArray[2]);
     }
     ledStrip.setData(ledBuffer);
   }

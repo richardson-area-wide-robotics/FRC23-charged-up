@@ -8,16 +8,19 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.LEDConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.Arm.armPosition;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.led_strip.LEDStrip;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -32,6 +35,11 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
+  private final LEDStrip m_LEDStripLeft =
+      new LEDStrip(LEDConstants.LED_STRIP_LEFT_PORT, LEDConstants.LED_STRIP_LEFT_LENGTH);
+  private final LEDStrip m_LEDStripRight =
+      new LEDStrip(LEDConstants.LED_STRIP_RIGHT_PORT, LEDConstants.LED_STRIP_RIGHT_LENGTH);
+  private final LEDStrip[] m_LEDStrips = {m_LEDStripLeft, m_LEDStripRight};
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -91,6 +99,12 @@ public class RobotContainer {
         .whileTrue(
             new InstantCommand(
                 () -> m_arm.moveArmToPosition(armPosition.SCORING_ARM_POSITION_MID), m_arm));
+
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)
+        .whileTrue(new SetLEDColor(m_LEDStrips, LEDConstants.YELLOW));
+
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
+        .whileTrue(new SetLEDColor(m_LEDStrips, LEDConstants.PURPLE));
   }
 
   /**
@@ -100,5 +114,29 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return null;
+  }
+
+  public class SetLEDColor extends CommandBase {
+    private LEDStrip[] ledStrips;
+    private int[] color;
+
+    public SetLEDColor(LEDStrip[] ledStrips, int[] color) {
+      this.ledStrips = ledStrips;
+      this.color = color;
+    }
+
+    @Override
+    public void initialize() {
+      for (LEDStrip ledStrip : ledStrips) {
+        ledStrip.setSolidColor(color);
+      }
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+      for (LEDStrip ledStrip : ledStrips) {
+        ledStrip.setLightsToOff();
+      }
+    }
   }
 }

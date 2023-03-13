@@ -176,8 +176,8 @@ public class MAXSwerve extends SubsystemBase {
    * @return The pose.
    */
   public Pose2d getPose() {
-    //m_odometry.getPoseMeters();
-    return new Pose2d(this.local.getRobotPose().getX(), this.local.getRobotPose().getY(), new Rotation2d(m_gyro.getAngle()));
+    return m_odometry.getPoseMeters();
+    //return new Pose2d(this.local.getRobotPose().getX(), this.local.getRobotPose().getY(), new Rotation2d(m_gyro.getAngle()));
   }
 
   /**

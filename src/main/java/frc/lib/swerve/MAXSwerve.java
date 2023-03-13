@@ -1,5 +1,7 @@
 package frc.lib.swerve;
 
+import java.io.IOException;
+
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
@@ -19,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.localization.Localizer;
 
 public class MAXSwerve extends SubsystemBase {
   public enum ModuleLocation {
@@ -44,6 +47,7 @@ public class MAXSwerve extends SubsystemBase {
   private final MAXModule m_frontRight;
   private final MAXModule m_backLeft;
   private final MAXModule m_backRight;
+  private Localizer local;
 
   // The gyro sensor
   private final ADIS16470_IMU m_gyro;
@@ -89,6 +93,12 @@ public class MAXSwerve extends SubsystemBase {
     m_ModulePositions = modulePositions;
     m_maxSpeed = maxSpeed;
     m_odometry = new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(getAngle()), modulePositions);
+    try {
+      this.local = new Localizer();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     //m_odometry = new SwerveDriveOdometry(kinematics, m_gyro.getRotation2d(), modulePositions);
   }
 
@@ -166,7 +176,8 @@ public class MAXSwerve extends SubsystemBase {
    * @return The pose.
    */
   public Pose2d getPose() {
-    return m_odometry.getPoseMeters();
+    //m_odometry.getPoseMeters();
+    return new Pose2d(this.local.getRobotPose().getX(), this.local.getRobotPose().getY(), new Rotation2d(m_gyro.getAngle()));
   }
 
   /**

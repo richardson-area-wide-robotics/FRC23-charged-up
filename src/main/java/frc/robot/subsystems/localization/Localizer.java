@@ -29,27 +29,25 @@ public class Localizer extends SubsystemBase{
     String nodePositionPath = Filesystem.getDeployDirectory().getPath() + nodePositionFilename;
     nodeLayout = new NodePositionLayout(nodePositionPath);
     
-    camera = new PhotonCamera("Slotheye");
+    camera = new PhotonCamera("OV5647");
   }
 
   @Override
   public void periodic() {
     PhotonPipelineResult result = camera.getLatestResult();
-    PhotonTrackedTarget target = result.getBestTarget();
+    boolean hasTargets = result.hasTargets();
 
-    if(target!=null)
+    if(hasTargets)
     {
-
+      PhotonTrackedTarget target = result.getBestTarget();
       SmartDashboard.putNumber("tag seen", target.getFiducialId());
-
       currentAprilTagID = Optional.of(target.getFiducialId());
       currentAprilTagTransform = Optional.of(target.getBestCameraToTarget());
-      SmartDashboard.putString("tag", "" + target.getFiducialId());         
+      SmartDashboard.putString("tag", "" + target.getFiducialId()); 
+      SmartDashboard.putNumber("PoseX", getRobotPose().getX());
+    SmartDashboard.putNumber("PoseY", getRobotPose().getY());        
   }
-  else{
-    currentAprilTagID = Optional.of(null);
-    currentAprilTagTransform = Optional.of(null);
-  }
+
   }
 
   public void start() {

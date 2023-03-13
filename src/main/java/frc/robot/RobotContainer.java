@@ -5,6 +5,8 @@
 package frc.robot;
 
 import com.revrobotics.CANSparkMax.IdleMode;
+
+import java.io.IOException;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
@@ -29,6 +31,8 @@ import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.camera.Camera;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.lights.Lights;
+import frc.robot.subsystems.lights.LightsController;
 import frc.robot.subsystems.RoboState;
 import frc.robot.subsystems.localization.Localizer;
 
@@ -47,6 +51,8 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
+  private Lights lights;
+  private LightsController lightsController;
   //private final Intake intake = new Intake();
   //private final Arm m_arm = new Arm();
 
@@ -54,10 +60,8 @@ public class RobotContainer {
     AutoChooser.setDefaultAuton( new TopPark(m_robotDrive));
   }
   
-  private Lock lockMode;
-  // private final Camera camera = new Camera("Slotheye");
   // private final  RoboState roboCon = new RoboState();
-  // private final Localizer m_localizer;
+  private Localizer m_localizer;
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   XboxController m_operatorController = new XboxController(OIConstants.kOperatorControllerPort);
@@ -69,6 +73,14 @@ public class RobotContainer {
   public RobotContainer() {
      
     // m_localizer = localizer;
+    this.lights = new Lights(9, 60, 50);
+    this.lightsController = new LightsController(this.lights);
+    try {
+      this.m_localizer = new Localizer();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
    
    
     // Configure the trigger bindings

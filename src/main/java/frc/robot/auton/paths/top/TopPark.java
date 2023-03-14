@@ -2,16 +2,13 @@ package frc.robot.auton.paths.top;
 
 import com.pathplanner.lib.PathPlannerTrajectory;
 
-import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.lib.swerve.MAXSwerve;
 import frc.robot.Constants;
 import frc.robot.auton.util.AutonBase;
 import frc.robot.auton.util.AutonUtil;
-import frc.robot.subsystems.drive.DriveSubsystem;
 
 public class TopPark extends AutonBase {
     public TopPark(

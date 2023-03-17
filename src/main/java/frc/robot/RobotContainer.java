@@ -21,7 +21,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
-import frc.robot.auton.paths.top.TopPark;
+import frc.robot.auton.paths.top.TopScore2Test;
+import frc.robot.auton.paths.top.TopScoreThree;
+import frc.robot.auton.paths.top.TopTest;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.commands.armCommands.ElbowPosition;
 import frc.robot.commands.armCommands.PositionCommand;
@@ -53,19 +55,20 @@ public class RobotContainer {
   private final Arm m_arm = new Arm();
   private Lights lights;
   private LightsController lightsController;
+  private Localizer m_localizer;
   //private final Intake intake = new Intake();
   //private final Arm m_arm = new Arm();
 
   {
-    AutoChooser.setDefaultAuton( new TopPark(m_robotDrive));
+    AutoChooser.setDefaultAuton( new TopScoreThree(m_robotDrive, intake, m_arm));
   }
   
   // private final  RoboState roboCon = new RoboState();
-  private Localizer m_localizer;
+  // private Localizer m_localizer;
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   XboxController m_operatorController = new XboxController(OIConstants.kOperatorControllerPort);
-  private final PositionCommand armPositions = new PositionCommand(m_arm, intake);
+  private final PositionCommand armPositions = new PositionCommand(m_arm);
 
 
   
@@ -76,7 +79,7 @@ public class RobotContainer {
     this.lights = new Lights(9, 60, 50);
     this.lightsController = new LightsController(this.lights);
     try {
-      this.m_localizer = new Localizer();
+      this.m_localizer = new Localizer("BACK");
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -85,7 +88,7 @@ public class RobotContainer {
    
     // Configure the trigger bindings
     configureDriverBindings(); 
-    configureOpperatorBindings();   
+    configureOperatorBindings();   
   }
   
   /**
@@ -176,7 +179,7 @@ public class RobotContainer {
 
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(()->intake.manipulates(-1)));
 
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(0.25)));
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(0.5)));
 
     // new JoystickButton(m_driverController, XboxController.Axis.kLeftTrigger.value).whileTrue(intake.manipulator(1.0, mode));
 
@@ -215,12 +218,12 @@ public class RobotContainer {
     // Standing Cone 
     new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
     // Pick up Cube 
-    new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(armPositions.armPickUpCubeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
+    new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(armPositions.armPickUpCubeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(0.5))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
     // Shelf 
     new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0)));
   }
 
-  private void configureOpperatorBindings(){
+  private void configureOperatorBindings(){
     /* 
      * ---Toggle button that switches the state of the robot - between cone or cube state
      * left trigger on controller controls the toggle between cone and intake state - P1
@@ -236,7 +239,7 @@ public class RobotContainer {
 
     // cone high
     // new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(8)), new WaitCommand(0.3), new InstantCommand(() -> m_arm.moveElbowPosition(8))));
-    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand());
+    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.autonArmScoreConeHighCommand());
   // cone mid
     // new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(9)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(9))));
     new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand());

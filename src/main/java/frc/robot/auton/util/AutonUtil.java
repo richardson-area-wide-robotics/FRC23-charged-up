@@ -27,8 +27,6 @@ public class AutonUtil {
       public static PathPlannerTrajectory loadTrajectory(String name, double maxVel, double maxAccel) {
         return loadTrajectory(name, maxVel, maxAccel, false);
       }
-
-      // public static PathPlannerTrajectory load
     
       public static PathPlannerTrajectory loadTrajectory(
           String name, double maxVel, double maxAccel, boolean reversed) {

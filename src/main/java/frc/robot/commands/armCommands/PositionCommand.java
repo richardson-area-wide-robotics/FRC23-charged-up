@@ -13,9 +13,8 @@ public class PositionCommand extends SequentialCommandGroup {
     Arm arm;
     Intake intake;
 
-    public PositionCommand(Arm armMech, Intake intakeMech){
+    public PositionCommand(Arm armMech){
         this.arm = armMech;
-        this.intake = intakeMech;
     }
     
     // public SequentialCommandGroup armStowCommand(){
@@ -107,6 +106,10 @@ public class PositionCommand extends SequentialCommandGroup {
 
     public Command armBackStandingCone(){
         return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SPECIAL_IDLE));
+    }
+
+    public Command autonArmScoreConeHighCommand(){
+        return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE + 0.06).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_SCORE_CONE_HIGH).unless(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SCORE_CONE_HIGH));
     }
 
 }

@@ -22,14 +22,14 @@ public class Localizer extends SubsystemBase{
   private Optional<Transform3d> currentAprilTagTransform;
   private Optional<Integer> currentAprilTagID;
 
-  public Localizer() throws IOException {
+  public Localizer(String name) throws IOException {
     String path = Filesystem.getDeployDirectory().getPath() + filename;
     fieldLayout = new AprilTagFieldLayout(path);
 
     String nodePositionPath = Filesystem.getDeployDirectory().getPath() + nodePositionFilename;
     nodeLayout = new NodePositionLayout(nodePositionPath);
     
-    camera = new PhotonCamera("OV5647");
+    camera = new PhotonCamera(name);
   }
 
   @Override

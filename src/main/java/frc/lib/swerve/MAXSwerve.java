@@ -94,7 +94,7 @@ public class MAXSwerve extends SubsystemBase {
     m_maxSpeed = maxSpeed;
     m_odometry = new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(getAngle()), modulePositions);
     try {
-      this.local = new Localizer();
+      this.local = new Localizer("BACK");
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

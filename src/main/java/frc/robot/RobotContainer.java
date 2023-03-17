@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -16,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
+import frc.robot.auton.commands.Balance;
 import frc.robot.auton.paths.top.TopPark;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.commands.armCommands.PositionCommand;
@@ -50,6 +52,7 @@ public class RobotContainer {
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   XboxController m_operatorController = new XboxController(OIConstants.kOperatorControllerPort);
   private final PositionCommand armPositions = new PositionCommand(m_arm, intake);
+  private Balance balance = new Balance(m_robotDrive);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -76,6 +79,8 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureDriverBindings() {
+
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(balance);
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -110,8 +115,8 @@ public class RobotContainer {
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)
         .whileTrue(new RunCommand(() -> intake.manipulates(-1)));
 
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
-        .whileTrue(new RunCommand(() -> intake.manipulates(0.25)));
+    // new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
+    //     .whileTrue(new RunCommand(() -> intake.manipulates(0.25)));
     if (m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_CONE
         || m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_TCONE
         || m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_SHELF) {
@@ -179,8 +184,18 @@ public class RobotContainer {
     return AutoChooser.getAuton();
   }
 
+  public void putAccel(){
+  SmartDashboard.putNumber("Gyro Accel X", m_gyro.getAccelX());
+  SmartDashboard.putNumber("Gyro Accel y", m_gyro.getAccelY());
+  SmartDashboard.putNumber("Gyro Accel z", m_gyro.getAccelZ());
+  }
+
   public void autonInit() {
     m_robotDrive.calibrateGyro();
     m_robotDrive.stop();
+  }
+
+  public void getPitch(){
+    SmartDashboard.putNumber("Pitch",balance.getPitch());
   }
 }

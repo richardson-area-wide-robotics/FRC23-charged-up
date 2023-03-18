@@ -5,39 +5,26 @@
 package frc.robot;
 
 import com.revrobotics.CANSparkMax.IdleMode;
-import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.LEDConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.FlashLeds;
 import frc.lib.util.JoystickUtil;
-import frc.robot.Constants.OIConstants;
 import frc.robot.auton.paths.top.TopPark;
 import frc.robot.auton.util.AutoChooser;
-import frc.robot.commands.armCommands.ElbowPosition;
 import frc.robot.commands.armCommands.PositionCommand;
-import frc.robot.commands.LockMode.Lock;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmPositions;
-import frc.robot.subsystems.camera.Camera;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.led_strip.LEDStrip;
-import java.util.function.BooleanSupplier;
-import frc.robot.subsystems.RoboState;
-import frc.robot.subsystems.localization.Localizer;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -47,7 +34,6 @@ import frc.robot.subsystems.localization.Localizer;
  */
 public class RobotContainer {
 
-  private boolean mode = false;
   private double direction = 0.0;
   // The robot's subsystems
   private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
@@ -62,7 +48,6 @@ public class RobotContainer {
     AutoChooser.setDefaultAuton( new TopPark(m_robotDrive));
   }
   
-  private Lock lockMode;
   // private final Camera camera = new Camera("Slotheye");
   // private final  RoboState roboCon = new RoboState();
   // private final Localizer m_localizer;
@@ -96,14 +81,6 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureDriverBindings() {
-
-    
-
-    //Some adjustments made for lock on mode
-    DoubleSupplier moveForward =  () -> MathUtil.applyDeadband(
-      -m_driverController.getLeftY(), 0.06); // 0.1 might be better?
-     DoubleSupplier moveSideways = () -> MathUtil.applyDeadband(
-      -m_driverController.getLeftX(), 0.06); // 0.1 might be better?
   
     // lockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
 

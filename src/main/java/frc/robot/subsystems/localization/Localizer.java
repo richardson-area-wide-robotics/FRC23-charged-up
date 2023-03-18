@@ -15,9 +15,7 @@ import java.util.Optional;
 
 public class Localizer extends SubsystemBase{
   private AprilTagFieldLayout fieldLayout;
-  private NodePositionLayout nodeLayout;
   private String filename = "/ChargedUp.json";
-  private String nodePositionFilename = "/ScoringLocations.json";
   private PhotonCamera camera;
   private Optional<Transform3d> currentAprilTagTransform;
   private Optional<Integer> currentAprilTagID;
@@ -25,9 +23,6 @@ public class Localizer extends SubsystemBase{
   public Localizer() throws IOException {
     String path = Filesystem.getDeployDirectory().getPath() + filename;
     fieldLayout = new AprilTagFieldLayout(path);
-
-    String nodePositionPath = Filesystem.getDeployDirectory().getPath() + nodePositionFilename;
-    nodeLayout = new NodePositionLayout(nodePositionPath);
     
     camera = new PhotonCamera("Slotheye");
   }

@@ -54,9 +54,9 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
-  private final LEDStrip m_LEDStripLeft;
-  //private final LEDStrip m_LEDStripRight;
-  private final LEDStrip[] m_LEDStrips;
+  // private final LEDStrip m_LEDStripLeft;
+  // //private final LEDStrip m_LEDStripRight;
+  // private final LEDStrip[] m_LEDStrips;
 
   {
     AutoChooser.setDefaultAuton( new TopPark(m_robotDrive));
@@ -75,14 +75,11 @@ public class RobotContainer {
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-     m_LEDStripLeft = 
-      new LEDStrip(LEDConstants.LED_STRIP_LEFT_PORT, LEDConstants.LED_STRIP_LEFT_LENGTH);
-     //m_LEDStripRight =
-     // new LEDStrip(LEDConstants.LED_STRIP_RIGHT_PORT, LEDConstants.LED_STRIP_RIGHT_LENGTH);
-      m_LEDStrips = new LEDStrip[] {m_LEDStripLeft};
-
-    // m_localizer = localizer;
-   
+    //  m_LEDStripLeft = 
+    //   new LEDStrip(LEDConstants.LED_STRIP_PORT, LEDConstants.LED_STRIP_LENGTH);
+    //  //m_LEDStripRight =
+    //  // new LEDStrip(LEDConstants.LED_STRIP_RIGHT_PORT, LEDConstants.LED_STRIP_RIGHT_LENGTH);
+    //   m_LEDStrips = new LEDStrip[] {m_LEDStripLeft};
    
     // Configure the trigger bindings
     configureDriverBindings(); 
@@ -223,11 +220,11 @@ public class RobotContainer {
     // Shelf 
     new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0)));
 
-    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)
-        .whileTrue(new SetLEDColor(m_LEDStrips, LEDConstants.YELLOW));
+    // new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)
+    //     .whileTrue(new SetLEDColor(m_LEDStrips, LEDConstants.YELLOW));
 
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
-        .whileTrue(new FlashLeds(m_LEDStrips, LEDConstants.PURPLE));
+    // new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
+    //     .whileTrue(new FlashLeds(m_LEDStrips, LEDConstants.PURPLE));
   }
 
   private void configureOpperatorBindings(){

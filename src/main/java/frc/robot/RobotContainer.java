@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -21,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
+import frc.robot.auton.commands.BalancingCommand;
 import frc.robot.auton.paths.top.TopScore2Test;
 import frc.robot.auton.paths.top.TopScoreThree;
 import frc.robot.auton.paths.top.TopTest;
@@ -49,7 +52,7 @@ public class RobotContainer {
   private boolean mode = false;
   private double direction = 0.0;
   // The robot's subsystems
-  private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
+  private final AHRS m_gyro = new AHRS();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
@@ -68,6 +71,7 @@ public class RobotContainer {
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   XboxController m_operatorController = new XboxController(OIConstants.kOperatorControllerPort);
+  private BalancingCommand balance = new BalancingCommand(m_robotDrive);
   private final PositionCommand armPositions = new PositionCommand(m_arm);
 
 
@@ -102,7 +106,7 @@ public class RobotContainer {
    */
   private void configureDriverBindings() {
 
-    
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(balance);
 
     //Some adjustments made for lock on mode
     DoubleSupplier moveForward =  () -> MathUtil.applyDeadband(
@@ -179,7 +183,7 @@ public class RobotContainer {
 
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(()->intake.manipulates(-1)));
 
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(0.5)));
+    //new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(0.5)));
 
     // new JoystickButton(m_driverController, XboxController.Axis.kLeftTrigger.value).whileTrue(intake.manipulator(1.0, mode));
 
@@ -285,6 +289,11 @@ public class RobotContainer {
   public Command getAutonomousCommand(){
     // AutoChooser.addAuton(, "Top-Park");
     return AutoChooser.getAuton();
+  }
+
+  public void putAngle(){
+    SmartDashboard.putNumber("Gyro Angle", m_robotDrive.getAngle());
+    m_robotDrive.putNumber();
   }
 
   public void autonInit(){

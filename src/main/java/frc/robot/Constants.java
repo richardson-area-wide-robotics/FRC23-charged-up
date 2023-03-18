@@ -113,7 +113,7 @@ public final class Constants {
               kDriveMotorCANID, kSteerMotorCANID, kBackRightChassisAngularOffset);
     }
 
-    public static final boolean kGyroReversed = false;
+    public static final boolean kGyroReversed = true;
   }
 
   public static final class ModuleConstants {
@@ -189,6 +189,11 @@ public final class Constants {
     public static final PIDController kPXController = new PIDController(1.0, 0, 0.35);
     public static final PIDController kPYController = new PIDController(0.001, 0, 0.00075);
     public static final PIDController kPThetaController = new PIDController(8.0, 0, 0.75);
+
+    public static final PIDGains kMovingPIDGains =
+        new PIDGains(0.3,0, 0.01); // TODO: tune values for Vision auto-turning
+
+    public static final double gravity = 9.81;
   }
   
   public static final class Intake {

@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.lib.swerve.MAXSwerve;
 import frc.robot.Constants;
+import frc.robot.auton.commands.BalancingCommand;
 import frc.robot.auton.util.AutonBase;
 import frc.robot.auton.util.AutonUtil;
 import frc.robot.commands.armCommands.PositionCommand;
@@ -27,18 +28,21 @@ import frc.robot.subsystems.intake.Intake;
 
 public class TopScoreThree extends AutonBase {
     public PositionCommand armPositions;
+    public BalancingCommand balance;
 
     public TopScoreThree(
     DriveSubsystem drive, Intake intake,
     Arm m_arm) {
       
     //PathPlannerTrajectory PickUpOne = AutonUtil.loadTrajectory("Top-Simple-Park", 2.0, 5.0);
-    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-Three", new PathConstraints(2.0, 5.0));
+    //List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-Three", new PathConstraints(2.0, 5.0));
+    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score", new PathConstraints(1.5, 3.5));
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
+    this.balance = new BalancingCommand(drive);
 
-    if (pathGroup.get(0) == null || pathGroup.get(1) == null) {
+    if (pathGroup.get(0) == null) {
         System.out.println("Path not found");
         return;
     }
@@ -48,11 +52,11 @@ public class TopScoreThree extends AutonBase {
       new RunCommand(()-> intake.manipulates(-1.0), intake)
       .raceWith(armPositions.autonArmScoreConeHighCommand())
       .andThen(new WaitCommand(0.1))
-      .andThen(new RunCommand(()-> intake.manipulates(0.25), intake)));
-                     //drive.trajectoryFollowerCommand(pathGroup.get(1)),
-                     //new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive));
-
-
+      .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
+      .andThen(armPositions.armStowCommand())
+      .andThen(new WaitCommand(0.5))
+      .andThen(drive.trajectoryFollowerCommand(pathGroup.get(0)))
+      .andThen(balance).andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive)));
     }
 
   // public SequentialCommandGroup scoringFirst(){

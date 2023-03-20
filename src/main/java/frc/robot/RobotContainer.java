@@ -24,8 +24,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
 import frc.robot.auton.commands.BalancingCommand;
-import frc.robot.auton.paths.top.TopScore2Test;
-import frc.robot.auton.paths.top.TopScoreThree;
+import frc.robot.auton.paths.top.TopMidScore2Park;
+import frc.robot.auton.paths.top.TopMidScoreThree;
 import frc.robot.auton.paths.top.TopTest;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.commands.armCommands.ElbowPosition;
@@ -63,7 +63,7 @@ public class RobotContainer {
   //private final Arm m_arm = new Arm();
 
   {
-    AutoChooser.setDefaultAuton( new TopScoreThree(m_robotDrive, intake, m_arm));
+    AutoChooser.setDefaultAuton( new TopMidScore2Park(m_robotDrive, m_arm, intake));
   }
   
   // private final  RoboState roboCon = new RoboState();
@@ -106,7 +106,7 @@ public class RobotContainer {
    */
   private void configureDriverBindings() {
 
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(balance);
+    //new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(balance);
 
     //Some adjustments made for lock on mode
     DoubleSupplier moveForward =  () -> MathUtil.applyDeadband(
@@ -183,7 +183,7 @@ public class RobotContainer {
 
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(()->intake.manipulates(-1)));
 
-    //new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(0.5)));
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(0.5)));
 
     // new JoystickButton(m_driverController, XboxController.Axis.kLeftTrigger.value).whileTrue(intake.manipulator(1.0, mode));
 

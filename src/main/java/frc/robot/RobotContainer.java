@@ -25,20 +25,14 @@ import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
 import frc.robot.auton.commands.BalancingCommand;
 import frc.robot.auton.paths.top.TopMidScore2Park;
-import frc.robot.auton.paths.top.TopMidScoreThree;
-import frc.robot.auton.paths.top.TopTest;
 import frc.robot.auton.util.AutoChooser;
-import frc.robot.commands.armCommands.ElbowPosition;
 import frc.robot.commands.armCommands.PositionCommand;
-import frc.robot.commands.lockMode.Lock;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmPositions;
-import frc.robot.subsystems.camera.Camera;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.lights.Lights;
 import frc.robot.subsystems.lights.LightsController;
-import frc.robot.subsystems.RoboState;
 import frc.robot.subsystems.localization.Localizer;
 
 /**

@@ -22,12 +22,12 @@ import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 
-public class TopMidScoreThree extends AutonBase {
+public class TopMidScore3 extends AutonBase {
     public PositionCommand armPositions;
     public BalancingCommand balance;
     public PathPlannerServer server = new PathPlannerServer();
 
-    public TopMidScoreThree(
+    public TopMidScore3(
     DriveSubsystem drive, Intake intake,
     Arm m_arm) {
       

@@ -38,13 +38,11 @@ public class TopMidScore3 extends AutonBase {
     this.armPositions = new PositionCommand(m_arm);
     this.balance = new BalancingCommand(drive);
     HashMap<String, Command> eventMap = new HashMap<>();
-    eventMap.put("Stow1", armPositions.armPickUpTConeComand());
-    eventMap.put("intakeDown1", armPositions.armPickUpTConeComand());
-    eventMap.put("IntakeStow", armPositions.armStowCommand());
-    eventMap.put("IntakeScore1", armPositions.armScoreConeMidCommand());
-    eventMap.put("IntakeDown2", armPositions.armPickUpCubeCommand());
-    eventMap.put("Stow2", armPositions.armStowCommand());
-    eventMap.put("IntakeScore2", armPositions.armScoreCubeMidCommand());
+    eventMap.put("IntakeDownCone", armPositions.armPickUpTConeComand());
+    eventMap.put("ScoreCone", armPositions.armScoreConeMidCommand());
+    eventMap.put("IntakeDown", armPositions.armPickUpCubeCommand());
+    eventMap.put("Stow", armPositions.armStowCommand());
+    eventMap.put("Score", armPositions.armScoreCubeMidCommand());
 
     if (pathGroup.get(0) == null && pathGroup.get(1) == null) {
         System.out.println("Path not found");
@@ -56,13 +54,13 @@ public class TopMidScore3 extends AutonBase {
       .raceWith(armPositions.armScoreConeMidCommand())
       .andThen(new WaitCommand(0.5))
       .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
-      .andThen(armPositions.armStowCommand())
+      // .andThen(armPositions.armStowCommand())
       .andThen(new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"))
       .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake)
       .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), eventMap)))
       .andThen(new WaitCommand(0.8))
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake).withTimeout(0.5))
-      .andThen(armPositions.armStowCommand())
+      // .andThen(armPositions.armStowCommand())
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
       .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), eventMap)))
       .andThen(new WaitCommand(0.5))

@@ -6,6 +6,8 @@ import java.util.List;
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
+import com.pathplanner.lib.commands.FollowPathWithEvents;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,15 +31,15 @@ public class TopMidScore2Park extends AutonBase {
     DriveSubsystem drive,
     Arm m_arm, Intake intake) {
       
-    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-2-Mid", new PathConstraints(3.0, 5.0), new PathConstraints(2.0, 3.0));
+    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-2-Mid-Park-Test", new PathConstraints(3.85, 5.0), new PathConstraints(3.0, 4.7));
+    HashMap<String, Command> eventMap = new HashMap<>();
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
     this.balance = new BalancingCommand(drive);
-    HashMap<String, Command> eventMap = new HashMap<>();
-    eventMap.put("marker1", new PrintCommand("Passed marker 1"));
-    eventMap.put("intakeDown", armPositions.armPickUpCubeCommand());
-    eventMap.put("intake", new RunCommand(()->intake.manipulates(0.75), intake));
+    eventMap.put("Stow", armPositions.armStowCommand());
+    eventMap.put("IntakeDown", armPositions.armPickUpCubeCommand());
+    eventMap.put("Score", armPositions.armScoreCubeMidCommand());
 
     if (pathGroup.get(0) == null && pathGroup.get(1) == null) {
         System.out.println("Path not found");
@@ -49,19 +51,13 @@ public class TopMidScore2Park extends AutonBase {
       .raceWith(armPositions.armScoreConeMidCommand())
       .andThen(new WaitCommand(0.5))
       .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
-      .andThen(armPositions.armStowCommand())
-      .andThen(armPositions.armPickUpCubeCommand())
       .andThen(new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"))
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
-      .raceWith(drive.trajectoryFollowerCommand(pathGroup.get(0))))
-      .andThen(armPositions.armStowCommand())
-      .andThen(new InstantCommand(()-> intake.manipulates(0)))
-      .andThen(drive.trajectoryFollowerCommand(pathGroup.get(1)))
-      .andThen(armPositions.armScoreCubeMidCommand())
+      .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), eventMap)))
       .andThen(new WaitCommand(0.5))
-      .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(1.0))
-      .andThen(armPositions.armStowCommand())
-      .andThen(drive.trajectoryFollowerCommand(pathGroup.get(2)))
+      .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.4))
+      .andThen(new InstantCommand(()-> intake.manipulates(0), intake))
+      .andThen(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), eventMap))
       .andThen(balance));
     }
 

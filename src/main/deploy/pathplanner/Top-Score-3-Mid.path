@@ -16,7 +16,9 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "Stow"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -124,38 +126,43 @@
     {
       "position": 0.3213068181818182,
       "names": [
-        "marker1",
-        "intakeDown1"
+        "IntakeDownCone"
       ]
     },
     {
       "position": 1.16,
       "names": [
-        "IntakeStow"
+        "Stow"
       ]
     },
     {
-      "position": 1.8837357954545388,
+      "position": 1.8518465909090884,
       "names": [
-        "IntakeScore1"
+        "ScoreCone"
       ]
     },
     {
-      "position": 2.5133522727272717,
+      "position": 2.7740056818181795,
       "names": [
-        "IntakeDown2"
+        "IntakeDown"
       ]
     },
     {
-      "position": 3.3190340909090916,
+      "position": 3.232244318181819,
       "names": [
-        "Stow2"
+        "Stow"
       ]
     },
     {
-      "position": 3.800426136363628,
+      "position": 3.857954545454546,
       "names": [
-        "IntakeScore2"
+        "Score"
+      ]
+    },
+    {
+      "position": 2.056392045454542,
+      "names": [
+        "Stow"
       ]
     }
   ]

@@ -1,0 +1,195 @@
+{
+  "waypoints": [
+    {
+      "anchorPoint": {
+        "x": 1.830279550297092,
+        "y": 4.985716053127885
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.00362972086934,
+        "y": 4.78802592339537
+      },
+      "holonomicAngle": 0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 6.63940701880676,
+        "y": 4.83
+      },
+      "prevControl": {
+        "x": 5.187014690805219,
+        "y": 4.783728095229115
+      },
+      "nextControl": {
+        "x": 5.187014690805219,
+        "y": 4.783728095229115
+      },
+      "holonomicAngle": 0,
+      "isReversal": true,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 1.5,
+        "y": 4.3
+      },
+      "prevControl": {
+        "x": 2.767257684624539,
+        "y": 4.500558611633963
+      },
+      "nextControl": {
+        "x": 1.2071287338468986,
+        "y": 4.2536496363448375
+      },
+      "holonomicAngle": 0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": true,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 6.449852091843923,
+        "y": 4.100013485689272
+      },
+      "prevControl": {
+        "x": 3.9220611965605308,
+        "y": 5.676267802681167
+      },
+      "nextControl": {
+        "x": 6.470200856573018,
+        "y": 4.087324608492374
+      },
+      "holonomicAngle": -35.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 5.3370221869628605,
+        "y": 2.839010032095756
+      },
+      "prevControl": {
+        "x": 6.67565391117693,
+        "y": 2.8834803427537685
+      },
+      "nextControl": {
+        "x": 4.16781015421565,
+        "y": 2.8001679656925544
+      },
+      "holonomicAngle": 0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 3.8741904658117905,
+        "y": 2.8185074401444297
+      },
+      "prevControl": {
+        "x": 4.106208329774736,
+        "y": 2.803504232787215
+      },
+      "nextControl": null,
+      "holonomicAngle": 0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "sequential",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    }
+  ],
+  "maxVelocity": null,
+  "maxAcceleration": 5.5,
+  "isReversed": null,
+  "markers": [
+    {
+      "position": 0.0,
+      "names": [
+        "Stow"
+      ]
+    },
+    {
+      "position": 0.45,
+      "names": [
+        "IntakeDown"
+      ]
+    },
+    {
+      "position": 1.0696022727272736,
+      "names": [
+        "Stow"
+      ]
+    },
+    {
+      "position": 1.8819247159090908,
+      "names": [
+        "Score1"
+      ]
+    },
+    {
+      "position": 2.6603338068181754,
+      "names": [
+        "IntakeDown"
+      ]
+    },
+    {
+      "position": 3.4259588068181808,
+      "names": [
+        "Stow"
+      ]
+    },
+    {
+      "position": 2.2049005681818183,
+      "names": [
+        "Stow"
+      ]
+    }
+  ]
+}

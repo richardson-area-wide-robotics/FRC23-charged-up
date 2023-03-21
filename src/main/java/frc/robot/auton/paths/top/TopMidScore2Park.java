@@ -12,7 +12,6 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.auton.commands.BalancingCommand;
@@ -37,6 +36,7 @@ public class TopMidScore2Park extends AutonBase {
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
     this.balance = new BalancingCommand(drive);
+    
     eventMap.put("Stow", armPositions.armStowCommand());
     eventMap.put("IntakeDown", armPositions.armPickUpCubeCommand());
     eventMap.put("Score", armPositions.armScoreCubeMidCommand());

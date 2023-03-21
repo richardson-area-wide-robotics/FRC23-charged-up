@@ -31,13 +31,13 @@ public class TopMidScore3 extends AutonBase {
     DriveSubsystem drive, Intake intake,
     Arm m_arm) {
       
-    //PathPlannerTrajectory PickUpOne = AutonUtil.loadTrajectory("Top-Simple-Park", 2.0, 5.0);
     List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-3-Mid", new PathConstraints(2.75, 4.5), new PathConstraints(3.0, 5.0));
+    HashMap<String, Command> eventMap = new HashMap<>();
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
     this.balance = new BalancingCommand(drive);
-    HashMap<String, Command> eventMap = new HashMap<>();
+  
     eventMap.put("IntakeDownCone", armPositions.armPickUpTConeComand());
     eventMap.put("ScoreCone", armPositions.armScoreConeMidCommand());
     eventMap.put("IntakeDown", armPositions.armPickUpCubeCommand());

@@ -14,11 +14,10 @@ import frc.robot.subsystems.drive.DriveSubsystem;
 public class Balance extends CommandBase{
     public DriveSubsystem drive;
     public Localizer localizer;
-    public LinearFilter filter = LinearFilter.singlePoleIIR(0.2, 0.02);
     final PIDController movingController = new PIDController(
-        Constants.ModuleConstants.kMovingPIDGains.P,
-        Constants.ModuleConstants.kMovingPIDGains.I,
-        Constants.ModuleConstants.kMovingPIDGains.D);
+        Constants.AutoConstants.kMovingPIDGains.P,
+        Constants.AutoConstants.kMovingPIDGains.I,
+        Constants.AutoConstants.kMovingPIDGains.D);
 
     public Balance(DriveSubsystem drive){
         this.drive = drive;
@@ -28,7 +27,6 @@ public class Balance extends CommandBase{
     @Override
     public void initialize(){
         movingController.reset();
-        filter.reset();
     }
 
     @Override
@@ -37,7 +35,7 @@ public class Balance extends CommandBase{
 
         double controller = movingController.calculate(getPitch());
 
-        Math.min(Math.max(controller, -.25), .25);
+        //Math.min(Math.max(controller, -.25), .25);
         
         SmartDashboard.putNumber("Pitch", controller);
         drive.drive(-controller, 0, 0, false);
@@ -48,12 +46,6 @@ public class Balance extends CommandBase{
      * if the robot is inclined, the angle is positive 
      */
     public double getPitch(){
-        double x = drive.getAccelX();
-        double g = Constants.AutoConstants.gravity;
-        if (x/g > 1 || x/g < -1){
-            return 0;
-        }
-        double angle = Math.asin(x/g);
-        return filter.calculate(angle);
+        return drive.getRoll();
     }
 }

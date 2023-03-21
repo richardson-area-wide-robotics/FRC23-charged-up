@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
@@ -39,7 +40,7 @@ public class RobotContainer {
 
   private double direction = 0.0;
   // The robot's subsystems
-  private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
+  private final AHRS m_gyro = new AHRS();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
@@ -182,12 +183,6 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return AutoChooser.getAuton();
-  }
-
-  public void putAccel(){
-  SmartDashboard.putNumber("Gyro Accel X", m_gyro.getAccelX());
-  SmartDashboard.putNumber("Gyro Accel y", m_gyro.getAccelY());
-  SmartDashboard.putNumber("Gyro Accel z", m_gyro.getAccelZ());
   }
 
   public void autonInit() {

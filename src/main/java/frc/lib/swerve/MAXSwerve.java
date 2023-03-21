@@ -1,5 +1,8 @@
 package frc.lib.swerve;
 
+import java.io.IOException;
+
+import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
@@ -20,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.localization.Localizer;
 
 public class MAXSwerve extends SubsystemBase {
   public enum ModuleLocation {
@@ -45,9 +49,10 @@ public class MAXSwerve extends SubsystemBase {
   private final MAXModule m_frontRight;
   private final MAXModule m_backLeft;
   private final MAXModule m_backRight;
+  private Localizer local;
 
   // The gyro sensor
-  private final ADIS16470_IMU m_gyro;
+  private final AHRS m_gyro;
 
   // The module positions
   private final SwerveModulePosition[] m_ModulePositions;
@@ -79,7 +84,7 @@ public class MAXSwerve extends SubsystemBase {
       MAXModule backRight,
       SwerveDriveKinematics kinematics,
       SwerveModulePosition[] modulePositions,
-      ADIS16470_IMU gyro,
+      AHRS gyro,
       double maxSpeed) {
     m_frontLeft = frontLeft;
     m_frontRight = frontRight;
@@ -168,6 +173,7 @@ public class MAXSwerve extends SubsystemBase {
    */
   public Pose2d getPose() {
     return m_odometry.getPoseMeters();
+    //return new Pose2d(this.local.getRobotPose().getX(), this.local.getRobotPose().getY(), new Rotation2d(m_gyro.getAngle()));
   }
 
   /**
@@ -310,10 +316,6 @@ public class MAXSwerve extends SubsystemBase {
     return new RunCommand(this::stop, this).withName("Swerve Stop");
   }
 
-  public void setHeading(ADIS16470_IMU.IMUAxis heading) {
-    m_gyro.setYawAxis(heading);
-  }
-
   /**
    * Returns the turn rate of the robot.
    *
@@ -324,11 +326,16 @@ public class MAXSwerve extends SubsystemBase {
   }
 
   public double getAngle(){
-    return m_gyro.getAngle();
+    return m_gyro.getAngle() * (Constants.SwerveDriveConstants.kGyroReversed ? -1.0 : 1.0);
   }
 
-  public double getAccelX(){
-    return m_gyro.getAccelX();
+  public double getRoll(){
+    return Math.toRadians(-m_gyro.getRoll());
+  }
+
+  public void putNumber(){
+    SmartDashboard.putNumber("Pitch", m_gyro.getPitch());
+    SmartDashboard.putNumber("Roll", -m_gyro.getRoll());
   }
 
   /**

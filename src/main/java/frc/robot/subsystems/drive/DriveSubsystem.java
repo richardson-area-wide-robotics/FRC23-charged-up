@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.drive;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.PathPlannerTrajectory;
 
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -35,7 +36,7 @@ public class DriveSubsystem extends MAXSwerve {
   static final MAXSwerveModule backRight =
       new MAXSwerveModule(Constants.SwerveDriveConstants.BackRightModule.S_MODULE_CONSTANTS);
 
-  public DriveSubsystem(ADIS16470_IMU m_gyro) {
+  public DriveSubsystem(AHRS m_gyro) {
     super(
         frontLeft,
         frontRight,

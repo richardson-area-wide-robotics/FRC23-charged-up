@@ -191,7 +191,8 @@ public final class Constants {
     public static final PIDController kPYController = new PIDController(0.001, 0, 0.00075);// 1.075 - 0.45
     public static final PIDController kPThetaController = new PIDController(8.0, 0, 0.75);// 6.0 - 0.5
 
-    public static final double gravity = 9.81;
+    public static final PIDGains kMovingPIDGains =
+        new PIDGains(0.3,0, 0.01);
 
 
   }

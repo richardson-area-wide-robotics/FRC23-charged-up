@@ -19,11 +19,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
-import frc.robot.auton.paths.top.TopPark;
+import frc.robot.auton.paths.top.TopMidScore2Park;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.commands.armCommands.ElbowPosition;
 import frc.robot.commands.armCommands.PositionCommand;
-import frc.robot.commands.lockMode.Lock;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.camera.Camera;
@@ -48,11 +47,7 @@ public class RobotContainer {
   //private final Intake intake = new Intake();
   //private final Arm m_arm = new Arm();
 
-  {
-    AutoChooser.setDefaultAuton( new TopPark(m_robotDrive));
-  }
   
-  private Lock lockMode;
   private final Intake intake = new Intake();
   // private final Camera camera = new Camera("Slotheye");
   // private final  RoboState roboCon = new RoboState();
@@ -62,6 +57,10 @@ public class RobotContainer {
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   XboxController m_operatorController = new XboxController(OIConstants.kOperatorControllerPort);
   private final PositionCommand armPositions = new PositionCommand(m_arm, intake);
+
+  {
+    AutoChooser.setDefaultAuton( new TopMidScore2Park(m_robotDrive, m_arm, intake));
+  }
 
 
   

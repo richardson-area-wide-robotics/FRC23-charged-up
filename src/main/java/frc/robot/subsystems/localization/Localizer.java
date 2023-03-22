@@ -45,7 +45,7 @@ public class Localizer extends SubsystemBase{
       currentAprilTagTransform = Optional.of(target.getBestCameraToTarget());
       SmartDashboard.putString("tag", "" + target.getFiducialId()); 
       SmartDashboard.putNumber("PoseX", getRobotPose().getX());
-    SmartDashboard.putNumber("PoseY", getRobotPose().getY());   
+    SmartDashboard.putNumber("PoseY", getRobotPose().getY());
     SmartDashboard.putNumber("X rotation", getRobotPose().getRotation().getX());
     SmartDashboard.putNumber("Y rotation", getRobotPose().getRotation().getY());        
   }

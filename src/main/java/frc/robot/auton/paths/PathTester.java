@@ -1,17 +1,16 @@
-package frc.robot.auton.paths.top;
+package frc.robot.auton.paths;
 
 import com.pathplanner.lib.PathPlannerTrajectory;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.Constants;
 import frc.robot.auton.util.AutonBase;
 import frc.robot.auton.util.AutonUtil;
 import frc.robot.subsystems.drive.DriveSubsystem;
 
-public class TopTest extends AutonBase {
-    public TopTest(DriveSubsystem drive) {
+public class PathTester extends AutonBase {
+    public PathTester(DriveSubsystem drive) {
     
     PathPlannerTrajectory parkingPath = AutonUtil.loadTrajectory("Top-Simple-Park", 2.0, 5.0);
 

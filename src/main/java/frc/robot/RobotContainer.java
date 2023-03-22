@@ -25,6 +25,7 @@ import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
 import frc.robot.auton.commands.BalancingCommand;
 import frc.robot.auton.paths.top.TopMidScore2Park;
+import frc.robot.auton.paths.top.TopMidScore3;
 import frc.robot.auton.paths.top.TopMidScore2P1Park;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.commands.armCommands.PositionCommand;
@@ -58,7 +59,21 @@ public class RobotContainer {
   //private final Arm m_arm = new Arm();
 
   {
-    AutoChooser.setDefaultAuton( new TopMidScore2P1Park(m_robotDrive, intake, m_arm));
+    /* Top Autonomous Routines */
+    new TopMidScore2P1Park(
+      m_robotDrive, 
+      intake, 
+      m_arm);
+    new TopMidScore2Park(
+      m_robotDrive, 
+      m_arm, 
+      intake);
+    new TopMidScore3(
+      m_robotDrive, 
+      intake,
+      m_arm);
+    /* Middle Autonomous Routines */
+    AutoChooser.setDefaultAuton(new TopMidScore2P1Park(m_robotDrive, intake, m_arm));
   }
   
   // private final  RoboState roboCon = new RoboState();

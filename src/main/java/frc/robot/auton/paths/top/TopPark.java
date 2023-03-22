@@ -9,10 +9,11 @@ import frc.lib.swerve.MAXSwerve;
 import frc.robot.Constants;
 import frc.robot.auton.util.AutonBase;
 import frc.robot.auton.util.AutonUtil;
+import frc.robot.subsystems.drive.DriveSubsystem;
 
 public class TopPark extends AutonBase {
     public TopPark(
-    MAXSwerve drive) {
+    DriveSubsystem drive) {
       
     PathPlannerTrajectory parkingPath = AutonUtil.loadTrajectory("Top-Simple-Park", 2.0, 5.0);
 

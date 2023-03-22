@@ -4,8 +4,12 @@
 
 package frc.robot;
 
+import java.io.IOException;
+import java.util.Optional;
+
 import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,6 +27,7 @@ import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.localization.Localizer;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -41,7 +46,7 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
-
+  private Localizer localizer;
   {
     AutoChooser.setDefaultAuton(new TopPark(m_robotDrive));
   }
@@ -55,7 +60,14 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-
+    try{
+      this.localizer = new Localizer("FRONT");
+      updateVisionPose().schedule();
+    } catch (IOException e){
+      e.printStackTrace();
+      this.localizer = null;
+    }
+    
     // Configure the trigger bindings
     configureDriverBindings();
     configureOpperatorBindings();
@@ -182,5 +194,17 @@ public class RobotContainer {
   public void autonInit() {
     m_robotDrive.calibrateGyro();
     m_robotDrive.stop();
+  }
+
+  public Command updateVisionPose(){
+    return new RunCommand(() -> {
+      Optional<Pose3d> pose = localizer.getRobotPose();
+      // more lines here as needed
+      if (!pose.isEmpty()){
+        m_robotDrive.addPoseEstimate(
+        pose.get().toPose2d(),
+        localizer.getPoseTimeStamp().get());
+      }
+    });
   }
 }

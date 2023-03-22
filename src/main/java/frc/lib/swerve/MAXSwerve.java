@@ -3,6 +3,7 @@ package frc.lib.swerve;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Twist2d;
@@ -51,11 +52,12 @@ public class MAXSwerve extends SubsystemBase {
   // The module positions
   private final SwerveModulePosition[] m_ModulePositions;
 
+  // Swerve pose estimator
+  private final SwerveDrivePoseEstimator m_poseEstimator;
+
   // Kinematics
   private final SwerveDriveKinematics m_kinematics;
 
-  // Odometry
-  SwerveDriveOdometry m_odometry;
   private final Field2d m_field = new Field2d();
 
   private final double m_maxSpeed;
@@ -88,8 +90,7 @@ public class MAXSwerve extends SubsystemBase {
     m_kinematics = kinematics;
     m_ModulePositions = modulePositions;
     m_maxSpeed = maxSpeed;
-    m_odometry = new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(getAngle()), modulePositions);
-    //m_odometry = new SwerveDriveOdometry(kinematics, m_gyro.getRotation2d(), modulePositions);
+    m_poseEstimator = new SwerveDrivePoseEstimator(kinematics, Rotation2d.fromDegrees(getAngle()), modulePositions, new Pose2d());
   }
 
   private ChassisSpeeds m_chassisSpeed = new ChassisSpeeds();
@@ -117,7 +118,7 @@ public class MAXSwerve extends SubsystemBase {
 
     m_chassisSpeed = m_kinematics.toChassisSpeeds(getModuleStates());
 
-    m_odometry.update(
+    m_poseEstimator.update(
         Rotation2d.fromDegrees(getAngle()),
         new SwerveModulePosition[] {
           m_frontLeft.getPosition(),
@@ -125,7 +126,8 @@ public class MAXSwerve extends SubsystemBase {
           m_backLeft.getPosition(),
           m_backRight.getPosition()
         });
-    m_field.setRobotPose(m_odometry.getPoseMeters());
+        
+    m_field.setRobotPose(m_poseEstimator.getEstimatedPosition());
   }
 
   /**
@@ -161,12 +163,19 @@ public class MAXSwerve extends SubsystemBase {
   }
 
   /**
-   * Returns the currently-estimated pose of the robot.
-   *
-   * @return The pose.
+   * Returns the vision estimated pose of the robot.
+   * 
+   * @return The pose of the robot with vision estimation.
    */
-  public Pose2d getPose() {
-    return m_odometry.getPoseMeters();
+  public Pose2d getPose(){
+    return m_poseEstimator.getEstimatedPosition();
+  }
+
+  /**
+   * Time in seconds should match up with time called from Timer.getFPGATimestamp() 
+   */
+  public void addPoseEstimate(Pose2d poseMeasurement, double timestampSeconds){
+    m_poseEstimator.addVisionMeasurement(poseMeasurement, timestampSeconds);
   }
 
   /**
@@ -175,8 +184,7 @@ public class MAXSwerve extends SubsystemBase {
    * @param pose The pose to which to set the odometry.
    */
   public void resetOdometry(Pose2d pose) {
-    m_odometry.resetPosition(Rotation2d.fromDegrees(getAngle()), getModulePositions(), pose);
-    //m_odometry.resetPosition(m_gyro.getRotation2d(), getModulePositions(), pose);
+    m_poseEstimator.resetPosition(Rotation2d.fromDegrees(getAngle()), getModulePositions(), pose);
   }
 
   /**
@@ -297,20 +305,12 @@ public class MAXSwerve extends SubsystemBase {
     // return m_gyro.getRotation2d().getDegrees();
   }
 
-  public double getAdjustedAngle(){
-    return 0.0;
-  }
-
   public void stop() {
     drive(0.0, 0.0, 0.0, false);
   }
 
   public Command stopCommand() {
     return new RunCommand(this::stop, this).withName("Swerve Stop");
-  }
-
-  public void setHeading(ADIS16470_IMU.IMUAxis heading) {
-    m_gyro.setYawAxis(heading);
   }
 
   /**

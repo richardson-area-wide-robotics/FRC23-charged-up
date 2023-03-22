@@ -5,6 +5,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
@@ -21,6 +22,7 @@ public class Localizer extends SubsystemBase{
   private PhotonCamera camera;
   private Optional<Transform3d> currentAprilTagTransform;
   private Optional<Integer> currentAprilTagID;
+  private Optional<Double> currentTimeStamp;
 
   public Localizer(String name) throws IOException {
     String path = Filesystem.getDeployDirectory().getPath() + filename;
@@ -43,24 +45,28 @@ public class Localizer extends SubsystemBase{
       SmartDashboard.putNumber("tag seen", target.getFiducialId());
       currentAprilTagID = Optional.of(target.getFiducialId());
       currentAprilTagTransform = Optional.of(target.getBestCameraToTarget());
+      currentTimeStamp = Optional.of(result.getTimestampSeconds());
       SmartDashboard.putString("tag", "" + target.getFiducialId()); 
-      SmartDashboard.putNumber("PoseX", getRobotPose().getX());
-    SmartDashboard.putNumber("PoseY", getRobotPose().getY());
-    SmartDashboard.putNumber("X rotation", getRobotPose().getRotation().getX());
-    SmartDashboard.putNumber("Y rotation", getRobotPose().getRotation().getY());        
-  }
+      SmartDashboard.putNumber("PoseX", getRobotPose().get().getX());
+      SmartDashboard.putNumber("PoseY", getRobotPose().get().getY());     
+    }
+    else {
+      currentAprilTagTransform = Optional.empty();
+      currentAprilTagID = Optional.empty();
+      currentTimeStamp = Optional.empty();
+    }
 
   }
 
   public void start() {
   }
 
-  public Pose3d getRobotPose()
+  public Optional<Pose3d> getRobotPose()
   {
-    Pose3d posePlus = new Pose3d();
+    Optional<Pose3d> posePlus = Optional.empty();
     if(currentAprilTagTransform.isPresent() && currentAprilTagID.isPresent())
     {
-      posePlus = findPoseTransform(currentAprilTagTransform.get(), currentAprilTagID.get());
+      posePlus = Optional.of(findPoseTransform(currentAprilTagTransform.get(), currentAprilTagID.get()));
     }
 
     return posePlus;
@@ -74,6 +80,10 @@ public class Localizer extends SubsystemBase{
       robotPosition = tagPose.get().transformBy(pose);
   }
     return robotPosition;
+  }
+
+  public Optional<Double> getPoseTimeStamp(){
+    return currentTimeStamp;
   }
 
   //TODO future work Add method to find pose/transform for desired position in front of node

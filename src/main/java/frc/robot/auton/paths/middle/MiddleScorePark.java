@@ -39,7 +39,7 @@ public class MiddleScorePark extends AutonBase {
         return;
     }
 
-    addCommandsWithLog("Top park",
+    addCommandsWithLog("Mid Score and Park",
       new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"),
       new RunCommand(()-> intake.manipulates(-1.0), intake)
       .raceWith(armPositions.autonArmScoreConeHighCommand())

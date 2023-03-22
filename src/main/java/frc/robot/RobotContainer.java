@@ -26,6 +26,12 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.auton.commands.BalancingCommand;
 import frc.robot.auton.paths.top.TopMidScore2Park;
 import frc.robot.auton.paths.top.TopMidScore3;
+import frc.robot.auton.paths.bottom.BottomMidScore2;
+import frc.robot.auton.paths.bottom.BottomMidScore2Park;
+import frc.robot.auton.paths.bottom.BottomMidScore3;
+import frc.robot.auton.paths.bottom.BottomMidScoreP1;
+import frc.robot.auton.paths.middle.MiddleScoreP1Park;
+import frc.robot.auton.paths.middle.MiddleScorePark;
 import frc.robot.auton.paths.top.TopMidScore2P1Park;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.commands.armCommands.PositionCommand;
@@ -47,6 +53,7 @@ public class RobotContainer {
 
   private boolean mode = false;
   private double direction = 0.0;
+
   // The robot's subsystems
   private final AHRS m_gyro = new AHRS();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
@@ -55,8 +62,6 @@ public class RobotContainer {
   private Lights lights;
   private LightsController lightsController;
   private Localizer m_localizer;
-  //private final Intake intake = new Intake();
-  //private final Arm m_arm = new Arm();
 
   {
     /* Top Autonomous Routines */
@@ -73,6 +78,31 @@ public class RobotContainer {
       intake,
       m_arm);
     /* Middle Autonomous Routines */
+    new MiddleScorePark(
+      m_robotDrive, 
+      intake, 
+      m_arm);
+    new MiddleScoreP1Park(
+      m_robotDrive, 
+      intake, 
+      m_arm);
+    /* Bottom Autonomous Routines */
+    new BottomMidScore2(
+    m_robotDrive, 
+    intake, 
+    m_arm);
+    new BottomMidScore2Park(
+    m_robotDrive, 
+    intake, 
+    m_arm);
+    new BottomMidScore3(
+    m_robotDrive, 
+    intake, 
+    m_arm);
+    new BottomMidScoreP1(
+    m_robotDrive, 
+    intake, 
+    m_arm);
     AutoChooser.setDefaultAuton(new TopMidScore2P1Park(m_robotDrive, intake, m_arm));
   }
   

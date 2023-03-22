@@ -19,11 +19,11 @@ import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 
-public class BottomMidScore2Park extends AutonBase {
+public class BottomMidScore2 extends AutonBase {
     public PositionCommand armPositions;
     public BalancingCommand balance;
     
-    public BottomMidScore2Park(
+    public BottomMidScore2(
     DriveSubsystem drive, 
     Intake intake,
     Arm m_arm){
@@ -57,5 +57,6 @@ public class BottomMidScore2Park extends AutonBase {
   }
 
  }
+
 
 

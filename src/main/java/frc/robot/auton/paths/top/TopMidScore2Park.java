@@ -47,7 +47,7 @@ public class TopMidScore2Park extends AutonBase {
         return;
     }
 
-    addCommandsWithLog("Top park",
+    addCommandsWithLog("Top Score 2 and Park",
       new RunCommand(()-> intake.manipulates(-1.0), intake)
       .raceWith(armPositions.armScoreConeMidCommand())
       .andThen(new WaitCommand(0.5))

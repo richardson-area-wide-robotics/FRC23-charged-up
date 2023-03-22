@@ -1,5 +1,5 @@
 package frc.robot.auton.paths.middle;
 
-public class MiddleScore {
+public class MiddleScoreP1Park {
     
 }

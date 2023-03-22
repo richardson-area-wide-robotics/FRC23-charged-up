@@ -28,7 +28,8 @@ public class TopMidScore2Park extends AutonBase {
 
     public TopMidScore2Park(
     DriveSubsystem drive,
-    Arm m_arm, Intake intake) {
+    Arm m_arm, 
+    Intake intake) {
       
     List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-2-Mid-Park-Test", new PathConstraints(3.85, 5.0), new PathConstraints(3.0, 4.7));
     HashMap<String, Command> eventMap = new HashMap<>();

@@ -28,7 +28,8 @@ public class TopMidScore3 extends AutonBase {
     public PathPlannerServer server = new PathPlannerServer();
 
     public TopMidScore3(
-    DriveSubsystem drive, Intake intake,
+    DriveSubsystem drive, 
+    Intake intake,
     Arm m_arm) {
       
     List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-3-Mid", new PathConstraints(2.75, 4.5), new PathConstraints(3.0, 5.0));

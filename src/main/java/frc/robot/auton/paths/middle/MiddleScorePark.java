@@ -23,7 +23,9 @@ public class MiddleScorePark extends AutonBase {
     public PositionCommand armPositions;
     public BalancingCommand balance;
     
-    public MiddleScorePark(DriveSubsystem drive, Intake intake,
+    public MiddleScorePark(
+    DriveSubsystem drive, 
+    Intake intake,
     Arm m_arm){
 
     List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score", new PathConstraints(1.5, 3.5));

@@ -7,14 +7,10 @@ import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
-
 import frc.robot.Constants;
-import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import java.util.EnumMap;
 
 public class Arm extends SubsystemBase {
 
@@ -31,10 +27,6 @@ public class Arm extends SubsystemBase {
   private SparkMaxPIDController armPIDController;
   private SparkMaxPIDController elbowPIDController;  
 
-  // Feedforward
-  private ArmFeedforward elbowFF;
-  private ArmFeedforward armFF;
-
   // Encoders
   private AbsoluteEncoder armEncoder;
   private AbsoluteEncoder elbowEncoder;
@@ -46,7 +38,6 @@ public class Arm extends SubsystemBase {
   // last arm positions
   private double lastArmPosition;
   private double lastElbowPosition;
-
 
   // set up the arm congfiguration
   public void armConfig(CANSparkMax motor, AbsoluteEncoder enc){
@@ -153,8 +144,6 @@ public class Arm extends SubsystemBase {
     this.lastArmPosition = currentArmPosition;
     this.lastElbowPosition = currentElbowPosition;
 
-    elbowFF = Constants.ArmConstants.ELBOW_MOTOR_FEEDFORWARD;
-    armFF = Constants.ArmConstants.ARM_MOTOR_FEEDFORWARD;
   }
 
   // getting relative encoder position of the arm

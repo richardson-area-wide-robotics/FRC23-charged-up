@@ -6,10 +6,8 @@ package frc.robot.subsystems.drive;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.PathPlannerTrajectory;
-
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.util.sendable.SendableBuilder;
-import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.swerve.MAXSwerve;
 import frc.robot.Constants;
@@ -53,9 +51,6 @@ public class DriveSubsystem extends MAXSwerve {
         Constants.SwerveDriveConstants.kMaxSpeedMetersPerSecond);
   }
 
-
-
-  // TODO: Add sendable data for controllers during autonomous mode
   @Override
   public void initSendable(SendableBuilder builder) {
     super.initSendable(builder);

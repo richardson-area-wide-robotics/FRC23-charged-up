@@ -19,11 +19,7 @@ public abstract class AutonBase extends SequentialCommandGroup {
     AutoChooser.addAuton(this, name);
   }
 
-
-// TODO: Possibly look into a low priority issue for changing printing to logging 
   public void addCommandsWithLog(String tag, Command... commands) {
-    // Add Printing to each command
-
     // Print start of group
     super.addCommands(
         new InstantCommand(

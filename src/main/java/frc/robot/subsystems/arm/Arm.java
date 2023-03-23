@@ -6,6 +6,7 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import frc.robot.Constants;
 import edu.wpi.first.math.controller.PIDController;
@@ -45,8 +46,6 @@ public class Arm extends SubsystemBase {
     motor.restoreFactoryDefaults();
     // set motor basic values
     motor.setIdleMode(Constants.ArmConstants.kMotorIdleMode);
-    // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
-    // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
     // set the arm PID controllers
     motor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
     armPIDController = motor.getPIDController();
@@ -58,25 +57,20 @@ public class Arm extends SubsystemBase {
     armPIDController.setD(armPID.getD());
     armPIDController.setOutputRange(
         Constants.ArmConstants.MIN_OUTPUT, Constants.ArmConstants.MAX_OUTPUT);
-  //       motor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 20);
-  //       motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 200);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 20);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 200);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 200);
-// motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.ArmConstants.ARM_FORWARD_LIMIT);
-//     motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.ArmConstants.ARM_REVERSE_LIMIT);
-  
+    motor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 20);
+    motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
+    motor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 200);
+    motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 20);
+    motor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 200);
+    motor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 200);
   }
 
   // set up the elbow congfiguration
   public void elbowConfig(CANSparkMax motor, AbsoluteEncoder enc){
- // restore factory defaults
- motor.restoreFactoryDefaults();
- // set motor basic values
- motor.setIdleMode(Constants.ArmConstants.kMotorIdleMode);
- // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
- // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
+  // restore factory defaults
+  motor.restoreFactoryDefaults();
+  // set motor basic values
+  motor.setIdleMode(Constants.ArmConstants.kMotorIdleMode);
   motor.setSmartCurrentLimit(Constants.ArmConstants.kElbowMotorCurrentLimit);
   elbowPIDController = motor.getPIDController();
   elbowPIDController.setFeedbackDevice(enc);
@@ -87,14 +81,12 @@ public class Arm extends SubsystemBase {
   elbowPIDController.setD(elbowPID.getD());
   elbowPIDController.setOutputRange(
       Constants.ArmConstants.MIN_OUTPUT, Constants.ArmConstants.MAX_OUTPUT);
-  //     motor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 20);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 200);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 20);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 200);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 200);
-      // motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.ArmConstants.ELBOW_FORWARD_LIMIT);
-      // motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.ArmConstants.ELBOW_REVERSE_LIMIT);
+  motor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 20);
+  motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
+  motor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 200);
+  motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 20);
+  motor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 200);
+  motor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 200);
   }
 
   public Arm() {
@@ -116,10 +108,7 @@ public class Arm extends SubsystemBase {
     elbowEncoder.setPositionConversionFactor(Constants.ArmConstants.kElbowEncoderPositionFactor);
     elbowEncoder.setVelocityConversionFactor(Constants.ArmConstants.kElbowEncoderVelocityFactor);
 
-    // this.resetArmPosition();
-
     // setting the motor configuration
-    // armConfig(leftMotor, armEncoder, false);
     armConfig(rightMotor, armEncoder);
     elbowConfig(elbowMotor, elbowEncoder);
 
@@ -132,12 +121,6 @@ public class Arm extends SubsystemBase {
     leftMotor.burnFlash();
     rightMotor.burnFlash();
     elbowMotor.burnFlash();
-
-    // armPositions.put(armPosition.INTAKE_ARM_POSITION_GROUND,  Constants.ArmConstants.INTAKE_ARM_GROUND);
-    // armPositions.put(armPosition.INTAKE_ARM_POSITION_SHELF,  Constants.ArmConstants.INTAKE_ARM_SHELF);
-    // armPositions.put(armPosition.SCORING_ARM_POSITION_LOW,  Constants.ArmConstants.SCORING_ARM_LOW);
-    // armPositions.put(armPosition.SCORING_ARM_POSITION_MID, Constants.ArmConstants. SCORING_ARM_MID);
-    // armPositions.put(armPosition.INTAKE_ARM_POSITION_STOWED,  Constants.ArmConstants.INTAKE_ARM_STOWED);
 
     this.currentArmPosition = Constants.ArmConstants.ARM_STOWED;
     this.currentElbowPosition = Constants.ArmConstants.ELBOW_STOWED;
@@ -193,88 +176,13 @@ public class Arm extends SubsystemBase {
     return this.armEncoder.getVelocity(); 
   }
 
-  public void moveElbowPosition(int armPosition){
-    if(armPosition == 0){
-      this.currentElbowPosition = Constants.ArmConstants.ELBOW_PICK_UP_SHELF;
-    }
-    if(armPosition == 1){
-      this.currentElbowPosition = Constants.ArmConstants.ELBOW_PICK_UP_TCONE;
-    }
-    else if(armPosition == 2){
-      this.currentElbowPosition = Constants.ArmConstants.ELBOW_PICK_UP_CONE;
-    }
-    else if(armPosition == 3){
-      this.currentElbowPosition = Constants.ArmConstants.ELBOW_PICK_UP_CUBE;
-    }
-    else if(armPosition == 4){
-      this.currentElbowPosition = Constants.ArmConstants.ELBOW_SCORE_CUBE_LOW;
-    }
-    else if(armPosition == 5){
-      this.currentElbowPosition = Constants.ArmConstants.ELBOW_SCORE_CONE_LOW;
-    }
-    else if(armPosition == 6){
-      this.currentElbowPosition = Constants.ArmConstants.ELBOW_SCORE_CONE_MID;
-    }
-    else if(armPosition == 7){
-      this.currentElbowPosition = Constants.ArmConstants.ELBOW_SCORE_CUBE_MID;
-    }
-    else if(armPosition == 8){
-      this.currentElbowPosition = Constants.ArmConstants.ELBOW_SCORE_CONE_HIGH;
-    }
-    else if(armPosition == 9){
-      this.currentElbowPosition = Constants.ArmConstants.ELBOW_SCORE_CUBE_HIGH;
-    }
-    else if(armPosition == 10){
-      this.currentElbowPosition = Constants.ArmConstants.ELBOW_STOWED;
-    }
-    else if(armPosition == 11){
-      this.currentElbowPosition = Constants.ArmConstants.ELBOW_IDLE;
-    }
-  }
-
-  // arm movement controls using PID loop
-  public void moveArmToPosition(int armPosition) {
-
-    if(armPosition == 0){
-      this.currentArmPosition = Constants.ArmConstants.ARM_PICK_UP_SHELF;
-    }
-    if(armPosition == 1){
-      this.currentArmPosition = Constants.ArmConstants.ARM_PICK_UP_TCONE;
-    }
-    else if(armPosition == 2){
-      this.currentArmPosition = Constants.ArmConstants.ARM_PICK_UP_CONE;
-    }
-    else if(armPosition == 3){
-      this.currentArmPosition = Constants.ArmConstants.ARM_PICK_UP_CUBE;
-    }
-    else if(armPosition == 4){
-      this.currentArmPosition = Constants.ArmConstants.ARM_SCORE_CUBE_LOW;
-    }
-    else if(armPosition == 5){
-      this.currentArmPosition = Constants.ArmConstants.ARM_SCORE_CONE_LOW;
-    }
-    else if(armPosition == 6){
-      this.currentArmPosition = Constants.ArmConstants.ARM_SCORE_CONE_MID;
-    }
-    else if(armPosition == 7){
-      this.currentArmPosition = Constants.ArmConstants.ARM_SCORE_CUBE_MID;
-    }
-    else if(armPosition == 8){
-      this.currentArmPosition = Constants.ArmConstants.ARM_SCORE_CONE_HIGH;
-    }
-    else if(armPosition == 9){
-      this.currentArmPosition = Constants.ArmConstants.ARM_SCORE_CUBE_HIGH;
-    }
-    else if(armPosition == 10){
-      this.currentArmPosition = Constants.ArmConstants.ARM_STOWED;
-    }
-  }
-
   public void setArmPosition(double position) {
+    lastArmPosition = currentArmPosition;
     currentArmPosition = position;
   }
 
   public void setElbowPosition(double position) {
+    lastElbowPosition = currentElbowPosition;
     currentElbowPosition = position;
   }
 
@@ -303,8 +211,5 @@ public class Arm extends SubsystemBase {
     SmartDashboard.putNumber("outputcurrent for right", outputrightcurrent());
 
     elbowPIDController.setReference(currentElbowPosition, ControlType.kPosition/* , 1, elbowFF.calculate(elbowPID.getSetpoint().position, elbowPID.getSetpoint().velocity)*/);
-
-    lastArmPosition = currentArmPosition;
-    lastElbowPosition = currentElbowPosition;
   }
 }

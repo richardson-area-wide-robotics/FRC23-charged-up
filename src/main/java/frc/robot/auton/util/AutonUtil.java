@@ -5,6 +5,7 @@ import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.Command;
 
 public class AutonUtil {
     private static HashMap<String, PathPlannerTrajectory> m_cache = new HashMap<>();
@@ -54,5 +55,10 @@ public class AutonUtil {
         m_cache.put(cacheKey_, trajectory);
     
         return trajectory;
+      }
+
+      public static HashMap<String, Command> loadEventMap(){
+        HashMap<String, Command> eventMap = new HashMap<>();
+        return eventMap;
       }
 }

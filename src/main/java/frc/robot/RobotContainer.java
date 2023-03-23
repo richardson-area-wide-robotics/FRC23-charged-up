@@ -5,6 +5,7 @@
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.pathplanner.lib.server.PathPlannerServer;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import java.io.IOException;

@@ -5,6 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+
+import com.pathplanner.lib.server.PathPlannerServer;
 import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.math.util.Units;
 import java.io.IOException;
@@ -35,7 +37,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    
+    PathPlannerServer.startServer(5803);
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     DriverStation.silenceJoystickConnectionWarning(!Constants.kCompetitionMode);

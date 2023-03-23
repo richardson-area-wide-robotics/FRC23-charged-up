@@ -6,23 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import com.revrobotics.CANSparkMax.IdleMode;
-import edu.wpi.first.math.util.Units;
-import java.io.IOException;
-import java.net.http.HttpResponse.PushPromiseHandler;
-
-import edu.wpi.first.wpilibj.RobotController;
-
-
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Constants.LEDConstants;
-import frc.robot.subsystems.arm.ArmKinematics;
 import frc.robot.subsystems.led_strip.LEDStrip;
-import frc.robot.subsystems.localization.Localizer;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -33,12 +22,7 @@ import frc.robot.subsystems.localization.Localizer;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  private ArmKinematics mArmKinematics;
   private LEDStrip m_LEDStrip;
-
-  private double autonStart = 0;
-  //In seconds
-  private double autonDuration = 1;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -50,7 +34,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     DriverStation.silenceJoystickConnectionWarning(!Constants.kCompetitionMode);
-    mArmKinematics = new ArmKinematics(0.559, 0.652);
     m_robotContainer = new RobotContainer();
 
     // m_LEDStrip = 

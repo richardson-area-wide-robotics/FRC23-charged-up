@@ -38,6 +38,7 @@ import frc.robot.subsystems.led_strip.LEDStrip;
 import java.util.function.BooleanSupplier;
 import frc.robot.subsystems.RoboState;
 import frc.robot.subsystems.localization.Localizer;
+import frc.robot.commands.SolidLeds;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -54,7 +55,7 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
-  // private final LEDStrip m_LEDStripLeft;
+  private final LEDStrip m_LEDStrip;
   // //private final LEDStrip m_LEDStripRight;
   // private final LEDStrip[] m_LEDStrips;
 
@@ -75,8 +76,9 @@ public class RobotContainer {
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    //  m_LEDStripLeft = 
-    //   new LEDStrip(LEDConstants.LED_STRIP_PORT, LEDConstants.LED_STRIP_LENGTH);
+     m_LEDStrip = 
+      new LEDStrip(LEDConstants.LED_STRIP_PORT, LEDConstants.LED_STRIP_LENGTH);
+
     //  //m_LEDStripRight =
     //  // new LEDStrip(LEDConstants.LED_STRIP_RIGHT_PORT, LEDConstants.LED_STRIP_RIGHT_LENGTH);
     //   m_LEDStrips = new LEDStrip[] {m_LEDStripLeft};
@@ -216,10 +218,11 @@ public class RobotContainer {
     // Standing Cone 
     new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
     // Pick up Cube 
-    new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(armPositions.armPickUpCubeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
+    new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(armPositions.armPickUpCubeCommand().alongWith(new SolidLeds(m_LEDStrip, LEDConstants.PURPLE))).whileTrue(new RunCommand(()-> intake.manipulates(1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
     // Shelf 
-    new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0)));
+    new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0)).alongWith(new SolidLeds(m_LEDStrip, LEDConstants.YELLOW)));
 
+    new JoystickButton(m_operatorController, XboxController.Button.kRightBumper.value).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.PURPLE));
     // new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)
     //     .whileTrue(new SetLEDColor(m_LEDStrips, LEDConstants.YELLOW));
 
@@ -243,16 +246,16 @@ public class RobotContainer {
 
     // cone high
     // new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(8)), new WaitCommand(0.3), new InstantCommand(() -> m_arm.moveElbowPosition(8))));
-    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand());
+    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
   // cone mid
     // new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(9)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(9))));
-    new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand());
+    new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
   // cube High
     // new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(7)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(7))));
-    new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(armPositions.armScoreCubeHighCommand());
+    new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(armPositions.armScoreCubeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
   // cube mid
     // new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(6)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(6))));
-    new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand());
+    new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
     // shelf
     // new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(0)), new WaitCommand(0.7), new InstantCommand(() -> m_arm.moveArmToPosition(0))));
 

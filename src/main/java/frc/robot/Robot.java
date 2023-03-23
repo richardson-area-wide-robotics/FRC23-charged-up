@@ -53,10 +53,10 @@ public class Robot extends TimedRobot {
     mArmKinematics = new ArmKinematics(0.559, 0.652);
     m_robotContainer = new RobotContainer();
 
-    m_LEDStrip = 
-    new LEDStrip(LEDConstants.LED_STRIP_PORT, LEDConstants.LED_STRIP_LENGTH);
+    // m_LEDStrip = 
+    // new LEDStrip(LEDConstants.LED_STRIP_PORT, LEDConstants.LED_STRIP_LENGTH);
 
-    m_LEDStrip.setSolidColor(LEDConstants.YELLOW);
+    // m_LEDStrip.setSolidColor(LEDConstants.YELLOW);
     
   }
 

@@ -339,8 +339,10 @@ public static final boolean kCompetitionMode = false;
   public static final class LEDConstants {
     public static final int LED_STRIP_PORT = 8;
     public static final int LED_STRIP_LENGTH = 50;
-    public static final int[] PURPLE = {138, 43, 226};
+    public static final int[] PURPLE = {226, 43, 226};
     public static final int[] YELLOW = {255, 255, 0};
+    public static final int[] GREEN = {0, 255, 0};
+    public static final int[] BLUE = {0, 150, 150};
     public static final double FLASH_PERIOD = 0.5; // in seconds
   }
 

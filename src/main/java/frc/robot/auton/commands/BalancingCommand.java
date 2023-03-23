@@ -30,8 +30,6 @@ public class BalancingCommand extends CommandBase{
     ){
 
         double controller = movingController.calculate(getPitch());
-
-        //Math.min(Math.max(controller, -.25), .25);
         
         SmartDashboard.putNumber("Pitch", controller);
         drive.drive(-controller, 0, 0, false);

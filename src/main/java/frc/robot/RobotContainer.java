@@ -28,7 +28,6 @@ import frc.robot.auton.paths.top.TopMidScore3;
 import frc.robot.auton.paths.bottom.BottomMidScore2;
 import frc.robot.auton.paths.bottom.BottomMidScore2Park;
 import frc.robot.auton.paths.bottom.BottomMidScore3;
-import frc.robot.auton.paths.bottom.BottomMidScoreP1;
 import frc.robot.auton.paths.middle.MidScorePark;
 import frc.robot.auton.paths.middle.MidScoreP1Park;
 import frc.robot.auton.paths.top.TopMidScore2P1Park;
@@ -48,7 +47,6 @@ import frc.robot.subsystems.localization.Localizer;
  */
 public class RobotContainer {
 
-  private boolean mode = false;
   private double direction = 0.0;
 
   // The robot's subsystems
@@ -96,10 +94,6 @@ public class RobotContainer {
     intake, 
     m_arm);
     new BottomMidScore3(
-    m_robotDrive, 
-    intake, 
-    m_arm);
-    new BottomMidScoreP1(
     m_robotDrive, 
     intake, 
     m_arm);
@@ -154,13 +148,12 @@ public class RobotContainer {
     //  new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(lockMode);
     
     // Configure default commands
-    m_robotDrive.setDefaultCommand(
-      /* 
+    /* 
        * ---Driving Controls for the driver 
        * The left stick on Xbox controller controls the translation of the robot - 1
        * The right stick controls the rotation of the robot - 12
        */
-  
+    m_robotDrive.setDefaultCommand(
       new RunCommand(
         () ->
           m_robotDrive.drive(
@@ -214,17 +207,6 @@ public class RobotContainer {
      * left Bumper - shelf cone pickup
      *  - shelf cube picup
      */
-    // // pick up tipped cone
-    // new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> System.out.println("Button Presseds")), new ElbowPosition(m_arm, Constants.ArmConstants.ELBOW_IDLE), new WaitCommand(0.2), new InstantCommand(() -> m_arm.moveArmToPosition(1)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(1))));
-    // // stowed
-    // new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.7), new InstantCommand(() -> m_arm.moveArmToPosition(10)), new WaitCommand(1.6), new InstantCommand(() -> m_arm.moveElbowPosition(10))));
-    // //  pick up cube
-    // new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(3)), new WaitCommand(0.3), new InstantCommand(() -> m_arm.moveElbowPosition(3))));
-    // // standing cone 
-    // new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.7), new InstantCommand(() -> m_arm.moveArmToPosition(2)), new WaitCommand(1.0), new InstantCommand(() -> m_arm.moveElbowPosition(2))));
-    // // shelf
-
-
     if (m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_CONE || m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_TCONE || m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_SHELF){
       direction = -0.1;
     } else if (m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_CUBE){
@@ -266,30 +248,15 @@ public class RobotContainer {
     // cube mid
     new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand());
     // shelf
-    // new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(0)), new WaitCommand(0.7), new InstantCommand(() -> m_arm.moveArmToPosition(0))));
-
-     /*
-      * ---Manual arm controls 
-      * Up on the dpad on the controller controls manual intake(elbow) up command
-      * Down on the dpad on the controller controls manual intake(elbow) down command
-      * left on the dpad on the controller controls manual intake(elbow) angle up command
-      * right on the dpad on the controller controls manual intake(elbow) angle down command
-      */
+    
   }
 
-  public double getSparkMax(){
-    // SparkMaxAbsoluteEncoder abs = leftArmMotor.getAbsoluteEncoder(Type.kDutyCycle);
-    // return (abs.getPosition() * 2 * Math.PI) /*- Units.degreesToRadians()*/;
-    return m_arm.getArmAbsoluteEncoder();
-  }
-
-  public double getElbowSparkMax(){
-    // SparkMaxAbsoluteEncoder abs = ElbowMotor.getAbsoluteEncoder(Type.kDutyCycle);
-    // return abs.getPosition() * 2 * Math.PI;
-    return m_arm.getElbowAbsoluteEncoder();
-  }
-
-  public void getIdleMode(IdleMode idleMode){
+  /**
+   * Sets the idle mode for the arm and intake joints
+   * 
+   * Used to make the robot arm easier to move when disabled
+   */
+  public void setIdleMode(IdleMode idleMode){
       m_arm.getSparkStatus(idleMode);
   }
   
@@ -303,8 +270,15 @@ public class RobotContainer {
     return AutoChooser.getAuton();
   }
 
-  public void putAngle(){
+  /**
+   * Use this method to pass anythign to the dashboard 
+   * 
+   * Reduces multi method use to Shuffleboard
+   */
+  public void putDashboard(){
     SmartDashboard.putNumber("Gyro Angle", m_robotDrive.getAngle());
+    SmartDashboard.putNumber("Arm encoder", m_arm.getArmAbsoluteEncoder());
+    SmartDashboard.putNumber("encoder elbow", m_arm.getElbowAbsoluteEncoder());
     m_robotDrive.putNumber();
   }
 

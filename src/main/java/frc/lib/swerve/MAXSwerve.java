@@ -1,5 +1,6 @@
 package frc.lib.swerve;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
@@ -12,8 +13,8 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.sendable.SendableBuilder;
-import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -46,7 +47,7 @@ public class MAXSwerve extends SubsystemBase {
   private final MAXModule m_backRight;
 
   // The gyro sensor
-  private final ADIS16470_IMU m_gyro;
+  private final AHRS m_gyro;
 
   // The module positions
   private final SwerveModulePosition[] m_ModulePositions;
@@ -78,7 +79,7 @@ public class MAXSwerve extends SubsystemBase {
       MAXModule backRight,
       SwerveDriveKinematics kinematics,
       SwerveModulePosition[] modulePositions,
-      ADIS16470_IMU gyro,
+      AHRS gyro,
       double maxSpeed) {
     m_frontLeft = frontLeft;
     m_frontRight = frontRight;
@@ -167,6 +168,7 @@ public class MAXSwerve extends SubsystemBase {
    */
   public Pose2d getPose() {
     return m_odometry.getPoseMeters();
+    //return new Pose2d(this.local.getRobotPose().getX(), this.local.getRobotPose().getY(), new Rotation2d(m_gyro.getAngle()));
   }
 
   /**
@@ -309,10 +311,6 @@ public class MAXSwerve extends SubsystemBase {
     return new RunCommand(this::stop, this).withName("Swerve Stop");
   }
 
-  public void setHeading(ADIS16470_IMU.IMUAxis heading) {
-    m_gyro.setYawAxis(heading);
-  }
-
   /**
    * Returns the turn rate of the robot.
    *
@@ -323,7 +321,16 @@ public class MAXSwerve extends SubsystemBase {
   }
 
   public double getAngle(){
-    return m_gyro.getAngle();
+    return m_gyro.getAngle() * (Constants.SwerveDriveConstants.kGyroReversed ? -1.0 : 1.0);
+  }
+
+  public double getRoll(){
+    return Math.toRadians(-m_gyro.getRoll());
+  }
+
+  public void putNumber(){
+    SmartDashboard.putNumber("Pitch", m_gyro.getPitch());
+    SmartDashboard.putNumber("Roll", -m_gyro.getRoll());
   }
 
   /**

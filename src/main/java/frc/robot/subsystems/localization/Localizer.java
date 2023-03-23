@@ -22,34 +22,34 @@ public class Localizer extends SubsystemBase{
   private Optional<Transform3d> currentAprilTagTransform;
   private Optional<Integer> currentAprilTagID;
 
-  public Localizer() throws IOException {
+  public Localizer(String name) throws IOException {
     String path = Filesystem.getDeployDirectory().getPath() + filename;
     fieldLayout = new AprilTagFieldLayout(path);
 
     String nodePositionPath = Filesystem.getDeployDirectory().getPath() + nodePositionFilename;
     nodeLayout = new NodePositionLayout(nodePositionPath);
     
-    camera = new PhotonCamera("Slotheye");
+    camera = new PhotonCamera(name);
   }
 
   @Override
   public void periodic() {
     PhotonPipelineResult result = camera.getLatestResult();
-    PhotonTrackedTarget target = result.getBestTarget();
+    boolean hasTargets = result.hasTargets();
 
-    if(target!=null)
+    if(hasTargets)
     {
-
+      PhotonTrackedTarget target = result.getBestTarget();
       SmartDashboard.putNumber("tag seen", target.getFiducialId());
-
       currentAprilTagID = Optional.of(target.getFiducialId());
       currentAprilTagTransform = Optional.of(target.getBestCameraToTarget());
-      SmartDashboard.putString("tag", "" + target.getFiducialId());         
+      SmartDashboard.putString("tag", "" + target.getFiducialId()); 
+      SmartDashboard.putNumber("PoseX", getRobotPose().getX());
+    SmartDashboard.putNumber("PoseY", getRobotPose().getY());
+    SmartDashboard.putNumber("X rotation", getRobotPose().getRotation().getX());
+    SmartDashboard.putNumber("Y rotation", getRobotPose().getRotation().getY());        
   }
-  else{
-    currentAprilTagID = Optional.of(null);
-    currentAprilTagTransform = Optional.of(null);
-  }
+
   }
 
   public void start() {

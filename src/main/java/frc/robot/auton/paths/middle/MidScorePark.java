@@ -28,7 +28,7 @@ public class MidScorePark extends AutonBase {
     Intake intake,
     Arm m_arm){
 
-    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score", new PathConstraints(1.5, 3.5));
+    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Mid-Score-Park", new PathConstraints(1.5, 3.5));
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
@@ -48,7 +48,8 @@ public class MidScorePark extends AutonBase {
       .andThen(armPositions.armStowCommand())
       .andThen(new WaitCommand(0.5))
       .andThen(drive.trajectoryFollowerCommand(pathGroup.get(0)))
-      .andThen(balance).andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive)));
+      .andThen(balance)
+      .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive)));
     }
 
     @Override

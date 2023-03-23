@@ -30,8 +30,8 @@ import frc.robot.auton.paths.bottom.BottomMidScore2;
 import frc.robot.auton.paths.bottom.BottomMidScore2Park;
 import frc.robot.auton.paths.bottom.BottomMidScore3;
 import frc.robot.auton.paths.bottom.BottomMidScoreP1;
-import frc.robot.auton.paths.middle.MiddleScoreP1Park;
-import frc.robot.auton.paths.middle.MiddleScorePark;
+import frc.robot.auton.paths.middle.MidScorePark;
+import frc.robot.auton.paths.middle.MidScoreP1Park;
 import frc.robot.auton.paths.top.TopMidScore2P1Park;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.commands.armCommands.PositionCommand;
@@ -78,11 +78,11 @@ public class RobotContainer {
       intake,
       m_arm);
     /* Middle Autonomous Routines */
-    new MiddleScorePark(
+    new MidScoreP1Park(
       m_robotDrive, 
       intake, 
       m_arm);
-    new MiddleScoreP1Park(
+    new MidScorePark(
       m_robotDrive, 
       intake, 
       m_arm);
@@ -118,10 +118,9 @@ public class RobotContainer {
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-     
     // m_localizer = localizer;
-    this.lights = new Lights(9, 60, 50);
-    this.lightsController = new LightsController(this.lights);
+    // this.lights = new Lights(9, 60, 50);
+    // this.lightsController = new LightsController(this.lights);
     try {
       this.m_localizer = new Localizer("BACK");
     } catch (IOException e) {
@@ -327,7 +326,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand(){
-    // AutoChooser.addAuton(, "Top-Park");
+    System.out.println("Auton Selected" + AutoChooser.getAuton().getName());
     return AutoChooser.getAuton();
   }
 
@@ -336,6 +335,7 @@ public class RobotContainer {
     m_robotDrive.putNumber();
   }
 
+  /** Run a function at the start of auton. */
   public void autonInit(){
     m_robotDrive.calibrateGyro();
     m_robotDrive.stop();

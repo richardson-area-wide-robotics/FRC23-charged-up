@@ -19,11 +19,11 @@ import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 
-public class MiddleScorePark extends AutonBase {
+public class MidScorePark extends AutonBase {
     public PositionCommand armPositions;
     public BalancingCommand balance;
     
-    public MiddleScorePark(
+    public MidScorePark(
     DriveSubsystem drive, 
     Intake intake,
     Arm m_arm){
@@ -39,7 +39,7 @@ public class MiddleScorePark extends AutonBase {
         return;
     }
 
-    addCommandsWithLog("Mid Score and Park",
+    addCommandsWithLog("Mid Score+1 and Park",
       new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"),
       new RunCommand(()-> intake.manipulates(-1.0), intake)
       .raceWith(armPositions.autonArmScoreConeHighCommand())

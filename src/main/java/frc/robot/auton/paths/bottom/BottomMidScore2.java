@@ -1,5 +1,6 @@
 package frc.robot.auton.paths.bottom;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.pathplanner.lib.PathConstraints;
@@ -8,6 +9,7 @@ import com.pathplanner.lib.PathPlannerTrajectory;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.util.sendable.SendableBuilder;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -29,10 +31,15 @@ public class BottomMidScore2 extends AutonBase {
     Arm m_arm){
 
     List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score", new PathConstraints(1.5, 3.5));
+    HashMap<String, Command> eventMap = new HashMap<>();
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
     this.balance = new BalancingCommand(drive);
+
+    eventMap.put("Stow", armPositions.armStowCommand());
+    eventMap.put("IntakeDown", armPositions.armPickUpCubeCommand());
+    eventMap.put("Score", armPositions.armScoreCubeMidCommand());
 
     if (pathGroup.get(0) == null) {
         System.out.println("Path not found");

@@ -85,19 +85,19 @@ public class RobotContainer {
       intake, 
       m_arm);
     /* Bottom Autonomous Routines */
-    new BottomMidScore2(
-    m_robotDrive, 
-    intake, 
-    m_arm);
-    new BottomMidScore2Park(
-    m_robotDrive, 
-    intake, 
-    m_arm);
-    new BottomMidScore3(
-    m_robotDrive, 
-    intake, 
-    m_arm);
-    AutoChooser.setDefaultAuton(new TopMidScore2P1Park(m_robotDrive, intake, m_arm));
+    // new BottomMidScore2(
+    // m_robotDrive, 
+    // intake, 
+    // m_arm);
+    // new BottomMidScore2Park(
+    // m_robotDrive, 
+    // intake, 
+    // m_arm);
+    // new BottomMidScore3(
+    // m_robotDrive, 
+    // intake, 
+    // m_arm);
+    AutoChooser.setDefaultAuton(new TopMidScore3(m_robotDrive, intake, m_arm));
   }
   
   // TODO: remove this before merging
@@ -106,7 +106,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     try{
-      this.localizer = new Localizer("FRONT");
+      this.localizer = new Localizer("BACK");
       updateVisionPose().schedule();
     } catch (IOException e){
       e.printStackTrace();

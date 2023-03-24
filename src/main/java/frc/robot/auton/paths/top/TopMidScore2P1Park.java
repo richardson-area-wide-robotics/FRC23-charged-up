@@ -32,7 +32,7 @@ public class TopMidScore2P1Park extends AutonBase {
     Intake intake,
     Arm m_arm) {
       
-    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-2-P1-Mid", new PathConstraints(3.85, 5.0), new PathConstraints(3.0, 5.0));
+    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-score-2-P1-Mid", new PathConstraints(3.85, 5.0), new PathConstraints(3.0, 5.0));
     HashMap<String, Command> eventMap = new HashMap<>();
     
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));

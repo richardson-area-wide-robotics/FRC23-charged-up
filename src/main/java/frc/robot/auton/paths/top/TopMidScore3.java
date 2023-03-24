@@ -32,7 +32,7 @@ public class TopMidScore3 extends AutonBase {
     Intake intake,
     Arm m_arm) {
       
-    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-3-Mid", new PathConstraints(2.75, 4.5), new PathConstraints(3.0, 5.0));
+    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-3", new PathConstraints(2.75, 4.5), new PathConstraints(3.0, 5.0));
     HashMap<String, Command> eventMap = new HashMap<>();
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
@@ -53,19 +53,17 @@ public class TopMidScore3 extends AutonBase {
     addCommandsWithLog("Top Link Auto",
       new RunCommand(()-> intake.manipulates(-1.0), intake)
       .raceWith(armPositions.armScoreConeMidCommand())
-      .andThen(new WaitCommand(0.5))
-      .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
-      // .andThen(armPositions.armStowCommand())
+      .andThen(new WaitCommand(0.6))
+      .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.7))
       .andThen(new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"))
       .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake)
       .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), eventMap)))
       .andThen(new WaitCommand(0.8))
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake).withTimeout(0.5))
-      // .andThen(armPositions.armStowCommand())
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
       .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), eventMap)))
-      .andThen(new WaitCommand(0.5))
-      .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.5)));
+      .andThen(new WaitCommand(0.5)));
+      // .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.5)));
     }
 
     @Override

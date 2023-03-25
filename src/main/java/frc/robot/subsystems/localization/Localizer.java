@@ -48,6 +48,7 @@ public class Localizer extends SubsystemBase{
       currentTimeStamp = Optional.of(result.getTimestampSeconds());
       SmartDashboard.putString("tag", "" + target.getFiducialId()); 
       SmartDashboard.putNumber("PoseX", getRobotPose().get().getX());
+      SmartDashboard.putNumber("Pose rotation", getRobotPose().get().getRotation().toRotation2d().getDegrees());
       SmartDashboard.putNumber("PoseY", getRobotPose().get().getY());     
     }
     else {

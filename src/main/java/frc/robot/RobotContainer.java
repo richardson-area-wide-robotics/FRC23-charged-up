@@ -56,7 +56,8 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
-  private Localizer localizer;
+  private Localizer frontLocalizer;
+  private Localizer backLocalizer;
   private final PositionCommand armPositions = new PositionCommand(m_arm);
 
   // The driver's controller
@@ -108,13 +109,20 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     try{
-      this.localizer = new Localizer("BACK");
-      updateVisionPose().schedule();
+      this.backLocalizer = new Localizer("BACK");
+      updateVisionPose(backLocalizer).schedule();
     } catch (IOException e){
       e.printStackTrace();
-      this.localizer = null;
+      this.backLocalizer = null;
     }
-   
+
+    try{
+      this.frontLocalizer = new Localizer("FRONT");
+      updateVisionPose(frontLocalizer).schedule();
+    } catch (IOException e){
+      e.printStackTrace();
+      this.frontLocalizer = null;
+    }
    
     // Configure the trigger bindings
     configureDriverBindings(); 
@@ -305,7 +313,7 @@ public class RobotContainer {
     SmartDashboard.putNumber("Auton Time", Timer.getFPGATimestamp());
   }
 
-  public Command updateVisionPose(){
+  public Command updateVisionPose(Localizer localizer){
     return new RunCommand(() -> {
       Optional<Pose3d> pose = localizer.getRobotPose();
       // more lines here as needed

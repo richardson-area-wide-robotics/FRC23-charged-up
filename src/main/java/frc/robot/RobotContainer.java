@@ -58,7 +58,7 @@ public class RobotContainer {
 
     // Configure the trigger bindings
     configureDriverBindings();
-    configureOpperatorBindings();
+    configureOperatorBindings();
   }
 
   /**

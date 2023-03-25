@@ -184,9 +184,7 @@ public final class Constants {
         new TrapezoidProfile.Constraints(
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
 
-    // public static final PIDController kPXController = new PIDController(0.0, 0, 0.0);// 1.0 - 0.35
-    // public static final PIDController kPYController = new PIDController(0.0, 0, 0.0);// 1.075 - 0.45
-    // public static final PIDController kPThetaController = new PIDController(0.0, 0, 0.0);// 6.0 - 0.5
+    
     public static final PIDController kPXController = new PIDController(1.0, 0, 0.35);// 1.0 - 0.35
     public static final PIDController kPYController = new PIDController(0.001, 0, 0.00075);// 1.075 - 0.45
     public static final PIDController kPThetaController = new PIDController(8.0, 0, 0.75);// 6.0 - 0.5

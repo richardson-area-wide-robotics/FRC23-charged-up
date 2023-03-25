@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import java.io.IOException;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -30,6 +31,7 @@ import frc.robot.auton.paths.middle.MidScorePark;
 import frc.robot.auton.paths.middle.MidScoreP1Park;
 import frc.robot.auton.paths.top.TopMidScore2P1Park;
 import frc.robot.auton.util.AutoChooser;
+import frc.robot.auton.util.AutonUtil;
 import frc.robot.commands.armCommands.PositionCommand;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmPositions;
@@ -283,5 +285,20 @@ public class RobotContainer {
   public void autonInit(){
     m_robotDrive.calibrateGyro();
     m_robotDrive.stop();
+    this.globalEventList();
+  }
+
+  /** Creates the Global event list for the autonomous paths */
+  public void globalEventList(){
+    AutonUtil.addEvent("IntakeDownCone", armPositions.armPickUpTConeComand());
+    AutonUtil.addEvent("ScoreCone", armPositions.armScoreConeMidCommand());
+    AutonUtil.addEvent("IntakeDown", armPositions.armPickUpCubeCommand());
+    AutonUtil.addEvent("Stow", armPositions.armStowCommand());
+    AutonUtil.addEvent("Score", armPositions.armScoreCubeMidCommand());
+  }
+
+  /** Run a function during autonomous to get run time of autonomous. */
+  public void autonPeriodic(){
+    SmartDashboard.putNumber("Auton Time", Timer.getFPGATimestamp());
   }
 }

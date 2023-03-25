@@ -32,18 +32,11 @@ public class TopMidScore3 extends AutonBase {
     Intake intake,
     Arm m_arm) {
       
-    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-3-Mid", new PathConstraints(2.75, 4.5), new PathConstraints(3.0, 5.0));
-    HashMap<String, Command> eventMap = new HashMap<>();
+    List<PathPlannerTrajectory> pathGroup = AutonUtil.loadTrajectoryGroup("Top-Score-3-Mid", new PathConstraints(2.75, 4.5), new PathConstraints(3.0, 5.0));
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
     this.balance = new BalancingCommand(drive);
-  
-    eventMap.put("IntakeDownCone", armPositions.armPickUpTConeComand());
-    eventMap.put("ScoreCone", armPositions.armScoreConeMidCommand());
-    eventMap.put("IntakeDown", armPositions.armPickUpCubeCommand());
-    eventMap.put("Stow", armPositions.armStowCommand());
-    eventMap.put("Score", armPositions.armScoreCubeMidCommand());
 
     if (pathGroup.get(0) == null && pathGroup.get(1) == null) {
         System.out.println("Path not found");
@@ -58,12 +51,12 @@ public class TopMidScore3 extends AutonBase {
       // .andThen(armPositions.armStowCommand())
       .andThen(new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"))
       .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake)
-      .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), eventMap)))
+      .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), AutonUtil.getEventMap())))
       .andThen(new WaitCommand(0.8))
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake).withTimeout(0.5))
       // .andThen(armPositions.armStowCommand())
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
-      .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), eventMap)))
+      .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), AutonUtil.getEventMap())))
       .andThen(new WaitCommand(0.5))
       .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.5)));
     }

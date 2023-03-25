@@ -32,15 +32,10 @@ public class TopMidScore2Park extends AutonBase {
     Intake intake) {
       
     List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-2-Mid-Park-Test", new PathConstraints(3.85, 5.0), new PathConstraints(3.0, 4.7));
-    HashMap<String, Command> eventMap = new HashMap<>();
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
     this.balance = new BalancingCommand(drive);
-    
-    eventMap.put("Stow", armPositions.armStowCommand());
-    eventMap.put("IntakeDown", armPositions.armPickUpCubeCommand());
-    eventMap.put("Score", armPositions.armScoreCubeMidCommand());
 
     if (pathGroup.get(0) == null && pathGroup.get(1) == null) {
         System.out.println("Path not found");
@@ -54,11 +49,11 @@ public class TopMidScore2Park extends AutonBase {
       .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
       .andThen(new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"))
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
-      .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), eventMap)))
+      .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), AutonUtil.getEventMap())))
       .andThen(new WaitCommand(0.5))
       .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.4))
       .andThen(new InstantCommand(()-> intake.manipulates(0), intake))
-      .andThen(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), eventMap))
+      .andThen(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), AutonUtil.getEventMap()))
       .andThen(balance));
     }
 

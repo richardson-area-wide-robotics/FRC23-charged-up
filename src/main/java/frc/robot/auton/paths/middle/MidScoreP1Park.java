@@ -32,14 +32,10 @@ public class MidScoreP1Park extends AutonBase {
     Arm m_arm){
 
     List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Mid-Score-P1-Park", new PathConstraints(2.5, 3.5));
-    HashMap<String, Command> eventMap = new HashMap<>();
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
     this.balance = new BalancingCommand(drive);
-
-    eventMap.put("Stow", armPositions.armStowCommand());
-    eventMap.put("IntakeDown", armPositions.armPickUpCubeCommand());
 
     if (pathGroup.get(0) == null) {
         System.out.println("Path not found");
@@ -54,7 +50,7 @@ public class MidScoreP1Park extends AutonBase {
       .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
       .andThen(armPositions.armStowCommand())
       .andThen(new WaitCommand(0.5))
-      .andThen(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), eventMap))
+      .andThen(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), AutonUtil.getEventMap()))
       .andThen(balance)
       .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive)));
     }

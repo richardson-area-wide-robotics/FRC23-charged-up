@@ -1,6 +1,9 @@
 package frc.robot.auton.util;
 
 import java.util.HashMap;
+import java.util.List;
+
+import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -9,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public class AutonUtil {
     private static HashMap<String, PathPlannerTrajectory> m_cache = new HashMap<>();
+    private static HashMap<String, Command> eventMap = new HashMap<>();
 
     private static String cacheKey(String name, double maxVel, double maxAccel, boolean reversed) {
       return new StringBuilder()
@@ -57,8 +61,29 @@ public class AutonUtil {
         return trajectory;
       }
 
-      public static HashMap<String, Command> loadEventMap(){
-        HashMap<String, Command> eventMap = new HashMap<>();
+      public static List<PathPlannerTrajectory> loadTrajectoryGroup(String name, PathConstraints constraints, PathConstraints... extraConstraints){
+        List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup(name, constraints, extraConstraints);
+        return pathGroup;
+      }
+
+      /**
+       * Adds events to the event map that can be used gloablly in any class.
+       * The method will add the event to the event map if it does not already exist.
+       * @param name the name of the event
+       * @param event the event to be added to the map 
+       */
+      public static void addEvent(String name, Command event){
+        if(!eventMap.containsKey(name)){
+          eventMap.put(name, event);
+        }
+      }
+
+      /**
+       * @return the event map
+      */
+      public static HashMap<String, Command> getEventMap(){
         return eventMap;
       }
+
+
 }

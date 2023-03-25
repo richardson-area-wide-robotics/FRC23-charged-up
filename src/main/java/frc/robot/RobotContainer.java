@@ -63,41 +63,41 @@ public class RobotContainer {
 
   {
     /* Top Autonomous Routines */
-    new TopMidScore2P1Park(
-      m_robotDrive, 
-      intake, 
-      m_arm);
-    new TopMidScore2Park(
-      m_robotDrive, 
-      m_arm, 
-      intake);
-    new TopMidScore3(
-      m_robotDrive, 
-      intake,
-      m_arm);
-    /* Middle Autonomous Routines */
-    new MidScoreP1Park(
-      m_robotDrive, 
-      intake, 
-      m_arm);
-    new MidScorePark(
-      m_robotDrive, 
-      intake, 
-      m_arm);
-    /* Bottom Autonomous Routines */
-    new BottomMidScore2(
-    m_robotDrive, 
-    intake, 
-    m_arm);
-    new BottomMidScore2Park(
-    m_robotDrive, 
-    intake, 
-    m_arm);
-    new BottomMidScore3(
-    m_robotDrive, 
-    intake, 
-    m_arm);
-    AutoChooser.setDefaultAuton(new TopMidScore2P1Park(m_robotDrive, intake, m_arm));
+    // new TopMidScore2P1Park(
+    //   m_robotDrive, 
+    //   intake, 
+    //   m_arm);
+    // new TopMidScore2Park(
+    //   m_robotDrive, 
+    //   m_arm, 
+    //   intake);
+    // new TopMidScore3(
+    //   m_robotDrive, 
+    //   intake,
+    //   m_arm);
+    // /* Middle Autonomous Routines */
+    // new MidScoreP1Park(
+    //   m_robotDrive, 
+    //   intake, 
+    //   m_arm);
+    // new MidScorePark(
+    //   m_robotDrive, 
+    //   intake, 
+    //   m_arm);
+    // /* Bottom Autonomous Routines */
+    // new BottomMidScore2(
+    // m_robotDrive, 
+    // intake, 
+    // m_arm);
+    // new BottomMidScore2Park(
+    // m_robotDrive, 
+    // intake, 
+    // m_arm);
+    // new BottomMidScore3(
+    // m_robotDrive, 
+    // intake, 
+    // m_arm);
+    AutoChooser.setDefaultAuton(new TopMidScore3(m_robotDrive, intake, m_arm));
   }
   
   // TODO: remove this before merging

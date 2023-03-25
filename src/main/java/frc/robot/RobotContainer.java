@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Timer;
@@ -54,7 +55,7 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
-  private Localizer m_localizer;
+  private Localizer localizer;
   private final PositionCommand armPositions = new PositionCommand(m_arm);
 
   // The driver's controller
@@ -105,11 +106,12 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    try {
-      this.m_localizer = new Localizer("BACK");
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
+    try{
+      this.localizer = new Localizer("BACK");
+      updateVisionPose().schedule();
+    } catch (IOException e){
       e.printStackTrace();
+      this.localizer = null;
     }
    
    
@@ -300,5 +302,17 @@ public class RobotContainer {
   /** Run a function during autonomous to get run time of autonomous. */
   public void autonPeriodic(){
     SmartDashboard.putNumber("Auton Time", Timer.getFPGATimestamp());
+  }
+
+  public Command updateVisionPose(){
+    return new RunCommand(() -> {
+      Optional<Pose3d> pose = localizer.getRobotPose();
+      // more lines here as needed
+      if (!pose.isEmpty()){
+        m_robotDrive.addPoseEstimate(
+        pose.get().toPose2d(),
+        localizer.getPoseTimeStamp().get());
+      }
+    });
   }
 }

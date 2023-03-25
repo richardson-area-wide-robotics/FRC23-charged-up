@@ -141,7 +141,7 @@ public class RobotContainer {
         .onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(() -> intake.manipulates(-1.0)));
   }
 
-  private void configureOpperatorBindings() {
+  private void configureOperatorBindings() {
 
     new JoystickButton(m_operatorController, XboxController.Button.kY.value)
         .onTrue(armPositions.armScoreConeHighCommand());

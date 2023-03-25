@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -312,6 +313,11 @@ public class RobotContainer {
         m_robotDrive.addPoseEstimate(
         pose.get().toPose2d(),
         localizer.getPoseTimeStamp().get());
+        SmartDashboard.putBoolean("using AprilTag", true);
+      }
+      else{
+
+        SmartDashboard.putBoolean("using AprilTag", false);
       }
     });
   }

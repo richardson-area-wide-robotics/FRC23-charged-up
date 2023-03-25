@@ -297,12 +297,20 @@ public class MAXSwerve extends SubsystemBase {
     // return m_gyro.getRotation2d().getDegrees();
   }
 
+  public double getAdjustedAngle(){
+    return 0.0;
+  }
+
   public void stop() {
     drive(0.0, 0.0, 0.0, false);
   }
 
   public Command stopCommand() {
     return new RunCommand(this::stop, this).withName("Swerve Stop");
+  }
+
+  public void setHeading(ADIS16470_IMU.IMUAxis heading) {
+    m_gyro.setYawAxis(heading);
   }
 
   /**
@@ -329,21 +337,22 @@ public class MAXSwerve extends SubsystemBase {
    * @return Command to be scheduled
    */
   public Command trajectoryFollowerCommand(
-      PathPlannerTrajectory trajectory,
-      PIDController xController,
-      PIDController yController,
-      PIDController thetaController) {
-    Command swCommand =
-        new PPSwerveControllerCommand(
-            trajectory,
-            this::getPose,
-            m_kinematics,
-            xController,
-            yController,
-            thetaController,
-            (states) -> setModuleStates(states),
-            this);
-    return new InstantCommand(() -> m_field.getObject("Trajectory").setTrajectory(trajectory))
-        .alongWith(swCommand);
-  }
+    PathPlannerTrajectory trajectory,
+    PIDController xController,
+    PIDController yController,
+    PIDController thetaController) {
+  Command swCommand =
+      new PPSwerveControllerCommand(
+          trajectory,
+          this::getPose,
+          m_kinematics,
+          xController,
+          yController,
+          thetaController,
+          (states) -> setModuleStates(states),
+          true,
+          this);
+  return new InstantCommand(() -> m_field.getObject("Trajectory").setTrajectory(trajectory))
+      .alongWith(swCommand);
+}
 }

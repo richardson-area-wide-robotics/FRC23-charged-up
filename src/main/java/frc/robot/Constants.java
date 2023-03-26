@@ -188,9 +188,7 @@ public final class Constants {
     public static final PIDController kPThetaController = new PIDController(8.0, 0, 0.75);
 
     public static final PIDGains kMovingPIDGains =
-        new PIDGains(0.3,0, 0.01); // TODO: tune values for Vision auto-turning
-
-    public static final double gravity = 9.81;
+        new PIDGains(0.3,0, 0.01);
   }
   
   public static final class Intake {

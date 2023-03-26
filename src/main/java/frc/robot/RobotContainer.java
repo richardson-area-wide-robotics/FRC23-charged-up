@@ -61,7 +61,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     try{
-      this.localizer = new Localizer("FRONT");
+      this.localizer = new Localizer("FRONT", Constants.Localizer.FRONT_CAMERA_TO_ROBOT);
       updateVisionPose().schedule();
     } catch (IOException e){
       e.printStackTrace();

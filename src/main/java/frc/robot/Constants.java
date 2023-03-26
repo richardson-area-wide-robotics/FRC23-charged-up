@@ -8,7 +8,10 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ArmFeedforward;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
@@ -287,7 +290,9 @@ public static final boolean kCompetitionMode = false;
     public static final double FY_PIXELS = 0.0;
     public static final double CX_PIXELS = 0.0;
     public static final double CY_PIXELS = 0.0;
+
+    public static Transform3d FRONT_CAMERA_TO_ROBOT = new Transform3d(new Translation3d(0.0, 0.0, 0.0), new Rotation3d());
+    public static Transform3d BACK_CAMERA_TO_ROBOT = new Transform3d(new Translation3d(0.0, 0.0, 0.0), new Rotation3d());
+    public static Transform3d FRONT_ROBOT_TO_CAMERA = FRONT_CAMERA_TO_ROBOT.inverse();
   }
-
-
 }

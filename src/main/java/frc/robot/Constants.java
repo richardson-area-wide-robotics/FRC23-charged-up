@@ -240,7 +240,7 @@ public final class Constants {
     public static final PIDGains ARM_PID_GAINS = new PIDGains(3.0, 0.0, 0.0);
     public static final ArmFeedforward ARM_MOTOR_FEEDFORWARD = new ArmFeedforward(0.0,0.72,1.56, 0.08);
     public static final double ARM_FF = 0.0;
-    public static final PIDGains ELBOW_PID_GAINS = new PIDGains(4, 0.0, 0.65);
+    public static final PIDGains ELBOW_PID_GAINS = new PIDGains(2.75, 0.0, 0.65);
     public static final ArmFeedforward ELBOW_MOTOR_FEEDFORWARD = new ArmFeedforward(0.0,0.77,0.7,0.04);
     public static final double ELBOW_FF = 0.0;
     public static final double MIN_OUTPUT = -1.0;

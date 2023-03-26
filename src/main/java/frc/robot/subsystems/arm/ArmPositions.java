@@ -1,5 +1,7 @@
 package frc.robot.subsystems.arm;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -24,32 +26,24 @@ public class ArmPositions extends SubsystemBase{
 
     public ArmPositions(){
         // Arm Stowed Positions
-        SmartDashboard.putNumber("Arm stowed", Positions.ARM_STOWED);
-        SmartDashboard.putNumber("Elbow stowed", Positions.ELBOW_STOWED);
-        // Arm Intake Tipped Cone
-        SmartDashboard.putNumber("Arm Tipped Cone", Positions.ARM_PICK_UP_TCONE);
-        SmartDashboard.putNumber("Elbow Tipped Cone", Positions.ELBOW_PICK_UP_TCONE);
-        // Arm Intake Standing Cone 
-        SmartDashboard.putNumber("Arm Standing Cone", Positions.ARM_PICK_UP_CONE);
-        SmartDashboard.putNumber("Elbow Standing Cone", Positions.ELBOW_PICK_UP_CONE);
-        // Arm Intake Cube
-        SmartDashboard.putNumber("Arm Cube", Positions.ARM_PICK_UP_CUBE);
-        SmartDashboard.putNumber("Elbow cube", Positions.ELBOW_PICK_UP_CUBE);
-        // Score Cube Mid
-        SmartDashboard.putNumber("Arm Cube Mid", Positions.ARM_SCORE_CUBE_MID);
-        SmartDashboard.putNumber("Elbow Cube Mid", Positions.ELBOW_SCORE_CUBE_MID);
-        // Score Cube High
-        SmartDashboard.putNumber("Arm Cube High", Positions.ARM_SCORE_CUBE_HIGH);
-        SmartDashboard.putNumber("Elbow Cube High", Positions.ELBOW_SCORE_CUBE_HIGH);
-        // Score Cone Mid
-        SmartDashboard.putNumber("Arm Cone Mid", Positions.ARM_SCORE_CONE_MID);
-        SmartDashboard.putNumber("Elbow Cone Mid", Positions.ELBOW_SCORE_CONE_MID);
-        // Score Cone High
-        SmartDashboard.putNumber("Arm Cone High", Positions.ARM_SCORE_CONE_HIGH);
-        SmartDashboard.putNumber("Elbow Cone High", Positions.ELBOW_SCORE_CONE_HIGH);
-        // Elbow Idle Position
-        SmartDashboard.putNumber("Elbow Idle", Positions.ELBOW_IDLE);
-        
+        ShuffleboardTab tab = Shuffleboard.getTab("Arm Positions");
+        tab.add("Arm stowed", Positions.ARM_STOWED);
+        tab.add("Elbow stowed", Positions.ELBOW_STOWED);
+        tab.add("Arm Tipped Cone", Positions.ARM_PICK_UP_TCONE);
+        tab.add("Elbow Tipped Cone", Positions.ELBOW_PICK_UP_TCONE);
+        tab.add("Arm Standing Cone", Positions.ARM_PICK_UP_CONE);
+        tab.add("Elbow Standing Cone", Positions.ELBOW_PICK_UP_CONE);
+        tab.add("Arm Cube", Positions.ARM_PICK_UP_CUBE);
+        tab.add("Elbow cube", Positions.ELBOW_PICK_UP_CUBE);
+        tab.add("Arm Cube Mid", Positions.ARM_SCORE_CUBE_MID);
+        tab.add("Elbow Cube Mid", Positions.ELBOW_SCORE_CUBE_MID);
+        tab.add("Arm Cube High", Positions.ARM_SCORE_CUBE_HIGH);
+        tab.add("Elbow Cube High", Positions.ELBOW_SCORE_CUBE_HIGH);
+        tab.add("Arm Cone Mid", Positions.ARM_SCORE_CONE_MID);
+        tab.add("Elbow Cone Mid", Positions.ELBOW_SCORE_CONE_MID);
+        tab.add("Arm Cone High", Positions.ARM_SCORE_CONE_HIGH);
+        tab.add("Elbow Cone High", Positions.ELBOW_SCORE_CONE_HIGH);
+        tab.add("Elbow Idle", Positions.ELBOW_IDLE);
     }
 public static class Positions{
     // Arm Stowed Positions
@@ -78,10 +72,11 @@ public static double ARM_STOWED = .55;
     // Arm back cone pick up scoring position
     public static double ARM_BACK_PICKUP = 0.0;
     public static double ELBOW_BACK_PICKUP = 0.0;
-    public static double ARM_SPECIAL_IDLE = 0.0;
+    public static double ARM_SPECIAL_IDLE = 0.22;
     public static double ELBOW_SPECIAL_IDLE = 0.0;
     // Elbow Idle position
-    public static double ELBOW_IDLE = .83;//.80
+    public static double ELBOW_IDLE = .83;
+    public static double ARM_SPECIAL_IDLEv = 0.43;
 }
 
 @Override

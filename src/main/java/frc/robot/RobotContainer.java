@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
@@ -146,14 +147,6 @@ public class RobotContainer {
       -m_driverController.getLeftY(), Constants.OIConstants.kControllerDeadband);
      DoubleSupplier moveSideways = () -> MathUtil.applyDeadband(
       -m_driverController.getLeftX(), Constants.OIConstants.kControllerDeadband);
-  
-    // lockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
-
-    //sends the movement information to RoboCon method in RoboState
-    // roboCon.drive(moveForward, moveSideways); 
-    
-    //Enters Lock-on mode
-    //  new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(lockMode);
     
     // Configure default commands
     /* 
@@ -181,16 +174,12 @@ public class RobotContainer {
        new JoystickButton(m_driverController, XboxController.Button.kLeftStick.value).onTrue(new InstantCommand(()-> m_robotDrive.setX()));
 
     /*
-     * ---Toggle buttons
-     * Top Right botton on the back of Xbox controller controls the toggle between cone and intake state - P1
-     */
-
-    /*
      * ---Intaking Controls
      * Left trigger - intaking - 16
      * Right trigger - outaking - 13
+     * Up on dpad on the back of Xbox controller controls the toggle between cone and intake state using Intake - P1
      */
-    // TODO: change this to be a ramp up with the deadband of the trigger :)
+    intake.manipulates(direction, false, false);
 
 // if (new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).getAsBoolean()) {
 //    if (mode) {

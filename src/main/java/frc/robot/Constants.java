@@ -8,7 +8,10 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ArmFeedforward;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
@@ -283,7 +286,13 @@ public static final boolean kCompetitionMode = false;
     public static final double FY_PIXELS = 0.0;
     public static final double CX_PIXELS = 0.0;
     public static final double CY_PIXELS = 0.0;
+
+        /**
+     * Physical location of the camera on the robot, relative to the center of the robot.
+     */
+    public static final Transform3d CAMERA_TO_ROBOT =
+        new Transform3d(new Translation3d(-0.3425, 0.0, -0.233), new Rotation3d()); // TODO: tune this value
+    public static final Transform3d ROBOT_TO_CAMERA = CAMERA_TO_ROBOT.inverse();
+  }
   }
 
-
-}

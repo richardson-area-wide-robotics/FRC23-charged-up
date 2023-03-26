@@ -54,9 +54,9 @@ public class TopMidScore3 extends AutonBase {
       .andThen(new WaitCommand(0.8))
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake).withTimeout(0.5))
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
-      .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), AutonUtil.getEventMap())))
-      .andThen(new WaitCommand(0.5))
-      .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.5)));
+      .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), AutonUtil.getEventMap()))));
+      // .andThen(new WaitCommand(0.5))
+      // .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.5)));
     }
 
     @Override

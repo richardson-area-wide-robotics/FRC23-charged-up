@@ -12,7 +12,7 @@ import frc.robot.subsystems.drive.DriveSubsystem;
 public class PathTester extends AutonBase {
     public PathTester(DriveSubsystem drive) {
     
-    PathPlannerTrajectory parkingPath = AutonUtil.loadTrajectory("Top-Simple-Park", 2.0, 5.0);
+    PathPlannerTrajectory parkingPath = AutonUtil.loadTrajectory("Test", 2.0, 5.0);
 
     Pose2d initialPose = AutonUtil.initialPose(parkingPath);
 

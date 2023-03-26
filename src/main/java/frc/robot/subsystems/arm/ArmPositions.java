@@ -4,6 +4,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ArmPositions extends SubsystemBase{
+    public double armStowed;
+    public double elbowStowed;
+    public double armPickUpTippedCone;
+    public double elbowPickUpTippedCone;
+    public double armPickUpStandingCone;
+    public double elbowPickUpStandingCone;
+    public double armPickUpCube;
+    public double elbowPickUpCube;
+    public double armScoreConeMid;
+    public double elbowScoreConeMid;
+    public double armScoreConeHigh;
+    public double elbowScoreConeHigh;
+    public double armScoreCubeMid;
+    public double elbowScoreCubeMid;
+    public double armScoreCubeHigh;
+    public double elbowScoreCubeHigh;
+    public double elbowIdle;
+
     public ArmPositions(){
         // Arm Stowed Positions
         SmartDashboard.putNumber("Arm stowed", Positions.ARM_STOWED);
@@ -42,7 +60,7 @@ public static double ARM_STOWED = .55;
     public static double ARM_PICK_UP_CONE = 0.1658;
     public static double ELBOW_PICK_UP_CONE = 0.32;
     public static double ARM_PICK_UP_CUBE = 0.325;
-    public static double ELBOW_PICK_UP_CUBE = 0.60;
+    public static double ELBOW_PICK_UP_CUBE = 0.60;//0.62
     public static double ARM_SCORE_CUBE_LOW = 0.166;
     public static double ELBOW_SCORE_CUBE_LOW = 0.4;
     public static double ARM_SCORE_CONE_LOW = 0.172;
@@ -52,7 +70,7 @@ public static double ARM_STOWED = .55;
     public static double ARM_SCORE_CUBE_MID = 0.71;
     public static double ELBOW_SCORE_CUBE_MID = 0.62;
     public static double ARM_SCORE_CONE_HIGH = 0.0185;
-    public static double ELBOW_SCORE_CONE_HIGH = 0.30;
+    public static double ELBOW_SCORE_CONE_HIGH = 0.30;//0.28
     public static double ARM_SCORE_CUBE_HIGH = 0.2;
     public static double ELBOW_SCORE_CUBE_HIGH = 0.62;
     public static double ARM_PICK_UP_SHELF = 0.445;
@@ -63,7 +81,7 @@ public static double ARM_STOWED = .55;
     public static double ARM_SPECIAL_IDLE = 0.0;
     public static double ELBOW_SPECIAL_IDLE = 0.0;
     // Elbow Idle position
-    public static double ELBOW_IDLE = .83;
+    public static double ELBOW_IDLE = .83;//.80
 }
 
 @Override

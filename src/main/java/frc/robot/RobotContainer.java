@@ -108,7 +108,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     try{
-      this.backLocalizer = new Localizer("BACK");
+      this.backLocalizer = new Localizer("BACK", );
       updateVisionPose(backLocalizer).schedule();
     } catch (IOException e){
       e.printStackTrace();

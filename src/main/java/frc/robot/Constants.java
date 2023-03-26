@@ -290,9 +290,9 @@ public static final boolean kCompetitionMode = false;
         /**
      * Physical location of the camera on the robot, relative to the center of the robot.
      */
-    public static final Transform3d CAMERA_TO_ROBOT =
-        new Transform3d(new Translation3d(-0.3425, 0.0, -0.233), new Rotation3d()); // TODO: tune this value
-    public static final Transform3d ROBOT_TO_CAMERA = CAMERA_TO_ROBOT.inverse();
+    public static Transform3d FRONT_CAMERA_TO_ROBOT = new Transform3d(new Translation3d(0.0, 0.0, 0.0), new Rotation3d());
+    public static Transform3d BACK_CAMERA_TO_ROBOT = new Transform3d(new Translation3d(0.0, 0.0, 0.0), new Rotation3d());
+    public static Transform3d FRONT_ROBOT_TO_CAMERA = FRONT_CAMERA_TO_ROBOT.inverse();
   }
   }
 

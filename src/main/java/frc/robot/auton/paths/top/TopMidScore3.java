@@ -43,7 +43,7 @@ public class TopMidScore3 extends AutonBase {
         return;
     }
 
-    addCommandsWithLog("Top Link Auto",
+    addCommandsWithLog("Top Link",
       new RunCommand(()-> intake.manipulates(-1.0), intake)
       .raceWith(armPositions.armScoreConeMidCommand())
       .andThen(new WaitCommand(0.5))

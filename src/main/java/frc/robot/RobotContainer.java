@@ -26,6 +26,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.auton.commands.BalancingCommand;
 import frc.robot.auton.paths.top.TopMidScore2Park;
 import frc.robot.auton.paths.top.TopMidScore3;
+import frc.robot.auton.paths.PathTester;
 import frc.robot.auton.paths.bottom.BottomMidScore2;
 import frc.robot.auton.paths.bottom.BottomMidScore2Park;
 import frc.robot.auton.paths.bottom.BottomMidScore3;
@@ -65,27 +66,27 @@ public class RobotContainer {
 
   {
     /* Top Autonomous Routines */
-    new TopMidScore2P1Park(
-      m_robotDrive, 
-      intake, 
-      m_arm);
-    new TopMidScore2Park(
-      m_robotDrive, 
-      m_arm, 
-      intake);
-    new TopMidScore3(
-      m_robotDrive, 
-      intake,
-      m_arm);
-    /* Middle Autonomous Routines */
-    new MidScoreP1Park(
-      m_robotDrive, 
-      intake, 
-      m_arm);
-    new MidScorePark(
-      m_robotDrive, 
-      intake, 
-      m_arm);
+    // new TopMidScore2P1Park(
+    //   m_robotDrive, 
+    //   intake, 
+    //   m_arm);
+    // new TopMidScore2Park(
+    //   m_robotDrive, 
+    //   m_arm, 
+    //   intake);
+    // new TopMidScore3(
+    //   m_robotDrive, 
+    //   intake,
+    //   m_arm);
+    // /* Middle Autonomous Routines */
+    // new MidScoreP1Park(
+    //   m_robotDrive, 
+    //   intake, 
+    //   m_arm);
+    // new MidScorePark(
+    //   m_robotDrive, 
+    //   intake, 
+    //   m_arm);
     /* Bottom Autonomous Routines */
     // new BottomMidScore2(
     // m_robotDrive, 
@@ -99,7 +100,7 @@ public class RobotContainer {
     // m_robotDrive, 
     // intake, 
     // m_arm);
-    AutoChooser.setDefaultAuton(new TopMidScore3(m_robotDrive, intake, m_arm));
+    AutoChooser.setDefaultAuton(new TopMidScore2Park(m_robotDrive, m_arm, intake));
   }
   
   // TODO: remove this before merging
@@ -108,7 +109,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     try{
-      this.backLocalizer = new Localizer("BACK", );
+      this.backLocalizer = new Localizer("BACK", Constants.Localizer.BACK_CAMERA_TO_ROBOT);
       updateVisionPose(backLocalizer).schedule();
     } catch (IOException e){
       e.printStackTrace();
@@ -116,7 +117,7 @@ public class RobotContainer {
     }
 
     try{
-      this.frontLocalizer = new Localizer("FRONT");
+      this.frontLocalizer = new Localizer("FRONT", Constants.Localizer.FRONT_CAMERA_TO_ROBOT);
       updateVisionPose(frontLocalizer).schedule();
     } catch (IOException e){
       e.printStackTrace();

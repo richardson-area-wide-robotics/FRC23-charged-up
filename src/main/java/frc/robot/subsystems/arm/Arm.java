@@ -36,7 +36,7 @@ public class Arm extends SubsystemBase {
   private double currentArmPosition;
   private double currentElbowPosition;
 
-  // last arm positions
+  // last arm position
   private double lastArmPosition;
   private double lastElbowPosition;
 
@@ -124,18 +124,16 @@ public class Arm extends SubsystemBase {
 
     this.currentArmPosition = Constants.ArmConstants.ARM_STOWED;
     this.currentElbowPosition = Constants.ArmConstants.ELBOW_STOWED;
-    this.lastArmPosition = currentArmPosition;
-    this.lastElbowPosition = currentElbowPosition;
+    
+    // set up variables for getting the last know arm and elbow position
+    this.lastArmPosition = this.currentArmPosition;
+    this.lastElbowPosition = this.currentElbowPosition;
 
   }
 
   // getting relative encoder position of the arm
   public double getPosition() {
     return this.leftMotor.getEncoder().getPosition();
-  }
-
-  public double getLastArmPosition(){
-    return lastArmPosition;
   }
 
   public double getArmPosition(){
@@ -202,6 +200,8 @@ public class Arm extends SubsystemBase {
 
   @Override
   public void periodic() {
+    // set last arm position to current arm position before updating current arm position
+    lastArmPosition = currentArmPosition;
 
     // This method will be called once per scheduler run
     armPIDController.setReference(currentArmPosition, ControlType.kPosition);
@@ -212,4 +212,10 @@ public class Arm extends SubsystemBase {
 
     elbowPIDController.setReference(currentElbowPosition, ControlType.kPosition/* , 1, elbowFF.calculate(elbowPID.getSetpoint().position, elbowPID.getSetpoint().velocity)*/);
   }
+
+  // Get the previous set point 
+  public double getLastArmPosition() {
+    return lastArmPosition;
+  }
+  
 }

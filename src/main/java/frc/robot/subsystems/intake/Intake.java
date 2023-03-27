@@ -13,6 +13,7 @@ public class Intake extends SubsystemBase {
 
 private CANSparkMax intakeMotor;
 private double intaking;
+private boolean mode;
 private DigitalInput sensor;
 
 public Intake() {
@@ -31,6 +32,8 @@ public Intake() {
   intakeMotor.burnFlash();
 
   setDefaultCommand(new RunCommand(this::stop, this));
+
+  this.mode = false;
 }
 
 
@@ -53,21 +56,56 @@ public void manipulates(double speed){
   intakeMotor.set(speed);
 }
 
-public Command manipulator(double supplier, boolean mode){
-  if (!mode){
-  intaking = supplier;
-} else {
-  intaking = supplier * -1;
+/**
+ * Toggles Mode of Intake
+ */
+public void toggleMode(){
+  mode = !mode;
 }
 
-return run(() -> intakeMotor.set(intaking));
+/** 
+ * Returns the mode of the intake; true for Cube mode, false for Cone mode; default is false
+ * @return mode
+ */
+public boolean getMode(){
+  return mode;
 }
 
-// returns the current of the motor 
+/**
+ * Intaking command for the intake
+ * @param speed the speed of the intake
+ * @param mode As cube intaking is positive and cone intaking is negative this command will invert based on the mode
+ * @param direction will tell us if we are intaking or outtaking and also use @param mode to determine each directions mode of intaking or outtaking
+ */
+public void manipulates(double speed, boolean mode, boolean direction){
+  if(direction){
+    if(mode){
+      manipulates(speed);
+    } else {
+      manipulates(-speed);
+    }
+  } else {
+    if(mode){
+      manipulates(-speed);
+    } else {
+      manipulates(speed);
+    }
+  }
+}
+
+
+/**
+ * Returns the output current of the intake motor
+ * @return outputCurrent
+ */
 public double outputCurrent(){
   return intakeMotor.getOutputCurrent();
 }
 
+/**
+ * Returns the sensor data from the intake
+ * @return sensor
+ */
 public boolean getSensorData(){
   return sensor.get();
 }

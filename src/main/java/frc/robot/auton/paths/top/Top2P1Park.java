@@ -64,7 +64,6 @@ public class Top2P1Park extends AutonBase {
        */
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
         .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(firstPath), firstPath)))
-        // .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), AutonUtil.getEventMap())))
       
        /*
        * Activate intake to score the first cube

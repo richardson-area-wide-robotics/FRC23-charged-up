@@ -68,9 +68,9 @@ public class Top2Park extends AutonBase {
        * and then stop the intake 
        */
       .andThen(new WaitCommand(0.2))
-      .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.4))
-        .andThen(new InstantCommand(()-> intake.manipulates(0), intake))
-      .andThen(new InstantCommand(() -> drive.resetOdometry(AutonUtil.initialPose(secondPath)), drive).withName("Reset Odometry"))
+        .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.4))
+          .andThen(new InstantCommand(()-> intake.manipulates(0), intake))
+            .andThen(new InstantCommand(() -> drive.resetOdometry(AutonUtil.initialPose(secondPath)), drive).withName("Reset Odometry"))
 
       /*
        * Runs the Second path which is to drive onto charge station
@@ -79,21 +79,6 @@ public class Top2Park extends AutonBase {
       .andThen(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(secondPath), secondPath))
       , balance);
     }
-
-    // addCommandsWithLog("Top 2Park",
-    //   new RunCommand(()-> intake.manipulates(-1.0), intake)
-    //   .raceWith(armPositions.armScoreConeMidCommand())
-    //   .andThen(new WaitCommand(0.5))
-    //   .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
-    //   .andThen(new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"))
-    //   .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
-    //   .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), AutonUtil.getEventMap())))
-    //   .andThen(new WaitCommand(0.5))
-    //   .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.4))
-    //   .andThen(new InstantCommand(()-> intake.manipulates(0), intake))
-    //   .andThen(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), AutonUtil.getEventMap()))
-    //   .andThen(balance));
-    // }
 
     @Override
   public void initSendable(SendableBuilder builder) {

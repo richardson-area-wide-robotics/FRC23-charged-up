@@ -60,20 +60,20 @@ public class TopLink extends AutonBase {
        * and races with the intake to pick up the cube
        */
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
-      .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(firstPath), firstPath)))
+        .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(firstPath), firstPath)))
 
        /*
        * Activate intake to score the first cube
        * and then stop the intake 
        */
       .andThen(new WaitCommand(0.2))
-      .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.3))
+        .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.3))
 
       // /*
       //  * Runs the Second path which is to pick up a cone
       //  */
       .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake)
-      .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(secondPath), secondPath)))
+        .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(secondPath), secondPath)))
 
       // /*
       //  * Activate intake to score the cone

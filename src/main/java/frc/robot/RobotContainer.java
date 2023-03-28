@@ -25,15 +25,15 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
 import frc.robot.auton.commands.BalancingCommand;
-import frc.robot.auton.paths.top.TopMidScore2Park;
-import frc.robot.auton.paths.top.TopMidScore3;
+import frc.robot.auton.paths.top.Top2Park;
+import frc.robot.auton.paths.top.TopLink;
 import frc.robot.auton.paths.PathTester;
 import frc.robot.auton.paths.bottom.BottomMidScore2;
-import frc.robot.auton.paths.bottom.BottomMidScore2Park;
-import frc.robot.auton.paths.bottom.BottomMidScore3;
+import frc.robot.auton.paths.bottom.Bottom2Park;
+import frc.robot.auton.paths.bottom.BottomLink;
 import frc.robot.auton.paths.middle.MidScorePark;
 import frc.robot.auton.paths.middle.MidScoreP1Park;
-import frc.robot.auton.paths.top.TopMidScore2P1Park;
+import frc.robot.auton.paths.top.Top2P1Park;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.auton.util.AutonUtil;
 import frc.robot.commands.armCommands.PositionCommand;
@@ -103,7 +103,8 @@ public class RobotContainer {
     // m_robotDrive, 
     // intake, 
     // m_arm);
-    AutoChooser.setDefaultAuton(new TopMidScore3(m_robotDrive, intake, m_arm));
+    // AutoChooser.setDefaultAuton(new Top2Park(m_robotDrive, m_arm, intake));
+    AutoChooser.setDefaultAuton(new Bottom2Park(m_robotDrive, intake, m_arm));
     // AutoChooser.setDefaultAuton(new PathTester(m_robotDrive));
   }
   
@@ -145,7 +146,7 @@ public class RobotContainer {
   private void configureDriverBindings() {
 
     // TODO: remove this before merging
-    //new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(balance);
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(balance);
 
     //Some adjustments made for lock on mode
     DoubleSupplier moveForward =  () -> MathUtil.applyDeadband(
@@ -198,7 +199,7 @@ public class RobotContainer {
 
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(()->intake.manipulates(1)));
 
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(-0.5)));
+    // new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(-0.5)));
 
     /*
      * ---Arm Controls 

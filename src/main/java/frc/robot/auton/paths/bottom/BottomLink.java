@@ -22,11 +22,11 @@ import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 
-public class BottomMidScore3 extends AutonBase {
+public class BottomLink extends AutonBase {
     public PositionCommand armPositions;
     public BalancingCommand balance;
     
-    public BottomMidScore3(
+    public BottomLink(
     DriveSubsystem drive, 
     Intake intake,
     Arm m_arm){

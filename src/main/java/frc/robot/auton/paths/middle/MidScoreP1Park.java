@@ -1,16 +1,10 @@
 package frc.robot.auton.paths.middle;
 
-import java.util.HashMap;
 import java.util.List;
-
 import com.pathplanner.lib.PathConstraints;
-import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
-import com.pathplanner.lib.commands.FollowPathWithEvents;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.util.sendable.SendableBuilder;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -31,28 +25,45 @@ public class MidScoreP1Park extends AutonBase {
     Intake intake,
     Arm m_arm){
 
-    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Mid-Score-P1-Park", new PathConstraints(2.5, 3.5));
+    List<PathPlannerTrajectory> midP1Park = AutonUtil.loadTrajectoryGroup("Mid-Score-P1Park", new PathConstraints(2.5, 3.5));
+    PathPlannerTrajectory firstPath = midP1Park.get(0);
 
-    Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
+    Pose2d initialPose = AutonUtil.initialPose(firstPath);
     this.armPositions = new PositionCommand(m_arm);
     this.balance = new BalancingCommand(drive);
 
-    if (pathGroup.get(0) == null) {
+     /*
+     * Checks if the paths are null and if they are it will print out that the path was not found
+     */
+    if (firstPath == null) {
         System.out.println("Path not found");
         return;
     }
 
-    addCommandsWithLog("Mid Score+1 and Park",
+    /**
+     * Creates a command group that this auton class will call on when initialized 
+     */
+    addCommandsWithLog("Mid P1 Park",
+    /* Runs commands to score pre-load Cone in high */
       new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"),
-      new RunCommand(()-> intake.manipulates(-1.0), intake)
-      .raceWith(armPositions.autonArmScoreConeHighCommand())
-      .andThen(new WaitCommand(0.1))
-      .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
+        new RunCommand(()-> intake.manipulates(-1.0), intake)
+          .raceWith(armPositions.autonArmScoreConeHighCommand())
+            .andThen(new WaitCommand(0.1))
+              .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
+
+      /*
+       * Stows the arm 
+       * Waits for 0.5 seconds
+       * Follows the first path
+       */
       .andThen(armPositions.armStowCommand())
-      .andThen(new WaitCommand(0.5))
-      .andThen(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), AutonUtil.getEventMap()))
-      .andThen(balance)
-      .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive)));
+        .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
+          .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(firstPath), firstPath)))
+      
+      /*
+       * Activates the balancing command
+       */
+      .andThen(balance));
     }
 
     @Override

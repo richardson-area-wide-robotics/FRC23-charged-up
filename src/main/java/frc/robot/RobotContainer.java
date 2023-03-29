@@ -123,8 +123,6 @@ public class RobotContainer {
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)
         .whileTrue(new RunCommand(() -> intake.manipulates(-1)));
 
-    // new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
-    //     .whileTrue(new RunCommand(() -> intake.manipulates(0.25)));
     if (m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_CONE
         || m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_TCONE
         || m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_SHELF) {

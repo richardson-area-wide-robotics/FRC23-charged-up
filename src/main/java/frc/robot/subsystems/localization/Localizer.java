@@ -45,7 +45,6 @@ public class Localizer extends SubsystemBase {
 
     if (hasTargets) {
       PhotonTrackedTarget target = result.getBestTarget();
-      SmartDashboard.putNumber("tag seen", target.getFiducialId());
       currentAprilTagID = Optional.of(target.getFiducialId());
       currentAprilTagTransform = Optional.of(target.getBestCameraToTarget());
       currentTimeStamp = Optional.of(result.getTimestampSeconds());
@@ -79,6 +78,7 @@ public class Localizer extends SubsystemBase {
     if (tagPose.isPresent()) {
 
       Pose3d camPose = tagPose.get().transformBy(cameraToTarget.inverse());
+      // robotPosition = tagPose.get().transformBy(cameraToTarget);
       robotPosition = camPose.transformBy(cameraPos);
 
     }

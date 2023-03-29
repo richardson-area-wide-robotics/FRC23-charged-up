@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -24,16 +25,18 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
 import frc.robot.auton.commands.BalancingCommand;
-import frc.robot.auton.paths.top.TopMidScore2Park;
-import frc.robot.auton.paths.top.TopMidScore3;
+import frc.robot.auton.paths.top.Top2Park;
+import frc.robot.auton.paths.top.TopLink;
+import frc.robot.auton.paths.top.TopLinkPark;
 import frc.robot.auton.paths.PathTester;
 import frc.robot.auton.paths.bottom.BottomMidScore2;
-import frc.robot.auton.paths.bottom.BottomMidScore2Park;
-import frc.robot.auton.paths.bottom.BottomMidScore3;
+import frc.robot.auton.paths.bottom.Bottom2Park;
+import frc.robot.auton.paths.bottom.BottomLink;
 import frc.robot.auton.paths.middle.MidScorePark;
 import frc.robot.auton.paths.middle.MidScoreP1Park;
-import frc.robot.auton.paths.top.TopMidScore2P1Park;
+import frc.robot.auton.paths.top.Top2P1Park;
 import frc.robot.auton.util.AutoChooser;
+import frc.robot.auton.util.AutonUtil;
 import frc.robot.commands.armCommands.PositionCommand;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmPositions;
@@ -59,6 +62,7 @@ public class RobotContainer {
   private Localizer frontLocalizer;
   private Localizer backLocalizer;
   private final PositionCommand armPositions = new PositionCommand(m_arm);
+  // private ArmPositions positions = new ArmPositions();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -66,18 +70,22 @@ public class RobotContainer {
 
   {
     /* Top Autonomous Routines */
-    // new TopMidScore2P1Park(
-    //   m_robotDrive, 
-    //   intake, 
-    //   m_arm);
-    // new TopMidScore2Park(
-    //   m_robotDrive, 
-    //   m_arm, 
-    //   intake);
-    // new TopMidScore3(
-    //   m_robotDrive, 
-    //   intake,
-    //   m_arm);
+    new Top2P1Park(
+      m_robotDrive, 
+      intake, 
+      m_arm);
+    new Top2Park(
+      m_robotDrive, 
+      intake, 
+      m_arm);
+    new TopLink(
+      m_robotDrive, 
+      intake,
+      m_arm);
+    new TopLinkPark(
+      m_robotDrive, 
+      intake, 
+      m_arm);
     // /* Middle Autonomous Routines */
     // new MidScoreP1Park(
     //   m_robotDrive, 
@@ -87,20 +95,20 @@ public class RobotContainer {
     //   m_robotDrive, 
     //   intake, 
     //   m_arm);
-    /* Bottom Autonomous Routines */
+    // /* Bottom Autonomous Routines */
     // new BottomMidScore2(
     // m_robotDrive, 
     // intake, 
     // m_arm);
-    // new BottomMidScore2Park(
-    // m_robotDrive, 
-    // intake, 
-    // m_arm);
+    new Bottom2Park(
+    m_robotDrive, 
+    intake, 
+    m_arm);
     // new BottomMidScore3(
     // m_robotDrive, 
     // intake, 
     // m_arm);
-    AutoChooser.setDefaultAuton(new TopMidScore2Park(m_robotDrive, m_arm, intake));
+    AutoChooser.setDefaultAuton(new TopLinkPark(m_robotDrive, intake, m_arm));
   }
   
   // TODO: remove this before merging
@@ -141,7 +149,7 @@ public class RobotContainer {
   private void configureDriverBindings() {
 
     // TODO: remove this before merging
-    //new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(balance);
+    // new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(balance);
 
     //Some adjustments made for lock on mode
     DoubleSupplier moveForward =  () -> MathUtil.applyDeadband(
@@ -192,9 +200,9 @@ public class RobotContainer {
 //    }
 //   }
 
-    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(()->intake.manipulates(-1)));
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(()->intake.manipulates(1)));
 
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(0.5)));
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.manipulates(-0.5)));
 
     /*
      * ---Arm Controls 
@@ -214,13 +222,13 @@ public class RobotContainer {
     // Stow
     new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(armPositions.armStowCommand());
     // Tipped pick up
-    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand().alongWith(new RunCommand(()-> intake.manipulates(direction))));
+    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand());//.whileTrue(new RunCommand(()-> intake.manipulates(1.0))).onFalse(armPositions.armStowCommand().alongWith(new RunCommand(()-> intake.manipulates(direction))));
     // Standing Cone 
-    new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
+    new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
     // Pick up Cube 
-    new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(armPositions.armPickUpCubeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(0.5))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
+    new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(armPositions.armPickUpCubeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
     // Shelf 
-    new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0)));
+    new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(1.0)));
   }
 
   private void configureOperatorBindings(){
@@ -284,6 +292,21 @@ public class RobotContainer {
   public void autonInit(){
     m_robotDrive.calibrateGyro();
     m_robotDrive.stop();
+    this.globalEventList();
+  }
+
+  /** Creates the Global event list for the autonomous paths */
+  public void globalEventList(){
+    AutonUtil.addEvent("IntakeDownCone", armPositions.armPickUpTConeComand());
+    AutonUtil.addEvent("ScoreCone", armPositions.armScoreConeMidCommand());
+    AutonUtil.addEvent("IntakeDown", armPositions.armPickUpCubeCommand());
+    AutonUtil.addEvent("Stow", armPositions.armStowCommand());
+    AutonUtil.addEvent("Score", armPositions.armScoreCubeMidCommand());
+  }
+
+  /** Run a function during autonomous to get run time of autonomous. */
+  public void autonPeriodic(){
+    SmartDashboard.putNumber("Auton Time", Timer.getFPGATimestamp());
   }
 
   public Command updateVisionPose(Localizer localizer){
@@ -294,6 +317,11 @@ public class RobotContainer {
         m_robotDrive.addPoseEstimate(
         pose.get().toPose2d(),
         localizer.getPoseTimeStamp().get());
+        SmartDashboard.putBoolean("using AprilTag", true);
+      }
+      else{
+
+        SmartDashboard.putBoolean("using AprilTag", false);
       }
     });
   }

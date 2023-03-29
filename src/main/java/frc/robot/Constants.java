@@ -200,7 +200,7 @@ public final class Constants {
     public static final boolean kIntakeInverted = true;
     public static final int kIntakeID = 12;
     public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
-    public static final int kIntakeCurrentLimit = 60; // amps
+    public static final int kIntakeCurrentLimit = 50; // amps
 	  public static final double kIntakeSpeed = 1.0;
     public static final double kOutakeSpeed = -1.0;
     public static final double kConeIdleSpeed = 0.05;
@@ -290,8 +290,8 @@ public static final boolean kCompetitionMode = false;
         /**
      * Physical location of the camera on the robot, relative to the center of the robot.
      */
-    public static Transform3d FRONT_CAMERA_TO_ROBOT = new Transform3d(new Translation3d(0.256, 0.27, 1.13), new Rotation3d());// deg 30
-    public static Transform3d BACK_CAMERA_TO_ROBOT = new Transform3d(new Translation3d(0.1745, 0.27, 1.13), new Rotation3d());// deg 30
+    public static Transform3d FRONT_CAMERA_TO_ROBOT = new Transform3d(new Translation3d(0.256, Units.inchesToMeters(0), 1.13), new Rotation3d(0.0, 0.0, Units.degreesToRadians(30)));// deg 30
+    public static Transform3d BACK_CAMERA_TO_ROBOT = new Transform3d(new Translation3d(0.1745, Units.inchesToMeters(0), 1.13), new Rotation3d(0.0, 0.0, Units.degreesToRadians(30)));// deg 30
     public static Transform3d FRONT_ROBOT_TO_CAMERA = FRONT_CAMERA_TO_ROBOT.inverse();
   }
   }

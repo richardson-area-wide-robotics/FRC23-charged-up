@@ -1,16 +1,12 @@
 package frc.robot.auton.paths.bottom;
 
-import java.util.HashMap;
 import java.util.List;
-
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.FollowPathWithEvents;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.util.sendable.SendableBuilder;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -32,7 +28,6 @@ public class BottomMidScore2 extends AutonBase {
     Arm m_arm){
 
     List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Bottom-Score-2-Mid-Test", new PathConstraints(1.5, 3.5), new PathConstraints(2.0, 3.0));
-    HashMap<String, Command> eventMap = new HashMap<>();
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
@@ -43,10 +38,6 @@ public class BottomMidScore2 extends AutonBase {
         return;
     }
 
-    eventMap.put("Stow", armPositions.armStowCommand());
-    eventMap.put("IntakeDown", armPositions.armPickUpCubeCommand());
-    eventMap.put("Score", armPositions.armScoreCubeMidCommand());
-
     addCommandsWithLog("Bottom Score 2 Mid",
       new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"),
       new RunCommand(()-> intake.manipulates(-1.0), intake)
@@ -55,10 +46,10 @@ public class BottomMidScore2 extends AutonBase {
       .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
       .andThen(new WaitCommand(0.5))
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake))
-      .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), eventMap))
+      .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), AutonUtil.getEventMap()))
       .andThen(new WaitCommand(0.2))
       .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake)).withTimeout(0.3)
-      .andThen(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), eventMap))
+      .andThen(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), AutonUtil.getEventMap()))
       .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive)));
     }
 

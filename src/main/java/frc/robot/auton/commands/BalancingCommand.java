@@ -42,4 +42,9 @@ public class BalancingCommand extends CommandBase{
     public double getPitch(){
         return drive.getRoll();
     }
+
+    @Override
+    public boolean isFinished(){
+        return false;
+    }
 }

@@ -77,7 +77,7 @@ public class Top2P1Park extends AutonBase {
       //  * and then activates balancing command
       //  */
       .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(secondPath), secondPath)))
-        .andThen(balance));
+      .andThen(balance.until(()->isFinished())));
     }
 
     @Override

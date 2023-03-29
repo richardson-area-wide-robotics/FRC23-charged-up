@@ -16,11 +16,11 @@ import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 
-public class TopLinkTest extends AutonBase {
+public class TopLinkPark extends AutonBase {
     public PositionCommand armPositions;
     public BalancingCommand balance;
 
-    public TopLinkTest(
+    public TopLinkPark(
     DriveSubsystem drive, 
     Intake intake,
     Arm m_arm) {
@@ -47,15 +47,14 @@ public class TopLinkTest extends AutonBase {
      */
     addCommandsWithLog("Top Link",
       /* Runs commands to score pre-load Cone */
-      // new RunCommand(()-> intake.manipulates(-1.0), intake)
-      //   .raceWith(armPositions.armScoreConeMidCommand())
-      //     .andThen(new WaitCommand(0.5))
-      //       .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.7))
+      new RunCommand(()-> intake.manipulates(-1.0), intake)
+        .raceWith(armPositions.armScoreConeMidCommand())
+          .andThen(new WaitCommand(0.5))
+            .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.7))
       /* 
        * Resets the Odometry of the drivetrain to the starting pose of the first path 
        */
-      // .andThen(new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"))
-      new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry")
+      .andThen(new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"))
 
       /* 
        * Runs the First path which is picking up the first cube 
@@ -81,7 +80,8 @@ public class TopLinkTest extends AutonBase {
       //  * Activate intake to score the cone
       //  */
       .andThen(new RunCommand(()-> intake.manipulates(1.0), intake).withTimeout(0.3))
-      .andThen(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(thirdPath), thirdPath)));
+        .andThen(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(thirdPath), thirdPath))
+          .andThen(balance.until(()->isFinished())));
     }
 
     @Override

@@ -45,7 +45,7 @@ public class Bottom2Park extends AutonBase {
     /**
      * Creates a command group that this auton class will call on when initialized 
      */
-    addCommandsWithLog("Top 2P1 Park",
+    addCommandsWithLog("Bottom 2Park",
       /* Runs commands to score pre-load Cone */
       new RunCommand(()-> intake.manipulates(-1.0), intake)
       .raceWith(armPositions.armScoreConeMidCommand())

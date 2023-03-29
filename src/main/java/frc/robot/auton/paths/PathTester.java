@@ -24,7 +24,7 @@ public class PathTester extends AutonBase {
     }
 
     addCommandsWithLog("Top park",
-     new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"), drive.trajectoryFollowerCommand(parkingPath),
+     new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"), drive.trajectoryFollowerCommand(parkingPath), balancingCommand,
     new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive));
     
 }

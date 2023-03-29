@@ -30,7 +30,7 @@ public class TopMidScore2Park extends AutonBase {
     List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Score-2-Mid", new PathConstraints(3.0, 5.0), new PathConstraints(2.0, 3.0));
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
-    this.armPositions = new PositionCommand(m_arm, intake);
+    this.armPositions = new PositionCommand(m_arm);
     HashMap<String, Command> eventMap = new HashMap<>();
     eventMap.put("marker1", new PrintCommand("Passed marker 1"));
     eventMap.put("intakeDown", armPositions.armPickUpCubeCommand());

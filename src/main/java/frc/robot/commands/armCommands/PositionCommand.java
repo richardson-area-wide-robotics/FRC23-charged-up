@@ -12,9 +12,8 @@ public class PositionCommand extends SequentialCommandGroup {
     Arm arm;
     Intake intake;
 
-    public PositionCommand(Arm armMech, Intake intakeMech){
+    public PositionCommand(Arm armMech){
         this.arm = armMech;
-        this.intake = intakeMech;
     }
     
     // public SequentialCommandGroup armStowCommand(){

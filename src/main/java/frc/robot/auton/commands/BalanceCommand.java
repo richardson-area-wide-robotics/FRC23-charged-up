@@ -11,7 +11,7 @@ import frc.robot.Constants;
 import frc.robot.Constants.Localizer;
 import frc.robot.subsystems.drive.DriveSubsystem;
 
-public class Balance extends CommandBase{
+public class BalanceCommand extends CommandBase{
     public DriveSubsystem drive;
     public Localizer localizer;
     final PIDController movingController = new PIDController(
@@ -19,7 +19,7 @@ public class Balance extends CommandBase{
         Constants.AutoConstants.kMovingPIDGains.I,
         Constants.AutoConstants.kMovingPIDGains.D);
 
-    public Balance(DriveSubsystem drive){
+    public BalanceCommand(DriveSubsystem drive){
         this.drive = drive;
         addRequirements(drive);
     }

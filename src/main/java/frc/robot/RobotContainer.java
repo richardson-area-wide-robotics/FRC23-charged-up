@@ -18,8 +18,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
+import frc.robot.auton.paths.middle.MiddlePark;
 import frc.robot.auton.paths.top.TopMidScore2Park;
-import frc.robot.auton.commands.Balance;
+import frc.robot.auton.commands.BalanceCommand;
 import frc.robot.auton.paths.top.TopPark;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.commands.armCommands.PositionCommand;
@@ -47,14 +48,14 @@ public class RobotContainer {
   private final Arm m_arm = new Arm();
 
   {
-    AutoChooser.setDefaultAuton(new TopPark(m_robotDrive));
+    AutoChooser.setDefaultAuton(new MiddlePark(m_robotDrive, intake, m_arm));
   }
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   XboxController m_operatorController = new XboxController(OIConstants.kOperatorControllerPort);
-  private final PositionCommand armPositions = new PositionCommand(m_arm, intake);
-  private Balance balance = new Balance(m_robotDrive);
+  private final PositionCommand armPositions = new PositionCommand(m_arm);
+  private BalanceCommand balance = new BalanceCommand(m_robotDrive);
 
   {
     AutoChooser.setDefaultAuton( new TopMidScore2Park(m_robotDrive, m_arm, intake));

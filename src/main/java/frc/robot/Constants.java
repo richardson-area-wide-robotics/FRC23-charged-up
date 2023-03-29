@@ -166,6 +166,9 @@ public final class Constants {
     public static final PIDGains kVisionTurningPIDGains =
         new PIDGains(1.0, 0, 0.01); // TODO: tune values for Vision auto-turning
 
+        public static final PIDGains kMovingPIDGains =
+        new PIDGains(0.25,0, 0.01); // TODO: tune values for Vision auto-turning
+
     public static final double MAX_LOCKED_ON_SPEED = 0.33;
     
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
@@ -186,10 +189,14 @@ public final class Constants {
         new TrapezoidProfile.Constraints(
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
 
-    
     public static final PIDController kPXController = new PIDController(1.0, 0, 0.35);// 1.0 - 0.35
     public static final PIDController kPYController = new PIDController(0.001, 0, 0.00075);// 1.075 - 0.45
     public static final PIDController kPThetaController = new PIDController(8.0, 0, 0.75);// 6.0 - 0.5
+
+    public static final PIDGains kMovingPIDGains =
+        new PIDGains(0.3,0, 0.01);
+
+
   }
 
   public static final class Intake {

@@ -16,13 +16,13 @@ private CANSparkMax intakeMotor;
 private double intaking;
 private DigitalInput sensor;
 
-public Intake() {
+  public Intake() {
 
   intakeMotor = new CANSparkMax(Constants.Intake.kIntakeID, MotorType.kBrushless);
   sensor = new DigitalInput(0);
 
-  // set intake motor to factory defaults for if we ever want to switch them out 
-  intakeMotor.restoreFactoryDefaults();
+    // set intake motor to factory defaults for if we ever want to switch them out
+    intakeMotor.restoreFactoryDefaults();
 
   // set intake basic values 
   intakeMotor.setSmartCurrentLimit(Constants.Intake.kIntakeCurrentLimit);

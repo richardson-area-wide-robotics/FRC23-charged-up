@@ -166,10 +166,10 @@ public class Arm extends SubsystemBase {
   public void setSpeed(double speed) {
     this.leftMotor.set(speed);
   }
-  
+
   // get the arm speed - returns in RPM (revolutions per minute)
   public double getSpeed() {
-    return this.armEncoder.getVelocity(); 
+    return this.armEncoder.getVelocity();
   }
 
   public void moveElbowPosition(int armPosition){

@@ -11,11 +11,14 @@ import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.LEDConstants;
+import frc.robot.Constants.OIConstants;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
 import frc.robot.auton.paths.middle.MiddlePark;
@@ -24,10 +27,16 @@ import frc.robot.auton.commands.BalanceCommand;
 import frc.robot.auton.paths.top.TopPark;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.commands.armCommands.PositionCommand;
+import frc.robot.commands.ledCommands.FlashLeds;
+import frc.robot.commands.ledCommands.SolidLeds;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.led_strip.LEDStrip;
+import java.util.function.BooleanSupplier;
+import frc.robot.subsystems.RoboState;
+import frc.robot.subsystems.localization.Localizer;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -46,6 +55,7 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
+  private final LEDStrip m_LEDStrip;
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -57,16 +67,18 @@ public class RobotContainer {
     AutoChooser.setDefaultAuton(new MiddlePark(m_robotDrive, intake, m_arm));
   }
 
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
+
+  
+  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+     m_LEDStrip = 
+      new LEDStrip(LEDConstants.LED_STRIP_PORT, LEDConstants.LED_STRIP_LENGTH);
 
+   
     // Configure the trigger bindings
-    configureDriverBindings();
-    configureOperatorBindings();
+    configureDriverBindings(); 
+    configureOperatorBindings();   
   }
-
   /**
    * Use this method to define your trigger->command mappings. Triggers can be
    * created via the
@@ -134,17 +146,20 @@ public class RobotContainer {
         .whileTrue(new RunCommand(() -> intake.manipulates(-1.0)))
         .onFalse(armPositions.armStowCommand().alongWith(new RunCommand(() -> intake.manipulates(direction))));
 
-    // Standing Cone
-    new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand())
-        .whileTrue(new RunCommand(() -> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand())
-        .whileFalse(new RunCommand(() -> intake.manipulates(direction)));
-    // Pick up Cube
-    new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(armPositions.armPickUpCubeCommand())
-        .whileTrue(new RunCommand(() -> intake.manipulates(1.0))).onFalse(armPositions.armStowCommand())
-        .whileFalse(new RunCommand(() -> intake.manipulates(direction)));
-    // Shelf
+    new JoystickButton(m_driverController, XboxController.Button.kY.value)
+      .onTrue(armPositions.armPickUpTConeComand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand().alongWith(new RunCommand(()-> intake.manipulates(direction))));
+
+    // Standing Cone 
+    new JoystickButton(m_driverController, XboxController.Button.kA.value)
+      .onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
+    // Pick up Cube 
+    new JoystickButton(m_driverController, XboxController.Button.kX.value)
+      .onTrue(armPositions.armPickUpCubeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
+    // Shelf 
     new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value)
-        .onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(() -> intake.manipulates(-1.0)));
+      .onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0)).alongWith(new SolidLeds(m_LEDStrip, LEDConstants.YELLOW)));
+
+    new JoystickButton(m_operatorController, XboxController.Button.kRightBumper.value).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.PURPLE));
   }
 
   private void configureOperatorBindings() {
@@ -161,6 +176,22 @@ public class RobotContainer {
     new JoystickButton(m_operatorController, XboxController.Button.kA.value)
         .onTrue(armPositions.armScoreCubeMidCommand());
 
+    // cone high
+    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
+  // cone mid
+    new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
+  // cube High
+    new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(armPositions.armScoreCubeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
+  // cube mid
+    new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
+
+     /*
+      * ---Manual arm controls 
+      * Up on the dpad on the controller controls manual intake(elbow) up command
+      * Down on the dpad on the controller controls manual intake(elbow) down command
+      * left on the dpad on the controller controls manual intake(elbow) angle up command
+      * right on the dpad on the controller controls manual intake(elbow) angle down command
+      */
   }
 
   public double getSparkMax() {

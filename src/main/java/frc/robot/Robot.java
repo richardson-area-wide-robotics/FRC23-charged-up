@@ -41,11 +41,6 @@ public class Robot extends TimedRobot {
     DriverStation.silenceJoystickConnectionWarning(!Constants.kCompetitionMode);
     m_robotContainer = new RobotContainer();
 
-    // m_LEDStrip = 
-    // new LEDStrip(LEDConstants.LED_STRIP_PORT, LEDConstants.LED_STRIP_LENGTH);
-
-    // m_LEDStrip.setSolidColor(LEDConstants.YELLOW);
-    
   }
 
   /**

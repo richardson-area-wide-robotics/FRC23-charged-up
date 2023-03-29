@@ -282,31 +282,6 @@ public final class Constants {
   }
 public static final boolean kCompetitionMode = false;
 
-  // public void putNumber(){
-  //   SmartDashboard.putNumber("stowed elbow", ArmConstants.ELBOW_STOWED);
-  //   SmartDashboard.putNumber("pick up Tcone", ArmConstants.ELBOW_PICK_UP_TCONE);
-  //   SmartDashboard.putNumber("pick up cone", ArmConstants.ELBOW_PICK_UP_CONE);
-  //   SmartDashboard.putNumber("score cone low", ArmConstants.ELBOW_SCORE_CONE_LOW);
-  //   SmartDashboard.putNumber("score cone mid", ArmConstants.ELBOW_SCORE_CONE_MID);
-  //   SmartDashboard.putNumber("score cone high", ArmConstants.ELBOW_SCORE_CONE_HIGH);
-  //   SmartDashboard.putNumber("score cube low", ArmConstants.ELBOW_SCORE_CUBE_LOW);
-  //   SmartDashboard.putNumber("score cube mid", ArmConstants.ELBOW_SCORE_CUBE_MID);
-  //   SmartDashboard.putNumber("score cube high", ArmConstants.ELBOW_SCORE_CUBE_HIGH);
-  // }
-
-  // @Override public void periodic() {
-  //   SmartDashboard.getNumber("stowed elbow", ArmConstants.ELBOW_STOWED);
-  //   SmartDashboard.getNumber("pick up Tcone", ArmConstants.ELBOW_PICK_UP_TCONE);
-  //   SmartDashboard.getNumber("pick up cone", ArmConstants.ELBOW_PICK_UP_CONE);
-  //   SmartDashboard.getNumber("score cone low", ArmConstants.ELBOW_SCORE_CONE_LOW);
-  //   SmartDashboard.getNumber("score cone mid", ArmConstants.ELBOW_SCORE_CONE_MID);
-  //   SmartDashboard.getNumber("score cone high", ArmConstants.ELBOW_SCORE_CONE_HIGH);
-  //   SmartDashboard.getNumber("score cube low", ArmConstants.ELBOW_SCORE_CUBE_LOW);
-  //   SmartDashboard.getNumber("score cube mid", ArmConstants.ELBOW_SCORE_CUBE_MID);
-  //   SmartDashboard.getNumber("score cube high", ArmConstants.ELBOW_SCORE_CUBE_HIGH);
-
-  // }
-
   public static final class LEDConstants {
     public static final int LED_STRIP_PORT = 8;
     public static final int LED_STRIP_LENGTH = 50;

@@ -17,12 +17,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.FlashLeds;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
 import frc.robot.auton.paths.top.TopPark;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.commands.armCommands.PositionCommand;
+import frc.robot.commands.ledCommands.FlashLeds;
+import frc.robot.commands.ledCommands.SolidLeds;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.drive.DriveSubsystem;
@@ -31,7 +32,6 @@ import frc.robot.subsystems.led_strip.LEDStrip;
 import java.util.function.BooleanSupplier;
 import frc.robot.subsystems.RoboState;
 import frc.robot.subsystems.localization.Localizer;
-import frc.robot.commands.SolidLeds;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -51,8 +51,6 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
   private final LEDStrip m_LEDStrip;
-  // //private final LEDStrip m_LEDStripRight;
-  // private final LEDStrip[] m_LEDStrips;
 
   {
     AutoChooser.setDefaultAuton(new TopPark(m_robotDrive));
@@ -70,9 +68,6 @@ public class RobotContainer {
      m_LEDStrip = 
       new LEDStrip(LEDConstants.LED_STRIP_PORT, LEDConstants.LED_STRIP_LENGTH);
 
-    //  //m_LEDStripRight =
-    //  // new LEDStrip(LEDConstants.LED_STRIP_RIGHT_PORT, LEDConstants.LED_STRIP_RIGHT_LENGTH);
-    //   m_LEDStrips = new LEDStrip[] {m_LEDStripLeft};
    
     // Configure the trigger bindings
     configureDriverBindings(); 
@@ -159,11 +154,6 @@ public class RobotContainer {
       .onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0)).alongWith(new SolidLeds(m_LEDStrip, LEDConstants.YELLOW)));
 
     new JoystickButton(m_operatorController, XboxController.Button.kRightBumper.value).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.PURPLE));
-    // new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)
-    //     .whileTrue(new SetLEDColor(m_LEDStrips, LEDConstants.YELLOW));
-
-    // new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
-    //     .whileTrue(new FlashLeds(m_LEDStrips, LEDConstants.PURPLE));
   }
 
   private void configureOperatorBindings() {
@@ -181,19 +171,13 @@ public class RobotContainer {
         .onTrue(armPositions.armScoreCubeMidCommand());
 
     // cone high
-    // new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(8)), new WaitCommand(0.3), new InstantCommand(() -> m_arm.moveElbowPosition(8))));
     new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
   // cone mid
-    // new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(9)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(9))));
     new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
   // cube High
-    // new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(7)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(7))));
     new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(armPositions.armScoreCubeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
   // cube mid
-    // new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(6)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(6))));
     new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
-    // shelf
-    // new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(0)), new WaitCommand(0.7), new InstantCommand(() -> m_arm.moveArmToPosition(0))));
 
      /*
       * ---Manual arm controls 
@@ -229,29 +213,5 @@ public class RobotContainer {
   public void autonInit() {
     m_robotDrive.calibrateGyro();
     m_robotDrive.stop();
-  }
-
-  public class SetLEDColor extends CommandBase {
-    private LEDStrip[] ledStrips;
-    private int[] color;
-
-    public SetLEDColor(LEDStrip[] ledStrips, int[] color) {
-      this.ledStrips = ledStrips;
-      this.color = color;
-    }
-
-    @Override
-    public void initialize() {
-      for (LEDStrip ledStrip : ledStrips) {
-        ledStrip.setSolidColor(color);
-      }
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-      for (LEDStrip ledStrip : ledStrips) {
-        ledStrip.setLightsToOff();
-      }
-    }
   }
 }

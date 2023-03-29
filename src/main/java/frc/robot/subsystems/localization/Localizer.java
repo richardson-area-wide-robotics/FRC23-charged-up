@@ -45,7 +45,6 @@ public class Localizer extends SubsystemBase {
 
     if (hasTargets) {
       PhotonTrackedTarget target = result.getBestTarget();
-      SmartDashboard.putNumber("tag seen", target.getFiducialId());
       currentAprilTagID = Optional.of(target.getFiducialId());
       currentAprilTagTransform = Optional.of(target.getBestCameraToTarget());
       currentTimeStamp = Optional.of(result.getTimestampSeconds());

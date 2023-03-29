@@ -191,7 +191,7 @@ public final class Constants {
   }
   
   public static final class Intake {
-    public static final boolean kIntakeInverted = true;
+    public static final boolean kIntakeInverted = false;
     public static final int kIntakeID = 12;
     public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
     public static final int kIntakeCurrentLimit = 70; // amps
@@ -255,25 +255,36 @@ public final class Constants {
 
     public static final double ARM_STOWED = .55;
     public static final double ELBOW_STOWED = .79;
+      //Pick up tipped cone
     public static final double ARM_PICK_UP_TCONE = .35;
     public static final double ELBOW_PICK_UP_TCONE = .529;
+      //Pick up upright cone
     public static final double ARM_PICK_UP_CONE = 0.1658;
     public static final double ELBOW_PICK_UP_CONE = 0.31;
+      //Pick up ground cube
     public static final double ARM_PICK_UP_CUBE = 0.325;
     public static final double ELBOW_PICK_UP_CUBE = 0.60;
+      //Score low cube
     public static final double ARM_SCORE_CUBE_LOW = 0.166;
     public static final double ELBOW_SCORE_CUBE_LOW = 0.4;
+      //Score low cone
     public static final double ARM_SCORE_CONE_LOW = 0.172;
-    public static final double ARM_SCORE_CONE_MID = 0.7345;
     public static final double ELBOW_SCORE_CONE_LOW = 0.356;
+      //Score mid cone
+    public static final double ARM_SCORE_CONE_MID = 0.7345;
     public static final double ELBOW_SCORE_CONE_MID = 0.58;
+      //Score mid cube
     public static final double ARM_SCORE_CUBE_MID = 0.71;
     public static final double ELBOW_SCORE_CUBE_MID = 0.62;
+      //Score high cone
     public static final double ARM_SCORE_CONE_HIGH = 0.0185;
     public static final double ELBOW_SCORE_CONE_HIGH = 0.32;
+      //Score high cube
     public static final double ARM_SCORE_CUBE_HIGH = 0.2;
     public static final double ELBOW_SCORE_CUBE_HIGH = 0.62;
+
     public static final double ELBOW_IDLE = .83;
+      //Pick up from shelf
     public static final double ARM_PICK_UP_SHELF = 0.445;
     public static final double ELBOW_PICK_UP_SHELF = 0.83;
   }

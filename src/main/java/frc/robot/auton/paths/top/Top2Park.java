@@ -22,8 +22,9 @@ public class Top2Park extends AutonBase {
 
     public Top2Park(
     DriveSubsystem drive,
-    Arm m_arm, 
-    Intake intake) {
+    Intake intake,
+    Arm m_arm
+    ) {
       
     List<PathPlannerTrajectory> top2Park = AutonUtil.loadTrajectoryGroup("Top-Score-2Park", new PathConstraints(4.0, 5.0), new PathConstraints(3.0, 4.7));
     PathPlannerTrajectory firstPath = top2Park.get(0);

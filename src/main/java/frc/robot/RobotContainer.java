@@ -27,7 +27,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.auton.commands.BalancingCommand;
 import frc.robot.auton.paths.top.Top2Park;
 import frc.robot.auton.paths.top.TopLink;
-import frc.robot.auton.paths.top.TopLinkTest;
+import frc.robot.auton.paths.top.TopLinkPark;
 import frc.robot.auton.paths.PathTester;
 import frc.robot.auton.paths.bottom.BottomMidScore2;
 import frc.robot.auton.paths.bottom.Bottom2Park;
@@ -70,18 +70,22 @@ public class RobotContainer {
 
   {
     /* Top Autonomous Routines */
-    // new TopMidScore2P1Park(
-    //   m_robotDrive, 
-    //   intake, 
-    //   m_arm);
-    // new TopMidScore2Park(
-    //   m_robotDrive, 
-    //   m_arm, 
-    //   intake);
-    // new TopMidScore3(
-    //   m_robotDrive, 
-    //   intake,
-    //   m_arm);
+    new Top2P1Park(
+      m_robotDrive, 
+      intake, 
+      m_arm);
+    new Top2Park(
+      m_robotDrive, 
+      intake, 
+      m_arm);
+    new TopLink(
+      m_robotDrive, 
+      intake,
+      m_arm);
+    new TopLinkPark(
+      m_robotDrive, 
+      intake, 
+      m_arm);
     // /* Middle Autonomous Routines */
     // new MidScoreP1Park(
     //   m_robotDrive, 
@@ -96,17 +100,15 @@ public class RobotContainer {
     // m_robotDrive, 
     // intake, 
     // m_arm);
-    // new BottomMidScore2Park(
-    // m_robotDrive, 
-    // intake, 
-    // m_arm);
+    new Bottom2Park(
+    m_robotDrive, 
+    intake, 
+    m_arm);
     // new BottomMidScore3(
     // m_robotDrive, 
     // intake, 
     // m_arm);
-    // AutoChooser.setDefaultAuton(new Top2Park(m_robotDrive, m_arm, intake));
-    AutoChooser.setDefaultAuton(new TopLinkTest(m_robotDrive, intake, m_arm));
-    // AutoChooser.setDefaultAuton(new PathTester(m_robotDrive));
+    AutoChooser.setDefaultAuton(new TopLinkPark(m_robotDrive, intake, m_arm));
   }
   
   // TODO: remove this before merging

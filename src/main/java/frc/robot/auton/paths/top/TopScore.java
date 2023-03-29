@@ -1,14 +1,10 @@
 package frc.robot.auton.paths.top;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
-import com.pathplanner.lib.PathPoint;
-import com.pathplanner.lib.PathPlannerTrajectory.StopEvent;
-
 import frc.robot.subsystems.drive.DriveSubsystem;
 
 public class TopScore {

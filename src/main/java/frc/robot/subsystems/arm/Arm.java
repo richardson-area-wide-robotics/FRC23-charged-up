@@ -9,12 +9,9 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import frc.robot.Constants;
-import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import java.util.EnumMap;
 
 public class Arm extends SubsystemBase {
 
@@ -31,10 +28,6 @@ public class Arm extends SubsystemBase {
   private SparkMaxPIDController armPIDController;
   private SparkMaxPIDController elbowPIDController;  
 
-  // Feedforward
-  private ArmFeedforward elbowFF;
-  private ArmFeedforward armFF;
-
   // Encoders
   private AbsoluteEncoder armEncoder;
   private AbsoluteEncoder elbowEncoder;
@@ -45,7 +38,6 @@ public class Arm extends SubsystemBase {
 
   // last arm positions
   private double lastArmPosition;
-  private double lastElbowPosition;
 
 
   // set up the arm congfiguration
@@ -151,10 +143,6 @@ public class Arm extends SubsystemBase {
     this.currentArmPosition = Constants.ArmConstants.ARM_STOWED;
     this.currentElbowPosition = Constants.ArmConstants.ELBOW_STOWED;
     this.lastArmPosition = currentArmPosition;
-    this.lastElbowPosition = currentElbowPosition;
-
-    elbowFF = Constants.ArmConstants.ELBOW_MOTOR_FEEDFORWARD;
-    armFF = Constants.ArmConstants.ARM_MOTOR_FEEDFORWARD;
   }
 
   // getting relative encoder position of the arm
@@ -316,6 +304,5 @@ public class Arm extends SubsystemBase {
     elbowPIDController.setReference(currentElbowPosition, ControlType.kPosition/* , 1, elbowFF.calculate(elbowPID.getSetpoint().position, elbowPID.getSetpoint().velocity)*/);
 
     lastArmPosition = currentArmPosition;
-    lastElbowPosition = currentElbowPosition;
   }
 }

@@ -8,13 +8,10 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ArmFeedforward;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.controller.PIDGains;
 import frc.lib.util.SwerveModuleConstants;
 
@@ -157,8 +154,9 @@ public final class Constants {
     public static final double kDrivingMinOutput = -1.0;
     public static final double kDrivingMaxOutput = 1.0;
 
+    //was 3.75,0,.35
     public static final PIDGains kTurningPIDGains =
-        new PIDGains(3.75, 0, 0.35); // TODO: tune values for the turning motor
+        new PIDGains(6.75, 0.03, 0.35); // TODO: tune values for the turning motor
     public static final double kTurningFF = 0.0; // TODO: tune values for Feed Forward
     public static final double kTurningMinOutput = -1.0;
     public static final double kTurningMaxOutput = 1.0;
@@ -166,6 +164,9 @@ public final class Constants {
     
     public static final PIDGains kVisionTurningPIDGains =
         new PIDGains(1.0, 0, 0.01); // TODO: tune values for Vision auto-turning
+
+        public static final PIDGains kMovingPIDGains =
+        new PIDGains(0.25,0, 0.01); // TODO: tune values for Vision auto-turning
 
     public static final double MAX_LOCKED_ON_SPEED = 0.33;
     
@@ -186,19 +187,21 @@ public final class Constants {
         new TrapezoidProfile.Constraints(
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
 
-    // public static final PIDController kPXController = new PIDController(0.0, 0, 0.0);// 1.0 - 0.35
-    // public static final PIDController kPYController = new PIDController(0.0, 0, 0.0);// 1.075 - 0.45
-    // public static final PIDController kPThetaController = new PIDController(0.0, 0, 0.0);// 6.0 - 0.5
     public static final PIDController kPXController = new PIDController(1.0, 0, 0.35);// 1.0 - 0.35
     public static final PIDController kPYController = new PIDController(0.001, 0, 0.00075);// 1.075 - 0.45
     public static final PIDController kPThetaController = new PIDController(8.0, 0, 0.75);// 6.0 - 0.5
+
+    public static final PIDGains kMovingPIDGains =
+        new PIDGains(0.3,0, 0.01);
+
+
   }
   
   public static final class Intake {
     public static final boolean kIntakeInverted = true;
     public static final int kIntakeID = 12;
     public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
-    public static final int kIntakeCurrentLimit = 60; // amps
+    public static final int kIntakeCurrentLimit = 70; // amps
 	  public static final double kIntakeSpeed = 1.0;
     public static final double kOutakeSpeed = -1.0;
     public static final double kConeIdleSpeed = 0.05;
@@ -280,57 +283,8 @@ public final class Constants {
     public static final double ELBOW_IDLE = .83;
     public static final double ARM_PICK_UP_SHELF = 0.445;
     public static final double ELBOW_PICK_UP_SHELF = 0.83;
-    // public static final double ARM_STOWED = .55;
-    // public static final double ELBOW_STOWED = .92;
-    // public static final double ARM_PICK_UP_TCONE = .3455;//.35
-    // public static final double ELBOW_PICK_UP_TCONE = .67;//.13
-    // public static final double ARM_PICK_UP_CONE = 0.163;
-    // public static final double ELBOW_PICK_UP_CONE = 0.42;//0.416
-    // public static final double ARM_PICK_UP_CUBE = 0.395;
-    // public static final double ELBOW_PICK_UP_CUBE = 0.79;
-    // public static final double ARM_SCORE_CUBE_LOW = 0.166;
-    // public static final double ELBOW_SCORE_CUBE_LOW = 0.4;
-    // public static final double ARM_SCORE_CONE_LOW = 0.172;
-    // public static final double ARM_SCORE_CONE_MID = 0.0175;
-    // public static final double ELBOW_SCORE_CONE_LOW = 0.356;
-    // public static final double ELBOW_SCORE_CONE_MID = 0.35;
-    // public static final double ARM_SCORE_CUBE_MID = 0.029;
-    // public static final double ELBOW_SCORE_CUBE_MID = 0.33;
-    // public static final double ARM_SCORE_CONE_HIGH = 0.024;
-    // public static final double ELBOW_SCORE_CONE_HIGH = 0.445;
-    // public static final double ARM_SCORE_CUBE_HIGH = 0.043;
-    // public static final double ELBOW_SCORE_CUBE_HIGH = 0.49;
-    // public static final double ELBOW_IDLE = .95;
-    // public static final double ARM_PICK_UP_SHELF = 0.49;
-    // public static final double ELBOW_PICK_UP_SHELF = 0.995;
-    // public static final double ARM_IDLE = 0.3;
   }
 public static final boolean kCompetitionMode = false;
-
-  // public void putNumber(){
-  //   SmartDashboard.putNumber("stowed elbow", ArmConstants.ELBOW_STOWED);
-  //   SmartDashboard.putNumber("pick up Tcone", ArmConstants.ELBOW_PICK_UP_TCONE);
-  //   SmartDashboard.putNumber("pick up cone", ArmConstants.ELBOW_PICK_UP_CONE);
-  //   SmartDashboard.putNumber("score cone low", ArmConstants.ELBOW_SCORE_CONE_LOW);
-  //   SmartDashboard.putNumber("score cone mid", ArmConstants.ELBOW_SCORE_CONE_MID);
-  //   SmartDashboard.putNumber("score cone high", ArmConstants.ELBOW_SCORE_CONE_HIGH);
-  //   SmartDashboard.putNumber("score cube low", ArmConstants.ELBOW_SCORE_CUBE_LOW);
-  //   SmartDashboard.putNumber("score cube mid", ArmConstants.ELBOW_SCORE_CUBE_MID);
-  //   SmartDashboard.putNumber("score cube high", ArmConstants.ELBOW_SCORE_CUBE_HIGH);
-  // }
-
-  // @Override public void periodic() {
-  //   SmartDashboard.getNumber("stowed elbow", ArmConstants.ELBOW_STOWED);
-  //   SmartDashboard.getNumber("pick up Tcone", ArmConstants.ELBOW_PICK_UP_TCONE);
-  //   SmartDashboard.getNumber("pick up cone", ArmConstants.ELBOW_PICK_UP_CONE);
-  //   SmartDashboard.getNumber("score cone low", ArmConstants.ELBOW_SCORE_CONE_LOW);
-  //   SmartDashboard.getNumber("score cone mid", ArmConstants.ELBOW_SCORE_CONE_MID);
-  //   SmartDashboard.getNumber("score cone high", ArmConstants.ELBOW_SCORE_CONE_HIGH);
-  //   SmartDashboard.getNumber("score cube low", ArmConstants.ELBOW_SCORE_CUBE_LOW);
-  //   SmartDashboard.getNumber("score cube mid", ArmConstants.ELBOW_SCORE_CUBE_MID);
-  //   SmartDashboard.getNumber("score cube high", ArmConstants.ELBOW_SCORE_CUBE_HIGH);
-
-  // }
 
   public static final class Localizer {
     public static final double TARGET_SIZE_METERS = 0.0;

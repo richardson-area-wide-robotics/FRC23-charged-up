@@ -47,21 +47,16 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
 
-  {
-    AutoChooser.setDefaultAuton(new MiddlePark(m_robotDrive, intake, m_arm));
-  }
-
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
   XboxController m_operatorController = new XboxController(OIConstants.kOperatorControllerPort);
   private final PositionCommand armPositions = new PositionCommand(m_arm);
-  private BalanceCommand balance = new BalanceCommand(m_robotDrive);
+  private BalanceCommand balance = new BalanceCommand(m_robotDrive); 
 
   {
-    AutoChooser.setDefaultAuton( new TopMidScore2Park(m_robotDrive, m_arm, intake));
+    AutoChooser.setDefaultAuton(new MiddlePark(m_robotDrive, intake, m_arm));
   }
 
-  
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */

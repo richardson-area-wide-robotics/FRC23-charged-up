@@ -200,7 +200,7 @@ public final class Constants {
     public static final boolean kIntakeInverted = true;
     public static final int kIntakeID = 12;
     public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
-    public static final int kIntakeCurrentLimit = 60; // amps
+    public static final int kIntakeCurrentLimit = 50; // amps
 	  public static final double kIntakeSpeed = 1.0;
     public static final double kOutakeSpeed = -1.0;
     public static final double kConeIdleSpeed = 0.05;

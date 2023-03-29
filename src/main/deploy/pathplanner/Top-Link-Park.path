@@ -131,6 +131,31 @@
         "x": 1.5478594283577456,
         "y": 5.110794518880704
       },
+      "nextControl": {
+        "x": 1.3171203397962352,
+        "y": 2.6492054811192958
+      },
+      "holonomicAngle": 0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": true,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 4.697908067691135,
+        "y": 3.095629427369966
+      },
+      "prevControl": {
+        "x": 3.5030660859932836,
+        "y": 3.0839158588039397
+      },
       "nextControl": null,
       "holonomicAngle": 0,
       "isReversal": false,
@@ -145,57 +170,5 @@
       }
     }
   ],
-  "maxVelocity": null,
-  "maxAcceleration": 5.0,
-  "isReversed": null,
-  "markers": [
-    {
-      "position": 0.0,
-      "names": [
-        "Stow"
-      ]
-    },
-    {
-      "position": 0.45845170454545453,
-      "names": [
-        "IntakeDown"
-      ]
-    },
-    {
-      "position": 4.116654829545465,
-      "names": [
-        "Stow"
-      ]
-    },
-    {
-      "position": 1.21857244318181,
-      "names": [
-        "Stow"
-      ]
-    },
-    {
-      "position": 2.442649147727271,
-      "names": [
-        "Score"
-      ]
-    },
-    {
-      "position": 3.5,
-      "names": [
-        "IntakeDownCone"
-      ]
-    },
-    {
-      "position": 3.0751065340908945,
-      "names": [
-        "Stow"
-      ]
-    },
-    {
-      "position": 4.670987215909073,
-      "names": [
-        "ScoreCone"
-      ]
-    }
-  ]
+  "markers": []
 }

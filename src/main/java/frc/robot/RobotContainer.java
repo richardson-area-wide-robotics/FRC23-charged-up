@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
@@ -28,12 +27,7 @@ import frc.robot.auton.commands.BalancingCommand;
 import frc.robot.auton.paths.top.Top2Park;
 import frc.robot.auton.paths.top.TopLink;
 import frc.robot.auton.paths.top.TopLinkPark;
-import frc.robot.auton.paths.PathTester;
-import frc.robot.auton.paths.bottom.BottomMidScore2;
 import frc.robot.auton.paths.bottom.Bottom2Park;
-import frc.robot.auton.paths.bottom.BottomLink;
-import frc.robot.auton.paths.middle.MidScorePark;
-import frc.robot.auton.paths.middle.MidScoreP1Park;
 import frc.robot.auton.paths.top.Top2P1Park;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.auton.util.AutonUtil;
@@ -246,7 +240,7 @@ public class RobotContainer {
      */
 
     // cone high
-    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.autonArmScoreConeHighCommand());
+    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand());
     // cone mid
     new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand());
     // cube High

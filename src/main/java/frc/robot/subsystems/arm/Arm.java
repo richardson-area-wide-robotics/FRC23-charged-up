@@ -209,6 +209,9 @@ public class Arm extends SubsystemBase {
     SmartDashboard.putNumber("outputcurrent for elbow", outputcurrent());
     SmartDashboard.putNumber("outputcurrent for left", outputleftcurrent());
     SmartDashboard.putNumber("outputcurrent for right", outputrightcurrent());
+    SmartDashboard.putNumber("Arm Position", getLastArmPosition());
+    SmartDashboard.putNumber("abs for arm", getArmAbsoluteEncoder());
+    SmartDashboard.putNumber("abs for elbow", getElbowAbsoluteEncoder());
 
     elbowPIDController.setReference(currentElbowPosition, ControlType.kPosition/* , 1, elbowFF.calculate(elbowPID.getSetpoint().position, elbowPID.getSetpoint().velocity)*/);
   }

@@ -46,8 +46,7 @@ public class Arm extends SubsystemBase {
     motor.restoreFactoryDefaults();
     // set motor basic values
     motor.setIdleMode(Constants.ArmConstants.kMotorIdleMode);
-    // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
-    // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
+
     // set the arm PID controllers
     motor.setSmartCurrentLimit(Constants.ArmConstants.kArmMotorCurrentLimit);
     armPIDController = motor.getPIDController();
@@ -59,14 +58,7 @@ public class Arm extends SubsystemBase {
     armPIDController.setD(armPID.getD());
     armPIDController.setOutputRange(
         Constants.ArmConstants.MIN_OUTPUT, Constants.ArmConstants.MAX_OUTPUT);
-  //       motor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 20);
-  //       motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 200);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 20);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 200);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 200);
-// motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.ArmConstants.ARM_FORWARD_LIMIT);
-//     motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.ArmConstants.ARM_REVERSE_LIMIT);
+  
   
   }
 
@@ -76,8 +68,7 @@ public class Arm extends SubsystemBase {
  motor.restoreFactoryDefaults();
  // set motor basic values
  motor.setIdleMode(Constants.ArmConstants.kMotorIdleMode);
- // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
- // motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
+ 
   motor.setSmartCurrentLimit(Constants.ArmConstants.kElbowMotorCurrentLimit);
   elbowPIDController = motor.getPIDController();
   elbowPIDController.setFeedbackDevice(enc);
@@ -88,14 +79,7 @@ public class Arm extends SubsystemBase {
   elbowPIDController.setD(elbowPID.getD());
   elbowPIDController.setOutputRange(
       Constants.ArmConstants.MIN_OUTPUT, Constants.ArmConstants.MAX_OUTPUT);
-  //     motor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 20);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 200);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 20);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 200);
-  // motor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 200);
-      // motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.ArmConstants.ELBOW_FORWARD_LIMIT);
-      // motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.ArmConstants.ELBOW_REVERSE_LIMIT);
+  
   }
 
   public Arm() {
@@ -117,10 +101,10 @@ public class Arm extends SubsystemBase {
     elbowEncoder.setPositionConversionFactor(Constants.ArmConstants.kElbowEncoderPositionFactor);
     elbowEncoder.setVelocityConversionFactor(Constants.ArmConstants.kElbowEncoderVelocityFactor);
 
-    // this.resetArmPosition();
+
 
     // setting the motor configuration
-    // armConfig(leftMotor, armEncoder, false);
+
     armConfig(rightMotor, armEncoder);
     elbowConfig(elbowMotor, elbowEncoder);
 
@@ -134,11 +118,7 @@ public class Arm extends SubsystemBase {
     rightMotor.burnFlash();
     elbowMotor.burnFlash();
 
-    // armPositions.put(armPosition.INTAKE_ARM_POSITION_GROUND,  Constants.ArmConstants.INTAKE_ARM_GROUND);
-    // armPositions.put(armPosition.INTAKE_ARM_POSITION_SHELF,  Constants.ArmConstants.INTAKE_ARM_SHELF);
-    // armPositions.put(armPosition.SCORING_ARM_POSITION_LOW,  Constants.ArmConstants.SCORING_ARM_LOW);
-    // armPositions.put(armPosition.SCORING_ARM_POSITION_MID, Constants.ArmConstants. SCORING_ARM_MID);
-    // armPositions.put(armPosition.INTAKE_ARM_POSITION_STOWED,  Constants.ArmConstants.INTAKE_ARM_STOWED);
+    
 
     this.currentArmPosition = Constants.ArmConstants.ARM_STOWED;
     this.currentElbowPosition = Constants.ArmConstants.ELBOW_STOWED;
@@ -159,7 +139,7 @@ public class Arm extends SubsystemBase {
   }
 
   public double getArmAbsoluteEncoder(){
-    return armEncoder.getPosition(); //- Units.degreesToRadians(50);
+    return armEncoder.getPosition();
   }
 
   public double getElbowAbsoluteEncoder(){
@@ -296,12 +276,12 @@ public class Arm extends SubsystemBase {
 
     // This method will be called once per scheduler run
     armPIDController.setReference(currentArmPosition, ControlType.kPosition);
-    /* , 1, armFF.calculate(currentElbowPosition, armPID.getSetpoint().velocity)*/
+
     SmartDashboard.putNumber("outputcurrent for elbow", outputcurrent());
     SmartDashboard.putNumber("outputcurrent for left", outputleftcurrent());
     SmartDashboard.putNumber("outputcurrent for right", outputrightcurrent());
 
-    elbowPIDController.setReference(currentElbowPosition, ControlType.kPosition/* , 1, elbowFF.calculate(elbowPID.getSetpoint().position, elbowPID.getSetpoint().velocity)*/);
+    elbowPIDController.setReference(currentElbowPosition, ControlType.kPosition);
 
     lastArmPosition = currentArmPosition;
   }

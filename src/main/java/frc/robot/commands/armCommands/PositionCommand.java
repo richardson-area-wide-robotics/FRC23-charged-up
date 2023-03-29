@@ -17,45 +17,7 @@ public class PositionCommand extends SequentialCommandGroup {
         this.intake = intakeMech;
     }
     
-    // public SequentialCommandGroup armStowCommand(){
-    //     return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_STOWED).until(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_STOWED));
-    // }
-
-    // public SequentialCommandGroup armPickUpTConeComand(){
-    //     return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_TCONE).until(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_TCONE));
-    // }
-
-    // public SequentialCommandGroup armPickUpConeCommand(){
-    //     return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_CONE).until(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_CONE));
-    // }
-
-    // public SequentialCommandGroup armPickUpCubeCommand(){
-    //     return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_CUBE).until(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_CUBE));
-    // }
-
-    // public SequentialCommandGroup armPickUpFromShelf(){
-    //     return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_SHELF).until(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_SHELF));
-    // }
-
-    // public SequentialCommandGroup armScoreCubeMidCommand(){
-    //     return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_SCORE_CUBE_MID).unless(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SCORE_CUBE_MID));
-    // }
-
-    // public SequentialCommandGroup armScoreCubeHighCommand(){
-    //     return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_SCORE_CUBE_HIGH).unless(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SCORE_CUBE_HIGH));
-    // }
-
-    // public SequentialCommandGroup armScoreConeMidCommand(){
-    //     return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_SCORE_CONE_MID).unless(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SCORE_CONE_MID));
-    // }
-
-    // public SequentialCommandGroup armScoreConeHighCommand(){
-    //     return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_SCORE_CONE_HIGH).unless(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SCORE_CONE_HIGH));
-    // }
-
-    // public SequentialCommandGroup armBackStandingCone(){
-    //     return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SPECIAL_IDLE));
-    // }
+    
 
     public Command armStowCommand(){
         if (arm.getLastArmPosition() == ArmPositions.Positions.ARM_BACK_PICKUP){

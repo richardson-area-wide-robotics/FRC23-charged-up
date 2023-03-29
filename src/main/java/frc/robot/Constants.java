@@ -32,6 +32,7 @@ public final class Constants {
     public static final double kControllerDeadband = 0.1;
     
   }
+
   public static final class SwerveDriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
@@ -173,8 +174,9 @@ public final class Constants {
     public static final int kDrivingMotorCurrentLimit = 50; // amps
     public static final int kTurningMotorCurrentLimit = 10; // amps
   }
+
   public static final class AutoConstants {
-     public static final double kMaxSpeedMetersPerSecond = 3.0;
+    public static final double kMaxSpeedMetersPerSecond = 3.0;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3.0;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
     public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;    
@@ -189,18 +191,19 @@ public final class Constants {
     public static final PIDController kPYController = new PIDController(0.001, 0, 0.00075);// 1.075 - 0.45
     public static final PIDController kPThetaController = new PIDController(8.0, 0, 0.75);// 6.0 - 0.5
   }
-  
+
   public static final class Intake {
-    public static final boolean kIntakeInverted = true;
+    public static final boolean kIntakeInverted = false;
     public static final int kIntakeID = 12;
     public static final IdleMode kIntakeIdleMode = IdleMode.kBrake;
-    public static final int kIntakeCurrentLimit = 70; // amps
+    public static final int kIntakeCurrentLimit = 40; // amps
 	  public static final double kIntakeSpeed = 1.0;
     public static final double kOutakeSpeed = -1.0;
     public static final double kConeIdleSpeed = 0.05;
     public static final double kCubeIdleSpeed = -0.05;
   }
-   public static final class ArmConstants {
+
+  public static final class ArmConstants {
     // Arm limits
     public final static float ARM_REVERSE_LIMIT = 34.0f;
     public final static float ARM_FORWARD_LIMIT = 0.0f;
@@ -213,7 +216,7 @@ public final class Constants {
     public final static double ELBOW_REVERSE_SPEED = 0.5;
     public final static double ELBOW_FORWARD_SPEED = 0.5;
 
-    /* Spark max constants */ 
+    /* Spark max constants */
     // CAN ID
     public final static int LEFT_MOTOR_CAN_ID = 9;
     public final static int RIGHT_MOTOR_CAN_ID = 10;
@@ -278,6 +281,16 @@ public final class Constants {
     public static final double ELBOW_PICK_UP_SHELF = 0.83;
   }
 public static final boolean kCompetitionMode = false;
+
+  public static final class LEDConstants {
+    public static final int LED_STRIP_PORT = 8;
+    public static final int LED_STRIP_LENGTH = 50;
+    public static final int[] PURPLE = {226, 43, 226};
+    public static final int[] YELLOW = {255, 255, 0};
+    public static final int[] GREEN = {0, 255, 0};
+    public static final int[] BLUE = {0, 150, 150};
+    public static final double FLASH_PERIOD = 0.5; // in seconds
+  }
 
   public static final class Localizer {
     public static final double TARGET_SIZE_METERS = 0.0;

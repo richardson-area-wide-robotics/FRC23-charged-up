@@ -206,9 +206,9 @@ public class Arm extends SubsystemBase {
     // This method will be called once per scheduler run
     armPIDController.setReference(currentArmPosition, ControlType.kPosition);
     /* , 1, armFF.calculate(currentElbowPosition, armPID.getSetpoint().velocity)*/
-    SmartDashboard.putNumber("outputcurrent for elbow", outputcurrent());
-    SmartDashboard.putNumber("outputcurrent for left", outputleftcurrent());
-    SmartDashboard.putNumber("outputcurrent for right", outputrightcurrent());
+    // SmartDashboard.putNumber("outputcurrent for elbow", outputcurrent());
+    // SmartDashboard.putNumber("outputcurrent for left", outputleftcurrent());
+    // SmartDashboard.putNumber("outputcurrent for right", outputrightcurrent());
 
     elbowPIDController.setReference(currentElbowPosition, ControlType.kPosition/* , 1, elbowFF.calculate(elbowPID.getSetpoint().position, elbowPID.getSetpoint().velocity)*/);
   }

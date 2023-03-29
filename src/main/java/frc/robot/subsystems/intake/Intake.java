@@ -3,6 +3,8 @@ package frc.robot.subsystems.intake;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -15,6 +17,7 @@ private CANSparkMax intakeMotor;
 private double intaking;
 private boolean mode;
 private DigitalInput sensor;
+private ShuffleboardTab tab;
 
 public Intake() {
 
@@ -24,6 +27,7 @@ public Intake() {
   // set intake motor to factory defaults for if we ever want to switch them out 
   intakeMotor.restoreFactoryDefaults();
 
+  
   // set intake basic values 
   intakeMotor.setSmartCurrentLimit(Constants.Intake.kIntakeCurrentLimit);
   intakeMotor.setInverted(Constants.Intake.kIntakeInverted);
@@ -34,6 +38,7 @@ public Intake() {
   setDefaultCommand(new RunCommand(this::stop, this));
 
   this.mode = false;
+  // this.tab = Shuffleboard.getTab("Intake");
 }
 
 
@@ -115,8 +120,9 @@ public void setSmartCurrentLimit(){}
 
 @Override 
 public void periodic(){
+  // tab.addDouble("output", ()->outputCurrent());
   SmartDashboard.putNumber("Output current for testing", outputCurrent());
-  SmartDashboard.putBoolean("sensor", getSensorData());
+  // SmartDashboard.putBoolean("sensor", getSensorData());
 }
 
 }

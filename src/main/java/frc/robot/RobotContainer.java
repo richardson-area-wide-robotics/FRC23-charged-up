@@ -5,26 +5,40 @@
 package frc.robot;
 
 import com.revrobotics.CANSparkMax.IdleMode;
+import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.LEDConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.FlashLeds;
 import frc.lib.util.JoystickUtil;
+import frc.robot.Constants.OIConstants;
 import frc.robot.auton.paths.top.TopPark;
 import frc.robot.auton.util.AutoChooser;
+import frc.robot.commands.armCommands.ElbowPosition;
 import frc.robot.commands.armCommands.PositionCommand;
+import frc.robot.commands.LockMode.Lock;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmPositions;
+import frc.robot.subsystems.camera.Camera;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.led_strip.LEDStrip;
+import java.util.function.BooleanSupplier;
+import frc.robot.subsystems.RoboState;
+import frc.robot.subsystems.localization.Localizer;
+import frc.robot.commands.SolidLeds;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -34,13 +48,14 @@ import frc.robot.subsystems.led_strip.LEDStrip;
  */
 public class RobotContainer {
 
+  private boolean mode = false;
   private double direction = 0.0;
   // The robot's subsystems
   private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
   private final DriveSubsystem m_robotDrive = new DriveSubsystem(m_gyro);
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
-  // private final LEDStrip m_LEDStripLeft;
+  private final LEDStrip m_LEDStrip;
   // //private final LEDStrip m_LEDStripRight;
   // private final LEDStrip[] m_LEDStrips;
 
@@ -48,6 +63,7 @@ public class RobotContainer {
     AutoChooser.setDefaultAuton( new TopPark(m_robotDrive));
   }
   
+  private Lock lockMode;
   // private final Camera camera = new Camera("Slotheye");
   // private final  RoboState roboCon = new RoboState();
   // private final Localizer m_localizer;
@@ -60,8 +76,9 @@ public class RobotContainer {
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    //  m_LEDStripLeft = 
-    //   new LEDStrip(LEDConstants.LED_STRIP_PORT, LEDConstants.LED_STRIP_LENGTH);
+     m_LEDStrip = 
+      new LEDStrip(LEDConstants.LED_STRIP_PORT, LEDConstants.LED_STRIP_LENGTH);
+
     //  //m_LEDStripRight =
     //  // new LEDStrip(LEDConstants.LED_STRIP_RIGHT_PORT, LEDConstants.LED_STRIP_RIGHT_LENGTH);
     //   m_LEDStrips = new LEDStrip[] {m_LEDStripLeft};
@@ -81,6 +98,14 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureDriverBindings() {
+
+    
+
+    //Some adjustments made for lock on mode
+    DoubleSupplier moveForward =  () -> MathUtil.applyDeadband(
+      -m_driverController.getLeftY(), 0.06); // 0.1 might be better?
+     DoubleSupplier moveSideways = () -> MathUtil.applyDeadband(
+      -m_driverController.getLeftX(), 0.06); // 0.1 might be better?
   
     // lockMode = new Lock(m_robotDrive, camera, moveForward, moveSideways);
 
@@ -201,6 +226,7 @@ public class RobotContainer {
     new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value)
       .onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0)));
 
+    new JoystickButton(m_operatorController, XboxController.Button.kRightBumper.value).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.PURPLE));
     // new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)
     //     .whileTrue(new SetLEDColor(m_LEDStrips, LEDConstants.YELLOW));
 
@@ -224,16 +250,16 @@ public class RobotContainer {
 
     // cone high
     // new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(8)), new WaitCommand(0.3), new InstantCommand(() -> m_arm.moveElbowPosition(8))));
-    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand());
+    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
   // cone mid
     // new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(9)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(9))));
-    new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand());
+    new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
   // cube High
     // new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(7)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(7))));
-    new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(armPositions.armScoreCubeHighCommand());
+    new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(armPositions.armScoreCubeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
   // cube mid
     // new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(11)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveArmToPosition(6)), new WaitCommand(0.5), new InstantCommand(() -> m_arm.moveElbowPosition(6))));
-    new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand());
+    new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
     // shelf
     // new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(new SequentialCommandGroup(new InstantCommand(() -> m_arm.moveElbowPosition(0)), new WaitCommand(0.7), new InstantCommand(() -> m_arm.moveArmToPosition(0))));
 

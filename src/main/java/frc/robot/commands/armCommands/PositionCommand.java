@@ -1,6 +1,7 @@
 package frc.robot.commands.armCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmPositions;
@@ -12,9 +13,8 @@ public class PositionCommand extends SequentialCommandGroup {
     Arm arm;
     Intake intake;
 
-    public PositionCommand(Arm armMech, Intake intakeMech){
+    public PositionCommand(Arm armMech){
         this.arm = armMech;
-        this.intake = intakeMech;
     }
     
     
@@ -63,7 +63,7 @@ public class PositionCommand extends SequentialCommandGroup {
     }
 
     public Command armScoreConeHighCommand(){
-        return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_SCORE_CONE_HIGH).unless(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SCORE_CONE_HIGH));
+        return new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).andThen(new ShoulderPosition(arm, ArmPositions.Positions.ARM_SPECIAL_IDLE)).until(()-> isFinished()).andThen(new ShoulderPosition(arm, ArmPositions.Positions.ARM_SCORE_CONE_HIGH).alongWith(new InstantCommand(()->arm.setElbowPosition(ArmPositions.Positions.ELBOW_SCORE_CONE_HIGH))));
     }
 
     public Command armBackStandingCone(){

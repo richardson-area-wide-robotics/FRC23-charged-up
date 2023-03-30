@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants.LEDConstants;
-import frc.robot.subsystems.led_strip.LEDStrip;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,7 +23,6 @@ import frc.robot.subsystems.led_strip.LEDStrip;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  private LEDStrip m_LEDStrip;
 
   /**
    * This function is run when the robot is first started up and should be used

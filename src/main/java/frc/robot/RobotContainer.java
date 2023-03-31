@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
@@ -28,14 +29,16 @@ import frc.robot.auton.paths.top.Top2Park;
 import frc.robot.auton.paths.top.TopLink;
 import frc.robot.auton.paths.top.TopLinkPark;
 import frc.robot.auton.paths.bottom.Bottom2Park;
+import frc.robot.auton.paths.middle.MidScorePark;
 import frc.robot.auton.paths.top.Top2P1Park;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.auton.util.AutonUtil;
 import frc.robot.commands.armCommands.PositionCommand;
 import frc.robot.subsystems.arm.Arm;
-import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.lights.Lights;
+import frc.robot.subsystems.lights.LightsController;
 import frc.robot.subsystems.localization.Localizer;
 
 /**
@@ -55,6 +58,8 @@ public class RobotContainer {
   private final Arm m_arm = new Arm();
   private Localizer frontLocalizer;
   private Localizer backLocalizer;
+  private LightsController lights;
+  private Lights m_lights;
   private final PositionCommand armPositions = new PositionCommand(m_arm);
   // private ArmPositions positions = new ArmPositions();
 
@@ -85,10 +90,10 @@ public class RobotContainer {
     //   m_robotDrive, 
     //   intake, 
     //   m_arm);
-    // new MidScorePark(
-    //   m_robotDrive, 
-    //   intake, 
-    //   m_arm);
+    new MidScorePark(
+      m_robotDrive, 
+      intake, 
+      m_arm);
     // /* Bottom Autonomous Routines */
     // new BottomMidScore2(
     // m_robotDrive, 
@@ -103,6 +108,7 @@ public class RobotContainer {
     // intake, 
     // m_arm);
     AutoChooser.setDefaultAuton(new TopLinkPark(m_robotDrive, intake, m_arm));
+    // AutoChooser.setDefaultAuton(new PathTester(m_robotDrive));
   }
   
   // TODO: remove this before merging
@@ -125,6 +131,9 @@ public class RobotContainer {
       e.printStackTrace();
       this.frontLocalizer = null;
     }
+
+    m_lights = new Lights(9, 100, 50);
+    m_lights.allBlue();
    
     // Configure the trigger bindings
     configureDriverBindings(); 
@@ -182,17 +191,6 @@ public class RobotContainer {
      * Right trigger - outaking - 13
      * Up on dpad on the back of Xbox controller controls the toggle between cone and intake state using Intake - P1
      */
-    intake.manipulates(direction, false, false);
-
-// if (new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).getAsBoolean()) {
-//    if (mode) {
-//       // Current state is true so turn off
-//       mode = false;
-//    } else {
-//       // Current state is false so turn on
-//       mode = true;
-//    }
-//   }
 
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(()->intake.manipulates(1)));
 
@@ -207,22 +205,24 @@ public class RobotContainer {
      * left Bumper - shelf cone pickup
      *  - shelf cube picup
      */
-    if (m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_CONE || m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_TCONE || m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_SHELF){
-      direction = -0.1;
-    } else if (m_arm.getLastArmPosition() == ArmPositions.Positions.ARM_PICK_UP_CUBE){
-      direction = 0.1;
-      }
 
     // Stow
     new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(armPositions.armStowCommand());
     // Tipped pick up
-    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand());//.whileTrue(new RunCommand(()-> intake.manipulates(1.0))).onFalse(armPositions.armStowCommand().alongWith(new RunCommand(()-> intake.manipulates(direction))));
+    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand()).onTrue(new InstantCommand(()-> {intake.setMode(false); 
+    m_lights.allYellow();}));//.whileTrue(new RunCommand(()-> intake.manipulates(1.0))).onFalse(armPositions.armStowCommand().alongWith(new RunCommand(()-> intake.manipulates(direction))));
     // Standing Cone 
-    new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
+    new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(1.0), intake)).onTrue(new InstantCommand(()-> {intake.setMode(false); 
+      m_lights.allYellow();})).onFalse(armPositions.armStowCommand());
     // Pick up Cube 
-    new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(armPositions.armPickUpCubeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
+    new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(armPositions.armPickUpCubeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0))).onTrue(new InstantCommand(()-> {intake.setMode(true); 
+      m_lights.allPurple();})).onFalse(armPositions.armStowCommand());
     // Shelf 
-    new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(1.0)));
+    new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(armPositions.armPickUpFromShelf()).onTrue(new InstantCommand(()-> {intake.setMode(false); 
+      m_lights.allYellow();})).whileTrue(new RunCommand(()-> intake.manipulates(1.0)));
+
+    // new POVButton(m_driverController, 0, 20).onTrue(new InstantCommand(()->{intake.setMode(false); m_lights.allYellow();}));
+    // new POVButton(m_driverController, 180, 20).onTrue(new InstantCommand(()->{intake.setMode(true); m_lights.allYellow();})); 
   }
 
   private void configureOperatorBindings(){
@@ -276,9 +276,9 @@ public class RobotContainer {
    * Reduces multi method use to Shuffleboard
    */
   public void putDashboard(){
-    SmartDashboard.putNumber("Gyro Angle", m_robotDrive.getAngle());
-    SmartDashboard.putNumber("Arm encoder", m_arm.getArmAbsoluteEncoder());
-    SmartDashboard.putNumber("encoder elbow", m_arm.getElbowAbsoluteEncoder());
+    // SmartDashboard.putNumber("Gyro Angle", m_robotDrive.getAngle());
+    // SmartDashboard.putNumber("Arm encoder", m_arm.getArmAbsoluteEncoder());
+    // SmartDashboard.putNumber("encoder elbow", m_arm.getElbowAbsoluteEncoder());
     m_robotDrive.putNumber();
   }
 

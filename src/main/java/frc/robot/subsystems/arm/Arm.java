@@ -18,6 +18,7 @@ public class Arm extends SubsystemBase {
   // Shoulder Motors
   private CANSparkMax leftMotor;
   private CANSparkMax rightMotor;
+  private boolean normalStow;
 
   // Elbow Motors
   private CANSparkMax elbowMotor;
@@ -129,6 +130,9 @@ public class Arm extends SubsystemBase {
     this.lastArmPosition = this.currentArmPosition;
     this.lastElbowPosition = this.currentElbowPosition;
 
+
+    this.normalStow = true;
+
   }
 
   // getting relative encoder position of the arm
@@ -154,6 +158,14 @@ public class Arm extends SubsystemBase {
 
   public double outputleftcurrent(){
     return leftMotor.getOutputCurrent();
+  }
+
+  public void setNormalStow(boolean normal){
+    normalStow = normal;
+  }
+
+  public boolean getNormalStow(){
+    return normalStow;
   }
 
   public double outputrightcurrent(){
@@ -205,6 +217,7 @@ public class Arm extends SubsystemBase {
 
     // This method will be called once per scheduler run
     armPIDController.setReference(currentArmPosition, ControlType.kPosition);
+    SmartDashboard.putBoolean("Stow normal", getNormalStow());
     /* , 1, armFF.calculate(currentElbowPosition, armPID.getSetpoint().velocity)*/
     // SmartDashboard.putNumber("outputcurrent for elbow", outputcurrent());
     // SmartDashboard.putNumber("outputcurrent for left", outputleftcurrent());

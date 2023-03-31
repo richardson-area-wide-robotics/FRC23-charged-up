@@ -46,10 +46,10 @@ public class TopLink extends AutonBase {
      */
     addCommandsWithLog("Top Link",
       /* Runs commands to score pre-load Cone */
-      new RunCommand(()-> intake.manipulates(-1.0), intake)
+      new RunCommand(()-> intake.manipulates(1.0), intake)
         .raceWith(armPositions.armScoreConeMidCommand())
           .andThen(new WaitCommand(0.5))
-            .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.7))
+            .andThen(new RunCommand(()-> intake.manipulates(-0.25), intake).withTimeout(0.7))
       /* 
        * Resets the Odometry of the drivetrain to the starting pose of the first path 
        */
@@ -59,7 +59,7 @@ public class TopLink extends AutonBase {
        * Runs the First path which is picking up the first cube 
        * and races with the intake to pick up the cube
        */
-      .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
+      .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake)
         .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(firstPath), firstPath)))
 
        /*
@@ -67,18 +67,18 @@ public class TopLink extends AutonBase {
        * and then stop the intake 
        */
       .andThen(new WaitCommand(0.2))
-        .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.3))
+        .andThen(new RunCommand(()-> intake.manipulates(1.0), intake).withTimeout(0.3))
 
       // /*
       //  * Runs the Second path which is to pick up a cone
       //  */
-      .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake)
+      .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
         .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(secondPath), secondPath)))
 
       // /*
       //  * Activate intake to score the cone
       //  */
-      .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)));
+      .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake)));
     }
 
     @Override

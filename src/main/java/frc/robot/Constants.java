@@ -192,6 +192,7 @@ public final class Constants {
 
     public static final PIDGains kMovingPIDGains =
         new PIDGains(0.3,0, 0.01);
+    public static final double offset = 0.00315;
   }
   
   public static final class Intake {

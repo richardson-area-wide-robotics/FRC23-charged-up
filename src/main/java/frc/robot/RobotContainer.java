@@ -32,6 +32,7 @@ import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.led_strip.LEDStrip;
+import frc.robot.commands.ledCommands.IdleLeds;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -51,6 +52,7 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final Arm m_arm = new Arm();
   private final LEDStrip m_LEDStrip;
+  private final IdleLeds idleLeds;
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -68,6 +70,7 @@ public class RobotContainer {
   public RobotContainer() {
      m_LEDStrip = 
       new LEDStrip(LEDConstants.LED_STRIP_PORT, LEDConstants.LED_STRIP_LENGTH);
+    idleLeds = new IdleLeds();
 
    
     // Configure the trigger bindings
@@ -135,7 +138,7 @@ public class RobotContainer {
     }
 
     // Stow
-    new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(armPositions.armStowCommand());
+    new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(armPositions.armStowCommand().alongWith(idleLeds));
     // Tipped pick up
 
     new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand())
@@ -173,13 +176,13 @@ public class RobotContainer {
         .onTrue(armPositions.armScoreCubeMidCommand());
 
     // cone high
-    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
+    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand()).onTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE)).onFalse(idleLeds);
   // cone mid
-    new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
+    new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand()).onTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN)).onFalse(idleLeds);
   // cube High
-    new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(armPositions.armScoreCubeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
+    new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(armPositions.armScoreCubeHighCommand()).onTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE)).onFalse(idleLeds);
   // cube mid
-    new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
+    new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand()).onTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN)).onFalse(idleLeds);
 
      /*
       * ---Manual arm controls 

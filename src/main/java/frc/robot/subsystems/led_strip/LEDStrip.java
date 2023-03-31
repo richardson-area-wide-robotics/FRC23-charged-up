@@ -31,4 +31,20 @@ public class LEDStrip extends SubsystemBase {
   public void setLightsToOff() {
     ledStrip.setData(OFF_BUFFER);
   }
+
+  public void setData(){
+    ledStrip.setData(ledBuffer);
+  }
+
+  public void start(){
+    ledStrip.start();
+  }
+
+  public int getLength(){
+    return ledBuffer.getLength();
+  }
+
+  public void setHSV(int i, int h, int s, int v){
+    ledBuffer.setHSV(i, h, s, v);
+  }
 }

@@ -64,7 +64,7 @@ public class RobotContainer {
   private BalanceCommand balance = new BalanceCommand(m_robotDrive); 
 
   {
-    AutoChooser.setDefaultAuton(new MiddlePark(m_robotDrive, intake, m_arm));
+    //AutoChooser.setDefaultAuton(new MiddlePark(m_robotDrive, intake, m_arm));
   }
 
 

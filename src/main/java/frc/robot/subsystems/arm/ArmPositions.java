@@ -35,17 +35,22 @@ public class ArmPositions extends SubsystemBase {
 
     public static class Positions {
         // Arm Stowed Positions
+
         public static double ARM_STOWED = .55;
         public static double ELBOW_STOWED = .79;
         public static double ARM_PICK_UP_TCONE = .35;
         public static double ELBOW_PICK_UP_TCONE = .529;
         public static double ARM_PICK_UP_CONE = 0.1658;
         public static double ELBOW_PICK_UP_CONE = 0.31;
-        public static double ARM_PICK_UP_CUBE = 0.325;
-        public static double ELBOW_PICK_UP_CUBE = 0.60;
+        //public static double ARM_PICK_UP_CUBE = 0.325;
+        //public static double ELBOW_PICK_UP_CUBE = 0.60;
+
+        public static double ARM_PICK_UP_CUBE = 0.286;
+        public static double ELBOW_PICK_UP_CUBE = 0.571;
         public static double ARM_SCORE_CUBE_LOW = 0.166;
         public static double ELBOW_SCORE_CUBE_LOW = 0.4;
         public static double ARM_SCORE_CONE_LOW = 0.172;
+        
         // .7345
         public static double ARM_SCORE_CONE_MID = 0.74;
         public static double ELBOW_SCORE_CONE_LOW = 0.356;
@@ -57,10 +62,12 @@ public class ArmPositions extends SubsystemBase {
         // .0185
         public static double ARM_SCORE_CONE_HIGH = 0.0185;
         // .32
-        public static double ELBOW_SCORE_CONE_HIGH = 0.32;
+        public static double ELBOW_SCORE_CONE_HIGH = 0.2618;
 
-        public static double ARM_SCORE_CUBE_HIGH = 0.2;
-        public static double ELBOW_SCORE_CUBE_HIGH = 0.62;
+        // public static double ARM_SCORE_CUBE_HIGH = 0.2;
+        // public static double ELBOW_SCORE_CUBE_HIGH = 0.62;
+        public static double ARM_SCORE_CUBE_HIGH = 0.135;
+        public static double ELBOW_SCORE_CUBE_HIGH = 0.53;
 
         public static double ARM_PICK_UP_SHELF = 0.445;
         public static double ELBOW_PICK_UP_SHELF = 0.83;

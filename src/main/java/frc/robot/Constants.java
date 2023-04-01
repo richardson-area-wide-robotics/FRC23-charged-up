@@ -111,7 +111,7 @@ public final class Constants {
               kDriveMotorCANID, kSteerMotorCANID, kBackRightChassisAngularOffset);
     }
 
-    public static final boolean kGyroReversed = false;
+    public static final boolean kGyroReversed = true;
   }
 
   public static final class ModuleConstants {
@@ -263,27 +263,44 @@ public final class Constants {
     public static final double ARM_ENCODER_OFFSET = 0;
     public static final double ELBOW_ENCODER_OFFSET = 0;
 
+
+
+    
     public static final double ARM_STOWED = .55;
     public static final double ELBOW_STOWED = .79;
+
     public static final double ARM_PICK_UP_TCONE = .35;
     public static final double ELBOW_PICK_UP_TCONE = .529;
+
     public static final double ARM_PICK_UP_CONE = 0.1658;
     public static final double ELBOW_PICK_UP_CONE = 0.31;
-    public static final double ARM_PICK_UP_CUBE = 0.325;
-    public static final double ELBOW_PICK_UP_CUBE = 0.60;
+
+    public static final double ARM_PICK_UP_CUBE = 0.286;
+    public static final double ELBOW_PICK_UP_CUBE = 0.571;
+
+    //public static final double ARM_PICK_UP_CUBE = 0.1;
+    //public static final double ELBOW_PICK_UP_CUBE = 0.4;
+
     public static final double ARM_SCORE_CUBE_LOW = 0.166;
     public static final double ELBOW_SCORE_CUBE_LOW = 0.4;
+
     public static final double ARM_SCORE_CONE_LOW = 0.172;
-    public static final double ARM_SCORE_CONE_MID = 0.7345;
     public static final double ELBOW_SCORE_CONE_LOW = 0.356;
-    public static final double ELBOW_SCORE_CONE_MID = 0.58;
-    public static final double ARM_SCORE_CUBE_MID = 0.71;
-    public static final double ELBOW_SCORE_CUBE_MID = 0.62;
-    public static final double ARM_SCORE_CONE_HIGH = 0.0185;
-    public static final double ELBOW_SCORE_CONE_HIGH = 0.32;
-    public static final double ARM_SCORE_CUBE_HIGH = 0.2;
-    public static final double ELBOW_SCORE_CUBE_HIGH = 0.62;
+
+    public static final double ARM_SCORE_CONE_MID = 0.7316;
+    public static final double ELBOW_SCORE_CONE_MID = 0.6216;
+
+    public static final double ARM_SCORE_CUBE_MID = 0.6595;
+    public static final double ELBOW_SCORE_CUBE_MID = 0.5922;
+
+    public static final double ARM_SCORE_CONE_HIGH = 0.9755;
+    public static final double ELBOW_SCORE_CONE_HIGH = 0.2497;
+
+    public static final double ARM_SCORE_CUBE_HIGH = 0.152;
+    public static final double ELBOW_SCORE_CUBE_HIGH = 0.5503;
+
     public static final double ELBOW_IDLE = .83;
+    
     public static final double ARM_PICK_UP_SHELF = 0.445;
     public static final double ELBOW_PICK_UP_SHELF = 0.83;
   }

@@ -64,6 +64,7 @@ public class RobotContainer {
   private BalanceCommand balance = new BalanceCommand(m_robotDrive); 
 
   {
+    //removed by Eden - autonomous
     //AutoChooser.setDefaultAuton(new MiddlePark(m_robotDrive, intake, m_arm));
   }
 
@@ -95,7 +96,8 @@ public class RobotContainer {
    */
   private void configureDriverBindings() {
 
-    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(balance);
+    //removed by Eden
+    //new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(balance);
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -142,6 +144,7 @@ public class RobotContainer {
     new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(armPositions.armStowCommand());
     // Tipped pick up
 
+
     new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand())
         .whileTrue(new RunCommand(() -> intake.manipulates(-1.0)))
         .onFalse(armPositions.armStowCommand().alongWith(new RunCommand(() -> intake.manipulates(direction))));
@@ -155,11 +158,22 @@ public class RobotContainer {
     // Pick up Cube 
     new JoystickButton(m_driverController, XboxController.Button.kX.value)
       .onTrue(armPositions.armPickUpCubeCommand()).whileTrue(new RunCommand(()-> intake.manipulates(1.0))).onFalse(armPositions.armStowCommand()).whileFalse(new RunCommand(()->intake.manipulates(direction)));
-    // Shelf 
+    // Shelf
+    //Outtake cubes
     new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value)
-      .onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0)).alongWith(new SolidLeds(m_LEDStrip, LEDConstants.YELLOW)));
+      .onTrue(armPositions.armPickUpFromShelf()).whileTrue(new RunCommand(()-> intake.manipulates(-1.0)));
+    //Outtake cones - not working
+    new JoystickButton(m_operatorController, XboxController.Button.kRightBumper.value)
+       //.onTrue(armPositions.armPickUpFromShelf())
+      .whileTrue(new RunCommand(()-> intake.manipulates(1.0)));
+      //.alongWith(new SolidLeds(m_LEDStrip, LEDConstants.YELLOW)));
 
-    new JoystickButton(m_operatorController, XboxController.Button.kRightBumper.value).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.PURPLE));
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
+      //.onTrue(armPositions.armPickUpFromShelf())
+     .whileTrue(new RunCommand(()-> intake.manipulates(1.0)));
+
+    //removed by Eden
+      //new JoystickButton(m_operatorController, XboxController.Button.kRightBumper.value).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.PURPLE));
   }
 
   private void configureOperatorBindings() {
@@ -177,13 +191,13 @@ public class RobotContainer {
         .onTrue(armPositions.armScoreCubeMidCommand());
 
     // cone high
-    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
-  // cone mid
-    new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
-  // cube High
-    new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(armPositions.armScoreCubeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
-  // cube mid
-    new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
+    //new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
+    // cone mid
+    //new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
+    // cube High
+    //new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(armPositions.armScoreCubeHighCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.BLUE));
+    // cube mid
+    //new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand()).whileTrue(new SolidLeds(m_LEDStrip, LEDConstants.GREEN));
 
      /*
       * ---Manual arm controls 

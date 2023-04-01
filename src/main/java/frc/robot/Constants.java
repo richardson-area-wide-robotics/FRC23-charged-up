@@ -263,9 +263,12 @@ public final class Constants {
     public static final double ARM_ENCODER_OFFSET = 0;
     public static final double ELBOW_ENCODER_OFFSET = 0;
 
+  //   public double getARM_STOWED()
+  // {
+  //   return ARM_STOWED;
+  // }
 
-
-    
+    // !!!!  these values are over in armPositions.java !!!!
     public static final double ARM_STOWED = .55;
     public static final double ELBOW_STOWED = .79;
 
@@ -278,11 +281,9 @@ public final class Constants {
     public static final double ARM_PICK_UP_CUBE = 0.286;
     public static final double ELBOW_PICK_UP_CUBE = 0.571;
 
-    //public static final double ARM_PICK_UP_CUBE = 0.1;
-    //public static final double ELBOW_PICK_UP_CUBE = 0.4;
-
     public static final double ARM_SCORE_CUBE_LOW = 0.166;
     public static final double ELBOW_SCORE_CUBE_LOW = 0.4;
+    // !!!!  these values are over in armPositions.java !!!!
 
     public static final double ARM_SCORE_CONE_LOW = 0.172;
     public static final double ELBOW_SCORE_CONE_LOW = 0.356;
@@ -299,10 +300,13 @@ public final class Constants {
     public static final double ARM_SCORE_CUBE_HIGH = 0.152;
     public static final double ELBOW_SCORE_CUBE_HIGH = 0.5503;
 
+    // !!!!  these values are over in armPositions.java !!!!
     public static final double ELBOW_IDLE = .83;
     
     public static final double ARM_PICK_UP_SHELF = 0.445;
     public static final double ELBOW_PICK_UP_SHELF = 0.83;
+    // !!!!  these values are over in armPositions.java !!!!
+
   }
 public static final boolean kCompetitionMode = false;
 

@@ -29,6 +29,7 @@ public class MiddlePark extends AutonBase {
     Arm m_arm){
 
     List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Mid-Score-Park", new PathConstraints(1.5, 3.5));
+    //List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Simple-Park", new PathConstraints(1.5, 3.5));
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);

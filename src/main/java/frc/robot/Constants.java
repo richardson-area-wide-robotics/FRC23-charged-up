@@ -263,10 +263,6 @@ public final class Constants {
     public static final double ARM_ENCODER_OFFSET = 0;
     public static final double ELBOW_ENCODER_OFFSET = 0;
 
-  //   public double getARM_STOWED()
-  // {
-  //   return ARM_STOWED;
-  // }
 
     // !!!!  these values are over in armPositions.java !!!!
     public static final double ARM_STOWED = .55;
@@ -289,7 +285,7 @@ public final class Constants {
     public static final double ELBOW_SCORE_CONE_LOW = 0.356;
 
     public static final double ARM_SCORE_CONE_MID = 0.7316;
-    public static final double ELBOW_SCORE_CONE_MID = 0.6216;
+    public static final double ELBOW_SCORE_CONE_MID = 0.6;
 
     public static final double ARM_SCORE_CUBE_MID = 0.6595;
     public static final double ELBOW_SCORE_CUBE_MID = 0.5922;

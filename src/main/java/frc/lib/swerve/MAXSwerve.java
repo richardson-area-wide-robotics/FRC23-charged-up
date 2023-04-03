@@ -1,7 +1,5 @@
 package frc.lib.swerve;
 
-import java.io.IOException;
-
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
@@ -15,7 +13,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.sendable.SendableBuilder;
-import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,7 +20,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.localization.Localizer;
 
 public class MAXSwerve extends SubsystemBase {
   public enum ModuleLocation {
@@ -49,7 +45,6 @@ public class MAXSwerve extends SubsystemBase {
   private final MAXModule m_frontRight;
   private final MAXModule m_backLeft;
   private final MAXModule m_backRight;
-  private Localizer local;
 
   // The gyro sensor
   private final AHRS m_gyro;

@@ -2,6 +2,7 @@ package frc.robot.subsystems.arm;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.ArmConstants;
 
 public class ArmPositions extends SubsystemBase {
     public ArmPositions() {
@@ -35,47 +36,46 @@ public class ArmPositions extends SubsystemBase {
 
     public static class Positions {
         // Arm Stowed Positions
+        //Constants in ArmPositions.java are synced to Constants.java
+        public static double ARM_STOWED = ArmConstants.ARM_STOWED;
+        public static double ELBOW_STOWED = ArmConstants.ELBOW_STOWED;
 
-        public static double ARM_STOWED = .55;
-        public static double ELBOW_STOWED = .79;
-        public static double ARM_PICK_UP_TCONE = .35;
-        public static double ELBOW_PICK_UP_TCONE = .529;
-        public static double ARM_PICK_UP_CONE = 0.1658;
-        public static double ELBOW_PICK_UP_CONE = 0.31;
-        //public static double ARM_PICK_UP_CUBE = 0.325;
-        //public static double ELBOW_PICK_UP_CUBE = 0.60;
+        public static double ARM_PICK_UP_TCONE = ArmConstants.ARM_PICK_UP_TCONE;
+        public static double ELBOW_PICK_UP_TCONE = ArmConstants.ELBOW_PICK_UP_TCONE;
 
-        public static double ARM_PICK_UP_CUBE = 0.286;
-        public static double ELBOW_PICK_UP_CUBE = 0.571;
-        public static double ARM_SCORE_CUBE_LOW = 0.166;
-        public static double ELBOW_SCORE_CUBE_LOW = 0.4;
-        public static double ARM_SCORE_CONE_LOW = 0.172;
+        public static double ARM_PICK_UP_CONE = ArmConstants.ARM_PICK_UP_CONE;
+        public static double ELBOW_PICK_UP_CONE = ArmConstants.ELBOW_PICK_UP_CONE;
+
+        public static double ARM_PICK_UP_CUBE = ArmConstants.ARM_PICK_UP_CUBE;
+        public static double ELBOW_PICK_UP_CUBE = ArmConstants.ELBOW_PICK_UP_CUBE;
+
+        public static double ARM_SCORE_CUBE_LOW = ArmConstants.ARM_SCORE_CUBE_LOW;
+        public static double ELBOW_SCORE_CUBE_LOW = ArmConstants.ELBOW_SCORE_CUBE_LOW;
+
+        public static double ARM_SCORE_CONE_LOW = ArmConstants.ARM_SCORE_CONE_LOW;
+        public static double ELBOW_SCORE_CONE_LOW = ArmConstants.ELBOW_SCORE_CONE_LOW;
         
-        // .7345
-        public static double ARM_SCORE_CONE_MID = 0.74;
-        public static double ELBOW_SCORE_CONE_LOW = 0.356;
-        // .58
-        public static double ELBOW_SCORE_CONE_MID = 0.58;
+        public static double ARM_SCORE_CONE_MID = ArmConstants.ARM_SCORE_CONE_MID;
+        public static double ELBOW_SCORE_CONE_MID = ArmConstants.ELBOW_SCORE_CONE_MID;
 
-        public static double ARM_SCORE_CUBE_MID = 0.71;
-        public static double ELBOW_SCORE_CUBE_MID = 0.62;
-        // .0185
-        public static double ARM_SCORE_CONE_HIGH = 0.0185;
-        // .32
-        public static double ELBOW_SCORE_CONE_HIGH = 0.2618;
+        public static double ARM_SCORE_CUBE_MID = ArmConstants.ARM_SCORE_CUBE_MID;
+        public static double ELBOW_SCORE_CUBE_MID = ArmConstants.ELBOW_SCORE_CUBE_MID;
+        
+        public static double ARM_SCORE_CONE_HIGH = ArmConstants.ARM_SCORE_CONE_HIGH;
+        public static double ELBOW_SCORE_CONE_HIGH = ArmConstants.ELBOW_SCORE_CONE_HIGH;
 
-        // public static double ARM_SCORE_CUBE_HIGH = 0.2;
-        // public static double ELBOW_SCORE_CUBE_HIGH = 0.62;
-        public static double ARM_SCORE_CUBE_HIGH = 0.135;
-        public static double ELBOW_SCORE_CUBE_HIGH = 0.53;
+        public static double ARM_SCORE_CUBE_HIGH = ArmConstants.ARM_SCORE_CUBE_HIGH;
+        public static double ELBOW_SCORE_CUBE_HIGH = ArmConstants.ELBOW_SCORE_CUBE_HIGH;
 
-        public static double ARM_PICK_UP_SHELF = 0.445;
-        public static double ELBOW_PICK_UP_SHELF = 0.83;
+        public static double ARM_PICK_UP_SHELF = ArmConstants.ARM_PICK_UP_SHELF;
+        public static double ELBOW_PICK_UP_SHELF = ArmConstants.ELBOW_PICK_UP_SHELF;
+
         // Arm back cone pick up scoring position
         public static double ARM_BACK_PICKUP = 0.0;
         public static double ELBOW_BACK_PICKUP = 0.0;
         public static double ARM_SPECIAL_IDLE = 0.0;
         public static double ELBOW_SPECIAL_IDLE = 0.0;
+
         // Elbow Idle position
         public static double ELBOW_IDLE = .83;
         

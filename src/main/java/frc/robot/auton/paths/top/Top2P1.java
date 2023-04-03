@@ -47,10 +47,10 @@ public class Top2P1 extends AutonBase {
      */
     addCommandsWithLog("Top 2P1 Park",
       /* Runs commands to score pre-load Cone */
-      new RunCommand(()-> intake.manipulates(1.0), intake)
+      new RunCommand(()-> intake.setIntakeSpeed(1.0), intake)
       .raceWith(armPositions.armScoreConeMidCommand())
         .andThen(new WaitCommand(0.6))
-          .andThen(new RunCommand(()-> intake.manipulates(-0.25), intake).withTimeout(0.5))
+          .andThen(new RunCommand(()-> intake.setIntakeSpeed(-0.25), intake).withTimeout(0.5))
 
       /* 
        * Resets the Odometry of the drivetrain to the starting pose of the first path 
@@ -61,7 +61,7 @@ public class Top2P1 extends AutonBase {
        * Runs the First path which is picking up the first cube 
        * and races with the intake to pick up the cube
        */
-      .andThen(new RunCommand(()-> intake.manipulates(-0.9), intake)
+      .andThen(new RunCommand(()-> intake.setIntakeSpeed(-0.9), intake)
         .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(firstPath), firstPath)))
         .andThen(new WaitCommand(0.3))
       
@@ -69,8 +69,8 @@ public class Top2P1 extends AutonBase {
        * Activate intake to score the first cube
        * and then stop the intake 
        */
-      .andThen(new RunCommand(()-> intake.manipulates(1.0), intake).withTimeout(0.6))
-        .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake)
+      .andThen(new RunCommand(()-> intake.setIntakeSpeed(1.0), intake).withTimeout(0.6))
+        .andThen(new RunCommand(()-> intake.setIntakeSpeed(-1.0), intake)
 
       //  /*
       //  * Runs the Second path which is to pick up second cube and balance with it 

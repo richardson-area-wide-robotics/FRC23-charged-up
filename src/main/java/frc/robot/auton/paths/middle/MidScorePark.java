@@ -40,10 +40,10 @@ public class MidScorePark extends AutonBase {
 
     addCommandsWithLog("Mid Park",
       new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"),
-      new RunCommand(()-> intake.manipulates(1.0), intake)
+      new RunCommand(()-> intake.setIntakeSpeed(1.0), intake)
       .raceWith(armPositions.autonArmScoreConeHighCommand())
       .andThen(new WaitCommand(0.7))
-      .andThen(new RunCommand(()-> intake.manipulates(-0.25), intake).withTimeout(0.8))
+      .andThen(new RunCommand(()-> intake.setIntakeSpeed(-0.25), intake).withTimeout(0.8))
       .andThen(new InstantCommand(()-> intake.stop()))
       .andThen(armPositions.armStowCommand())
       .andThen(new WaitCommand(0.5))

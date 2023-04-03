@@ -46,10 +46,10 @@ public class MidScoreP1Park extends AutonBase {
     addCommandsWithLog("Mid P1 Park",
     /* Runs commands to score pre-load Cone in high */
       new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"),
-        new RunCommand(()-> intake.manipulates(-1.0), intake)
+        new RunCommand(()-> intake.setIntakeSpeed(-1.0), intake)
           .raceWith(armPositions.autonArmScoreConeHighCommand())
             .andThen(new WaitCommand(0.1))
-              .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
+              .andThen(new RunCommand(()-> intake.setIntakeSpeed(0.25), intake).withTimeout(0.5))
 
       /*
        * Stows the arm 
@@ -57,7 +57,7 @@ public class MidScoreP1Park extends AutonBase {
        * Follows the first path
        */
       .andThen(armPositions.armStowCommand())
-        .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
+        .andThen(new RunCommand(()-> intake.setIntakeSpeed(1.0), intake)
           .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(firstPath), firstPath)))
       
       /*

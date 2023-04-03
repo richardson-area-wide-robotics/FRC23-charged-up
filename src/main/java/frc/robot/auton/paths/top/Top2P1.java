@@ -17,16 +17,16 @@ import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 
-public class Top2P1Park extends AutonBase {
+public class Top2P1 extends AutonBase {
     public PositionCommand armPositions;
     public PathPlannerServer server = new PathPlannerServer();
 
-    public Top2P1Park(
+    public Top2P1(
     DriveSubsystem drive, 
     Intake intake,
     Arm m_arm) {
       
-    List<PathPlannerTrajectory> top2P1Park = AutonUtil.loadTrajectoryGroup("Top-Score-2P1Park", new PathConstraints(3.85, 5.0), new PathConstraints(3.0, 5.0));
+    List<PathPlannerTrajectory> top2P1Park = AutonUtil.loadTrajectoryGroup("Top-Score-2P1Park", new PathConstraints(3.85, 5.0), new PathConstraints(3.0, 4.5));
     PathPlannerTrajectory firstPath = top2P1Park.get(0);
     PathPlannerTrajectory secondPath = top2P1Park.get(1);
     
@@ -61,24 +61,23 @@ public class Top2P1Park extends AutonBase {
        * Runs the First path which is picking up the first cube 
        * and races with the intake to pick up the cube
        */
-      .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake)
+      .andThen(new RunCommand(()-> intake.manipulates(-0.9), intake)
         .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(firstPath), firstPath)))
-      .andThen(new WaitCommand(0.3))
+        .andThen(new WaitCommand(0.3))
       
        /*
        * Activate intake to score the first cube
        * and then stop the intake 
        */
-      .andThen(new RunCommand(()-> intake.manipulates(1.0), intake).withTimeout(0.3))
+      .andThen(new RunCommand(()-> intake.manipulates(1.0), intake).withTimeout(0.6))
         .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake)
 
       //  /*
       //  * Runs the Second path which is to pick up second cube and balance with it 
       //  * and then activates balancing command
       //  */
-      .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(secondPath), secondPath))));
-
-      addCommands(balancingCommand);
+      .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(secondPath), secondPath)))
+      .andThen(armPositions.armStowCommand()));
     }
 
     @Override

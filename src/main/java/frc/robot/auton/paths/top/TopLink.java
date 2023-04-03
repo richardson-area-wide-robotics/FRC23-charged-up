@@ -48,7 +48,7 @@ public class TopLink extends AutonBase {
       /* Runs commands to score pre-load Cone */
       new RunCommand(()-> intake.manipulates(1.0), intake)
         .raceWith(armPositions.armScoreConeMidCommand())
-          .andThen(new WaitCommand(0.5))
+          .andThen(new WaitCommand(0.7))
             .andThen(new RunCommand(()-> intake.manipulates(-0.25), intake).withTimeout(0.7))
       /* 
        * Resets the Odometry of the drivetrain to the starting pose of the first path 

@@ -42,6 +42,10 @@ public class PositionCommand extends SequentialCommandGroup {
         return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_CUBE).until(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_CUBE)).alongWith(new InstantCommand(()-> arm.setNormalStow(true)));
     }
 
+    public Command autonArmPickUpCubeCommand(){
+        return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_CUBE).until(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_CUBE - .025)).alongWith(new InstantCommand(()-> arm.setNormalStow(true)));
+    }
+
     public Command armPickUpFromShelf(){
         return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_SHELF).until(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_SHELF)).alongWith(new InstantCommand(()-> arm.setNormalStow(true)));
     }
@@ -56,6 +60,10 @@ public class PositionCommand extends SequentialCommandGroup {
 
     public Command armScoreConeMidCommand(){
         return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_SCORE_CONE_MID).unless(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SCORE_CONE_MID)).alongWith(new InstantCommand(()-> arm.setNormalStow(true)));
+    }
+
+    public Command autonArmScoreConeMidCommand(){
+        return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_SCORE_CONE_MID).unless(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SCORE_CONE_MID - 0.01)).alongWith(new InstantCommand(()-> arm.setNormalStow(true)));
     }
 
     public Command armScoreConeHighCommand(){

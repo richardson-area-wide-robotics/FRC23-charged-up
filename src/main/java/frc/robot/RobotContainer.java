@@ -28,8 +28,10 @@ import frc.robot.auton.commands.BalancingCommand;
 import frc.robot.auton.paths.top.Top2Park;
 import frc.robot.auton.paths.top.TopLink;
 import frc.robot.auton.paths.top.TopLinkPark;
+import frc.robot.auton.paths.PathTester;
 import frc.robot.auton.paths.bottom.Bottom2Park;
 import frc.robot.auton.paths.middle.MidScorePark;
+import frc.robot.auton.paths.top.Top2P1;
 import frc.robot.auton.paths.top.Top2P1Park;
 import frc.robot.auton.util.AutoChooser;
 import frc.robot.auton.util.AutonUtil;
@@ -107,7 +109,7 @@ public class RobotContainer {
     // m_robotDrive, 
     // intake, 
     // m_arm);
-    AutoChooser.setDefaultAuton(new TopLinkPark(m_robotDrive, intake, m_arm));
+    AutoChooser.setDefaultAuton(new Top2P1(m_robotDrive, intake, m_arm));
     // AutoChooser.setDefaultAuton(new PathTester(m_robotDrive));
   }
   
@@ -292,8 +294,8 @@ public class RobotContainer {
   /** Creates the Global event list for the autonomous paths */
   public void globalEventList(){
     AutonUtil.addEvent("IntakeDownCone", armPositions.armPickUpTConeComand());
-    AutonUtil.addEvent("ScoreCone", armPositions.armScoreConeMidCommand());
-    AutonUtil.addEvent("IntakeDown", armPositions.armPickUpCubeCommand());
+    AutonUtil.addEvent("ScoreCone", armPositions.autonArmScoreConeMidCommand());
+    AutonUtil.addEvent("IntakeDown", armPositions.autonArmPickUpCubeCommand());
     AutonUtil.addEvent("Stow", armPositions.armStowCommand());
     AutonUtil.addEvent("Score", armPositions.armScoreCubeMidCommand());
   }

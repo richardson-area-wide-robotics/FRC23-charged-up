@@ -50,6 +50,10 @@ public class PositionCommand extends SequentialCommandGroup {
         return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_SHELF).until(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_SHELF)).alongWith(new InstantCommand(()-> arm.setNormalStow(true)));
     }
 
+    public Command armPickUpFromDoubleShelf(){
+        return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_DOUBLE_SHELF).until(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_DOUBLE_SHELF)).alongWith(new InstantCommand(()-> arm.setNormalStow(true)));
+    }
+
     public Command armScoreCubeMidCommand(){
         return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_SCORE_CUBE_MID).unless(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SCORE_CUBE_MID)).alongWith(new InstantCommand(()-> arm.setNormalStow(true)));
     }

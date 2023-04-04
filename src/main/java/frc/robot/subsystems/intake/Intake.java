@@ -99,6 +99,18 @@ public Command manipulatorCommand(double speed, boolean intakingMode){
 }
 
 /**
+ * Intaking/outtaking Command for cones and cubes, will use mode to identify which mode it needs to be in 
+ * @param speed the speed of the intake
+ */
+public Command intakeCommand(double speed){
+  if(!mode){
+    return new RunCommand(()-> this.setIntakeSpeed(speed), this);
+  } else {
+    return new RunCommand(()-> this.setIntakeSpeed(-speed), this);
+  }
+}
+
+/**
  * Intaking Idle command for the intake 
  * intakes based of the mode given from this class, if mode is true then it will idle as a cube, if mode is false then it will idle as a cone
  */
@@ -126,9 +138,6 @@ public double outputCurrent(){
 public boolean getSensorData(){
   return sensor.get();
 }
-
-/* Manipulates the smart current limit to act as a "hard" stop for intaking */
-public void setSmartCurrentLimit(){}
 
 @Override 
 public void periodic(){

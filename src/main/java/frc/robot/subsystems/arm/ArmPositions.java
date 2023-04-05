@@ -51,14 +51,19 @@ public static class Positions{
 // Arm Stowed Positions
 public static double ARM_STOWED = .55;
     public static double ELBOW_STOWED = .79;
+
     public static double ARM_PICK_UP_TCONE = .35;
     public static double ELBOW_PICK_UP_TCONE = .529;
+
     public static double ARM_PICK_UP_CONE = 0.1658;
     public static double ELBOW_PICK_UP_CONE = 0.32;
+
     public static double ARM_PICK_UP_CUBE = 0.325;
-    public static double ELBOW_PICK_UP_CUBE = 0.58;//0.62
+    public static double ELBOW_PICK_UP_CUBE = 0.60;
+
     public static double ARM_SCORE_CUBE_LOW = 0.166;
     public static double ELBOW_SCORE_CUBE_LOW = 0.4;
+
     public static double ARM_SCORE_CONE_LOW = 0.172;
     public static double ARM_SCORE_CONE_MID = 0.7345;
     public static double ELBOW_SCORE_CONE_LOW = 0.356;

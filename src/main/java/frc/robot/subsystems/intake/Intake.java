@@ -99,14 +99,20 @@ public Command manipulatorCommand(double speed, boolean intakingMode){
 }
 
 /**
- * Intaking/outtaking Command for cones and cubes, will use mode to identify which mode it needs to be in 
+ * Intaking/outtaking Command for cones and cubes
+ * Will take in a speed, if mode is true then it will invert the speed to intake cube, if mode is false then it will use the normal speed to intake cone
+ * Also if the mode is set to false and original speed is negative then it will set the speed to -0.25 for cone outtaking
  * @param speed the speed of the intake
  */
-public Command intakeCommand(double speed){
+public Command manipulatorCommand(double speed){
   if(!mode){
     return new RunCommand(()-> this.setIntakeSpeed(speed), this);
   } else {
-    return new RunCommand(()-> this.setIntakeSpeed(-speed), this);
+    if(speed < 0){
+      return new RunCommand(()-> this.setIntakeSpeed(-0.25), this);
+    } else {
+      return new RunCommand(()-> this.setIntakeSpeed(-speed), this);
+    }
   }
 }
 
@@ -115,10 +121,10 @@ public Command intakeCommand(double speed){
  * intakes based of the mode given from this class, if mode is true then it will idle as a cube, if mode is false then it will idle as a cone
  */
 public Command idle(){
-  if(!mode){
-    return new RunCommand(()-> this.setIntakeSpeed(0.1), this);
-  } else {
+  if(mode){
     return new RunCommand(()-> this.setIntakeSpeed(-0.1), this);
+  } else {
+    return new RunCommand(()-> this.setIntakeSpeed(0.1), this);
   }
 }
 

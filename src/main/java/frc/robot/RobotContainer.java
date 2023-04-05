@@ -25,6 +25,7 @@ import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
 import frc.robot.auton.commands.BalancingCommand;
 import frc.robot.auton.paths.top.Top2Park;
+import frc.robot.auton.paths.top.Top3;
 import frc.robot.auton.paths.top.TopLink;
 import frc.robot.auton.paths.top.TopLinkPark;
 import frc.robot.auton.paths.bottom.Bottom2Park;
@@ -61,8 +62,8 @@ public class RobotContainer {
   // private ArmPositions positions = new ArmPositions();
 
   // The driver's controller
-  XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
-  XboxController m_operatorController = new XboxController(OIConstants.kOperatorControllerPort);
+  CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
+  CommandXboxController m_operatorController = new CommandXboxController(OIConstants.kOperatorControllerPort);
 
   {
     /* Top Autonomous Routines */
@@ -104,7 +105,7 @@ public class RobotContainer {
     // m_robotDrive, 
     // intake, 
     // m_arm);
-    AutoChooser.setDefaultAuton(new Top2P1(m_robotDrive, intake, m_arm));
+    AutoChooser.setDefaultAuton(new Top3(m_robotDrive, intake, m_arm));
     // AutoChooser.setDefaultAuton(new PathTester(m_robotDrive));
   }
   
@@ -179,8 +180,8 @@ public class RobotContainer {
        * right stick button on controller controls the X mode of the robot
        */
 
-       new JoystickButton(m_driverController, XboxController.Button.kRightStick.value).onTrue(new InstantCommand(()-> m_robotDrive.zeroHeading()));
-       new JoystickButton(m_driverController, XboxController.Button.kLeftStick.value).onTrue(new InstantCommand(()-> m_robotDrive.setX()));
+       m_driverController.rightStick().onTrue(new InstantCommand(()-> m_robotDrive.zeroHeading()));
+       m_driverController.leftStick().onTrue(new InstantCommand(()-> m_robotDrive.setX()));
 
     /*
      * ---Intaking Controls
@@ -188,25 +189,9 @@ public class RobotContainer {
      * Right trigger - outaking - 13
      * Up on dpad on the back of Xbox controller controls the toggle between cone and intake state using Intake - P1
      */
+    m_driverController.leftTrigger().whileTrue(intake.manipulatorCommand(1.0));
 
-    // gets the left trigger value for intake, and then the right trigger value for outtake
-    DoubleSupplier intakeSpeed = () -> MathUtil.applyDeadband(
-      m_driverController.getLeftTriggerAxis(), 0);
-
-    DoubleSupplier outakeSpeed = () -> MathUtil.applyDeadband(
-      -m_driverController.getRightTriggerAxis(), 0);
-
-    // new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).whileTrue(new RunCommand(()->intake.setIntakeSpeed(1)));
-
-    // new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).whileTrue(new RunCommand(()->intake.setIntakeSpeed(-0.5)));
-    // new JoystickButton(m_driverController, XboxController.Button.).whileTrue(new RunCommand(()-> intake.setIntakeSpeed(1.0), intake));]
-
-    new JoystickButton(m_driverController, XboxController.Axis.kLeftTrigger.value).whileTrue(new RunCommand(()->intake.setIntakeSpeed(1.0), intake));
-    
-    // use the left trigger for intake and the right trigger for outtake
-    
-
-    intake.intakeCommand(m_driverController.getLeftTriggerAxis()).schedule();
+    m_driverController.rightTrigger().whileTrue(intake.manipulatorCommand(-1.0));
 
     /*
      * ---Arm Controls 
@@ -219,33 +204,25 @@ public class RobotContainer {
      */
 
     // Stow
-    //m_driverController.
-    new JoystickButton(m_driverController, XboxController.Button.kB.value).onTrue(armPositions.armStowCommand());
+    m_driverController.b().onTrue(armPositions.armStowCommand());
+
     // Tipped pick up
-    new JoystickButton(m_driverController, XboxController.Button.kY.value).onTrue(armPositions.armPickUpTConeComand()).onTrue(new InstantCommand(()-> {intake.setMode(false); 
-    m_lights.allYellow();}));//.whileTrue(new RunCommand(()-> intake.setIntakeSpeed(1.0))).onFalse(armPositions.armStowCommand().alongWith(new RunCommand(()-> intake.setIntakeSpeed(direction))));
+    m_driverController.y().onTrue(armPositions.armPickUpTConeComand()).onTrue(new InstantCommand(()-> intake.setMode(false))); 
 
     // Standing Cone 
-    // new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(new RunCommand(()-> intake.setIntakeSpeed(1.0), intake)).onTrue(new InstantCommand(()-> {intake.setMode(false); 
-    //   m_lights.allYellow();})).onFalse(armPositions.armStowCommand());
-
-    new JoystickButton(m_driverController, XboxController.Button.kA.value).onTrue(armPositions.armPickUpConeCommand()).whileTrue(intake.manipulatorCommand(1.0, false));
+    m_driverController.a().onTrue(armPositions.armBackStandingCone()).onTrue(new InstantCommand(()-> intake.setMode(false)));
 
     // Pick up Cube 
-    // new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(armPositions.armPickUpCubeCommand()).whileTrue(new RunCommand(()-> intake.setIntakeSpeed(-1.0))).onTrue(new InstantCommand(()-> {intake.setMode(true); 
-    //   m_lights.allPurple();})).onFalse(armPositions.armStowCommand());
+    m_driverController.x().onTrue(armPositions.armPickUpCubeCommand()).whileTrue(intake.manipulatorCommand(1.0, true));
 
-    new JoystickButton(m_driverController, XboxController.Button.kX.value).onTrue(armPositions.armPickUpCubeCommand()).whileTrue(intake.manipulatorCommand(-1.0, true));  
     // Shelf single
-    // new JoystickButton(m_operatorController, XboxController.Button.kLeftBumper.value).onTrue(armPositions.armPickUpFromShelf()).onTrue(new InstantCommand(()-> {intake.setMode(false); 
-    //   m_lights.allYellow();})).whileTrue(new RunCommand(()-> intake.setIntakeSpeed(1.0)));
+    m_driverController.leftBumper().onTrue(armPositions.armPickUpFromShelf()).whileTrue(intake.manipulatorCommand(1.0, false));
 
-    // new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value).onTrue(armPositions.armPickUpFromShelf()).whileTrue(intake.manipulatorCommand(1.0, false));
     // // Shelf double
-    // new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value).onTrue(armPositions.armPickUpFromDoubleShelf()).whileTrue(intake.manipulatorCommand(1.0, false));
+    m_driverController.rightBumper().onTrue(armPositions.armPickUpFromDoubleShelf()).whileTrue(intake.manipulatorCommand(1.0, false));
 
-    // new POVButton(m_driverController, 0, 20).onTrue(new InstantCommand(()->{intake.setMode(false); m_lights.allYellow();}));
-    // new POVButton(m_driverController, 180, 20).onTrue(new InstantCommand(()->{intake.setMode(true); m_lights.allYellow();})); 
+    m_driverController.pov(0).onTrue(new InstantCommand(()->{intake.setMode(false); m_lights.allYellow();}));
+    m_driverController.pov(180).onTrue(new InstantCommand(()->{intake.setMode(true); m_lights.allPurple();}));
   }
 
   private void configureOperatorBindings(){
@@ -263,13 +240,13 @@ public class RobotContainer {
      */
 
     // cone high
-    new JoystickButton(m_operatorController, XboxController.Button.kY.value).onTrue(armPositions.armScoreConeHighCommand());
+    m_operatorController.y().onTrue(armPositions.armScoreConeHighCommand());
     // cone mid
-    new JoystickButton(m_operatorController, XboxController.Button.kB.value).onTrue(armPositions.armScoreConeMidCommand());
+    m_operatorController.b().onTrue(armPositions.armScoreConeMidCommand());
     // cube High
-    new JoystickButton(m_operatorController, XboxController.Button.kX.value).onTrue(armPositions.armScoreCubeHighCommand());
+    m_operatorController.x().onTrue(armPositions.armScoreCubeHighCommand());
     // cube mid
-    new JoystickButton(m_operatorController, XboxController.Button.kA.value).onTrue(armPositions.armScoreCubeMidCommand());
+    m_operatorController.a().onTrue(armPositions.armScoreCubeMidCommand());
   }
 
   /**

@@ -19,16 +19,17 @@ import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 
-public class MiddlePark extends AutonBase {
+public class MiddleJustScore extends AutonBase {
     public PositionCommand armPositions;
     public BalanceCommand balance;
     
-    public MiddlePark(
+    public MiddleJustScore(
     DriveSubsystem drive, 
     Intake intake,
     Arm m_arm){
 
     List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Mid-Score-Park", new PathConstraints(1.5, 3.5));
+    //List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Top-Simple-Park", new PathConstraints(1.5, 3.5));
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
@@ -48,17 +49,11 @@ public class MiddlePark extends AutonBase {
       .andThen(armPositions.armStowCommand())
       .andThen(new WaitCommand(0.75))
       .andThen(new RunCommand(()-> intake.manipulates(0), intake).withTimeout(0.5))
-      .andThen(new InstantCommand(() -> drive.drive(1,0,0,false), drive))
-      .andThen(new WaitCommand(.001))
-      .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive))
-      .andThen(drive.trajectoryFollowerCommand(pathGroup.get(0)))
-      .andThen(new WaitCommand(.45))
-      .andThen(balance)
-      .andThen(new WaitCommand(3))
-      .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive))
-      // .andThen(new WaitCommand(.5))
-      .andThen(new RunCommand(() -> drive.setX(), drive)));
-      // .andThen(new WaitCommand(.5)));
+    //   .andThen(drive.trajectoryFollowerCommand(pathGroup.get(0)))
+    //   .andThen(new WaitCommand(.45))
+    //   .andThen(balance)
+    //   .andThen(new WaitCommand(1))
+      .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive)));
     }
 
     @Override

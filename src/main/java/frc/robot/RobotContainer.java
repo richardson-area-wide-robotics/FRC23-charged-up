@@ -22,6 +22,7 @@ import frc.robot.Constants.OIConstants;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
 import frc.robot.auton.paths.middle.MiddlePark;
+import frc.robot.auton.paths.middle.MiddleJustScore;
 import frc.robot.auton.paths.top.TopMidScore2Park;
 import frc.robot.auton.commands.BalanceCommand;
 import frc.robot.auton.paths.top.TopPark;
@@ -64,7 +65,14 @@ public class RobotContainer {
   private BalanceCommand balance = new BalanceCommand(m_robotDrive); 
 
   {
+<<<<<<< Updated upstream
     AutoChooser.setDefaultAuton(new MiddlePark(m_robotDrive, intake, m_arm));
+=======
+    //removed by Eden - autonomous
+    AutoChooser.setDefaultAuton(new MiddlePark(m_robotDrive, intake, m_arm));
+    // AutoChooser.setDefaultAuton(new MiddleJustScore(m_robotDrive, intake, m_arm));
+
+>>>>>>> Stashed changes
   }
 
 
@@ -219,6 +227,7 @@ public class RobotContainer {
   public void autonInit() {
     m_robotDrive.calibrateGyro();
     m_robotDrive.stop();
+
   }
 
   public void getPitch(){

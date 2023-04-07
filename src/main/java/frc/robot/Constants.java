@@ -194,7 +194,7 @@ public final class Constants {
     public static final PIDController kPThetaController = new PIDController(8.0, 0, 0.75);// 6.0 - 0.5
 
     public static final PIDGains kMovingPIDGains =
-        new PIDGains(0.3,0, 0.01);
+        new PIDGains(0.425,0, 0.015);
 
 
   }
@@ -263,6 +263,11 @@ public final class Constants {
     public static final double ARM_ENCODER_OFFSET = 0;
     public static final double ELBOW_ENCODER_OFFSET = 0;
 
+<<<<<<< Updated upstream
+=======
+
+    // Values are in radians.
+>>>>>>> Stashed changes
     public static final double ARM_STOWED = .55;
     public static final double ELBOW_STOWED = .79;
     public static final double ARM_PICK_UP_TCONE = .35;
@@ -273,9 +278,14 @@ public final class Constants {
     public static final double ELBOW_PICK_UP_CUBE = 0.60;
     public static final double ARM_SCORE_CUBE_LOW = 0.166;
     public static final double ELBOW_SCORE_CUBE_LOW = 0.4;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     public static final double ARM_SCORE_CONE_LOW = 0.172;
     public static final double ARM_SCORE_CONE_MID = 0.7345;
     public static final double ELBOW_SCORE_CONE_LOW = 0.356;
+<<<<<<< Updated upstream
     public static final double ELBOW_SCORE_CONE_MID = 0.58;
     public static final double ARM_SCORE_CUBE_MID = 0.71;
     public static final double ELBOW_SCORE_CUBE_MID = 0.62;
@@ -283,9 +293,36 @@ public final class Constants {
     public static final double ELBOW_SCORE_CONE_HIGH = 0.32;
     public static final double ARM_SCORE_CUBE_HIGH = 0.2;
     public static final double ELBOW_SCORE_CUBE_HIGH = 0.62;
+=======
+
+    public static final double ARM_SCORE_CONE_MID = 0.7316;
+    public static final double ELBOW_SCORE_CONE_MID = 0.6;
+
+    // public static final double ARM_SCORE_CUBE_MID = 0.6977;
+    public static final double ARM_SCORE_CUBE_MID = 0.72;
+
+    public static final double ELBOW_SCORE_CUBE_MID = 0.6605;
+    
+//.9755
+    public static final double ARM_SCORE_CONE_HIGH = 0.0002;
+    //public static final double ARM_SCORE_CONE_HIGH = 0.9799445;
+
+    //.2497
+    public static final double ELBOW_SCORE_CONE_HIGH = 0.269;
+    // public static final double ELBOW_SCORE_CONE_HIGH = 0.2877;
+
+
+    public static final double ARM_SCORE_CUBE_HIGH = 0.152;
+    public static final double ELBOW_SCORE_CUBE_HIGH = 0.5503;
+
+>>>>>>> Stashed changes
     public static final double ELBOW_IDLE = .83;
     public static final double ARM_PICK_UP_SHELF = 0.445;
     public static final double ELBOW_PICK_UP_SHELF = 0.83;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
   }
 public static final boolean kCompetitionMode = false;
 

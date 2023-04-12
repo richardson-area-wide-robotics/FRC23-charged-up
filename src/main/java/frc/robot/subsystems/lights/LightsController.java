@@ -2,25 +2,15 @@ package frc.robot.subsystems.lights;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 // import frc.robot.subsystems.vision.Limelight
+import frc.robot.subsystems.intake.Intake;
 
 public class LightsController extends SubsystemBase {
   private Lights lights;
-  // private Limelight limelight;
+  private Intake intake;
   boolean isIdle = true;
 
-  public LightsController(Lights lights) {
+  public LightsController(Lights lights, Intake intake) {
     this.lights = lights;
-    // this.limelight = limelight;
-    this.lights.idleAnimation(100);
+    this.intake = intake;
   }
-
-  /*public void checkTargetLock() {
-      if (limelight.hasValidTarget() && !isIdle) {
-          lights.allLimeGreen();
-          isIdle = true;
-      } else if(!limelight.hasValidTarget() && isIdle){
-          lights.idleAnimation(3);
-          isIdle = false;
-      }
-  }*/
 }

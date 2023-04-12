@@ -18,6 +18,7 @@ public class Arm extends SubsystemBase {
   // Shoulder Motors
   private CANSparkMax leftMotor;
   private CANSparkMax rightMotor;
+  private boolean normalStow;
 
   // Elbow Motors
   private CANSparkMax elbowMotor;
@@ -39,6 +40,8 @@ public class Arm extends SubsystemBase {
   // last arm position
   private double lastArmPosition;
   private double lastElbowPosition;
+
+  public double armPosition;
 
   // set up the arm congfiguration
   public void armConfig(CANSparkMax motor, AbsoluteEncoder enc){
@@ -129,6 +132,11 @@ public class Arm extends SubsystemBase {
     this.lastArmPosition = this.currentArmPosition;
     this.lastElbowPosition = this.currentElbowPosition;
 
+    this.armPosition = 0; // 0 is position stowed, 1 is special stow
+
+
+    this.normalStow = true;
+
   }
 
   // getting relative encoder position of the arm
@@ -144,6 +152,14 @@ public class Arm extends SubsystemBase {
     return armEncoder.getPosition(); //- Units.degreesToRadians(50);
   }
 
+  public void setAdjusted(double position){
+    armPosition = position;
+  }
+
+  public double getAdjusted(){
+    return armPosition;
+  }
+
   public double getElbowAbsoluteEncoder(){
     return elbowEncoder.getPosition();
   }
@@ -154,6 +170,14 @@ public class Arm extends SubsystemBase {
 
   public double outputleftcurrent(){
     return leftMotor.getOutputCurrent();
+  }
+
+  public void setNormalStow(boolean normal){
+    normalStow = normal;
+  }
+
+  public boolean getNormalStow(){
+    return normalStow;
   }
 
   public double outputrightcurrent(){
@@ -203,16 +227,10 @@ public class Arm extends SubsystemBase {
     // set last arm position to current arm position before updating current arm position
     lastArmPosition = currentArmPosition;
 
+    SmartDashboard.putNumber("arm pos", armEncoder.getPosition());
+    SmartDashboard.putNumber("elbow pos", elbowEncoder.getPosition());
     // This method will be called once per scheduler run
     armPIDController.setReference(currentArmPosition, ControlType.kPosition);
-    /* , 1, armFF.calculate(currentElbowPosition, armPID.getSetpoint().velocity)*/
-    SmartDashboard.putNumber("outputcurrent for elbow", outputcurrent());
-    SmartDashboard.putNumber("outputcurrent for left", outputleftcurrent());
-    SmartDashboard.putNumber("outputcurrent for right", outputrightcurrent());
-    SmartDashboard.putNumber("Arm Position", getLastArmPosition());
-    SmartDashboard.putNumber("abs for arm", getArmAbsoluteEncoder());
-    SmartDashboard.putNumber("abs for elbow", getElbowAbsoluteEncoder());
-
     elbowPIDController.setReference(currentElbowPosition, ControlType.kPosition/* , 1, elbowFF.calculate(elbowPID.getSetpoint().position, elbowPID.getSetpoint().velocity)*/);
   }
 

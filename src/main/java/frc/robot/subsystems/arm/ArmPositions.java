@@ -46,27 +46,34 @@ public class ArmPositions extends SubsystemBase{
         tab.add("Elbow Idle", Positions.ELBOW_IDLE);
     }
 public static class Positions{
-    // Arm Stowed Positions
+    public static double ARM_PICK_UP_DOUBLE_SHELF = 0.003;
+    public static double ELBOW_PICK_UP_DOUBLE_SHELF = 0.31;
+// Arm Stowed Positions
 public static double ARM_STOWED = .55;
     public static double ELBOW_STOWED = .79;
+
     public static double ARM_PICK_UP_TCONE = .35;
     public static double ELBOW_PICK_UP_TCONE = .529;
+
     public static double ARM_PICK_UP_CONE = 0.1658;
     public static double ELBOW_PICK_UP_CONE = 0.32;
+
     public static double ARM_PICK_UP_CUBE = 0.325;
-    public static double ELBOW_PICK_UP_CUBE = 0.59;//0.62
+    public static double ELBOW_PICK_UP_CUBE = 0.595;
+
     public static double ARM_SCORE_CUBE_LOW = 0.166;
     public static double ELBOW_SCORE_CUBE_LOW = 0.4;
+
     public static double ARM_SCORE_CONE_LOW = 0.172;
     public static double ARM_SCORE_CONE_MID = 0.7345;
     public static double ELBOW_SCORE_CONE_LOW = 0.356;
     public static double ELBOW_SCORE_CONE_MID = 0.58;
     public static double ARM_SCORE_CUBE_MID = 0.71;
-    public static double ELBOW_SCORE_CUBE_MID = 0.62;
+    public static double ELBOW_SCORE_CUBE_MID = 0.60;
     public static double ARM_SCORE_CONE_HIGH = 0.0185;
-    public static double ELBOW_SCORE_CONE_HIGH = 0.30;//0.28
+    public static double ELBOW_SCORE_CONE_HIGH = 0.31;//0.28
     public static double ARM_SCORE_CUBE_HIGH = 0.2;
-    public static double ELBOW_SCORE_CUBE_HIGH = 0.62;
+    public static double ELBOW_SCORE_CUBE_HIGH = 0.63;
     public static double ARM_PICK_UP_SHELF = 0.445;
     public static double ELBOW_PICK_UP_SHELF = 0.83;
     // Arm back cone pick up scoring position

@@ -29,7 +29,9 @@ public class BalancingCommand extends CommandBase{
     public void execute(
     ){
 
-        double controller = movingController.calculate(getPitch());
+        // double angle_actual = getPitch() - Constants.AutoConstants.offset;
+        double angle_actual = getPitch();
+        double controller = movingController.calculate(angle_actual);
         
         SmartDashboard.putNumber("Pitch", controller);
         drive.drive(-controller, 0, 0, false);

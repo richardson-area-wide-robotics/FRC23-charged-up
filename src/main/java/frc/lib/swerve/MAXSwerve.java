@@ -331,8 +331,7 @@ public class MAXSwerve extends SubsystemBase {
   }
 
   public void putNumber(){
-    SmartDashboard.putNumber("Pitch", m_gyro.getPitch());
-    SmartDashboard.putNumber("Roll", -m_gyro.getRoll());
+    SmartDashboard.putNumber("Pitch", getRoll());
   }
 
   /**

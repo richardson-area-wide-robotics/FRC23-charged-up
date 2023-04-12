@@ -5,6 +5,7 @@ import com.pathplanner.lib.PathPlannerTrajectory;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.auton.commands.BalancingCommand;
 import frc.robot.auton.util.AutonBase;
 import frc.robot.auton.util.AutonUtil;
@@ -24,8 +25,7 @@ public class PathTester extends AutonBase {
     }
 
     addCommandsWithLog("Top park",
-     new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"), drive.trajectoryFollowerCommand(parkingPath), balancingCommand,
-    new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive));
+     new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"), drive.trajectoryFollowerCommand(parkingPath).andThen(new WaitCommand(0.2)).andThen(balancingCommand));
     
 }
     @Override

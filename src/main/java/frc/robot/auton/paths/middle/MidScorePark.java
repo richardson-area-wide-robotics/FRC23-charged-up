@@ -21,7 +21,6 @@ import frc.robot.subsystems.intake.Intake;
 
 public class MidScorePark extends AutonBase {
     public PositionCommand armPositions;
-    public BalancingCommand balance;
     
     public MidScorePark(
     DriveSubsystem drive, 
@@ -32,24 +31,25 @@ public class MidScorePark extends AutonBase {
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
-    this.balance = new BalancingCommand(drive);
+    BalancingCommand balancingCommand = new BalancingCommand(drive);
 
     if (pathGroup.get(0) == null) {
         System.out.println("Path not found");
         return;
     }
 
-    addCommandsWithLog("Mid Score and Park",
+    addCommandsWithLog("Mid Park",
       new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"),
-      new RunCommand(()-> intake.manipulates(-1.0), intake)
-      .raceWith(armPositions.autonArmScoreConeHighCommand())
-      .andThen(new WaitCommand(0.1))
-      .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
+      new RunCommand(()-> intake.setIntakeSpeed(1.0), intake)
+      .raceWith(armPositions.armScoreConeHighCommand())
+      .andThen(new WaitCommand(0.7))
+      .andThen(new RunCommand(()-> intake.setIntakeSpeed(-0.25), intake).withTimeout(0.8))
+      .andThen(new InstantCommand(()-> intake.stop()))
       .andThen(armPositions.armStowCommand())
-      .andThen(new WaitCommand(0.5))
-      .andThen(drive.trajectoryFollowerCommand(pathGroup.get(0)))
-      .andThen(balance)
-      .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive)));
+      .andThen(new WaitCommand(0.2))
+      .andThen(drive.trajectoryFollowerCommand(pathGroup.get(0))));
+
+    addCommands(balancingCommand);
     }
 
     @Override

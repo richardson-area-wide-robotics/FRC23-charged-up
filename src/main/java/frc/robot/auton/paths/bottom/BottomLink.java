@@ -40,19 +40,19 @@ public class BottomLink extends AutonBase {
   
       addCommandsWithLog("Bottom Score 3",
         new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"),
-        new RunCommand(()-> intake.manipulates(-1.0), intake)
+        new RunCommand(()-> intake.setIntakeSpeed(-1.0), intake)
         .raceWith(armPositions.armScoreConeMidCommand())
         .andThen(new WaitCommand(0.1))
-        .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
+        .andThen(new RunCommand(()-> intake.setIntakeSpeed(0.25), intake).withTimeout(0.5))
         .andThen(new WaitCommand(0.5))
-        .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake))
+        .andThen(new RunCommand(()-> intake.setIntakeSpeed(-1.0), intake))
         .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(0)), pathGroup.get(0).getMarkers(), AutonUtil.getEventMap()))
         .andThen(new WaitCommand(0.2))
-        .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)).withTimeout(0.3)
-        .andThen(new RunCommand(()-> intake.manipulates(1.0), intake))
+        .andThen(new RunCommand(()-> intake.setIntakeSpeed(1.0), intake)).withTimeout(0.3)
+        .andThen(new RunCommand(()-> intake.setIntakeSpeed(1.0), intake))
         .raceWith(new FollowPathWithEvents(drive.trajectoryFollowerCommand(pathGroup.get(1)), pathGroup.get(1).getMarkers(), AutonUtil.getEventMap()))
         .andThen(new WaitCommand(0.4))
-        .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake)));
+        .andThen(new RunCommand(()-> intake.setIntakeSpeed(-1.0), intake)));
     }
 
     @Override

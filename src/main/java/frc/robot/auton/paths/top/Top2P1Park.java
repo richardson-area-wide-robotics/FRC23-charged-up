@@ -19,7 +19,6 @@ import frc.robot.subsystems.intake.Intake;
 
 public class Top2P1Park extends AutonBase {
     public PositionCommand armPositions;
-    public BalancingCommand balance;
     public PathPlannerServer server = new PathPlannerServer();
 
     public Top2P1Park(
@@ -33,7 +32,7 @@ public class Top2P1Park extends AutonBase {
     
     Pose2d initialPose = AutonUtil.initialPose(firstPath);
     this.armPositions = new PositionCommand(m_arm);
-    this.balance = new BalancingCommand(drive);
+   BalancingCommand balancingCommand = new BalancingCommand(drive);
 
     /*
      * Checks if the paths are null and if they are it will print out that the path was not found
@@ -48,10 +47,10 @@ public class Top2P1Park extends AutonBase {
      */
     addCommandsWithLog("Top 2P1 Park",
       /* Runs commands to score pre-load Cone */
-      new RunCommand(()-> intake.manipulates(-1.0), intake)
+      new RunCommand(()-> intake.setIntakeSpeed(1.0), intake)
       .raceWith(armPositions.armScoreConeMidCommand())
-        .andThen(new WaitCommand(0.5))
-          .andThen(new RunCommand(()-> intake.manipulates(0.25), intake).withTimeout(0.5))
+        .andThen(new WaitCommand(0.6))
+          .andThen(new RunCommand(()-> intake.setIntakeSpeed(-0.25), intake).withTimeout(0.5))
 
       /* 
        * Resets the Odometry of the drivetrain to the starting pose of the first path 
@@ -62,22 +61,24 @@ public class Top2P1Park extends AutonBase {
        * Runs the First path which is picking up the first cube 
        * and races with the intake to pick up the cube
        */
-      .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
+      .andThen(new RunCommand(()-> intake.setIntakeSpeed(-1.0), intake)
         .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(firstPath), firstPath)))
+      .andThen(new WaitCommand(0.3))
       
        /*
        * Activate intake to score the first cube
        * and then stop the intake 
        */
-      .andThen(new RunCommand(()-> intake.manipulates(-1.0), intake).withTimeout(0.3))
-        .andThen(new RunCommand(()-> intake.manipulates(1.0), intake)
+      .andThen(new RunCommand(()-> intake.setIntakeSpeed(1.0), intake).withTimeout(0.3))
+        .andThen(new RunCommand(()-> intake.setIntakeSpeed(-1.0), intake)
 
       //  /*
       //  * Runs the Second path which is to pick up second cube and balance with it 
       //  * and then activates balancing command
       //  */
-      .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(secondPath), secondPath)))
-      .andThen(balance.until(()->isFinished())));
+      .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(secondPath), secondPath))));
+
+      addCommands(balancingCommand);
     }
 
     @Override

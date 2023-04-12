@@ -5,6 +5,7 @@
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.kauailabs.navx.frc.AHRS.SerialDataType;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import java.io.IOException;
@@ -63,6 +64,7 @@ public class RobotContainer {
 
   // The driver's controller
   CommandXboxController m_driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
+  XboxController m_driverControllerSP = new XboxController(OIConstants.kDriverControllerPort);
   CommandXboxController m_operatorController = new CommandXboxController(OIConstants.kOperatorControllerPort);
 
   {
@@ -105,7 +107,7 @@ public class RobotContainer {
     // m_robotDrive, 
     // intake, 
     // m_arm);
-    AutoChooser.setDefaultAuton(new Top3(m_robotDrive, intake, m_arm));
+    AutoChooser.setDefaultAuton(new Top2P1(m_robotDrive, intake, m_arm));
     // AutoChooser.setDefaultAuton(new PathTester(m_robotDrive));
   }
   
@@ -207,19 +209,21 @@ public class RobotContainer {
     m_driverController.b().onTrue(armPositions.armStowCommand());
 
     // Tipped pick up
-    m_driverController.y().onTrue(armPositions.armPickUpTConeComand()).onTrue(new InstantCommand(()-> intake.setMode(false))); 
+    m_driverController.y().onTrue(armPositions.armPickUpTConeComand()).onTrue(new InstantCommand(()->{ intake.setMode(false); m_lights.allYellow();}));
+    // new JoystickButton(m_driverControllerSP, XboxController.Button.kY.value).onTrue(new InstantCommand(()-> intake.setXMode(false)));
 
     // Standing Cone 
     m_driverController.a().onTrue(armPositions.armBackStandingCone()).onTrue(new InstantCommand(()-> intake.setMode(false)));
 
     // Pick up Cube 
-    m_driverController.x().onTrue(armPositions.armPickUpCubeCommand()).whileTrue(intake.manipulatorCommand(1.0, true));
+    m_driverController.x().onTrue(armPositions.armPickUpCubeCommand()).onTrue(new InstantCommand(()->{ intake.setMode(true); m_lights.allPurple();})).whileTrue(intake.manipulatorCommand(-1.0));
+    // new JoystickButton(m_driverControllerSP, XboxController.Button.kX.value).onTrue(new InstantCommand(()-> intake.setXMode(true)));
 
     // Shelf single
-    m_driverController.leftBumper().onTrue(armPositions.armPickUpFromShelf()).whileTrue(intake.manipulatorCommand(1.0, false));
+    m_driverController.leftBumper().onTrue(armPositions.armPickUpFromShelf()).onTrue(new InstantCommand(()->{ intake.setMode(false); m_lights.allYellow();})).whileTrue(intake.manipulatorCommand(1.0));
 
     // // Shelf double
-    m_driverController.rightBumper().onTrue(armPositions.armPickUpFromDoubleShelf()).whileTrue(intake.manipulatorCommand(1.0, false));
+    // m_driverController.rightBumper().onTrue(armPositions.armPickUpFromDoubleShelf());//.onTrue(new InstantCommand(()-> intake.setMode(false))).whileTrue(intake.manipulatorCommand(1.0)).onTrue(new InstantCommand(()->m_arm.setAdjusted(1)));
 
     m_driverController.pov(0).onTrue(new InstantCommand(()->{intake.setMode(false); m_lights.allYellow();}));
     m_driverController.pov(180).onTrue(new InstantCommand(()->{intake.setMode(true); m_lights.allPurple();}));
@@ -240,13 +244,13 @@ public class RobotContainer {
      */
 
     // cone high
-    m_operatorController.y().onTrue(armPositions.armScoreConeHighCommand());
+    m_operatorController.y().onTrue(armPositions.armScoreConeHighCommand()).onTrue(new InstantCommand(()->m_arm.setAdjusted(1)));
     // cone mid
-    m_operatorController.b().onTrue(armPositions.armScoreConeMidCommand());
+    m_operatorController.b().onTrue(armPositions.armScoreConeMidCommand()).onTrue(new InstantCommand(()->m_arm.setAdjusted(0)));
     // cube High
-    m_operatorController.x().onTrue(armPositions.armScoreCubeHighCommand());
+    m_operatorController.x().onTrue(armPositions.armScoreCubeHighCommand()).onTrue(new InstantCommand(()->m_arm.setAdjusted(0)));
     // cube mid
-    m_operatorController.a().onTrue(armPositions.armScoreCubeMidCommand());
+    m_operatorController.a().onTrue(armPositions.armScoreCubeMidCommand()).onTrue(new InstantCommand(()->m_arm.setAdjusted(0)));
   }
 
   /**
@@ -291,6 +295,7 @@ public class RobotContainer {
     AutonUtil.addEvent("IntakeDown", armPositions.autonArmPickUpCubeCommand());
     AutonUtil.addEvent("Stow", armPositions.armStowCommand());
     AutonUtil.addEvent("Score", armPositions.armScoreCubeMidCommand());
+    AutonUtil.addEvent("ScoreHighCone", armPositions.armScoreConeHighCommand());
   }
 
   /** Run a function during autonomous to get run time of autonomous. */
@@ -314,4 +319,9 @@ public class RobotContainer {
       }
     });
   }
+
+  // // Command
+  // public Command autoStowCommand(){
+  
+  // }
 }

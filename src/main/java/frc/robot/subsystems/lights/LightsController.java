@@ -12,17 +12,5 @@ public class LightsController extends SubsystemBase {
   public LightsController(Lights lights, Intake intake) {
     this.lights = lights;
     this.intake = intake;
-    this.lights.idleAnimation(100);
-  }
-
-  /**
-   * Sets the lights based off the intake given mode
-   */
-  public void gamePieceColor(){
-    if(intake.getMode()){
-      lights.allPurple();
-    } else {
-      lights.allYellow();
-    }
   }
 }

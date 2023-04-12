@@ -14,8 +14,9 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
 
 private CANSparkMax intakeMotor;
-private boolean mode;
+public boolean mode;
 private DigitalInput sensor;
+public boolean desiredM;
 
 public Intake() {
 
@@ -33,7 +34,7 @@ public Intake() {
 
   intakeMotor.burnFlash();
 
-  setDefaultCommand(idle());
+  this.setDefaultCommand(stop());
 
   this.mode = false;
 }
@@ -76,6 +77,10 @@ public void setMode(boolean desiredMode){
   mode = desiredMode;
 }
 
+public boolean setXMode(boolean desiredMode){
+  return desiredM = desiredMode;
+}
+
 /** 
  * Returns the mode of the intake; true for Cube mode, false for Cone mode; default is false
  * @return mode
@@ -90,9 +95,8 @@ public boolean getMode(){
  * @param intakingMode As cube intaking is positive and cone intaking is negative this command will invert based on the mode
  */
 public Command manipulatorCommand(double speed, boolean intakingMode){
-  this.setMode(intakingMode);
-  if(!mode){
-    return new RunCommand(()-> this.setIntakeSpeed(speed), this);
+  if(!getMode()){
+    return new RunCommand(()->  this.setIntakeSpeed(speed), this);
   } else {
     return new RunCommand(()-> this.setIntakeSpeed(-speed), this);
   }
@@ -105,7 +109,7 @@ public Command manipulatorCommand(double speed, boolean intakingMode){
  * @param speed the speed of the intake
  */
 public Command manipulatorCommand(double speed){
-  if(!mode){
+  if(!getMode()){
     return new RunCommand(()-> this.setIntakeSpeed(speed), this);
   } else {
     if(speed < 0){
@@ -121,10 +125,10 @@ public Command manipulatorCommand(double speed){
  * intakes based of the mode given from this class, if mode is true then it will idle as a cube, if mode is false then it will idle as a cone
  */
 public Command idle(){
-  if(mode){
-    return new RunCommand(()-> this.setIntakeSpeed(-0.1), this);
-  } else {
+  if(!mode){
     return new RunCommand(()-> this.setIntakeSpeed(0.1), this);
+  } else  {
+    return new RunCommand(()-> this.setIntakeSpeed(-0.1), this);
   }
 }
 
@@ -147,6 +151,9 @@ public boolean getSensorData(){
 
 @Override 
 public void periodic(){
+  if (mode != desiredM){
+    mode = desiredM;
+  }
   SmartDashboard.putNumber("Output current", outputCurrent());
 }
 

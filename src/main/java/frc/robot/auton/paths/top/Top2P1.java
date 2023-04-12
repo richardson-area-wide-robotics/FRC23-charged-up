@@ -26,7 +26,7 @@ public class Top2P1 extends AutonBase {
     Intake intake,
     Arm m_arm) {
       
-    List<PathPlannerTrajectory> top2P1Park = AutonUtil.loadTrajectoryGroup("Top-Score-2P1Park", new PathConstraints(3.85, 5.0), new PathConstraints(3.0, 4.5));
+    List<PathPlannerTrajectory> top2P1Park = AutonUtil.loadTrajectoryGroup("Top-Score-2P1Park", new PathConstraints(3.3, 4.6), new PathConstraints(3.0, 4.5));
     PathPlannerTrajectory firstPath = top2P1Park.get(0);
     PathPlannerTrajectory secondPath = top2P1Park.get(1);
     
@@ -51,6 +51,7 @@ public class Top2P1 extends AutonBase {
       .raceWith(armPositions.armScoreConeMidCommand())
         .andThen(new WaitCommand(0.6))
           .andThen(new RunCommand(()-> intake.setIntakeSpeed(-0.25), intake).withTimeout(0.5))
+          .andThen(armPositions.armStowCommand())
 
       /* 
        * Resets the Odometry of the drivetrain to the starting pose of the first path 
@@ -61,7 +62,7 @@ public class Top2P1 extends AutonBase {
        * Runs the First path which is picking up the first cube 
        * and races with the intake to pick up the cube
        */
-      .andThen(new RunCommand(()-> intake.setIntakeSpeed(-0.9), intake)
+      .andThen(new RunCommand(()-> intake.setIntakeSpeed(-1.0), intake)
         .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(firstPath), firstPath)))
         .andThen(new WaitCommand(0.3))
       

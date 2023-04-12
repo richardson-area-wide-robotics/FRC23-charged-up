@@ -18,7 +18,6 @@ import frc.robot.subsystems.intake.Intake;
 
 public class Top3 extends AutonBase {
     public PositionCommand armPositions;
-    public BalancingCommand balance;
 
     public Top3(
     DriveSubsystem drive, 
@@ -31,7 +30,6 @@ public class Top3 extends AutonBase {
 
     Pose2d initialPose = AutonUtil.initialPose(firstPath);
     this.armPositions = new PositionCommand(m_arm);
-    this.balance = new BalancingCommand(drive);
 
     /*
      * Checks if the paths are null and if they are it will print out that the path was not found
@@ -46,13 +44,15 @@ public class Top3 extends AutonBase {
      */
     addCommandsWithLog("Top Link",
       /* Runs commands to score pre-load Cone */
-        // armPositions.armScoreConeHighCommand()
-        //   .andThen(new WaitCommand(0.7))
-        //     .andThen(new RunCommand(()-> intake.setIntakeSpeed(-0.25), intake).withTimeout(0.7)));
+      new RunCommand(()-> intake.setIntakeSpeed(1.0), intake)
+        .raceWith(armPositions.armScoreConeHighCommand())
+          .andThen(new WaitCommand(0.7))
+            .andThen(new RunCommand(()-> intake.setIntakeSpeed(-0.25), intake).withTimeout(0.7))
+              .andThen(armPositions.armStowCommand())
       // /* 
       //  * Resets the Odometry of the drivetrain to the starting pose of the first path 
       //  */
-      new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry")
+      .andThen(new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"))
 
       // /* 
       //  * Runs the First path which is picking up the first cube 
@@ -73,12 +73,12 @@ public class Top3 extends AutonBase {
       // //  * Runs the Second path which is to pick up a cone
       // //  */
       .andThen(new RunCommand(()-> intake.setIntakeSpeed(1.0), intake)
-        .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(secondPath), secondPath))));
+        .raceWith(AutonUtil.followEventCommand(drive.trajectoryFollowerCommand(secondPath), secondPath)))
 
       // // /*
       // //  * Activate intake to score the cone
       // //  */
-      // .andThen(new RunCommand(()-> intake.setIntakeSpeed(-1.0), intake)));
+      .andThen(new RunCommand(()-> intake.setIntakeSpeed(-1.0), intake)));
     }
 
     @Override

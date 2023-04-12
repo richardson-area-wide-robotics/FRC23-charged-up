@@ -150,13 +150,7 @@
   "isReversed": null,
   "markers": [
     {
-      "position": 0.0,
-      "names": [
-        "Stow"
-      ]
-    },
-    {
-      "position": 0.45,
+      "position": 0.42,
       "names": [
         "IntakeDown"
       ]

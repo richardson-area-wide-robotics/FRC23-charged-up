@@ -46,8 +46,8 @@ public class ArmPositions extends SubsystemBase{
         tab.add("Elbow Idle", Positions.ELBOW_IDLE);
     }
 public static class Positions{
-    public static final double ARM_PICK_UP_DOUBLE_SHELF = 0;
-    public static final double ELBOW_PICK_UP_DOUBLE_SHELF = 0;
+    public static double ARM_PICK_UP_DOUBLE_SHELF = 0.003;
+    public static double ELBOW_PICK_UP_DOUBLE_SHELF = 0.31;
 // Arm Stowed Positions
 public static double ARM_STOWED = .55;
     public static double ELBOW_STOWED = .79;
@@ -59,7 +59,7 @@ public static double ARM_STOWED = .55;
     public static double ELBOW_PICK_UP_CONE = 0.32;
 
     public static double ARM_PICK_UP_CUBE = 0.325;
-    public static double ELBOW_PICK_UP_CUBE = 0.60;
+    public static double ELBOW_PICK_UP_CUBE = 0.595;
 
     public static double ARM_SCORE_CUBE_LOW = 0.166;
     public static double ELBOW_SCORE_CUBE_LOW = 0.4;

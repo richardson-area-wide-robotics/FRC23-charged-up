@@ -18,15 +18,12 @@ public class PositionCommand extends SequentialCommandGroup {
     }
 
     public Command armStowCommand(){
-        if (!arm.getNormalStow()){
+        if (arm.getAdjusted() == 1){
         return new InstantCommand(()->arm.setElbowPosition(ArmPositions.Positions.ELBOW_STOWED)).alongWith(new ShoulderPosition(arm, ArmPositions.Positions.ARM_SPECIAL_IDLE)).andThen(new ShoulderPosition(arm, ArmPositions.Positions.ARM_STOWED));
         // return new InstantCommand(()->arm.setElbowPosition(ArmPositions.Positions.ELBOW_STOWED)).andThen(new WaitUntilCommand(null))
         }
-        else if (arm.getNormalStow()){
+        else{
         return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).andThen(new ShoulderPosition(arm, ArmPositions.Positions.ARM_STOWED)).andThen(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_STOWED)));
-        }
-        else {
-            return new InstantCommand(()->arm.setElbowPosition(ArmPositions.Positions.ELBOW_STOWED)).alongWith(new ShoulderPosition(arm, ArmPositions.Positions.ARM_SPECIAL_IDLE)).andThen(new ShoulderPosition(arm, ArmPositions.Positions.ARM_STOWED));
         }
     }
 
@@ -51,7 +48,7 @@ public class PositionCommand extends SequentialCommandGroup {
     }
 
     public Command armPickUpFromDoubleShelf(){
-        return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).until(()-> isFinished()), new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_DOUBLE_SHELF).until(()-> isFinished()), new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_DOUBLE_SHELF)).alongWith(new InstantCommand(()-> arm.setNormalStow(true)));
+        return new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).andThen(new ShoulderPosition(arm, ArmPositions.Positions.ARM_SPECIAL_IDLE)).until(()-> isFinished()).andThen(new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_DOUBLE_SHELF).alongWith(new InstantCommand(()-> arm.setElbowPosition(ArmPositions.Positions.ELBOW_PICK_UP_DOUBLE_SHELF))));
     }
 
     public Command armScoreCubeMidCommand(){

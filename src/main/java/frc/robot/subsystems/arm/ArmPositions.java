@@ -55,8 +55,8 @@ public static double ARM_STOWED = .55;
     public static double ARM_PICK_UP_TCONE = .35;
     public static double ELBOW_PICK_UP_TCONE = .529;
 
-    public static double ARM_PICK_UP_CONE = 0.1658;
-    public static double ELBOW_PICK_UP_CONE = 0.32;
+    public static double ARM_PICK_UP_CONE = 0.635;
+    public static double ELBOW_PICK_UP_CONE = 0.60;
 
     public static double ARM_PICK_UP_CUBE = 0.325;
     public static double ELBOW_PICK_UP_CUBE = 0.595;

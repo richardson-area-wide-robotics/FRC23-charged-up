@@ -1,9 +1,12 @@
 package frc.robot.subsystems.localization;
 
 import edu.wpi.first.apriltag.*;
+import edu.wpi.first.apriltag.AprilTagFieldLayout.OriginPosition;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -20,9 +23,9 @@ public class Localizer extends SubsystemBase {
   private String filename = "/ChargedUp.json";
   private String nodePositionFilename = "/ScoringLocations.json";
   private PhotonCamera camera;
-  private Optional<Transform3d> currentAprilTagTransform;
-  private Optional<Integer> currentAprilTagID;
-  private Optional<Double> currentTimeStamp;
+  private Optional<Transform3d> currentAprilTagTransform = Optional.empty();
+  private Optional<Integer> currentAprilTagID = Optional.empty();
+  private Optional<Double> currentTimeStamp = Optional.empty();
   private Transform3d cameraPos;
 
   public Localizer(String name, Transform3d cameraPositon) throws IOException {
@@ -31,6 +34,9 @@ public class Localizer extends SubsystemBase {
 
     String nodePositionPath = Filesystem.getDeployDirectory().getPath() + nodePositionFilename;
     nodeLayout = new NodePositionLayout(nodePositionPath);
+    var alliance = DriverStation.getAlliance();
+    // fieldLayout.setOrigin(alliance == Alliance.Blue ?
+    //     OriginPosition.kBlueAllianceWallRightSide : OriginPosition.kRedAllianceWallRightSide);
 
     camera = new PhotonCamera(name);
     cameraPos = cameraPositon;
@@ -43,12 +49,14 @@ public class Localizer extends SubsystemBase {
 
     if (hasTargets) {
       PhotonTrackedTarget target = result.getBestTarget();
+      if (target.getPoseAmbiguity() <= 0.2){
       currentAprilTagID = Optional.of(target.getFiducialId());
       currentAprilTagTransform = Optional.of(target.getBestCameraToTarget());
       currentTimeStamp = Optional.of(result.getTimestampSeconds());
       SmartDashboard.putString("tag", "" + target.getFiducialId());
       SmartDashboard.putNumber("PoseX", getRobotPose().get().getX());
       SmartDashboard.putNumber("PoseY", getRobotPose().get().getY());
+    }
     } else {
       currentAprilTagTransform = Optional.empty();
       currentAprilTagID = Optional.empty();
@@ -74,9 +82,10 @@ public class Localizer extends SubsystemBase {
 
     Pose3d robotPosition = new Pose3d();
     if (tagPose.isPresent()) {
-
       Pose3d camPose = tagPose.get().transformBy(cameraToTarget.inverse());
       // robotPosition = tagPose.get().transformBy(cameraToTarget);
+      SmartDashboard.putNumber("camPoseX", camPose.getX());
+      SmartDashboard.putNumber("camPoseY", camPose.getY());
       robotPosition = camPose.transformBy(cameraPos);
 
     }

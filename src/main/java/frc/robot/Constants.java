@@ -285,13 +285,15 @@ public static final boolean kCompetitionMode = false;
     public static final double FY_PIXELS = 0.0;
     public static final double CX_PIXELS = 0.0;
     public static final double CY_PIXELS = 0.0;
+    public static final double distanceOffset = 0.5;
 
         /**
      * Physical location of the camera on the robot, relative to the center of the robot.
      */
-    public static Transform3d FRONT_CAMERA_TO_ROBOT = new Transform3d(new Translation3d(0.256, Units.inchesToMeters(0), 1.13), new Rotation3d(0.0, 0.0, Units.degreesToRadians(30)));// deg 30
-    public static Transform3d BACK_CAMERA_TO_ROBOT = new Transform3d(new Translation3d(0.1745, Units.inchesToMeters(0), 1.13), new Rotation3d(0.0, 0.0, Units.degreesToRadians(30)));// deg 30
-    public static Transform3d FRONT_ROBOT_TO_CAMERA = FRONT_CAMERA_TO_ROBOT.inverse();
+    public static Transform3d FRONT_ROBOT_TO_CAMERA = new Transform3d(new Translation3d(0.256, Units.inchesToMeters(0), 1.13), new Rotation3d(0.0, 0.0, Units.degreesToRadians(30)));// deg 30
+    public static Transform3d BACK_ROBOT_TO_CAMERA = new Transform3d(new Translation3d(0.0, 0.1745, 1.13), new Rotation3d(0.0, Units.degreesToRadians(10), 0.0));// deg 30 
+    public static Transform3d FRONT_CAMERA_TO_ROBOT = FRONT_ROBOT_TO_CAMERA;
+    public static Transform3d BACK_CAMERA_TO_ROBOT = BACK_ROBOT_TO_CAMERA;
   }
   }
 

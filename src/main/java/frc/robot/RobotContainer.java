@@ -12,7 +12,9 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,11 +27,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.util.JoystickUtil;
 import frc.robot.Constants.OIConstants;
 import frc.robot.auton.commands.BalancingCommand;
-import frc.robot.auton.paths.top.Top2Park;
 import frc.robot.auton.paths.top.Top3;
 import frc.robot.auton.paths.top.TopLink;
-import frc.robot.auton.paths.top.TopLinkPark;
-import frc.robot.auton.paths.bottom.Bottom2Park;
+import frc.robot.auton.paths.PathTester;
+import frc.robot.auton.paths.bottom.Bottom2P1;
 import frc.robot.auton.paths.middle.MidScorePark;
 import frc.robot.auton.paths.top.Top2P1;
 import frc.robot.auton.paths.top.Top2P1Park;
@@ -57,6 +58,8 @@ public class RobotContainer {
   private final Arm m_arm = new Arm();
   private Localizer frontLocalizer;
   private Localizer backLocalizer;
+  public Runnable updateBackVisionPose;
+  public Runnable updateFrontVisionPose;
   private LightsController lights;
   private Lights m_lights;
   private final PositionCommand armPositions = new PositionCommand(m_arm);
@@ -73,18 +76,14 @@ public class RobotContainer {
       m_robotDrive, 
       intake, 
       m_arm);
-    new Top2Park(
+    new Top2P1(
       m_robotDrive, 
       intake, 
       m_arm);
-    new TopLink(
-      m_robotDrive, 
-      intake,
-      m_arm);
-    new TopLinkPark(
-      m_robotDrive, 
-      intake, 
-      m_arm);
+    // new Top3(
+    //   m_robotDrive, 
+    //   intake, 
+    //   m_arm);
     // /* Middle Autonomous Routines */
     // new MidScoreP1Park(
     //   m_robotDrive, 
@@ -99,16 +98,11 @@ public class RobotContainer {
     // m_robotDrive, 
     // intake, 
     // m_arm);
-    new Bottom2Park(
+    new Bottom2P1(
     m_robotDrive, 
     intake, 
     m_arm);
-    // new BottomMidScore3(
-    // m_robotDrive, 
-    // intake, 
-    // m_arm);
-    AutoChooser.setDefaultAuton(new Top2P1(m_robotDrive, intake, m_arm));
-    // AutoChooser.setDefaultAuton(new PathTester(m_robotDrive));
+    AutoChooser.setDefaultAuton(new PathTester(m_robotDrive));
   }
   
   // TODO: remove this before merging
@@ -118,7 +112,7 @@ public class RobotContainer {
   public RobotContainer() {
     try{
       this.backLocalizer = new Localizer("BACK", Constants.Localizer.BACK_CAMERA_TO_ROBOT);
-      updateVisionPose(backLocalizer).schedule();
+      this.updateBackVisionPose = updateVisionPose(backLocalizer);
     } catch (IOException e){
       e.printStackTrace();
       this.backLocalizer = null;
@@ -126,7 +120,7 @@ public class RobotContainer {
 
     try{
       this.frontLocalizer = new Localizer("FRONT", Constants.Localizer.FRONT_CAMERA_TO_ROBOT);
-      updateVisionPose(frontLocalizer).schedule();
+      this.updateFrontVisionPose = updateVisionPose(frontLocalizer);
     } catch (IOException e){
       e.printStackTrace();
       this.frontLocalizer = null;
@@ -279,6 +273,8 @@ public class RobotContainer {
    */
   public void putDashboard(){
     m_robotDrive.putNumber();
+    SmartDashboard.putNumber("filtered PoseX", m_robotDrive.getPose().getX());
+    SmartDashboard.putNumber("filtered PoseY", m_robotDrive.getPose().getY());
   }
 
   /** Run a function at the start of auton. */
@@ -301,10 +297,11 @@ public class RobotContainer {
   /** Run a function during autonomous to get run time of autonomous. */
   public void autonPeriodic(){
     SmartDashboard.putNumber("Auton Time", Timer.getFPGATimestamp());
+
   }
 
-  public Command updateVisionPose(Localizer localizer){
-    return new RunCommand(() -> {
+  public Runnable updateVisionPose(Localizer localizer){
+    return () -> {
       Optional<Pose3d> pose = localizer.getRobotPose();
       // more lines here as needed
       if (!pose.isEmpty()){
@@ -317,11 +314,6 @@ public class RobotContainer {
 
         SmartDashboard.putBoolean("using AprilTag", false);
       }
-    });
+    };
   }
-
-  // // Command
-  // public Command autoStowCommand(){
-  
-  // }
 }

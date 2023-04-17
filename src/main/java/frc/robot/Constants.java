@@ -285,7 +285,7 @@ public static final boolean kCompetitionMode = false;
     public static final double FY_PIXELS = 0.0;
     public static final double CX_PIXELS = 0.0;
     public static final double CY_PIXELS = 0.0;
-    public static final double distanceOffset = 0.5;
+    public static final double distanceOffset = 0.3;
 
         /**
      * Physical location of the camera on the robot, relative to the center of the robot.

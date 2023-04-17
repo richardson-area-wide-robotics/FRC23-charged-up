@@ -305,9 +305,13 @@ public class RobotContainer {
       Optional<Pose3d> pose = localizer.getRobotPose();
       // more lines here as needed
       if (!pose.isEmpty()){
+        Pose2d localizedPosed = new Pose2d(pose.get().toPose2d().getX(), pose.get().toPose2d().getY(), new Rotation2d(m_robotDrive.getAngle()));
+        double distance = Math.hypot((m_robotDrive.getPose().getX() - pose.get().getX()), (m_robotDrive.getPose().getY() - pose.get().getY()));
+        if (distance < Constants.Localizer.distanceOffset){
         m_robotDrive.addPoseEstimate(
-        pose.get().toPose2d(),
+        localizedPosed,
         localizer.getPoseTimeStamp().get());
+        }
         SmartDashboard.putBoolean("using AprilTag", true);
       }
       else{

@@ -185,6 +185,8 @@ public class RobotContainer {
      * Right trigger - outaking - 13
      * Up on dpad on the back of Xbox controller controls the toggle between cone and intake state using Intake - P1
      */
+
+    intake.setDefaultCommand(intake.idle());
     m_driverController.leftTrigger().whileTrue(intake.manipulatorCommand(1.0));
 
     m_driverController.rightTrigger().whileTrue(intake.manipulatorCommand(-1.0));
@@ -203,24 +205,24 @@ public class RobotContainer {
     m_driverController.b().onTrue(armPositions.armStowCommand());
 
     // Tipped pick up
-    m_driverController.y().onTrue(armPositions.armPickUpTConeComand()).onTrue(new InstantCommand(()->{ intake.setMode(false); m_lights.allYellow();}));
+    m_driverController.y().onTrue(armPositions.armPickUpTConeComand()).onTrue(new InstantCommand(()->{ intake.setMode(this.intake.mode = false); m_lights.allYellow();}));
     // new JoystickButton(m_driverControllerSP, XboxController.Button.kY.value).onTrue(new InstantCommand(()-> intake.setXMode(false)));
 
     // Standing Cone 
-    m_driverController.a().onTrue(armPositions.armBackStandingCone()).onTrue(new InstantCommand(()-> intake.setMode(false)));
+    m_driverController.a().onTrue(armPositions.armBackStandingCone()).onTrue(new InstantCommand(()-> intake.setMode(this.intake.mode = false)));
 
     // Pick up Cube 
-    m_driverController.x().onTrue(armPositions.armPickUpCubeCommand()).onTrue(new InstantCommand(()->{ intake.setMode(true); m_lights.allPurple();})).whileTrue(intake.manipulatorCommand(-1.0));
+    m_driverController.x().onTrue(armPositions.armPickUpCubeCommand()).onTrue(new InstantCommand(()->{ intake.setMode(this.intake.mode = true); m_lights.allPurple();})).whileTrue(intake.manipulatorCommand(-1.0));
     // new JoystickButton(m_driverControllerSP, XboxController.Button.kX.value).onTrue(new InstantCommand(()-> intake.setXMode(true)));
 
     // Shelf single
-    m_driverController.leftBumper().onTrue(armPositions.armPickUpFromShelf()).onTrue(new InstantCommand(()->{ intake.setMode(false); m_lights.allYellow();})).whileTrue(intake.manipulatorCommand(1.0));
+    m_driverController.leftBumper().onTrue(armPositions.armPickUpFromShelf()).onTrue(new InstantCommand(()->{ intake.setMode(this.intake.mode = false); m_lights.allYellow();})).whileTrue(intake.manipulatorCommand(1.0));
 
     // // Shelf double
     // m_driverController.rightBumper().onTrue(armPositions.armPickUpFromDoubleShelf());//.onTrue(new InstantCommand(()-> intake.setMode(false))).whileTrue(intake.manipulatorCommand(1.0)).onTrue(new InstantCommand(()->m_arm.setAdjusted(1)));
 
-    m_driverController.pov(0).onTrue(new InstantCommand(()->{intake.setMode(false); m_lights.allYellow();}));
-    m_driverController.pov(180).onTrue(new InstantCommand(()->{intake.setMode(true); m_lights.allPurple();}));
+    m_driverController.pov(0).onTrue(new InstantCommand(()->{intake.setMode(this.intake.mode = false); m_lights.allYellow();}));
+    m_driverController.pov(180).onTrue(new InstantCommand(()->{intake.setMode(this.intake.mode = true); m_lights.allPurple();}));
   }
 
   private void configureOperatorBindings(){

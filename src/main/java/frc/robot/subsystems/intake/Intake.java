@@ -34,8 +34,6 @@ public Intake() {
 
   intakeMotor.burnFlash();
 
-  this.setDefaultCommand(stop());
-
   this.mode = false;
 }
 

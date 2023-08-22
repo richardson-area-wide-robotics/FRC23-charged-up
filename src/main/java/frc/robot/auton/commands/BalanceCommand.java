@@ -1,10 +1,6 @@
 package frc.robot.auton.commands;
 
-import javax.swing.text.StyleContext.SmallAttributeSet;
-
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.filter.LinearFilter;
-import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -38,7 +34,7 @@ public class BalanceCommand extends CommandBase{
         //Math.min(Math.max(controller, -.25), .25);
         
         SmartDashboard.putNumber("Pitch", controller);
-        drive.drive(-controller, 0, 0, false);
+        drive.drive(controller, 0, 0, false);
     }
 
     /**

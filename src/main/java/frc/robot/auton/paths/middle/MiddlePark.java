@@ -39,6 +39,13 @@ public class MiddlePark extends AutonBase {
         return;
     }
 
+    // addCommandsWithLog("im testing x mode gimme a sec", 
+    //   new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"),
+    //   new WaitCommand(.5)
+    //   .andThen(new RunCommand(()->drive.setX(), drive))
+    //   .andThen(new WaitCommand(10))
+    // );
+
     addCommandsWithLog("Mid Score and Park",
       new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"),
       new WaitCommand(0.5)
@@ -48,14 +55,13 @@ public class MiddlePark extends AutonBase {
       .andThen(armPositions.armStowCommand())
       .andThen(new WaitCommand(0.75))
       .andThen(new RunCommand(()-> intake.manipulates(0), intake).withTimeout(0.5))
-      .andThen(new InstantCommand(() -> drive.drive(1,0,0,false), drive))
-      .andThen(new WaitCommand(.001))
-      .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive))
+      // .andThen(new InstantCommand(() -> drive.drive(1,0,0,false), drive))
+      // .andThen(new WaitCommand(.001))
+      // .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive))
       .andThen(drive.trajectoryFollowerCommand(pathGroup.get(0)))
       .andThen(new WaitCommand(.45))
       .andThen(balance)
-      .andThen(new WaitCommand(3))
-      .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive))
+      // .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive))
       // .andThen(new WaitCommand(.5))
       .andThen(new RunCommand(() -> drive.setX(), drive)));
       // .andThen(new WaitCommand(.5)));

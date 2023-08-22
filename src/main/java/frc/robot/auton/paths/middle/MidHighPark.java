@@ -1,4 +1,4 @@
-package frc.robot.auton.paths.bottom;
+package frc.robot.auton.paths.middle;
 
 import java.util.List;
 
@@ -19,16 +19,16 @@ import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.drive.DriveSubsystem;
 import frc.robot.subsystems.intake.Intake;
 
-public class BottomPark extends AutonBase {
+public class MidHighPark extends AutonBase {
     public PositionCommand armPositions;
     public BalanceCommand balance;
     
-    public BottomPark(
+    public MidHighPark(
     DriveSubsystem drive, 
     Intake intake,
     Arm m_arm){
 
-    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Edge-Move", new PathConstraints(1.5, 3.5));
+    List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup("Mid-High", new PathConstraints(1.5, 3.5));
 
     Pose2d initialPose = AutonUtil.initialPose(pathGroup.get(0));
     this.armPositions = new PositionCommand(m_arm);
@@ -39,18 +39,32 @@ public class BottomPark extends AutonBase {
         return;
     }
 
-    addCommandsWithLog("bot Score and exit",
+    // addCommandsWithLog("im testing x mode gimme a sec", 
+    //   new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"),
+    //   new WaitCommand(.5)
+    //   .andThen(new RunCommand(()->drive.setX(), drive))
+    //   .andThen(new WaitCommand(10))
+    // );
+
+    addCommandsWithLog("High Score and Park",
       new InstantCommand(() -> drive.resetOdometry(initialPose), drive).withName("Reset Odometry"),
       new WaitCommand(0.5)
-      .andThen(armPositions.armScoreCubeMidCommand())
+      .andThen(armPositions.armScoreCubeHighCommand())
       .andThen(new WaitCommand(0.5))
       .andThen(new RunCommand(()-> intake.manipulates(-1), intake).withTimeout(0.5))
       .andThen(armPositions.armStowCommand())
       .andThen(new WaitCommand(0.75))
       .andThen(new RunCommand(()-> intake.manipulates(0), intake).withTimeout(0.5))
+      // .andThen(new InstantCommand(() -> drive.drive(1,0,0,false), drive))
+      // .andThen(new WaitCommand(.001))
+      // .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive))
       .andThen(drive.trajectoryFollowerCommand(pathGroup.get(0)))
-      .andThen(new WaitCommand(3))
-      .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive)));
+      .andThen(new WaitCommand(.45))
+      .andThen(balance)
+      // .andThen(new InstantCommand(() -> drive.drive(0.0, 0.0, 0.0, false), drive))
+      // .andThen(new WaitCommand(.5))
+      .andThen(new RunCommand(() -> drive.setX(), drive)));
+      // .andThen(new WaitCommand(.5)));
     }
 
     @Override

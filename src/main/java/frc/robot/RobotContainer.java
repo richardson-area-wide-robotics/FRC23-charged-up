@@ -18,7 +18,11 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
 import frc.lib.util.JoystickUtil;
 import frc.robot.auton.paths.middle.MiddlePark;
+import frc.robot.auton.paths.bottom.BottomPark;
 import frc.robot.auton.paths.middle.MiddleJustScore;
+import frc.robot.auton.paths.middle.MidHighPark;
+import frc.robot.auton.paths.middle.MidLeavePark;
+// import frc.robot.auton.paths.middle.MidHighPark;
 // import frc.robot.auton.paths.top.TopMidScore2Park;
 import frc.robot.auton.commands.BalanceCommand;
 // import frc.robot.auton.paths.top.TopPark;
@@ -56,8 +60,11 @@ public class RobotContainer {
 
   {
     //removed by Eden - autonomous
-    AutoChooser.setDefaultAuton(new MiddlePark(m_robotDrive, intake, m_arm));
+    //AutoChooser.setDefaultAuton(new MiddlePark(m_robotDrive, intake, m_arm));
     // AutoChooser.setDefaultAuton(new MiddleJustScore(m_robotDrive, intake, m_arm));
+      AutoChooser.setDefaultAuton(new BottomPark(m_robotDrive, intake, m_arm)); // edge 
+    //  AutoChooser.setDefaultAuton(new MidLeavePark(m_robotDrive, intake, m_arm));
+    //  AutoChooser.setDefaultAuton(new MidHighPark(m_robotDrive, intake, m_arm));
 
   }
 

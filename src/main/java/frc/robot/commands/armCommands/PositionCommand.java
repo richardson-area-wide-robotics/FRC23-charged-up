@@ -20,22 +20,11 @@ public class PositionCommand extends SequentialCommandGroup {
     
 
     public Command armStowCommand(){
-        if (arm.getLastArmPosition() == ArmPositions.Positions.ARM_BACK_PICKUP){
-        return new ShoulderPosition(arm, ArmPositions.Positions.ARM_SPECIAL_IDLE).andThen(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SPECIAL_IDLE)).andThen(new ShoulderPosition(arm, ArmPositions.Positions.ARM_STOWED)).until(()->isFinished()).andThen(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_STOWED));
-        }
-        else{
         return new SequentialCommandGroup(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).andThen(new ShoulderPosition(arm, ArmPositions.Positions.ARM_STOWED)).andThen(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_STOWED)));
-        }
     }
 
     public Command armPickUpTConeComand(){
-        if (arm.getLastArmPosition() == ArmPositions.Positions.ARM_STOWED){
-        return new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).andThen(new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_TCONE)).until(()->this.arm.getArmAbsoluteEncoder() == .4).andThen(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_TCONE));
-        } else if (arm.getLastArmPosition() == ArmPositions.Positions.ARM_BACK_PICKUP){
-        return new ShoulderPosition(arm, ArmPositions.Positions.ARM_SPECIAL_IDLE).andThen(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_SPECIAL_IDLE)).andThen(new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_TCONE)).until(()->this.arm.getArmAbsoluteEncoder() == .4).andThen(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_TCONE));
-        } else {
         return new ElbowPosition(arm, ArmPositions.Positions.ELBOW_IDLE).andThen(new ShoulderPosition(arm, ArmPositions.Positions.ARM_PICK_UP_TCONE)).until(()->isFinished()).andThen(new ElbowPosition(arm, ArmPositions.Positions.ELBOW_PICK_UP_TCONE));
-        }
     }
 
     public Command armPickUpConeCommand(){
